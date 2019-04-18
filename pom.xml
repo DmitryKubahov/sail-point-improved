@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <groupId>com.sailpoint</groupId>
-    <artifactId>sail-point-improved</artifactId>
+    <artifactId>sail-point-improved-parent</artifactId>
     <version>${main.version}</version>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
 
     <modules>
-        <module>sail-point-annotation-processor</module>
-        <module>sail-point-improved-main</module>
+        <module>sail-point-annotation-parent</module>
+        <module>sail-point-improved</module>
     </modules>
 
     <properties>
@@ -77,6 +77,13 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <!-- Commons pool for compile -->
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.6</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Test dependencies -->
