@@ -43,7 +43,7 @@ public class JavaRuleRunner<T extends JavaRuleExecutor> extends BSFRuleRunner {
 
         log.debug("Try to get rule instance and run it");
         try {
-            String className = rule.getAttributeValue(Dictionary.ATTR_JAVA_RULE_CLASS_NAME).toString();
+            String className = rule.getSource();
             log.debug("Try to init rule class by name. Rule:[{}], class name:[{}]", rule.getName(), className);
             T ruleExecutor = getRuleExecutor(className);
             log.debug("Create rule context and run it");
@@ -84,7 +84,7 @@ public class JavaRuleRunner<T extends JavaRuleExecutor> extends BSFRuleRunner {
      */
     private void validateRule(Rule rule) throws GeneralException {
         log.debug("Validate rule");
-        Object className = rule.getAttributeValue(Dictionary.ATTR_JAVA_RULE_CLASS_NAME);
+        Object className = rule.getSource();
         if (className != null && Util.isNullOrEmpty(className.toString())) {
             String errorMessage = MessageFormat.format(
                     JavaRuleRunner.Dictionary.VALIDATION_RULE_ERROR_MESSAGE, rule.getName(),
@@ -98,11 +98,6 @@ public class JavaRuleRunner<T extends JavaRuleExecutor> extends BSFRuleRunner {
      * Dictionary for JavaRuleRunner
      */
     public static final class Dictionary {
-
-        /**
-         * Attribute name for class name. Must be full name of class
-         */
-        public static final String ATTR_JAVA_RULE_CLASS_NAME = "ruleClass";
 
         /**
          * Get instance rule method

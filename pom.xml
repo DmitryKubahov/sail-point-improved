@@ -12,6 +12,7 @@
     <modules>
         <module>sail-point-annotation-parent</module>
         <module>sail-point-improved</module>
+        <module>sail-point-customization</module>
     </modules>
 
     <properties>
@@ -21,6 +22,7 @@
         <!-- JAVA version compiler -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
 
         <!-- IdentityIQ version -->
         <identityiq.version>7.3</identityiq.version>
@@ -76,14 +78,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
-            <scope>provided</scope>
         </dependency>
         <!-- Commons pool for compile -->
         <dependency>
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
             <version>1.6</version>
-            <scope>compile</scope>
         </dependency>
 
         <!-- Test dependencies -->
@@ -99,50 +99,42 @@
             <groupId>com.sailpoint.connector</groupId>
             <artifactId>connector-bundle</artifactId>
             <version>${identityiq.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.sailpoint.mozila</groupId>
             <artifactId>mozila</artifactId>
             <version>${identityiq.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-            <version>1.9.3</version>
-            <scope>test</scope>
+            <version>1.8.9</version>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.2</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
             <version>3.5.0</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20180813</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
             <version>6.8.0</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.sf.flexjson</groupId>
             <artifactId>flexjson</artifactId>
             <version>3.3</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

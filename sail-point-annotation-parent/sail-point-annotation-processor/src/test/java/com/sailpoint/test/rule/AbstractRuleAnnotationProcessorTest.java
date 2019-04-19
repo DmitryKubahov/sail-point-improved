@@ -4,6 +4,7 @@ import com.google.testing.compile.Compilation;
 import com.google.testing.compile.Compiler;
 import com.google.testing.compile.JavaFileObjects;
 import com.sailpoint.processor.RuleAnnotationProcessor;
+import com.sailpoint.processor.SailPointAnnotationProcessorDictionary;
 import org.junit.Before;
 import sailpoint.object.Argument;
 import sailpoint.tools.xml.XMLObjectFactory;
@@ -19,7 +20,7 @@ public abstract class AbstractRuleAnnotationProcessorTest {
     /**
      * Path for test generated rule
      */
-    protected static final String TEST_XML_PATH = "target/test-classes";
+    protected static final String TEST_XML_PATH = "target/test-classes/";
     /**
      * Sail point object factory
      */
@@ -35,7 +36,7 @@ public abstract class AbstractRuleAnnotationProcessorTest {
     @Before
     public void init() {
         compiler = javac().withProcessors(new RuleAnnotationProcessor()).withOptions(
-                "-A".concat(RuleAnnotationProcessor.RULE_GENERATION_PATH).concat("=").concat(TEST_XML_PATH));
+                "-A".concat(SailPointAnnotationProcessorDictionary.GENERATION_PATH).concat("=").concat(TEST_XML_PATH));
         Compilation compilation = compile(compiler);
         assertThat(compilation).succeededWithoutWarnings();
     }

@@ -35,7 +35,7 @@ public class AllAttributesRuleGenerationTest extends AbstractRuleAnnotationProce
     /**
      * Path to xml of current rule after generating
      */
-    private static final String PATH_TO_GENERATED_RULE_XML = "Rule name - simple rule name.xml";
+    private static final String PATH_TO_GENERATED_RULE_XML = "rule/Rule name - simple rule name.xml";
 
     /**
      * Return current rule file path
@@ -77,9 +77,7 @@ public class AllAttributesRuleGenerationTest extends AbstractRuleAnnotationProce
         assertEquals("Rule type is not match", ruleExpected.getType(), rule.getType());
         assertEquals("Rule name is not match", ruleExpected.getName(), rule.getName());
         assertEquals("Language name is not match", ruleExpected.getLanguage(), rule.getLanguage());
-        assertEquals("Rule java class is not match",
-                ruleExpected.getAttributeValue(RuleAnnotationProcessor.DEFAULT_RULE_JAVA_CLASS),
-                rule.getAttributeValue(RuleAnnotationProcessor.DEFAULT_RULE_JAVA_CLASS));
+        assertEquals("Rule java class (source) is not match", ruleExpected.getSource(), rule.getSource());
 
         assertEquals("Signature return type is not match", ruleExpected.getSignature().getReturnType(),
                 rule.getSignature().getReturnType());
@@ -107,8 +105,7 @@ public class AllAttributesRuleGenerationTest extends AbstractRuleAnnotationProce
         expectedRule.setDescription("Simple java rule for test generation xml with all attributes");
 
         expectedRule.setLanguage("java");
-        expectedRule.setAttribute(RuleAnnotationProcessor.DEFAULT_RULE_JAVA_CLASS,
-                "rules.AllAttributesRuleForTest");
+        expectedRule.setSource("rules.AllAttributesRuleForTest");
 
         Signature signature = new Signature();
         signature.setReturnType("java.util.List");

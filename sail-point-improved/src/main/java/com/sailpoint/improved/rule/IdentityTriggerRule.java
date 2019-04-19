@@ -45,12 +45,12 @@ public abstract class IdentityTriggerRule extends AbstractJavaRuleExecutor {
     /**
      * Real executor method for identity trigger rules with parameters
      *
-     * @param context            - sail point context instance
-     * @param containerArguments - arguments for identity trigger rule
+     * @param context   - sail point context instance
+     * @param arguments - arguments for identity trigger rule
      * @return execution result of identity trigger task
      */
     protected abstract Object executeIdentityTriggerRule(SailPointContext context,
-                                                         IdentityTriggerRuleArguments containerArguments);
+                                                         IdentityTriggerRuleArguments arguments);
 
     /**
      * Arguments container for identity trigger rule. Contains prev and new identity snapshot.

@@ -25,7 +25,7 @@ public class EmptyPromptRuleGenerationTest extends AbstractRuleAnnotationProcess
     /**
      * Path to xml of current rule after generating
      */
-    private static final String PATH_TO_GENERATED_RULE_XML = "EmptyPromptRuleForTest.xml";
+    private static final String PATH_TO_GENERATED_RULE_XML = "rule/EmptyPromptRuleForTest.xml";
 
     /**
      * Return current rule file path
