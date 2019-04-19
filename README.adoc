@@ -1,0 +1,32 @@
+= SailPoint improved
+:toc:
+:toclevels: 5
+
+= Description
+Current project contains modules to improve SailPoint IdentityIQ projects. The main aims of the projects: simplify some areas in IdentityIQ, increasing performance, doing IdentityIQ developers life easier.
+
+= Structure
+
+Modules:
+
+. *sail-point-annotation-parent* - group of modules contains annotations and processors for generating xml sources from java classes
+.. *sail-point-annotation* - all external annotations, as for generating xml and as for other modules
+.. *sail-point-annotation-processor* - annotation processors for generating xml from java classes. Current implementation supported generating:
+* [*] Rules
+
+.. *sail-point-improved* - extends standard IdentityIQ classes for improvements (e.g. JavaRuleRunner)
+.. *sail-point-customization* - shows how to use all this stuff.
+
+= Build
+For start using it:
+
+. Add 2 IdentityIQ dependencies to local maven repository. Script for adding jars is localed on _/bin_ directory. List of custom jars:
+.. *identityiq.jar*
+.. *connector-bundle.jar*
+
+IMPORTANT: All versions in main pom for dependencies were taken from lib directory of identityiq,war. They all quite old and one (lucene) with vulnerable.
+
+Build command:
+----
+mnv clean install
+----
