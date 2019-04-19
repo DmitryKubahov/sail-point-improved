@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import sailpoint.api.SailPointContext;
 import sailpoint.object.Identity;
 import sailpoint.object.JavaRuleContext;
+import sailpoint.tools.GeneralException;
+
+import java.text.MessageFormat;
 
 /**
  * Common class for all identity trigger java rules
@@ -23,10 +26,9 @@ public abstract class IdentityTriggerRule extends AbstractJavaRuleExecutor {
      *
      * @param javaRuleContext - rule context with sailpoint context and passed parameters
      * @return rule execution result
-     * @throws Exception - error while preparing, validating or executing rule
      */
     @Override
-    public Object execute(@NonNull JavaRuleContext javaRuleContext) {
+    protected Object internalExecute(@NonNull JavaRuleContext javaRuleContext) {
         log.debug("Start identity trigger execution");
         log.trace("Parameters:[{}]", javaRuleContext.getArguments());
 
@@ -40,6 +42,26 @@ public abstract class IdentityTriggerRule extends AbstractJavaRuleExecutor {
 
         log.debug("Execute identity trigger rule with context and container arguments");
         return executeIdentityTriggerRule(javaRuleContext.getContext(), containerArguments);
+    }
+
+    /**
+     * Identity trigger rule validation.
+     * Arguments {@link Dictionary#ARG_NEW_IDENTITY_NAME} and {@link Dictionary#ARG_PREVIOUS_IDENTITY_NAME} can not be both null simultaneously.
+     *
+     * @param javaRuleContext - rule context to validate
+     * @throws GeneralException - newIdentity and previousIdentity are null
+     */
+    @Override
+    protected void internalValidation(JavaRuleContext javaRuleContext) throws GeneralException {
+        log.debug("Validate arguments attributes: {} and {}", Dictionary.ARG_NEW_IDENTITY_NAME,
+                Dictionary.ARG_PREVIOUS_IDENTITY_NAME);
+        if (getAttributeByName(javaRuleContext, Dictionary.ARG_NEW_IDENTITY_NAME) == null
+                && getAttributeByName(javaRuleContext, Dictionary.ARG_PREVIOUS_IDENTITY_NAME) == null) {
+            String errorMessage = MessageFormat.format(Dictionary.VALIDATION_ERROR_MESSAGE,
+                    Dictionary.ARG_NEW_IDENTITY_NAME, Dictionary.ARG_PREVIOUS_IDENTITY_NAME);
+            log.error("Identity trigger rule execution validation error:[{}]", errorMessage);
+            throw new GeneralException(errorMessage);
+        }
     }
 
     /**
@@ -88,6 +110,13 @@ public abstract class IdentityTriggerRule extends AbstractJavaRuleExecutor {
          * Name of new identity argument name
          */
         public static final String ARG_NEW_IDENTITY_NAME = "newIdentity";
+
+        /**
+         * Validation context error message. Parameters:
+         * 0 - newIdentity argument name
+         * 1 - previousIdentity argument name
+         */
+        public static final String VALIDATION_ERROR_MESSAGE = "[{0}] and [{1}] are null";
 
         /**
          * Only dictionary functions
