@@ -87,7 +87,7 @@ public class RuleAnnotationProcessor extends AbstractSailPointAnnotationProcesso
                         .format(SailPointAnnotationProcessorDictionary.XML_FILE_PATTERN, rule.getName());
                 String fileName = xmlPath.concat(RULE_PATH_XML_GENERATION).concat(xmlName);
                 log.debug("Write rule to file:[{}]", fileName);
-                FileUtils.writeStringToFile(new File(fileName), ruleXml, StandardCharsets.UTF_8);
+                FileUtils.writeStringToFile(new File(fileName), ruleXml, StandardCharsets.UTF_8.name());
             } catch (IOException ex) {
                 log.debug("Error while saving xml rule:[{}]", ex.getMessage());
                 throw new XmlWriteError(rule.getName(), ex);

@@ -49,7 +49,7 @@ public class WithoutNameRuleGenerationTest extends AbstractRuleAnnotationProcess
     @Test
     public void checkWithoutNameRuleGenerator() throws IOException {
         String xml = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(PATH_TO_GENERATED_RULE_XML),
-                StandardCharsets.UTF_8);
+                StandardCharsets.UTF_8.name());
         assertNotNull("Xml of rule can not be null", xml);
 
         Rule rule = (Rule) XML_OBJECT_FACTORY.parseXml(new SimulatedSailPointContext(), xml, false);
