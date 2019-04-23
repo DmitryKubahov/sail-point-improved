@@ -118,8 +118,6 @@
             <scope>test</scope>
         </dependency>
 
-
-
         <!-- IdentityIQ dependencies -->
         <!-- IdentityIq 7.3 -->
         <dependency>
