@@ -13,7 +13,12 @@ import java.util.Optional;
  * Abstract class for java rule executor,
  */
 @Slf4j
-public abstract class AbstractJavaRuleExecutor implements JavaRuleExecutor {
+public abstract class AbstractJavaRuleExecutor<T extends Object> implements JavaRuleExecutor {
+
+    /**
+     * Context value validation error message
+     */
+    public static final String VALIDATION_CONTEXT_ERROR_MESSAGE = "SailPoint context is null";
 
     /**
      * Common call of java rule executor
@@ -23,7 +28,7 @@ public abstract class AbstractJavaRuleExecutor implements JavaRuleExecutor {
      * @throws GeneralException - validation or execution error
      */
     @Override
-    public Object execute(JavaRuleContext javaRuleContext) throws GeneralException {
+    public T execute(JavaRuleContext javaRuleContext) throws GeneralException {
         log.debug("Validate rule context");
         validate(javaRuleContext);
 
@@ -38,7 +43,7 @@ public abstract class AbstractJavaRuleExecutor implements JavaRuleExecutor {
      * @return rule execution result
      * @throws GeneralException - execution error
      */
-    protected abstract Object internalExecute(JavaRuleContext javaRuleContext) throws GeneralException;
+    protected abstract T internalExecute(JavaRuleContext javaRuleContext) throws GeneralException;
 
     /**
      * Validation rule context:
@@ -49,7 +54,7 @@ public abstract class AbstractJavaRuleExecutor implements JavaRuleExecutor {
      */
     protected void validate(JavaRuleContext javaRuleContext) throws GeneralException {
         log.debug("Validate sailpoint context: must not be null");
-        Objects.requireNonNull(javaRuleContext.getContext(), "SailPoint context in rule is null");
+        Objects.requireNonNull(javaRuleContext.getContext(), VALIDATION_CONTEXT_ERROR_MESSAGE);
         log.debug("Call internal validation");
         internalValidation(javaRuleContext);
     }

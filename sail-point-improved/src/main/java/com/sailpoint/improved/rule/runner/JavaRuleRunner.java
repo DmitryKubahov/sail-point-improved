@@ -24,6 +24,18 @@ import java.util.Map;
 public class JavaRuleRunner<T extends JavaRuleExecutor> extends BSFRuleRunner {
 
     /**
+     * Get instance rule method
+     */
+    public static final String JAVA_RULE_GET_INSTANCE_METHOD_NAME = "getInstance";
+
+    /**
+     * Validate parameters error message. Parameters:
+     * 0 - rule name
+     * 1 - validation error message
+     */
+    public static final String VALIDATION_RULE_ERROR_MESSAGE = "Rule:[{0}], validation error:[{1}]";
+
+    /**
      * Override only run java rule
      *
      * @param rule          - rule to run
@@ -68,7 +80,7 @@ public class JavaRuleRunner<T extends JavaRuleExecutor> extends BSFRuleRunner {
             log.debug("Try to initialize class of rule executor by name:[{}]", ruleExecutorClassName);
             Class<T> ruleExecutorClass = (Class<T>) Class.forName(ruleExecutorClassName);
             log.debug("Get instance of rule executor via reflection calling method getInstance in rule executor class");
-            Method getInstanceMethod = ruleExecutorClass.getMethod(Dictionary.JAVA_RULE_GET_INSTANCE_METHOD_NAME);
+            Method getInstanceMethod = ruleExecutorClass.getMethod(JavaRuleRunner.JAVA_RULE_GET_INSTANCE_METHOD_NAME);
             return (T) getInstanceMethod.invoke(null);
         } catch (Exception ex) {
             log.error("Got:[{}] while initialize rule executor instance", ex.getMessage(), ex);
@@ -87,34 +99,11 @@ public class JavaRuleRunner<T extends JavaRuleExecutor> extends BSFRuleRunner {
         Object className = rule.getSource();
         if (className != null && Util.isNullOrEmpty(className.toString())) {
             String errorMessage = MessageFormat.format(
-                    JavaRuleRunner.Dictionary.VALIDATION_RULE_ERROR_MESSAGE, rule.getName(),
+                    JavaRuleRunner.VALIDATION_RULE_ERROR_MESSAGE, rule.getName(),
                     "rule class attribute is empty");
             log.error(errorMessage);
             throw new GeneralException(errorMessage);
         }
     }
 
-    /**
-     * Dictionary for JavaRuleRunner
-     */
-    public static final class Dictionary {
-
-        /**
-         * Get instance rule method
-         */
-        public static final String JAVA_RULE_GET_INSTANCE_METHOD_NAME = "getInstance";
-
-        /**
-         * Validate parameters error message. Parameters:
-         * 0 - rule name
-         * 1 - validation error message
-         */
-        public static final String VALIDATION_RULE_ERROR_MESSAGE = "Rule:[{0}], validation error:[{1}]";
-
-        /**
-         * Only dictionary, Nothing more
-         */
-        private Dictionary() {
-        }
-    }
 }
