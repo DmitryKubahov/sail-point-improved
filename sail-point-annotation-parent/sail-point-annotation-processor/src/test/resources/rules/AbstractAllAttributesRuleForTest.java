@@ -46,6 +46,6 @@ public abstract class AbstractAllAttributesRuleForTest implements JavaRuleExecut
          * Map java doc
          */
         @Argument(prompt = "prompt for map")
-        private Map map;
+        private Map<String, Object> map;
     }
 }

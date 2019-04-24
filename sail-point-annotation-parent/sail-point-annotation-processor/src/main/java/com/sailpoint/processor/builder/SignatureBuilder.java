@@ -134,6 +134,8 @@ public class SignatureBuilder {
                         .map(TypeMirror::toString).orElse(argumentType);
                 log.debug("Type of collection is:[{}]", argumentType);
             }
+        } else {
+            argumentType = processingEnv.getTypeUtils().erasure(elementType).toString();
         }
         log.debug("Type of argument is:[{}]", argumentType);
         argument.setType(argumentType);
