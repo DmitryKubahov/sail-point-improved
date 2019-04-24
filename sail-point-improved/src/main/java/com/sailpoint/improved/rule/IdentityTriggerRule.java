@@ -3,6 +3,7 @@ package com.sailpoint.improved.rule;
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
 import com.sailpoint.improved.rule.runner.JavaRuleRunner;
+import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
@@ -49,11 +50,13 @@ public abstract class IdentityTriggerRule extends AbstractJavaRuleExecutor<Boole
 
         log.debug("Build rule container arguments");
         IdentityTriggerRuleArguments containerArguments = IdentityTriggerRuleArguments.builder()
-                .newIdentity((Identity) getAttributeByName(javaRuleContext, IdentityTriggerRule.ARG_NEW_IDENTITY_NAME))
+                .newIdentity((Identity) JavaRuleExecutorUtil
+                        .getArgumentValueByName(javaRuleContext, IdentityTriggerRule.ARG_NEW_IDENTITY_NAME))
                 .previousIdentity(
-                        (Identity) getAttributeByName(javaRuleContext, IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME))
+                        (Identity) JavaRuleExecutorUtil
+                                .getArgumentValueByName(javaRuleContext, IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME))
                 .build();
-        log.debug("Get container arguments for identity trigger rule");
+        log.debug("Got container arguments for identity trigger rule");
         log.trace("Container arguments:[{}]", containerArguments);
 
         log.debug("Execute identity trigger rule with context and container arguments");
@@ -71,8 +74,9 @@ public abstract class IdentityTriggerRule extends AbstractJavaRuleExecutor<Boole
     protected void internalValidation(JavaRuleContext javaRuleContext) throws GeneralException {
         log.debug("Validate arguments attributes: {} and {}", IdentityTriggerRule.ARG_NEW_IDENTITY_NAME,
                 IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME);
-        if (getAttributeByName(javaRuleContext, IdentityTriggerRule.ARG_NEW_IDENTITY_NAME) == null
-                && getAttributeByName(javaRuleContext, IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME) == null) {
+        if (JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext, IdentityTriggerRule.ARG_NEW_IDENTITY_NAME) == null
+                && JavaRuleExecutorUtil
+                .getArgumentValueByName(javaRuleContext, IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME) == null) {
             String errorMessage = MessageFormat.format(IdentityTriggerRule.VALIDATION_ERROR_MESSAGE,
                     IdentityTriggerRule.ARG_NEW_IDENTITY_NAME, IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME);
             log.error("Identity trigger rule execution validation error:[{}]", errorMessage);
@@ -104,12 +108,12 @@ public abstract class IdentityTriggerRule extends AbstractJavaRuleExecutor<Boole
          * Identity as it existed before it was updated
          */
         @Argument(name = ARG_PREVIOUS_IDENTITY_NAME)
-        private Identity previousIdentity;
+        private final Identity previousIdentity;
 
         /**
          * Identity as it existed after it was updated
          */
         @Argument(name = ARG_NEW_IDENTITY_NAME)
-        private Identity newIdentity;
+        private final Identity newIdentity;
     }
 }

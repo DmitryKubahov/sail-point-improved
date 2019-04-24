@@ -14,20 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 public class SimpleIdentityTriggerRule extends IdentityTriggerRule {
 
     /**
-     * Singleton instance of current rule
-     */
-    private static final SimpleIdentityTriggerRule INSTANCE = new SimpleIdentityTriggerRule();
-
-    /**
-     * Return singleton instance of current rule
-     *
-     * @return instance of current rule;
-     */
-    public static SimpleIdentityTriggerRule getInstance() {
-        return SimpleIdentityTriggerRule.INSTANCE;
-    }
-
-    /**
      * Run for identity trigger rule
      */
     @Override

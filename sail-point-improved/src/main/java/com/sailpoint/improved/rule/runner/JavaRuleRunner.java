@@ -9,8 +9,8 @@ import sailpoint.server.BSFRuleRunner;
 import sailpoint.tools.GeneralException;
 import sailpoint.tools.Util;
 
-import java.lang.reflect.Method;
 import java.text.MessageFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,16 +24,16 @@ import java.util.Map;
 public class JavaRuleRunner<T extends JavaRuleExecutor> extends BSFRuleRunner {
 
     /**
-     * Get instance rule method
-     */
-    public static final String JAVA_RULE_GET_INSTANCE_METHOD_NAME = "getInstance";
-
-    /**
      * Validate parameters error message. Parameters:
      * 0 - rule name
      * 1 - validation error message
      */
     public static final String VALIDATION_RULE_ERROR_MESSAGE = "Rule:[{0}], validation error:[{1}]";
+
+    /**
+     * Rules instances storage
+     */
+    private final Map<Class<T>, T> storage = new HashMap<>();
 
     /**
      * Override only run java rule
@@ -75,13 +75,19 @@ public class JavaRuleRunner<T extends JavaRuleExecutor> extends BSFRuleRunner {
      * @param ruleExecutorClassName - rule executor class name value
      * @return instance of rule executor
      */
-    private T getRuleExecutor(String ruleExecutorClassName) throws GeneralException {
+    protected T getRuleExecutor(String ruleExecutorClassName) throws GeneralException {
         try {
             log.debug("Try to initialize class of rule executor by name:[{}]", ruleExecutorClassName);
             Class<T> ruleExecutorClass = (Class<T>) Class.forName(ruleExecutorClassName);
-            log.debug("Get instance of rule executor via reflection calling method getInstance in rule executor class");
-            Method getInstanceMethod = ruleExecutorClass.getMethod(JavaRuleRunner.JAVA_RULE_GET_INSTANCE_METHOD_NAME);
-            return (T) getInstanceMethod.invoke(null);
+            if (!storage.containsKey(ruleExecutorClass)) {
+                synchronized (this) {
+                    if (!storage.containsKey(ruleExecutorClass)) {
+                        log.debug("Instance of rule executor not found. Put it to storage.");
+                        storage.put(ruleExecutorClass, ruleExecutorClass.newInstance());
+                    }
+                }
+            }
+            return storage.get(ruleExecutorClass);
         } catch (Exception ex) {
             log.error("Got:[{}] while initialize rule executor instance", ex.getMessage(), ex);
             throw new GeneralException(ex);
@@ -94,13 +100,13 @@ public class JavaRuleRunner<T extends JavaRuleExecutor> extends BSFRuleRunner {
      *
      * @param rule - rule for run
      */
-    private void validateRule(Rule rule) throws GeneralException {
+    protected void validateRule(Rule rule) throws GeneralException {
         log.debug("Validate rule");
         Object className = rule.getSource();
         if (className != null && Util.isNullOrEmpty(className.toString())) {
             String errorMessage = MessageFormat.format(
                     JavaRuleRunner.VALIDATION_RULE_ERROR_MESSAGE, rule.getName(),
-                    "rule class attribute is empty");
+                    "Java rule must contains source with class name value");
             log.error(errorMessage);
             throw new GeneralException(errorMessage);
         }
