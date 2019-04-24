@@ -21,12 +21,12 @@ public class SimpleJDBCBuildMapRule extends JDBCBuildMapRule {
     /**
      * Active status attribute name
      */
-    private static final String ATTR_ACTIVE_STATUS_NAME = "active_status";
+    static final String ATTR_ACTIVE_STATUS_NAME = "active_status";
 
     /**
      * Active status true value
      */
-    private static final String TRUE_ACTIVE_STATUS_VALUE = "T";
+    static final String TRUE_ACTIVE_STATUS_VALUE = "T";
 
     /**
      * Check default string attribute {@link SimpleJDBCBuildMapRule#ATTR_ACTIVE_STATUS_NAME} and replace it with boolean value:

@@ -183,4 +183,19 @@
             <version>${jasperreports.version}</version>
         </dependency>
     </dependencies>
+
+    <!-- Enable JMock for mocking static methods -->
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.21.0</version> <!-- or some other version -->
+                <configuration>
+                    <argLine>
+                        -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
+                    </argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
