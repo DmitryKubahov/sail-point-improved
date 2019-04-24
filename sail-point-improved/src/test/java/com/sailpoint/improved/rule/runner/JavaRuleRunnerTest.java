@@ -1,6 +1,5 @@
 package com.sailpoint.improved.rule.runner;
 
-import com.sailpoint.improved.rule.runner.JavaRuleRunner;
 import mockit.Mock;
 import mockit.MockUp;
 import org.junit.Before;
@@ -73,6 +72,28 @@ public class JavaRuleRunnerTest {
         Object actualResult = javaRuleRunner.runJavaRule(rule, Collections.emptyMap(), Collections.emptyList());
 
         assertEquals("Expected result of rule execution is not match with actual", expectedResult, actualResult);
+    }
+
+    /**
+     * Test of java rule executor rules storage
+     * Input:
+     * - rule with context = {@link JMockRule} class name
+     * Expectation:
+     * - test rule must instantiated only once
+     */
+    @Test
+    public void rulesInstanceStorageTest() throws Exception {
+        int executions = 1000;
+        JMockRule.instanceCount = 0;
+
+        JMockRule.ruleMock = mock(JMockRule.class);
+        Rule rule = createTestRule();
+
+        assertEquals("Instance count before test is not 0", 0, JMockRule.ruleMock.instanceCount);
+        while (executions-- > 0) {
+            javaRuleRunner.runJavaRule(rule, Collections.emptyMap(), Collections.emptyList());
+        }
+        assertEquals("Instance count after test is not 1", 1, JMockRule.ruleMock.instanceCount);
     }
 
     /**
@@ -168,14 +189,16 @@ public class JavaRuleRunnerTest {
          * Mock instance of java rule executor
          */
         private static JMockRule ruleMock;
+        /**
+         * Count for testing java rule executor rule instance storage
+         */
+        private static int instanceCount = 0;
 
         /**
-         * Default method for getting instance of rule. Will be called in java rule runner for getting rule instance.
-         *
-         * @return mock rule instance
+         * Increment count of instances each time of instantiating rule
          */
-        public static JMockRule getInstance() {
-            return ruleMock;
+        public JMockRule() {
+            JMockRule.instanceCount++;
         }
 
         /**
