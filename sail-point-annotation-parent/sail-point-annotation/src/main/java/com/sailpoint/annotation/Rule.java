@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * Annotation for classes to generate rule xml for sail point
  */
 @Target({ElementType.TYPE})
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Rule {
 
     /**

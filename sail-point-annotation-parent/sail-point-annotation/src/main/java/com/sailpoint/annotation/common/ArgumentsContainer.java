@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
  * Annotation for arguments container class
  */
 @Target({ElementType.TYPE})
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface ArgumentsContainer {
 }

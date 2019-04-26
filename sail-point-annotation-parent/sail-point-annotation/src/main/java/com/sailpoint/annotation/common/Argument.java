@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * Argument annotation for rule
  */
 @Target({ElementType.FIELD, ElementType.METHOD})
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Argument {
 
     /**

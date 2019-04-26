@@ -3,6 +3,7 @@ package com.sailpoint.processor.builder;
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.annotation.common.ArgumentsContainer;
+import com.sailpoint.processor.javadoc.JavaDocsStorageProvider;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Type;
 import lombok.extern.slf4j.Slf4j;
@@ -26,35 +27,42 @@ import java.util.Optional;
 public class SignatureBuilder {
 
     /**
-     * Singleton instance of builder for all annotations processors
+     * Java doc storage provider instance
      */
-    private static final SignatureBuilder INSTANCE = new SignatureBuilder();
+    private final JavaDocsStorageProvider javaDocsStorageProvider;
 
     /**
-     * Get singleton instance of builder
-     *
-     * @return INSTANCE value
+     * Processing environmental
      */
-    public static SignatureBuilder getInstance() {
-        return SignatureBuilder.INSTANCE;
+    private final ProcessingEnvironment processingEnvironment;
+
+    /**
+     * Constructor with parameters
+     *
+     * @param javaDocsStorageProvider - java doc storage provider
+     * @param processingEnvironment   - processing environment
+     */
+    public SignatureBuilder(JavaDocsStorageProvider javaDocsStorageProvider,
+                            ProcessingEnvironment processingEnvironment) {
+        this.javaDocsStorageProvider = javaDocsStorageProvider;
+        this.processingEnvironment = processingEnvironment;
     }
 
     /**
      * Build signature from rule element. Tries to find elements with annotation {@link Argument}
      * or container of arguments {@link ArgumentsContainer} in current elements and also in all supers.
      *
-     * @param processingEnv - processing environment
-     * @param element       - current element
+     * @param element - current element
      * @return signature instance
      */
-    public Signature buildSignature(ProcessingEnvironment processingEnv, Element element) {
+    public Signature buildSignature(Element element) {
         log.debug("Initialize signature, inputs and returns arguments");
         Signature signature = new Signature();
         signature.setArguments(new ArrayList<>());
         signature.setReturns(new ArrayList<>());
 
         log.debug("Enrich signature");
-        enrichSignature(processingEnv, element, signature);
+        enrichSignature(element, signature);
 
         log.debug("Return signature");
         log.trace("Signature:[{}]", signature);
@@ -64,11 +72,10 @@ public class SignatureBuilder {
     /**
      * Analyses rule element.
      *
-     * @param processingEnv - processing environment
-     * @param element       - element to handle
-     * @param signature     - signature instance to enrich
+     * @param element   - element to handle
+     * @param signature - signature instance to enrich
      */
-    private void enrichSignature(ProcessingEnvironment processingEnv, Element element, Signature signature) {
+    private void enrichSignature(Element element, Signature signature) {
         if (element == null) {
             log.debug("Element is null. Do no do anything.");
             return;
@@ -76,14 +83,13 @@ public class SignatureBuilder {
         log.debug("Check element:[{}] type", element.getKind());
         if (ElementKind.CLASS.equals(element.getKind())) {
             log.debug("Element:[{}] is a class. Try to enrich signature for super class", element.getSimpleName());
-            enrichSignature(processingEnv,
-                    Optional.of((Symbol.ClassSymbol) element).map(Symbol.ClassSymbol::getSuperclass)
-                            .map(type -> processingEnv.getTypeUtils().asElement(type)).orElse(null),
+            enrichSignature(Optional.of((Symbol.ClassSymbol) element).map(Symbol.ClassSymbol::getSuperclass)
+                            .map(type -> processingEnvironment.getTypeUtils().asElement(type)).orElse(null),
                     signature);
         }
         log.debug("Check all elements from:[{}]", element.getSimpleName());
         element.getEnclosedElements()
-                .forEach(innerElement -> this.enrichSignature(processingEnv, innerElement, signature));
+                .forEach(innerElement -> this.enrichSignature(innerElement, signature));
 
         log.debug("Check element:[{}] argument annotation", element.getSimpleName());
         Argument argumentAnnotation = element.getAnnotation(Argument.class);
@@ -106,10 +112,7 @@ public class SignatureBuilder {
         }
 
         log.debug("Setting description for argument");
-        String description = processingEnv.getElementUtils().getDocComment(element);
-        if (!Util.isEmpty(description)) {
-            argument.setDescription(description.trim());
-        }
+        argument.setDescription(javaDocsStorageProvider.readJavaDoc(element));
 
         log.debug("Setting required flag to argument");
         argument.setRequired(argumentAnnotation.required());
@@ -118,14 +121,14 @@ public class SignatureBuilder {
         TypeMirror elementType = getArgumentType(element);
 
         if (argumentAnnotation.isReturnsType()) {
-            String returnType = processingEnv.getTypeUtils().erasure(elementType).toString();
+            String returnType = processingEnvironment.getTypeUtils().erasure(elementType).toString();
             log.debug("Element:[{}] mark as returns type. Set:[{}] as return type", element.getSimpleName(),
                     returnType);
             signature.setReturnType(returnType);
         }
 
         String argumentType = elementType.toString();
-        if (isCollectionType(processingEnv, elementType)) {
+        if (isCollectionType(elementType)) {
             log.debug("Type of element:[{}] is collection", elementType);
             argument.setMulti(true);
             if (elementType instanceof DeclaredType) {
@@ -135,7 +138,7 @@ public class SignatureBuilder {
                 log.debug("Type of collection is:[{}]", argumentType);
             }
         } else {
-            argumentType = processingEnv.getTypeUtils().erasure(elementType).toString();
+            argumentType = processingEnvironment.getTypeUtils().erasure(elementType).toString();
         }
         log.debug("Type of argument is:[{}]", argumentType);
         argument.setType(argumentType);
@@ -153,15 +156,14 @@ public class SignatureBuilder {
     /**
      * Check is element is collection
      *
-     * @param processingEnv - processing environment
-     * @param elementType   - type to check
+     * @param elementType - type to check
      * @return is collection type
      */
-    private boolean isCollectionType(ProcessingEnvironment processingEnv, TypeMirror elementType) {
+    private boolean isCollectionType(TypeMirror elementType) {
         log.trace("Init collection type from collection class:[{}]", Collection.class);
-        TypeMirror collectionType = processingEnv.getTypeUtils()
-                .erasure(processingEnv.getElementUtils().getTypeElement(Collection.class.getName()).asType());
-        return processingEnv.getTypeUtils().isAssignable(elementType, collectionType);
+        TypeMirror collectionType = processingEnvironment.getTypeUtils()
+                .erasure(processingEnvironment.getElementUtils().getTypeElement(Collection.class.getName()).asType());
+        return processingEnvironment.getTypeUtils().isAssignable(elementType, collectionType);
     }
 
     /**

@@ -19,5 +19,49 @@
             <artifactId>sail-point-annotation</artifactId>
             <version>${main.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.sailpoint</groupId>
+            <artifactId>sail-point-annotation-processor</artifactId>
+            <version>${main.version}</version>
+        </dependency>
     </dependencies>
+
+    <!-- Adding annotations processors -->
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-annotations</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>target/generated-sources/annotations</directory>
+                                </resource>
+                                <resource>
+                                    <directory>${basedir}/src/main/java</directory>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

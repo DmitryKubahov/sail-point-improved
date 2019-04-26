@@ -3,9 +3,9 @@ package com.sailpoint.exception;
 import java.text.MessageFormat;
 
 /**
- * Exception of error writing xml of sail point object
+ * Exception of writing rule to xml
  */
-public class XmlWriteError extends RuntimeException {
+public class RuleXmlObjectWriteError extends AnnotationProcessorException {
 
     /**
      * Error message of writing xml rule to file. Parameters:
@@ -19,7 +19,7 @@ public class XmlWriteError extends RuntimeException {
      * @param ruleName - failed rule name
      * @param cause    - real exception
      */
-    public XmlWriteError(String ruleName, Throwable cause) {
+    public RuleXmlObjectWriteError(String ruleName, Throwable cause) {
         super(MessageFormat.format(RULE_XML_WRITE_ERROR, ruleName), cause);
     }
 }

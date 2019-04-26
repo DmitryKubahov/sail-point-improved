@@ -24,7 +24,7 @@
         </dependency>
     </dependencies>
 
-    <!-- Adding annotations processors: lombock, sailpoint -->
+    <!-- Adding annotations processors -->
     <build>
         <plugins>
             <plugin>
@@ -34,6 +34,7 @@
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
+
                 </configuration>
             </plugin>
         </plugins>

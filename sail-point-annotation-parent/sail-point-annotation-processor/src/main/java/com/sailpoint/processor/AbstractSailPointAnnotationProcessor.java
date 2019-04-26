@@ -1,5 +1,7 @@
 package com.sailpoint.processor;
 
+import com.sailpoint.processor.builder.SignatureBuilder;
+import com.sailpoint.processor.javadoc.JavaDocsStorageProvider;
 import sailpoint.tools.xml.XMLObjectFactory;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -22,6 +24,16 @@ public abstract class AbstractSailPointAnnotationProcessor extends AbstractProce
     protected String xmlPath;
 
     /**
+     * Javadoc storage provider
+     */
+    protected JavaDocsStorageProvider javaDocsStorageProvider;
+
+    /**
+     * Signature builder
+     */
+    protected SignatureBuilder signatureBuilder;
+
+    /**
      * Init necessary properties:
      * - xml object factory
      *
@@ -34,5 +46,7 @@ public abstract class AbstractSailPointAnnotationProcessor extends AbstractProce
         this.xmlPath = Optional
                 .ofNullable(processingEnv.getOptions().get(SailPointAnnotationProcessorDictionary.GENERATION_PATH))
                 .orElse(SailPointAnnotationProcessorDictionary.DEFAULT_PATH_XML_GENERATION);
+        this.javaDocsStorageProvider = new JavaDocsStorageProvider(processingEnv);
+        this.signatureBuilder = new SignatureBuilder(javaDocsStorageProvider, processingEnv);
     }
 }

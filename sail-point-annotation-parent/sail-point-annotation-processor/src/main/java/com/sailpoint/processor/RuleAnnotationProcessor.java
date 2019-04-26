@@ -2,8 +2,7 @@ package com.sailpoint.processor;
 
 import com.google.auto.service.AutoService;
 import com.sailpoint.annotation.Rule;
-import com.sailpoint.exception.XmlWriteError;
-import com.sailpoint.processor.builder.SignatureBuilder;
+import com.sailpoint.exception.RuleXmlObjectWriteError;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import sailpoint.tools.Util;
@@ -39,7 +38,7 @@ public class RuleAnnotationProcessor extends AbstractSailPointAnnotationProcesso
      *
      * @param annotations - all sets of annotations for rule generation
      * @param roundEnv    - current environment for getting rule classes
-     * @return success generating or not
+     * @return return to complete handling {@link Rule} annotations
      */
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
@@ -74,10 +73,10 @@ public class RuleAnnotationProcessor extends AbstractSailPointAnnotationProcesso
             rule.setSource(ruleElement.asType().toString());
 
             log.debug("Setting description from java doc of rule class");
-            rule.setDescription(Util.trimWhitespace(processingEnv.getElementUtils().getDocComment(ruleElement)));
+            rule.setDescription(javaDocsStorageProvider.readJavaDoc(ruleElement));
 
             log.debug("Generating signature for the rule");
-            rule.setSignature(SignatureBuilder.getInstance().buildSignature(processingEnv, ruleElement));
+            rule.setSignature(signatureBuilder.buildSignature(ruleElement));
 
             log.debug("Parse rule to xml");
             String ruleXml = xmlObjectFactory.toXml(rule);
@@ -90,7 +89,7 @@ public class RuleAnnotationProcessor extends AbstractSailPointAnnotationProcesso
                 FileUtils.writeStringToFile(new File(fileName), ruleXml, StandardCharsets.UTF_8.name());
             } catch (IOException ex) {
                 log.debug("Error while saving xml rule:[{}]", ex.getMessage());
-                throw new XmlWriteError(rule.getName(), ex);
+                throw new RuleXmlObjectWriteError(rule.getName(), ex);
             }
         }
 
