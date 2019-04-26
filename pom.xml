@@ -50,6 +50,7 @@
         <google.process.test.version>0.15</google.process.test.version>
         <jmockit.version>1.46</jmockit.version>
         <mockito.all.version>1.10.19</mockito.all.version>
+        <spring.test.version>4.3.23.RELEASE</spring.test.version>
     </properties>
 
     <dependencies>
@@ -110,6 +111,14 @@
             <version>${mockito.all.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- Spring test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.test.version}</version>
+            <scope>test</scope>
+        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/bsf/bsf -->
         <dependency>

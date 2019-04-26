@@ -20,7 +20,7 @@ import java.util.Set;
 public class JavaDocsAnnotationProcessor extends AbstractProcessor {
 
     /**
-     * Java doc provider
+     * Instance of {@link JavaDocsStorageProvider} for saving java docs
      */
     private JavaDocsStorageProvider javaDocsProvider;
 
@@ -34,19 +34,10 @@ public class JavaDocsAnnotationProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         log.debug("Run throw all classes and saves java docs to each of them");
-        roundEnv.getRootElements().forEach(this::saveJavaDoc);
+        if (!Util.isEmpty(roundEnv.getRootElements())) {
+            roundEnv.getRootElements().forEach(this::saveJavaDoc);
+        }
         return false;
-    }
-
-    /**
-     * Initialize java doc provider
-     *
-     * @param processingEnv - current processing environment
-     */
-    @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-        this.javaDocsProvider = new JavaDocsStorageProvider(processingEnv);
     }
 
     /**
@@ -60,5 +51,16 @@ public class JavaDocsAnnotationProcessor extends AbstractProcessor {
             ruleElement.getEnclosedElements().forEach(this::saveJavaDoc);
         }
         this.javaDocsProvider.saveJavaDoc(ruleElement);
+    }
+
+    /**
+     * Initialize java doc provider
+     *
+     * @param processingEnv - current processing environment
+     */
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+        this.javaDocsProvider = new JavaDocsStorageProvider(processingEnv);
     }
 }

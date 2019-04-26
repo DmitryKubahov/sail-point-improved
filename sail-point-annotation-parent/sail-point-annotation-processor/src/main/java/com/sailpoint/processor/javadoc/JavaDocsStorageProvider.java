@@ -29,14 +29,20 @@ public class JavaDocsStorageProvider {
     /**
      * Supported elements kind
      */
-    private static final List<ElementKind> SUPPORTED_ELEMENTS_KIND = Arrays.asList(
+    public static final List<ElementKind> SUPPORTED_ELEMENTS_KIND = Arrays.asList(
             ElementKind.CLASS, ElementKind.FIELD
     );
 
     /**
      * File json pattern for java doc file
      */
-    private static final String JAVA_DOC_JSON_FILE_PATTERN = "{0}.jdoc";
+    public static final String JAVA_DOC_JSON_FILE_PATTERN = "{0}.jdoc";
+
+
+    /**
+     * Default package name
+     */
+    public static final String DEFAULT_PACKAGE_NAME = "jdoc";
 
     /**
      * Processor event instance
@@ -70,7 +76,10 @@ public class JavaDocsStorageProvider {
         log.debug("Check java docs for element:[{}]", element);
         String javaDocValue = handleJavaDocsValue(processingEnv.getElementUtils().getDocComment(element));
         if (!Util.isEmpty(javaDocValue)) {
-            try (Writer javaDocWriter = getFileObject(element, false).openWriter()) {
+            try (Writer javaDocWriter = getFileObject(element,
+                    (packageValue, fileName) -> processingEnv.getFiler()
+                            .createResource(StandardLocation.SOURCE_OUTPUT, packageValue, fileName))
+                    .openWriter()) {
                 javaDocWriter.write(javaDocValue);
             } catch (IOException ex) {
                 log.error("Got error:[{}] while writing javadocs", ex.getMessage());
@@ -87,16 +96,15 @@ public class JavaDocsStorageProvider {
      */
     public String readJavaDoc(@NonNull Element element) {
         log.debug("Try to read java doc for:[{}]", element);
-        String javaDoc = processingEnv.getElementUtils().getDocComment(element);
-        if (!Util.isEmpty(javaDoc)) {
-            log.debug("Java doc for:[{}] is:[{}]", element, javaDoc);
-            return handleJavaDocsValue(javaDoc);
+        String javaDoc = handleJavaDocsValue(processingEnv.getElementUtils().getDocComment(element));
+        if (!Util.isEmpty(javaDoc) || !SUPPORTED_ELEMENTS_KIND.contains(element.getKind())) {
+            log.debug("Return java doc from element:[{}]", element);
+            return javaDoc;
         }
-        if (!SUPPORTED_ELEMENTS_KIND.contains(element.getKind())) {
-            log.debug("Unsupported element:[{}], return null as java doc", element);
-            return null;
-        }
-        try (Reader javaDocReader = getFileObject(element, true).openReader(false)) {
+        try (Reader javaDocReader = getFileObject(element,
+                (packageValue, fileName) -> processingEnv.getFiler()
+                        .getResource(StandardLocation.CLASS_PATH, packageValue, fileName))
+                .openReader(false)) {
             return IOUtils.toString(javaDocReader);
         } catch (IOException ex) {
             log.debug("No file with java doc for element:[{}]", element);
@@ -118,16 +126,29 @@ public class JavaDocsStorageProvider {
      * Get file object for current element
      *
      * @param element - element source
-     * @param forRead - flag for opening or creating file object
      * @return file object
      * @throws IOException error creating/opening file object
      */
-    private FileObject getFileObject(Element element, boolean forRead) throws IOException {
+    private FileObject getFileObject(Element element, ResourceProvider resourceProvider) throws IOException {
         String elementName = element.getSimpleName().toString();
         String packageValue = element.accept(packageResolver, null);
         String fileName = MessageFormat.format(JAVA_DOC_JSON_FILE_PATTERN, elementName);
-        return forRead ? processingEnv.getFiler().getResource(StandardLocation.CLASS_PATH, packageValue, fileName)
-                : processingEnv.getFiler().createResource(StandardLocation.SOURCE_OUTPUT, packageValue, fileName);
+        return resourceProvider.getFileObject(packageValue, fileName);
+    }
+
+    /**
+     * Interface for getting java doc resources
+     */
+    @FunctionalInterface
+    private interface ResourceProvider {
+        /**
+         * Method for getting file object
+         *
+         * @param packageValue - package value of file
+         * @param fileName     - file name
+         * @return file object
+         */
+        FileObject getFileObject(String packageValue, String fileName) throws IOException;
     }
 
     /**
@@ -147,7 +168,7 @@ public class JavaDocsStorageProvider {
         @Override
         public String visitType(TypeElement element, Void aVoid) {
             return Optional.of(((Symbol.ClassSymbol) element)).map(Symbol.ClassSymbol::packge).map(
-                    Symbol.PackageSymbol::getQualifiedName).map(Name::toString).orElse("");
+                    Symbol.PackageSymbol::getQualifiedName).map(Name::toString).orElse(DEFAULT_PACKAGE_NAME);
         }
 
         /**
@@ -160,7 +181,7 @@ public class JavaDocsStorageProvider {
         @Override
         public String visitVariable(VariableElement element, Void aVoid) {
             return Optional.of(((Symbol.VarSymbol) element).owner).map(Symbol::getQualifiedName).map(Name::toString)
-                    .orElse("");
+                    .orElse(DEFAULT_PACKAGE_NAME);
         }
 
         /**
