@@ -76,19 +76,19 @@ public class BuildMapRuleTest {
             BuildMapRule.BuildMapRuleArguments arguments = (BuildMapRule.BuildMapRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(buildMapRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(BuildMapRule.ARG_APPLICATION_NAME),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(buildMapRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(BuildMapRule.ARG_SCHEMA_NAME),
                     arguments.getSchema());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(buildMapRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(BuildMapRule.ARG_STATE_NAME),
                     arguments.getState());
             assertEquals("Record is not match",
-                    testRuleContext.getArguments().get(buildMapRule.ARG_RECORD_NAME),
+                    testRuleContext.getArguments().get(BuildMapRule.ARG_RECORD_NAME),
                     arguments.getRecord());
             assertEquals("Columns are not match",
-                    testRuleContext.getArguments().get(buildMapRule.ARG_COLUMNS_NAME),
+                    testRuleContext.getArguments().get(BuildMapRule.ARG_COLUMNS_NAME),
                     arguments.getColumns());
             return testResult;
         }).when(buildMapRule).internalExecute(eq(sailPointContext), any());
@@ -129,11 +129,11 @@ public class BuildMapRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(buildMapRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(buildMapRule.ARG_SCHEMA_NAME, new Schema());
-        ruleParameters.put(buildMapRule.ARG_STATE_NAME, Collections.emptyMap());
-        ruleParameters.put(buildMapRule.ARG_RECORD_NAME, Collections.singletonList(UUID.randomUUID().toString()));
-        ruleParameters.put(buildMapRule.ARG_COLUMNS_NAME, Collections.singletonList(UUID.randomUUID().toString()));
+        ruleParameters.put(BuildMapRule.ARG_APPLICATION_NAME, new Application());
+        ruleParameters.put(BuildMapRule.ARG_SCHEMA_NAME, new Schema());
+        ruleParameters.put(BuildMapRule.ARG_STATE_NAME, Collections.emptyMap());
+        ruleParameters.put(BuildMapRule.ARG_RECORD_NAME, Collections.singletonList(UUID.randomUUID().toString()));
+        ruleParameters.put(BuildMapRule.ARG_COLUMNS_NAME, Collections.singletonList(UUID.randomUUID().toString()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

@@ -53,6 +53,16 @@
         <spring.test.version>4.3.23.RELEASE</spring.test.version>
     </properties>
 
+    <!-- Additional repositories -->
+    <repositories>
+        <!--Repository for sap -->
+        <repository>
+            <id>mit</id>
+            <name>maven_mit</name>
+            <url>http://maven.mit.edu/nexus/content/repositories/public/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- Slf4j -->
         <dependency>
@@ -88,6 +98,15 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.sap.conn.jco/sapjco3 -->
+        <dependency>
+            <groupId>com.sap.conn.jco</groupId>
+            <artifactId>sapjco3</artifactId>
+            <version>3.0.14</version>
+            <scope>provided</scope>
+        </dependency>
+
 
         <!-- Test dependencies -->
         <dependency>

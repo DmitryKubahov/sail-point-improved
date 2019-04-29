@@ -60,8 +60,9 @@ public abstract class AbstractJavaRuleExecutor<T extends Object, C> implements J
         log.debug("Rule:[{}], validation rule context arguments passed", ruleName);
 
         log.trace("Rule:[{}], raw parameters:[{}]", ruleName, javaRuleContext.getArguments());
-        log.debug("Rule:[{}], stage: start rule argument container building", ruleName);
+        log.debug("Rule:[{}], stage: start rule arguments container building", ruleName);
         C containerArguments = buildContainerArguments(javaRuleContext);
+        log.trace("Rule:[{}], arguments container:[{}]", ruleName, containerArguments);
 
         log.trace("Rule:[{}], stage: execute rule", ruleName);
 
