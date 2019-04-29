@@ -3,7 +3,7 @@ package com.sailpoint.rule;
 import com.sailpoint.annotation.Rule;
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
-import com.sailpoint.improved.rule.JDBCBuildMapRule;
+import com.sailpoint.improved.rule.connector.JDBCBuildMapRule;
 import lombok.extern.slf4j.Slf4j;
 import sailpoint.api.SailPointContext;
 import sailpoint.connector.JDBCConnector;
@@ -35,8 +35,8 @@ public class SimpleJDBCBuildMapRule extends JDBCBuildMapRule {
      */
     @Override
     @Argument(name = "map", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Map<String, Object> executeJDBCBuildMapRule(SailPointContext context,
-                                                          JDBCBuildMapRuleArguments arguments) throws GeneralException {
+    protected Map<String, Object> internalExecute(SailPointContext context,
+                                              JDBCBuildMapRuleArguments arguments) throws GeneralException {
         try {
             log.debug("Try to get default map");
             Map<String, Object> map = JDBCConnector.buildMapFromResultSet(arguments.getResult());

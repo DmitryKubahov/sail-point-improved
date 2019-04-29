@@ -1,7 +1,9 @@
 package com.sailpoint.improved.rule;
 
+import com.sailpoint.improved.rule.connector.JDBCBuildMapRule;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 import sailpoint.api.SailPointContext;
 import sailpoint.api.SailPointFactory;
 import sailpoint.object.Application;
@@ -41,7 +43,8 @@ public class JDBCBuildMapRuleTest {
     @Before
     public void init() {
         this.sailPointContext = mock(SailPointContext.class);
-        this.jdbcBuildMapRule = mock(JDBCBuildMapRule.class, CALLS_REAL_METHODS);
+        this.jdbcBuildMapRule = mock(JDBCBuildMapRule.class,
+                Mockito.withSettings().useConstructor().defaultAnswer(CALLS_REAL_METHODS));
     }
 
     /**
@@ -80,12 +83,12 @@ public class JDBCBuildMapRuleTest {
                     testRuleContext.getArguments().get(JDBCBuildMapRule.ARG_CONNECTION_NAME),
                     arguments.getConnection());
             return testResult;
-        }).when(jdbcBuildMapRule).executeJDBCBuildMapRule(eq(sailPointContext), any());
+        }).when(jdbcBuildMapRule).internalExecute(eq(sailPointContext), any());
 
         assertEquals(testResult, jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
-        verify(jdbcBuildMapRule).internalExecute(eq(testRuleContext));
-        verify(jdbcBuildMapRule).executeJDBCBuildMapRule(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule).execute(eq(testRuleContext));
+        verify(jdbcBuildMapRule).internalExecute(eq(sailPointContext), any());
     }
 
     /**
@@ -96,7 +99,7 @@ public class JDBCBuildMapRuleTest {
      * - General exception
      * Expectation:
      * - call internalValidation
-     * - do not call executeJDBCBuildMapRule
+     * - do not call internalExecute
      */
     @Test
     public void applicationNullTest() throws GeneralException {
@@ -105,8 +108,7 @@ public class JDBCBuildMapRuleTest {
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).internalExecute(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).executeJDBCBuildMapRule(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule, never()).internalExecute(eq(sailPointContext), any());
     }
 
     /**
@@ -117,7 +119,7 @@ public class JDBCBuildMapRuleTest {
      * - General exception
      * Expectation:
      * - call internalValidation
-     * - do not call executeJDBCBuildMapRule
+     * - do not call internalExecute
      */
     @Test
     public void schemaNullTest() throws GeneralException {
@@ -126,8 +128,7 @@ public class JDBCBuildMapRuleTest {
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).internalExecute(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).executeJDBCBuildMapRule(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule, never()).internalExecute(eq(sailPointContext), any());
     }
 
     /**
@@ -138,7 +139,7 @@ public class JDBCBuildMapRuleTest {
      * - General exception
      * Expectation:
      * - call internalValidation
-     * - do not call executeJDBCBuildMapRule
+     * - do not call internalExecute
      */
     @Test
     public void stateNullTest() throws GeneralException {
@@ -147,8 +148,7 @@ public class JDBCBuildMapRuleTest {
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).internalExecute(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).executeJDBCBuildMapRule(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule, never()).internalExecute(eq(sailPointContext), any());
     }
 
     /**
@@ -159,7 +159,7 @@ public class JDBCBuildMapRuleTest {
      * - General exception
      * Expectation:
      * - call internalValidation
-     * - do not call executeJDBCBuildMapRule
+     * - do not call internalExecute
      */
     @Test
     public void resultSetNullTest() throws GeneralException {
@@ -168,8 +168,7 @@ public class JDBCBuildMapRuleTest {
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).internalExecute(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).executeJDBCBuildMapRule(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule, never()).internalExecute(eq(sailPointContext), any());
     }
 
     /**
@@ -180,7 +179,7 @@ public class JDBCBuildMapRuleTest {
      * - General exception
      * Expectation:
      * - call internalValidation
-     * - do not call executeJDBCBuildMapRule
+     * - do not call internalExecute
      */
     @Test
     public void connectionNullTest() throws GeneralException {
@@ -189,8 +188,7 @@ public class JDBCBuildMapRuleTest {
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).internalExecute(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).executeJDBCBuildMapRule(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule, never()).internalExecute(eq(sailPointContext), any());
     }
 
 

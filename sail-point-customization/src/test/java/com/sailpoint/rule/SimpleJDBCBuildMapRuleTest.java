@@ -1,6 +1,6 @@
 package com.sailpoint.rule;
 
-import com.sailpoint.improved.rule.JDBCBuildMapRule;
+import com.sailpoint.improved.rule.connector.JDBCBuildMapRule;
 import mockit.Mock;
 import mockit.MockUp;
 import org.junit.Before;

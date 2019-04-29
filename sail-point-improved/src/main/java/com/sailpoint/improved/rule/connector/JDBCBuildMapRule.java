@@ -1,26 +1,29 @@
-package com.sailpoint.improved.rule;
+package com.sailpoint.improved.rule.connector;
 
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
+import com.sailpoint.improved.rule.AbstractJavaRuleExecutor;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
 import sailpoint.object.Application;
 import sailpoint.object.JavaRuleContext;
+import sailpoint.object.Rule;
 import sailpoint.object.Schema;
-import sailpoint.tools.GeneralException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Common rule for all JDBCBuildMap rules
  */
 @Slf4j
-public abstract class JDBCBuildMapRule extends AbstractJavaRuleExecutor<Map<String, Object>> {
+public abstract class JDBCBuildMapRule
+        extends AbstractJavaRuleExecutor<Map<String, Object>, JDBCBuildMapRule.JDBCBuildMapRuleArguments> {
 
     /**
      * Name of application argument name
@@ -42,23 +45,33 @@ public abstract class JDBCBuildMapRule extends AbstractJavaRuleExecutor<Map<Stri
      * Name of connection argument name
      */
     public static final String ARG_CONNECTION_NAME = "connection";
+    /**
+     * None nulls arguments
+     */
+    public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
+            JDBCBuildMapRule.ARG_APPLICATION_NAME,
+            JDBCBuildMapRule.ARG_SCHEMA_NAME,
+            JDBCBuildMapRule.ARG_STATE_NAME,
+            JDBCBuildMapRule.ARG_RESULT_SET_NAME,
+            JDBCBuildMapRule.ARG_CONNECTION_NAME
+    );
 
     /**
-     * Main execution method for JDBCBuildMap rule. During execution:
-     * 1 - checks all necessary attributes in rule context via {@link JDBCBuildMapRule#internalValidation(JavaRuleContext)}
-     * 2 - run {@link JDBCBuildMapRule#executeJDBCBuildMapRule(SailPointContext, JDBCBuildMapRule.JDBCBuildMapRuleArguments)}
+     * Default constructor
+     */
+    public JDBCBuildMapRule() {
+        super(Rule.Type.JDBCBuildMap.name(), NONE_NULL_ARGUMENTS_NAME);
+    }
+
+    /**
+     * Build argument container for current rule
      *
-     * @param javaRuleContext - rule context
-     * @return rule execution result
-     * @throws GeneralException error of execution jdbc build map rule
+     * @param javaRuleContext - current rule context
+     * @return argument container instance
      */
     @Override
-    protected Map<String, Object> internalExecute(JavaRuleContext javaRuleContext) throws GeneralException {
-        log.debug("Start jdbc build map rule execution");
-        log.trace("Parameters:[{}]", javaRuleContext.getArguments());
-
-        log.debug("Build jdbc build map rule container arguments");
-        JDBCBuildMapRule.JDBCBuildMapRuleArguments containerArguments = JDBCBuildMapRuleArguments
+    protected JDBCBuildMapRule.JDBCBuildMapRuleArguments buildContainerArguments(JavaRuleContext javaRuleContext) {
+        return JDBCBuildMapRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
                         getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_APPLICATION_NAME))
@@ -71,48 +84,7 @@ public abstract class JDBCBuildMapRule extends AbstractJavaRuleExecutor<Map<Stri
                 .connection((Connection) JavaRuleExecutorUtil.
                         getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_CONNECTION_NAME))
                 .build();
-        log.debug("Got container arguments for jdbc build map rule");
-        log.trace("Container arguments:[{}]", containerArguments);
-
-        log.debug("Execute jdbc build map rule  with context and container arguments");
-        return executeJDBCBuildMapRule(javaRuleContext.getContext(), containerArguments);
     }
-
-    /**
-     * JDBC build map rule validation.
-     * Checks all arguments by name
-     * - {@link JDBCBuildMapRule#ARG_APPLICATION_NAME}
-     * - {@link JDBCBuildMapRule#ARG_SCHEMA_NAME}
-     * - {@link JDBCBuildMapRule#ARG_STATE_NAME}
-     * - {@link JDBCBuildMapRule#ARG_RESULT_SET_NAME}
-     * - {@link JDBCBuildMapRule#ARG_CONNECTION_NAME}
-     * All must be not null
-     *
-     * @param javaRuleContext - rule context to validate
-     * @throws GeneralException - one of the arguments is null
-     */
-    @Override
-    protected void internalValidation(JavaRuleContext javaRuleContext) throws GeneralException {
-        log.debug("Validate jdbc build map rule arguments");
-        JavaRuleExecutorUtil.notNullArgumentValidation(javaRuleContext, JDBCBuildMapRule.ARG_APPLICATION_NAME);
-        JavaRuleExecutorUtil.notNullArgumentValidation(javaRuleContext, JDBCBuildMapRule.ARG_SCHEMA_NAME);
-        JavaRuleExecutorUtil.notNullArgumentValidation(javaRuleContext, JDBCBuildMapRule.ARG_STATE_NAME);
-        JavaRuleExecutorUtil.notNullArgumentValidation(javaRuleContext, JDBCBuildMapRule.ARG_RESULT_SET_NAME);
-        JavaRuleExecutorUtil.notNullArgumentValidation(javaRuleContext, JDBCBuildMapRule.ARG_CONNECTION_NAME);
-    }
-
-
-    /**
-     * Real executor method for jdbc build map rules with parameters
-     *
-     * @param context   - sail point context instance
-     * @param arguments - arguments for jdbc build map rule
-     * @return new map of properties for mapping
-     * @throws GeneralException error of execution jdbc build map rule
-     */
-    protected abstract Map<String, Object> executeJDBCBuildMapRule(SailPointContext context,
-                                                                   JDBCBuildMapRuleArguments arguments)
-            throws GeneralException;
 
     /**
      * Arguments container for jdbc build map rule. Contains:
