@@ -19,7 +19,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Common rule for all JDBCBuildMap rules
+ * Applies only to applications of type JDBC. It functions for JDBC applications just like the
+ * BuildMap rule does for Delimited File applications: it is used by the JDBC connector to create a map
+ * representation of the incoming ResultSet. The rule is called for each row of data as it is read in from the JDBC
+ * Rules in IdentityIQ. It is used to manipulate the raw input data (provided via the rows and columns) to build a map out of
+ * the incoming data.
+ * <p>
+ * NOTE: Since this rule is run for every row of data returned from the resource, time-intensive operations
+ * performed within this rule can have a noticeable impact on aggregation performance. Try to avoid lengthy or
+ * complex operations in this rule.
  */
 @Slf4j
 public abstract class JDBCBuildMapRule
