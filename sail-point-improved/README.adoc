@@ -1,0 +1,24 @@
+= Improvements
+:toc:
+:toclevels: 5
+
+= Description
+Contains all improvements for IdentityIQ
+
+= Implementations
+
+== Java rule runner
+Extends standard BSFRuleRunner to improve java rules execution. Improvements:
+
+. singleton rule storage
+. getting class of rule from source, not from name
+
+== Java rule implementation
+Contains java implementation for rule types:
+
+. Connector rules:
+.. PreIterate
+.. JDBCBuildMap
+
+. Certification rules:
+.. IdentityTrigger
