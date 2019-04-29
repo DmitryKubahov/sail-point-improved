@@ -18,6 +18,7 @@ Contains java implementation for rule types:
 
 . Connector rules:
 .. PreIterate
+.. BuildMap
 .. JDBCBuildMap
 
 . Certification rules:
