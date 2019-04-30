@@ -133,6 +133,8 @@ public abstract class PostIterateRule
          * • absolutePath: (String) absolute filename
          * • length: (Long) file length in bytes
          * • lastModified: (Long) last time the file was updated (Java GMT)
+         * • columnNames: (List) column names that were used during the iteration
+         * • objectsIterated: (Long) total number of objects iterated during this run
          */
         @Argument(name = PostIterateRule.ARG_STATS_NAME)
         private final Map<String, Object> stats;
