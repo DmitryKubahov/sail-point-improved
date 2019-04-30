@@ -154,7 +154,7 @@
             <artifactId>identityiq</artifactId>
             <version>${identityiq.version}</version>
         </dependency>
-        <!-- IdentityIq 7.3 connection bundle -->
+        <!-- IdentityIq 7.3 connector bundle -->
         <dependency>
             <groupId>com.sailpoint</groupId>
             <artifactId>connector-bundle</artifactId>

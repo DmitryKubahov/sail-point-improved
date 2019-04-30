@@ -1,4 +1,4 @@
-package com.sailpoint.rule;
+package com.sailpoint.rule.connector;
 
 import com.sailpoint.annotation.Rule;
 import com.sailpoint.annotation.common.Argument;

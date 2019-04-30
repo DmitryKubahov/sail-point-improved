@@ -1,4 +1,4 @@
-package com.sailpoint.rule;
+package com.sailpoint.rule.connector;
 
 import com.sailpoint.improved.rule.connector.JDBCBuildMapRule;
 import mockit.Mock;
@@ -19,7 +19,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 /**
