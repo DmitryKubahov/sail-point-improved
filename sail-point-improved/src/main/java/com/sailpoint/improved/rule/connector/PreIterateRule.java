@@ -52,7 +52,7 @@ public abstract class PreIterateRule
     );
 
     /**
-     * Constructor for preIterator rule
+     * Default constructor
      */
     public PreIterateRule() {
         super(Rule.Type.PreIterate.name(), NONE_NULL_ARGUMENTS_NAME);

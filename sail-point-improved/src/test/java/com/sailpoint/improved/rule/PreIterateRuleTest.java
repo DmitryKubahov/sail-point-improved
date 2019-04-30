@@ -61,7 +61,7 @@ public class PreIterateRuleTest {
      * Expectation:
      * - application as in rule context args by name {@link PreIterateRule#ARG_APPLICATION_NAME}
      * - schema as in rule context args by name {@link PreIterateRule#ARG_SCHEMA_NAME}
-     * - stats as in rule context args by name {@link PreIterateRule#PreIterateRule}
+     * - stats as in rule context args by name {@link PreIterateRule#ARG_STATS_NAME}
      */
     @Test
     public void normalTest() throws GeneralException {
