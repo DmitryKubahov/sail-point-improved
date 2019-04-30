@@ -102,7 +102,9 @@ public abstract class MergeMapsRule
      * Arguments container for {@link MergeMapsRule}. Contains:
      * - application
      * - schema
-     * - stats
+     * - current
+     * - newObject
+     * - mergeAttrs
      */
     @Data
     @Builder
