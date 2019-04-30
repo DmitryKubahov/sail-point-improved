@@ -117,7 +117,7 @@ public class SAPBuildMapRuleTest {
      */
     @Test
     public void noneNullArgumentIsNullTest() throws GeneralException {
-        for (String noneNullArgument : testRule.NONE_NULL_ARGUMENTS_NAME) {
+        for (String noneNullArgument : SAPBuildMapRule.NONE_NULL_ARGUMENTS_NAME) {
 
             JavaRuleContext testRuleContext = buildTestJavaRuleContext();
             testRuleContext.getArguments().remove(noneNullArgument);
