@@ -8,6 +8,7 @@ import sailpoint.api.SailPointContext;
 import sailpoint.api.SailPointFactory;
 import sailpoint.object.Identity;
 import sailpoint.object.JavaRuleContext;
+import sailpoint.object.Rule;
 import sailpoint.tools.GeneralException;
 
 import java.util.HashMap;
@@ -172,6 +173,17 @@ public class IdentityTriggerRuleTest {
         verify(identityTriggerRule, never()).internalExecute(eq(sailPointContext), any());
     }
 
+    /**
+     * Test rule type
+     * Input:
+     * - rule type value
+     * Expectation:
+     * - expected rule type
+     */
+    @Test
+    public void ruleTypeTest() {
+        assertEquals("Rule type is not match", Rule.Type.IdentityTrigger.name(), identityTriggerRule.getRuleType());
+    }
 
     /**
      * Create valid java rule context for identity trigger rule

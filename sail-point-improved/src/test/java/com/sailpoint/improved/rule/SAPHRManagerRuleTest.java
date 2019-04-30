@@ -10,6 +10,7 @@ import sailpoint.api.SailPointFactory;
 import sailpoint.connector.SAPInternalConnector;
 import sailpoint.object.Application;
 import sailpoint.object.JavaRuleContext;
+import sailpoint.object.Rule;
 import sailpoint.object.Schema;
 import sailpoint.tools.GeneralException;
 
@@ -118,6 +119,17 @@ public class SAPHRManagerRuleTest {
         }
     }
 
+    /**
+     * Test rule type
+     * Input:
+     * - rule type value
+     * Expectation:
+     * - expected rule type
+     */
+    @Test
+    public void ruleTypeTest() {
+        assertEquals("Rule type is not match", Rule.Type.SAPHRManagerRule.name(), testRule.getRuleType());
+    }
 
     /**
      * Create valid java rule context for SAP build map rule

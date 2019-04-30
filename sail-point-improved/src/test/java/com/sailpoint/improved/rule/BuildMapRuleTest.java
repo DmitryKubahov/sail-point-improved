@@ -8,6 +8,7 @@ import sailpoint.api.SailPointContext;
 import sailpoint.api.SailPointFactory;
 import sailpoint.object.Application;
 import sailpoint.object.JavaRuleContext;
+import sailpoint.object.Rule;
 import sailpoint.object.Schema;
 import sailpoint.tools.GeneralException;
 
@@ -120,6 +121,18 @@ public class BuildMapRuleTest {
             verify(buildMapRule).internalValidation(eq(testRuleContext));
             verify(buildMapRule, never()).internalExecute(eq(sailPointContext), any());
         }
+    }
+
+    /**
+     * Test rule type
+     * Input:
+     * - rule type value
+     * Expectation:
+     * - expected rule type
+     */
+    @Test
+    public void ruleTypeTest() {
+        assertEquals("Rule type is not match", Rule.Type.BuildMap.name(), buildMapRule.getRuleType());
     }
 
     /**

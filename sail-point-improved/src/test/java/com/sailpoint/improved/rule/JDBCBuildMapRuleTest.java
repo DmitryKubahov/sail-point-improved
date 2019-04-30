@@ -8,6 +8,7 @@ import sailpoint.api.SailPointContext;
 import sailpoint.api.SailPointFactory;
 import sailpoint.object.Application;
 import sailpoint.object.JavaRuleContext;
+import sailpoint.object.Rule;
 import sailpoint.object.Schema;
 import sailpoint.tools.GeneralException;
 
@@ -20,7 +21,13 @@ import java.util.UUID;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 /**
  * Test for {@link JDBCBuildMapRule} class
@@ -191,6 +198,17 @@ public class JDBCBuildMapRuleTest {
         verify(jdbcBuildMapRule, never()).internalExecute(eq(sailPointContext), any());
     }
 
+    /**
+     * Test rule type
+     * Input:
+     * - rule type value
+     * Expectation:
+     * - expected rule type
+     */
+    @Test
+    public void ruleTypeTest() {
+        assertEquals("Rule type is not match", Rule.Type.JDBCBuildMap.name(), jdbcBuildMapRule.getRuleType());
+    }
 
     /**
      * Create valid java rule context for jdbc build map rule

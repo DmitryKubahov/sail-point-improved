@@ -58,7 +58,7 @@ public abstract class SAPHRManagerRule
      * Default constructor
      */
     public SAPHRManagerRule() {
-        super(Rule.Type.SAPBuildMap.name(), NONE_NULL_ARGUMENTS_NAME);
+        super(Rule.Type.SAPHRManagerRule.name(), NONE_NULL_ARGUMENTS_NAME);
     }
 
     /**
