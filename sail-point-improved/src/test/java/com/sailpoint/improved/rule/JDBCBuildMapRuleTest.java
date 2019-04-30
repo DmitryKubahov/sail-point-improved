@@ -211,7 +211,7 @@ public class JDBCBuildMapRuleTest {
     }
 
     /**
-     * Create valid java rule context for jdbc build map rule
+     * Create valid java rule context for current rule
      *
      * @return valid rule context
      */

@@ -145,7 +145,7 @@ public class PeopleSoftHRMSBuildMapRuleTest {
     }
 
     /**
-     * Create valid java rule context for SAP build map rule
+     * Create valid java rule context for current rule
      *
      * @return valid rule context
      */

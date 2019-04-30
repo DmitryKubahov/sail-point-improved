@@ -136,7 +136,7 @@ public class BuildMapRuleTest {
     }
 
     /**
-     * Create valid java rule context for  build map rule
+     * Create valid java rule context for current rule
      *
      * @return valid rule context
      */

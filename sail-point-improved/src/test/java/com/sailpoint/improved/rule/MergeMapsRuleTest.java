@@ -133,7 +133,7 @@ public class MergeMapsRuleTest {
     }
 
     /**
-     * Create valid java rule context for pre-iterate rule
+     * Create valid java rule context for current rule
      *
      * @return valid rule context
      */

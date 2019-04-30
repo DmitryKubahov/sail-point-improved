@@ -186,7 +186,7 @@ public class IdentityTriggerRuleTest {
     }
 
     /**
-     * Create valid java rule context for identity trigger rule
+     * Create valid java rule context for current rule
      *
      * @return valid rule context
      */
