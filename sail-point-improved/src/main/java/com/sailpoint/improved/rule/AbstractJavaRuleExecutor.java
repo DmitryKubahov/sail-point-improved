@@ -1,6 +1,7 @@
 package com.sailpoint.improved.rule;
 
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import sailpoint.api.SailPointContext;
 import sailpoint.object.JavaRuleContext;
@@ -15,6 +16,7 @@ import java.util.Objects;
  * Abstract class for java rule executor,
  */
 @Slf4j
+@Getter
 public abstract class AbstractJavaRuleExecutor<T extends Object, C> implements JavaRuleExecutor {
 
     /**
