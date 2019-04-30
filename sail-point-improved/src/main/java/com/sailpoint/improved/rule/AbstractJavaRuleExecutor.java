@@ -25,9 +25,9 @@ public abstract class AbstractJavaRuleExecutor<T extends Object, C> implements J
     public static final String VALIDATION_CONTEXT_ERROR_MESSAGE = "SailPoint context is null";
 
     /**
-     * Current rule name
+     * Current rule type
      */
-    private final String ruleName;
+    private final String ruleType;
     /**
      * List of none-null check attributes
      */
@@ -36,11 +36,11 @@ public abstract class AbstractJavaRuleExecutor<T extends Object, C> implements J
     /**
      * Default constructor for all rules
      *
-     * @param ruleName          - current rule name value
+     * @param ruleType          - current rule type value
      * @param noneNullArguments - list of arguments for none null checking
      */
-    protected AbstractJavaRuleExecutor(String ruleName, List<String> noneNullArguments) {
-        this.ruleName = ruleName;
+    protected AbstractJavaRuleExecutor(String ruleType, List<String> noneNullArguments) {
+        this.ruleType = ruleType;
         this.noneNullArguments = noneNullArguments;
     }
 
@@ -53,20 +53,20 @@ public abstract class AbstractJavaRuleExecutor<T extends Object, C> implements J
      */
     @Override
     public T execute(JavaRuleContext javaRuleContext) throws GeneralException {
-        log.debug("Rule:[{}], stage: validate rule context", ruleName);
+        log.debug("Rule:[{}], stage: validate rule context", ruleType);
         validate(javaRuleContext);
-        log.debug("Rule:[{}], validation rule context passed", ruleName);
+        log.debug("Rule:[{}], validation rule context passed", ruleType);
 
-        log.debug("Rule:[{}], stage: validate rule context arguments", ruleName);
+        log.debug("Rule:[{}], stage: validate rule context arguments", ruleType);
         validateArguments(javaRuleContext);
-        log.debug("Rule:[{}], validation rule context arguments passed", ruleName);
+        log.debug("Rule:[{}], validation rule context arguments passed", ruleType);
 
-        log.trace("Rule:[{}], raw parameters:[{}]", ruleName, javaRuleContext.getArguments());
-        log.debug("Rule:[{}], stage: start rule arguments container building", ruleName);
+        log.trace("Rule:[{}], raw parameters:[{}]", ruleType, javaRuleContext.getArguments());
+        log.debug("Rule:[{}], stage: start rule arguments container building", ruleType);
         C containerArguments = buildContainerArguments(javaRuleContext);
-        log.trace("Rule:[{}], arguments container:[{}]", ruleName, containerArguments);
+        log.trace("Rule:[{}], arguments container:[{}]", ruleType, containerArguments);
 
-        log.trace("Rule:[{}], stage: execute rule", ruleName);
+        log.trace("Rule:[{}], stage: execute rule", ruleType);
 
         return internalExecute(javaRuleContext.getContext(), containerArguments);
     }
@@ -110,14 +110,14 @@ public abstract class AbstractJavaRuleExecutor<T extends Object, C> implements J
      * @param javaRuleContext - current rule context
      */
     protected void validateArguments(JavaRuleContext javaRuleContext) throws GeneralException {
-        log.debug("Rule:[{}], none-null arguments:[{}]", ruleName, noneNullArguments);
+        log.debug("Rule:[{}], none-null arguments:[{}]", ruleType, noneNullArguments);
         if (!Util.isEmpty(noneNullArguments)) {
             for (String noneNullArgument : noneNullArguments) {
-                log.debug("Rule:[{}], stage: none-null check for argument:[{}]", ruleName, noneNullArgument);
+                log.debug("Rule:[{}], stage: none-null check for argument:[{}]", ruleType, noneNullArgument);
                 JavaRuleExecutorUtil.notNullArgumentValidation(javaRuleContext, noneNullArgument);
             }
         }
-        log.debug("Rule:[{}], stage: internal arguments check", ruleName);
+        log.debug("Rule:[{}], stage: internal arguments check", ruleType);
         internalValidateArguments(javaRuleContext);
     }
 
