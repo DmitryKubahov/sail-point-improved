@@ -59,7 +59,7 @@ public abstract class PreIterateRule
     }
 
     /**
-     * Build arguments container for pre-iterator rule
+     * Build arguments container for current rule
      *
      * @param javaRuleContext - current rule context for arguments parameters
      * @return argument container instance

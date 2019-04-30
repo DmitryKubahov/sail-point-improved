@@ -62,7 +62,7 @@ public abstract class SAPHRManagerRule
     }
 
     /**
-     * Build argument container for current rule
+     * Build arguments container for current rule
      *
      * @param javaRuleContext - current rule context
      * @return argument container instance
