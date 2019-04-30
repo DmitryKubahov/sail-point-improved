@@ -102,11 +102,13 @@ public abstract class SAPBuildMapRule
     }
 
     /**
-     * Arguments container for SAP build map rule. Contains:
+     * Arguments container for {@link SAPBuildMapRule}. Contains:
      * - application
      * - schema
      * - state
-     * - connection
+     * - destination
+     * - object
+     * - connector
      */
     @Data
     @Builder

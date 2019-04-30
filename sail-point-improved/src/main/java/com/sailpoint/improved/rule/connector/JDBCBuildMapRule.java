@@ -95,7 +95,7 @@ public abstract class JDBCBuildMapRule
     }
 
     /**
-     * Arguments container for jdbc build map rule. Contains:
+     * Arguments container for {@link JDBCBuildMapRule}. Contains:
      * - application
      * - schema
      * - state

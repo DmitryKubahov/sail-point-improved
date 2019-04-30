@@ -92,11 +92,12 @@ public abstract class BuildMapRule
     }
 
     /**
-     * Arguments container for build map rule. Contains:
+     * Arguments container for {@link BuildMapRule}. Contains:
      * - application
      * - schema
      * - state
-     * - connection
+     * - record
+     * - columns
      */
     @Data
     @Builder
