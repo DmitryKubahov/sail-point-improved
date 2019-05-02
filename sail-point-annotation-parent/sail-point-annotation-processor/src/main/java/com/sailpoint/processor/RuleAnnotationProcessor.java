@@ -7,7 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import sailpoint.tools.Util;
 
-import javax.annotation.processing.*;
+import javax.annotation.processing.Processor;
+import javax.annotation.processing.RoundEnvironment;
+import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.annotation.processing.SupportedOptions;
+import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
@@ -29,9 +33,11 @@ public class RuleAnnotationProcessor extends AbstractSailPointAnnotationProcesso
      */
     public static final String RULE_LANGUAGE = "java";
     /**
-     * Path for generating xml rules
+     * Pattern for path for generating xml rules. Parameters:
+     * 1 - main part of path
+     * 2 - rule file name
      */
-    public static final String RULE_PATH_XML_GENERATION = "rule/";
+    public static final String RULE_PATH_XML_GENERATION_PATTERN = "{0}/Rule/{1}";
 
     /**
      * Processing elements with rule annotations for generating rule xml
@@ -84,7 +90,7 @@ public class RuleAnnotationProcessor extends AbstractSailPointAnnotationProcesso
             try {
                 String xmlName = MessageFormat
                         .format(SailPointAnnotationProcessorDictionary.XML_FILE_PATTERN, rule.getName());
-                String fileName = xmlPath.concat(RULE_PATH_XML_GENERATION).concat(xmlName);
+                String fileName = MessageFormat.format(RULE_PATH_XML_GENERATION_PATTERN, xmlPath, xmlName);
                 log.debug("Write rule to file:[{}]", fileName);
                 FileUtils.writeStringToFile(new File(fileName), ruleXml, StandardCharsets.UTF_8.name());
             } catch (IOException ex) {
@@ -92,7 +98,6 @@ public class RuleAnnotationProcessor extends AbstractSailPointAnnotationProcesso
                 throw new RuleXmlObjectWriteError(rule.getName(), ex);
             }
         }
-
         return true;
     }
 }

@@ -26,7 +26,7 @@ public class WithoutAttributesRuleGenerationTest extends AbstractRuleAnnotationP
     /**
      * Path to xml of current rule after generating
      */
-    private static final String PATH_TO_GENERATED_RULE_XML = "rule/WithoutArgumentsRuleForTest.xml";
+    private static final String PATH_TO_GENERATED_RULE_XML = "Rule/WithoutArgumentsRuleForTest.xml";
 
     /**
      * Return current rule file path

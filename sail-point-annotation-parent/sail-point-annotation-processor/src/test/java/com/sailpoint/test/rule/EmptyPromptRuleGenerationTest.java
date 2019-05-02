@@ -9,7 +9,8 @@ import sailpoint.server.SimulatedSailPointContext;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test generation of rule xml from {@link EmptyPromptRuleGenerationTest#PATH_TO_EMPTY_PROMPT_RULE}
@@ -25,7 +26,7 @@ public class EmptyPromptRuleGenerationTest extends AbstractRuleAnnotationProcess
     /**
      * Path to xml of current rule after generating
      */
-    private static final String PATH_TO_GENERATED_RULE_XML = "rule/EmptyPromptRuleForTest.xml";
+    private static final String PATH_TO_GENERATED_RULE_XML = "Rule/EmptyPromptRuleForTest.xml";
 
     /**
      * Return current rule file path

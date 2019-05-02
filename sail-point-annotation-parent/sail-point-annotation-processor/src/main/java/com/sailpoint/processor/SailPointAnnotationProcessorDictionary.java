@@ -12,7 +12,7 @@ public class SailPointAnnotationProcessorDictionary {
     public static final String XML_FILE_PATTERN = "{0}.xml";
 
     /**
-     * Option name to override default path for generating xml
+     * Option name to override default path for generating all xml
      */
     public static final String GENERATION_PATH = "generationPath";
 

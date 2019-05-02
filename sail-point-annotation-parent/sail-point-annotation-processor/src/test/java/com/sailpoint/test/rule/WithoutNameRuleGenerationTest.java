@@ -26,7 +26,7 @@ public class WithoutNameRuleGenerationTest extends AbstractRuleAnnotationProcess
     /**
      * Path to xml of current rule after generating
      */
-    private static final String PATH_TO_GENERATED_RULE_XML = "rule/WithoutNameRuleForTest.xml";
+    private static final String PATH_TO_GENERATED_RULE_XML = "Rule/WithoutNameRuleForTest.xml";
 
     /**
      * Expected rule name
