@@ -16,11 +16,20 @@ Extends standard BSFRuleRunner to improve java rules execution. Improvements:
 == Java rule implementation
 Contains java implementation for rule types:
 
-. Connector rules:
-.. PreIterate
-.. BuildMap
-.. JDBCBuildMap
-.. SAPBuildMap
+* [*] *Connector rules*:
+** [*] PreIterate
+** [*] BuildMap
+** [*] JDBCBuildMap
+** [*] SAPBuildMap
+** [*] SAPHRManagerRule
+** [*] PeopleSoftHRMSBuildMap
+** [*] FileParsingRule
+** [*] MergeMaps
+** [*] Transformation
+** [*] PostIterate
+** [*] WebServiceBeforeOperationRule
+** [*] WebServiceAfterOperationRule
+** [*] RACFPermissionCustomization
 
-. Certification rules:
-.. IdentityTrigger
+* [ ] *Certification rules*:
+** [*] IdentityTrigger
