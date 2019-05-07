@@ -31,5 +31,15 @@ Contains java implementation for rule types:
 ** [*] WebServiceAfterOperationRule
 ** [*] RACFPermissionCustomization
 
+* [*] *Aggregation/Refresh rules*:
+** [*] ResourceObjectCustomization
+** [*] Correlation
+** [*] IdentityCreation
+** [*] ManagerCorrelation
+** [*] ManagedAttributePromotion
+** [*] Refresh
+** [*] GroupAggregationRefresh
+** [*] AccountSelector
+
 * [ ] *Certification rules*:
 ** [*] IdentityTrigger
