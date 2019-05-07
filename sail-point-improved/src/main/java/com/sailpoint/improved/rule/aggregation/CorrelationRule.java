@@ -41,6 +41,17 @@ import java.util.Map;
  * NOTE: Except as noted above with respect to optimized aggregation, the Correlation rule runs for every Link
  * created in the aggregation. Therefore, time-intensive operations performed in it can have a negative impact on
  * aggregation performance.
+ * <p>
+ * Outputs:
+ * Map that identifies the manager’s Identity; may contain
+ * any of the following:
+ * “identityName”, “[identity.name value]”
+ * or
+ * “identity”, [Identity object]
+ * or
+ * “identityAttributeName”, “[attribute name]”
+ * “identityAttributeValue”, “[attribute value]”
+ * where the attribute value uniquely identifies one Identity
  */
 @Slf4j
 public abstract class CorrelationRule
