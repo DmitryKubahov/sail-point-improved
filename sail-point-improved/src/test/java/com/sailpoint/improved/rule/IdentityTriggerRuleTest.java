@@ -1,11 +1,14 @@
 package com.sailpoint.improved.rule;
 
+import com.sailpoint.improved.rule.certification.IdentityTriggerRule;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 import sailpoint.api.SailPointContext;
 import sailpoint.api.SailPointFactory;
 import sailpoint.object.Identity;
 import sailpoint.object.JavaRuleContext;
+import sailpoint.object.Rule;
 import sailpoint.tools.GeneralException;
 
 import java.util.HashMap;
@@ -15,7 +18,13 @@ import java.util.Random;
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 /**
  * Test for {@link IdentityTriggerRule} class
@@ -38,7 +47,8 @@ public class IdentityTriggerRuleTest {
     @Before
     public void init() {
         this.sailPointContext = mock(SailPointContext.class);
-        this.identityTriggerRule = mock(IdentityTriggerRule.class, CALLS_REAL_METHODS);
+        this.identityTriggerRule = mock(IdentityTriggerRule.class,
+                Mockito.withSettings().useConstructor().defaultAnswer(CALLS_REAL_METHODS));
     }
 
     /**
@@ -67,12 +77,12 @@ public class IdentityTriggerRuleTest {
                     testRuleContext.getArguments().get(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME),
                     arguments.getPreviousIdentity());
             return testResult;
-        }).when(identityTriggerRule).executeIdentityTriggerRule(any(), any());
+        }).when(identityTriggerRule).internalExecute(any(), any());
 
         assertEquals(testResult, identityTriggerRule.execute(testRuleContext));
         verify(identityTriggerRule).internalValidation(eq(testRuleContext));
-        verify(identityTriggerRule).internalExecute(eq(testRuleContext));
-        verify(identityTriggerRule).executeIdentityTriggerRule(eq(sailPointContext), any());
+        verify(identityTriggerRule).execute(eq(testRuleContext));
+        verify(identityTriggerRule).internalExecute(eq(sailPointContext), any());
     }
 
     /**
@@ -101,12 +111,12 @@ public class IdentityTriggerRuleTest {
                     testRuleContext.getArguments().get(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME),
                     arguments.getPreviousIdentity());
             return testResult;
-        }).when(identityTriggerRule).executeIdentityTriggerRule(any(), any());
+        }).when(identityTriggerRule).internalExecute(any(), any());
 
         assertEquals(testResult, identityTriggerRule.execute(testRuleContext));
         verify(identityTriggerRule).internalValidation(eq(testRuleContext));
-        verify(identityTriggerRule).internalExecute(eq(testRuleContext));
-        verify(identityTriggerRule).executeIdentityTriggerRule(eq(sailPointContext), any());
+        verify(identityTriggerRule).execute(eq(testRuleContext));
+        verify(identityTriggerRule).internalExecute(eq(sailPointContext), any());
     }
 
     /**
@@ -135,12 +145,12 @@ public class IdentityTriggerRuleTest {
             assertNull("Previous identity is not null",
                     testRuleContext.getArguments().get(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME));
             return testResult;
-        }).when(identityTriggerRule).executeIdentityTriggerRule(any(), any());
+        }).when(identityTriggerRule).internalExecute(any(), any());
 
         assertEquals(testResult, identityTriggerRule.execute(testRuleContext));
         verify(identityTriggerRule).internalValidation(eq(testRuleContext));
-        verify(identityTriggerRule).internalExecute(eq(testRuleContext));
-        verify(identityTriggerRule).executeIdentityTriggerRule(eq(sailPointContext), any());
+        verify(identityTriggerRule).execute(eq(testRuleContext));
+        verify(identityTriggerRule).internalExecute(eq(sailPointContext), any());
     }
 
     /**
@@ -160,13 +170,23 @@ public class IdentityTriggerRuleTest {
 
         assertThrows(GeneralException.class, () -> identityTriggerRule.execute(testRuleContext));
         verify(identityTriggerRule).internalValidation(eq(testRuleContext));
-        verify(identityTriggerRule, never()).internalExecute(eq(testRuleContext));
-        verify(identityTriggerRule, never()).executeIdentityTriggerRule(eq(sailPointContext), any());
+        verify(identityTriggerRule, never()).internalExecute(eq(sailPointContext), any());
     }
 
+    /**
+     * Test rule type
+     * Input:
+     * - rule type value
+     * Expectation:
+     * - expected rule type
+     */
+    @Test
+    public void ruleTypeTest() {
+        assertEquals("Rule type is not match", Rule.Type.IdentityTrigger.name(), identityTriggerRule.getRuleType());
+    }
 
     /**
-     * Create valid java rule context for identity trigger rule
+     * Create valid java rule context for current rule
      *
      * @return valid rule context
      */

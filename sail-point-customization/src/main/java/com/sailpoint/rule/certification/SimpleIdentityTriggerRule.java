@@ -1,9 +1,9 @@
-package com.sailpoint.rule;
+package com.sailpoint.rule.certification;
 
 import com.sailpoint.annotation.Rule;
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
-import com.sailpoint.improved.rule.IdentityTriggerRule;
+import com.sailpoint.improved.rule.certification.IdentityTriggerRule;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -18,8 +18,8 @@ public class SimpleIdentityTriggerRule extends IdentityTriggerRule {
      */
     @Override
     @Argument(name = "result", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Boolean executeIdentityTriggerRule(sailpoint.api.SailPointContext sailPointContext,
-                                                 IdentityTriggerRuleArguments arguments) {
+    protected Boolean internalExecute(sailpoint.api.SailPointContext sailPointContext,
+                                  IdentityTriggerRuleArguments arguments) {
         log.debug("Executing simple identity trigger rule");
         return false;
     }

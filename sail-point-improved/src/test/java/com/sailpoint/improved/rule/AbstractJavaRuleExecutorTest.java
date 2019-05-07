@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import sailpoint.api.SailPointContext;
 import sailpoint.api.SailPointFactory;
 import sailpoint.object.JavaRuleContext;
@@ -15,8 +15,12 @@ import java.util.UUID;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Test for {@link AbstractJavaRuleExecutor} class
@@ -59,7 +63,7 @@ public class AbstractJavaRuleExecutorTest {
     public void normalTest() throws GeneralException {
         String testValue = UUID.randomUUID().toString();
         JavaRuleContext javaRuleContext = new JavaRuleContext(this.sailPointContext, Collections.emptyMap());
-        when(abstractJavaRuleExecutor.internalExecute(eq(javaRuleContext))).thenReturn(testValue);
+        when(abstractJavaRuleExecutor.internalExecute(eq(this.sailPointContext), any())).thenReturn(testValue);
 
         assertEquals("Expected result of rule execution is not match", testValue,
                 this.abstractJavaRuleExecutor.execute(javaRuleContext));
@@ -84,8 +88,8 @@ public class AbstractJavaRuleExecutorTest {
         assertThrows(NullPointerException.class, () -> this.abstractJavaRuleExecutor.execute(javaRuleContext));
 
         verify(abstractJavaRuleExecutor).validate(eq(javaRuleContext));
-        verify(abstractJavaRuleExecutor, never()).internalValidation(eq(javaRuleContext));
-        verify(abstractJavaRuleExecutor, never()).internalExecute(eq(javaRuleContext));
+        verify(abstractJavaRuleExecutor, never()).internalValidation(any());
+        verify(abstractJavaRuleExecutor, never()).internalExecute(any(), any());
     }
 
 }

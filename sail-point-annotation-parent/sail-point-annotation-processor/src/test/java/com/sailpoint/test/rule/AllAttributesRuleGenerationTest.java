@@ -3,7 +3,6 @@ package com.sailpoint.test.rule;
 import com.google.testing.compile.Compilation;
 import com.google.testing.compile.Compiler;
 import com.google.testing.compile.JavaFileObjects;
-import com.sailpoint.processor.RuleAnnotationProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -15,7 +14,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test generation of rule xml from {@link AllAttributesRuleGenerationTest#PATH_TO_ALL_ATTRIBUTES_RULE}
@@ -35,7 +36,7 @@ public class AllAttributesRuleGenerationTest extends AbstractRuleAnnotationProce
     /**
      * Path to xml of current rule after generating
      */
-    private static final String PATH_TO_GENERATED_RULE_XML = "rule/Rule name - simple rule name.xml";
+    private static final String PATH_TO_GENERATED_RULE_XML = "Rule/Rule name - simple rule name.xml";
 
     /**
      * Return current rule file path

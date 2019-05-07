@@ -5,22 +5,23 @@
     <parent>
         <artifactId>sail-point-improved-parent</artifactId>
         <groupId>com.sailpoint</groupId>
-        <version>${main.version}</version>
+        <version>0.1.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sail-point-customization</artifactId>
     <dependencies>
+        <!-- Improved -->
         <dependency>
             <groupId>com.sailpoint</groupId>
             <artifactId>sail-point-improved</artifactId>
-            <version>${main.version}</version>
+            <scope>provided</scope>
         </dependency>
-
+        <!-- Improved annotation-processors -->
         <dependency>
             <groupId>com.sailpoint</groupId>
             <artifactId>sail-point-annotation-processor</artifactId>
-            <version>${main.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -34,7 +35,6 @@
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
-
                 </configuration>
             </plugin>
         </plugins>

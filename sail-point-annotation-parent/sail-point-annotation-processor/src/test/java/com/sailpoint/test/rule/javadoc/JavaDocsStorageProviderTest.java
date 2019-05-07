@@ -20,10 +20,17 @@ import java.text.MessageFormat;
 import java.util.UUID;
 
 import static com.sailpoint.processor.javadoc.JavaDocsStorageProvider.JAVA_DOC_JSON_FILE_PATTERN;
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Test for {@link JavaDocsStorageProvider} class
@@ -373,7 +380,8 @@ public class JavaDocsStorageProviderTest {
         when(reader.read((char[]) any())).thenReturn(-1);
         when(filer.getResource(any(), any(), any())).thenThrow(IOException.class);
 
-        assertNull("With IOException while reading java doc file must return NULL", javaDocsStorageProvider.readJavaDoc(testElement));
+        assertNull("With IOException while reading java doc file must return NULL",
+                javaDocsStorageProvider.readJavaDoc(testElement));
 
         verify(elements).getDocComment(eq(testElement));
         String expectedName = MessageFormat.format(JAVA_DOC_JSON_FILE_PATTERN, testElementNameValue);

@@ -5,7 +5,7 @@
 
     <groupId>com.sailpoint</groupId>
     <artifactId>sail-point-improved-parent</artifactId>
-    <version>${main.version}</version>
+    <version>0.1.2</version>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
 
@@ -16,17 +16,16 @@
     </modules>
 
     <properties>
-        <!-- Project version -->
-        <main.version>0.1.1</main.version>
 
         <!-- JAVA version compiler -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
-
+        <maven.versions.plugin>2.7</maven.versions.plugin>
+        <maven.surefire.plugin.version>2.22.1</maven.surefire.plugin.version>
 
         <!-- IdentityIQ dependencies -->
-        <identityiq.version>7.3.p1</identityiq.version>
+        <identityiq.version>7.3.p2</identityiq.version>
         <aspectjrt.version>1.8.9</aspectjrt.version>
         <commons.io.version>1.4</commons.io.version>
         <commons.pool.version>1.6</commons.pool.version>
@@ -37,6 +36,8 @@
         <flexjson.version>2.1</flexjson.version>
         <!-- (Old version 3.5.0 with Vulnerable) -->
         <lucene.core.version>3.5.0</lucene.core.version>
+        <!-- SAP j connection version -->
+        <sap.jconnection.version>3.0.14</sap.jconnection.version>
 
         <!-- slf4j api version -->
         <slf4j.api.version>1.7.25</slf4j.api.version>
@@ -49,9 +50,42 @@
         <!-- google annotation processor test version -->
         <google.process.test.version>0.15</google.process.test.version>
         <jmockit.version>1.46</jmockit.version>
-        <mockito.all.version>1.10.19</mockito.all.version>
+        <mockito.version>2.27.0</mockito.version>
         <spring.test.version>4.3.23.RELEASE</spring.test.version>
     </properties>
+
+    <!-- Additional repositories -->
+    <repositories>
+        <!--Repository for sap -->
+        <repository>
+            <id>mit</id>
+            <name>maven_mit</name>
+            <url>http://maven.mit.edu/nexus/content/repositories/public/</url>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Improved annotations -->
+            <dependency>
+                <groupId>com.sailpoint</groupId>
+                <artifactId>sail-point-annotation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- Improved annotation processor -->
+            <dependency>
+                <groupId>com.sailpoint</groupId>
+                <artifactId>sail-point-annotation-processor</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- Improved -->
+            <dependency>
+                <groupId>com.sailpoint</groupId>
+                <artifactId>sail-point-improved</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- Slf4j -->
@@ -89,6 +123,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Sap jconnection -->
+        <dependency>
+            <groupId>com.sap.conn.jco</groupId>
+            <artifactId>sapjco3</artifactId>
+            <version>${sap.jconnection.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>com.google.testing.compile</groupId>
@@ -107,8 +149,8 @@
         <!-- Mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>${mockito.all.version}</version>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- Spring test -->
@@ -135,7 +177,7 @@
             <artifactId>identityiq</artifactId>
             <version>${identityiq.version}</version>
         </dependency>
-        <!-- IdentityIq 7.3 connection bundle -->
+        <!-- IdentityIq 7.3 connector bundle -->
         <dependency>
             <groupId>com.sailpoint</groupId>
             <artifactId>connector-bundle</artifactId>
@@ -194,17 +236,23 @@
         </dependency>
     </dependencies>
 
-    <!-- Enable JMock for mocking static methods -->
     <build>
         <plugins>
+            <!-- Enable JMock for mocking static methods -->
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.21.0</version> <!-- or some other version -->
+                <version>${maven.surefire.plugin.version}</version>
                 <configuration>
                     <argLine>
                         -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
                     </argLine>
                 </configuration>
+            </plugin>
+            <!-- Enable version plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${maven.versions.plugin}</version>
             </plugin>
         </plugins>
     </build>

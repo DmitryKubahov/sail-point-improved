@@ -26,7 +26,7 @@ public class WithoutReturnTypeRuleGenerationTest extends AbstractRuleAnnotationP
     /**
      * Path to xml of current rule after generating
      */
-    private static final String PATH_TO_GENERATED_RULE_XML = "rule/WithoutReturnTypeRuleForTest.xml";
+    private static final String PATH_TO_GENERATED_RULE_XML = "Rule/WithoutReturnTypeRuleForTest.xml";
 
     /**
      * Return current rule file path
