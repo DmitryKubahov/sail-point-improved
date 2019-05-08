@@ -17,7 +17,23 @@ import java.text.MessageFormat;
 import java.util.Collections;
 
 /**
- * Common class for all identity trigger java rules
+ * Applies to both Certification Events and Lifecycle Events; they determine whether the
+ * associated certification or business process (respectively) should be triggered for the Identity on which an action
+ * occurs. IdentityTrigger rules run anytime an Identity is changed in an Identity Refresh or Aggregation if the
+ * “Process Events” option is selected on the task, and they are passed the Identity as it existed before and after
+ * the change. They also run when an Identity is edited through the Define -> Identities administrator page. The
+ * rule’s logic determines what attributes are evaluated, and the rule can return a True or False value; True fires
+ * the certification/business process associated with the rule and False does not.
+ * <p>
+ * When more than one trigger exists, they are retrieved from the database without regard to order, so their
+ * evaluation order depends on the database engine and possibly the order in which they were created in the
+ * database. Regardless, all are passed the same new and previous identity values (i.e. the effects of the one
+ * trigger’s event do not feed into the next trigger’s evaluation). Additionally, if multiple triggers’ conditions are
+ * met in one Identity update, the events launched by the triggers are processed in the background and may occur
+ * concurrently.
+ * <p>
+ * Output:
+ * True if the event should be triggered or false if it should not
  */
 @Slf4j
 public abstract class IdentityTriggerRule

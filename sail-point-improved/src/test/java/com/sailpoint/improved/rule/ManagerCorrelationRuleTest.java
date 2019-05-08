@@ -137,7 +137,7 @@ public class ManagerCorrelationRuleTest {
      * - General exception
      * Expectation:
      * - call internalValidation
-     * - do not call internalExecute
+     * - call internalExecute
      */
     @Test
     public void nullInstanceArgumentValueTest() throws GeneralException {

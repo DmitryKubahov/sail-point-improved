@@ -32,6 +32,7 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Test for {@link AccountSelectorRule} class
@@ -207,6 +208,29 @@ public class AccountSelectorRuleTest {
             verify(testRule).internalValidation(eq(testRuleContext));
             verify(testRule, never()).internalExecute(eq(sailPointContext), any());
         }
+    }
+
+    /**
+     * Test execution with valid NULL arguments.
+     * Input:
+     * - valid rule context, but {@link AccountSelectorRule#ARG_LINKS_NAME} attribute null
+     * Output:
+     * - General exception
+     * Expectation:
+     * - call internalValidation
+     * - call internalExecute
+     */
+    @Test
+    public void nullInstanceArgumentValueTest() throws GeneralException {
+        JavaRuleContext testRuleContext = buildTestJavaRuleContext();
+        String testResult = UUID.randomUUID().toString();
+
+        testRuleContext.getArguments().remove(AccountSelectorRule.ARG_LINKS_NAME);
+        when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
+
+        assertEquals(testResult, testRule.execute(testRuleContext));
+        verify(testRule).internalValidation(eq(testRuleContext));
+        verify(testRule).internalExecute(eq(sailPointContext), any());
     }
 
     /**

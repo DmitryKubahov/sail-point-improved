@@ -103,7 +103,6 @@ public abstract class AccountSelectorRule<T extends Object>
             AccountSelectorRule.ARG_ROLE_NAME,
             AccountSelectorRule.ARG_IDENTITY_NAME,
             AccountSelectorRule.ARG_APPLICATION_NAME,
-            AccountSelectorRule.ARG_LINKS_NAME,
             AccountSelectorRule.ARG_IS_SECONDARY_NAME,
             AccountSelectorRule.ARG_PROJECT_NAME,
             AccountSelectorRule.ARG_ACCOUNT_REQUEST_NAME,
