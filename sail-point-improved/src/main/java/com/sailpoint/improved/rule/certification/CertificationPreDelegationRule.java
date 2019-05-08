@@ -214,7 +214,7 @@ public abstract class CertificationPreDelegationRule
     }
 
     /**
-     * Arguments container for {@link FileParsingRule}. Contains:
+     * Arguments container for current rule. Contains:
      * - certification
      * - entity
      * - certContext

@@ -124,7 +124,7 @@ public abstract class CertificationExclusionRule
     }
 
     /**
-     * Arguments container for {@link FileParsingRule}. Contains:
+     * Arguments container for current rule. Contains:
      * - entity
      * - certification
      * - certContext
