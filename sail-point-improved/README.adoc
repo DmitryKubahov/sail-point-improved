@@ -41,5 +41,17 @@ Contains java implementation for rule types:
 ** [*] GroupAggregationRefresh
 ** [*] AccountSelector
 
-* [ ] *Certification rules*:
+* [*] *Certification rules*:
+** [*] CertificationExclusion
+** [*] CertificationPreDelegation
+** [*] Certifier
+** [*] CertificationEntityCustomization
+** [*] CertificationItemCustomization
+** [*] CertificationPhaseChange
+** [*] CertificationEntityRefresh
+** [*] CertificationEntityCompletion
+** [*] CertificationItemCompletion
+** [*] CertificationAutomaticClosing
+** [*] CertificationSignOffApprover
 ** [*] IdentityTrigger
+** [*] IdentitySelector
