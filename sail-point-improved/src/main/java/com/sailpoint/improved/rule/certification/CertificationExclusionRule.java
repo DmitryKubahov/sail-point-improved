@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * used to exclude specific items from a Certification based on an evaluation of the
+ * Used to exclude specific items from a Certification based on an evaluation of the
  * entity being certified or the certifiable items that are part of the certification. The certificationEntity depends on
  * the type of certification being run and can be a bundle (role), account group, or Identity. CertificationItems are
  * dependent on the entity and the certification type. For example, for Identities, items can be roles or
