@@ -25,7 +25,7 @@ import java.util.Map;
  * only when custom fields have been added to CertificationEntity for the installation. It runs for every
  * CertificationEntity in a certification.
  * <p>
- * NOTE: The CertificationItemCustomization rule runs for each certifiable item attached at a
+ * NOTE: The {@link CertificationItemCustomizationRule} rule runs for each certifiable item attached at a
  * certificationEntity before that entity’s CertificationEntityCustomization rule runs.
  * <p>
  * Output:
