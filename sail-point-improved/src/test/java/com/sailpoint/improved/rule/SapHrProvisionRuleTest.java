@@ -28,6 +28,7 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Test for {@link SapHrProvisionRule} class
@@ -126,6 +127,30 @@ public class SapHrProvisionRuleTest {
             verify(testRule).internalValidation(eq(testRuleContext));
             verify(testRule, never()).internalExecute(eq(sailPointContext), any());
         }
+    }
+
+    /**
+     * Test execution with valid arguments
+     * Input:
+     * - valid rule context with {@link SapHrProvisionRule#ARG_REQUEST_NAME} argument as null
+     * Output:
+     * - test provisioning result value
+     * Expectation:
+     * - call internalValidation
+     * - call internalExecute
+     */
+    @Test
+    public void nullRequestTest() throws GeneralException {
+        JavaRuleContext testRuleContext = buildTestJavaRuleContext();
+        ProvisioningResult testResult = mock(ProvisioningResult.class);
+        when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
+
+        testRuleContext.getArguments().remove(SapHrProvisionRule.ARG_REQUEST_NAME);
+
+        assertEquals(testResult, testRule.execute(testRuleContext));
+        verify(testRule).internalValidation(eq(testRuleContext));
+        verify(testRule).execute(eq(testRuleContext));
+        verify(testRule).internalExecute(eq(sailPointContext), any());
     }
 
     /**

@@ -66,7 +66,6 @@ public abstract class PeopleSoftHRMSProvisionRule
             PeopleSoftHRMSProvisionRule.ARG_APPLICATION_NAME,
             PeopleSoftHRMSProvisionRule.ARG_SCHEMA_NAME,
             PeopleSoftHRMSProvisionRule.ARG_PLAN_NAME,
-            PeopleSoftHRMSProvisionRule.ARG_REQUEST_NAME,
             PeopleSoftHRMSProvisionRule.ARG_CONNECTOR_NAME
     );
 
@@ -128,7 +127,7 @@ public abstract class PeopleSoftHRMSProvisionRule
         @Argument(name = PeopleSoftHRMSProvisionRule.ARG_PLAN_NAME)
         private final ProvisioningPlan plan;
         /**
-         * AccountRequest being processed; always null for this global rule; only set for SapHrOperationProvisioning
+         * AccountRequest being processed; always null for this global rule; only set for {@link PeopleSoftHRMSOperationProvisioningRule}
          */
         @Argument(name = PeopleSoftHRMSProvisionRule.ARG_REQUEST_NAME)
         private final ProvisioningPlan.AbstractRequest request;

@@ -69,7 +69,6 @@ public abstract class SapHrProvisionRule
             SapHrProvisionRule.ARG_SCHEMA_NAME,
             SapHrProvisionRule.ARG_DESTINATION_NAME,
             SapHrProvisionRule.ARG_PLAN_NAME,
-            SapHrProvisionRule.ARG_REQUEST_NAME,
             SapHrProvisionRule.ARG_CONNECTOR_NAME
     );
 
@@ -139,7 +138,7 @@ public abstract class SapHrProvisionRule
         @Argument(name = SapHrProvisionRule.ARG_PLAN_NAME)
         private final ProvisioningPlan plan;
         /**
-         * AccountRequest being processed; always null for this global rule; only set for SapHrOperationProvisioning
+         * AccountRequest being processed; always null for this global rule; only set for {@link SapHrOperationProvisioningRule}
          */
         @Argument(name = SapHrProvisionRule.ARG_REQUEST_NAME)
         private final ProvisioningPlan.AbstractRequest request;
