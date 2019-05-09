@@ -143,7 +143,7 @@ public abstract class SapHrOperationProvisioningRule
         @Argument(name = SapHrOperationProvisioningRule.ARG_PLAN_NAME)
         private final ProvisioningPlan plan;
         /**
-         * AccountRequest being processed; always null for this global rule; only set for SapHrOperationProvisioning
+         * AbstractRequest object containing the account request (or object request, in the case of group provisioning) to be processed
          */
         @Argument(name = SapHrOperationProvisioningRule.ARG_REQUEST_NAME)
         private final ProvisioningPlan.AbstractRequest request;
