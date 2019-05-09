@@ -58,7 +58,7 @@ public class WebServiceBeforeOperationRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test map of execution
+     * - test end point value
      * Expectation:
      * - application as in rule context args by name {@link WebServiceBeforeOperationRule#ARG_APPLICATION_NAME}
      * - requestEndPoint as in rule context args by name {@link WebServiceBeforeOperationRule#ARG_REQUEST_END_POINT_NAME}

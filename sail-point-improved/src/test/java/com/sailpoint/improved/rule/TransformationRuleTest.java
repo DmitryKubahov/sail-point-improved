@@ -58,7 +58,7 @@ public class TransformationRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test map of execution
+     * - test resource object value
      * Expectation:
      * - application as in rule context args by name {@link TransformationRule#ARG_APPLICATION_NAME}
      * - schema as in rule context args by name {@link TransformationRule#ARG_SCHEMA_NAME}

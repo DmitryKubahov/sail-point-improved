@@ -53,11 +53,11 @@ public class IdentitySelectorRuleTest {
     }
 
     /**
-     * Test of normal execution with return list type of {@link Message}
+     * Test of normal execution
      * Input:
      * - valid rule context
      * Output:
-     * - test list of test messages value
+     * - random boolean test value
      * Expectation:
      * - identity as in rule context args by name {@link IdentitySelectorRule#ARG_IDENTITY_NAME}
      * - context as in sailpoint context in rule context

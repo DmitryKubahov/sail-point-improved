@@ -71,7 +71,7 @@ public class CertificationPreDelegationRuleTest {
      * - context as in sailpoint context in rule context
      */
     @Test
-    public void normalTest() throws GeneralException {
+    public void normalExecutionTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
         Map<String, Object> testResult = buildValidRuleResult().toMap();
 

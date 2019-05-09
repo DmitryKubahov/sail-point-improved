@@ -52,11 +52,11 @@ public class CertificationAutomaticClosingRuleTest {
     }
 
     /**
-     * Test of normal execution with return list type of {@link Message}
+     * Test of normal execution
      * Input:
      * - valid rule context
      * Output:
-     * - test list of test messages value
+     * - random boolean test value
      * Expectation:
      * - certification as in rule context args by name {@link CertificationAutomaticClosingRule#ARG_CERTIFICATION_NAME}
      * - context as in sailpoint context in rule context

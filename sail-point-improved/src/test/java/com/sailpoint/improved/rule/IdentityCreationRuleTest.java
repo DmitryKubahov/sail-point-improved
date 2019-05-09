@@ -58,7 +58,7 @@ public class IdentityCreationRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test map of execution
+     * - test object value
      * Expectation:
      * - environment as in rule context args by name {@link IdentityCreationRule#ARG_ENVIRONMENT_NAME}
      * - application as in rule context args by name {@link IdentityCreationRule#ARG_APPLICATION_NAME}

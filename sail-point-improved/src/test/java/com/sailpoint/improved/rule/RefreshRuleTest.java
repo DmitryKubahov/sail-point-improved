@@ -56,7 +56,7 @@ public class RefreshRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test map of execution
+     * - test random object value
      * Expectation:
      * - environment as in rule context args by name {@link RefreshRule#ARG_ENVIRONMENT_NAME}
      * - identity as in rule context args by name {@link RefreshRule#ARG_IDENTITY_NAME}

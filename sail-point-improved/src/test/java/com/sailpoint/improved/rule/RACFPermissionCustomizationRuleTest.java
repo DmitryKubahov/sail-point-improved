@@ -55,7 +55,7 @@ public class RACFPermissionCustomizationRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test map of execution
+     * - test permission value
      * Expectation:
      * - permission as in rule context args by name {@link RACFPermissionCustomizationRule#ARG_PERMISSION_NAME}
      * - line as in rule context args by name {@link RACFPermissionCustomizationRule#ARG_LINE_NAME}
