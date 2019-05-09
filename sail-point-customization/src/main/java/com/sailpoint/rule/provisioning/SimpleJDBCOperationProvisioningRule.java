@@ -1,6 +1,8 @@
 package com.sailpoint.rule.provisioning;
 
 import com.sailpoint.annotation.Rule;
+import com.sailpoint.annotation.common.Argument;
+import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.provisioning.JDBCOperationProvisioningRule;
 import lombok.extern.slf4j.Slf4j;
 import sailpoint.api.SailPointContext;
@@ -17,6 +19,7 @@ public class SimpleJDBCOperationProvisioningRule extends JDBCOperationProvisioni
      * Log current plan and return new provisioning result
      */
     @Override
+    @Argument(name = "result", type = ArgumentType.RETURNS, isReturnsType = true)
     protected ProvisioningResult internalExecute(SailPointContext context,
                                                  JDBCOperationProvisioningRuleArguments arguments) {
 
