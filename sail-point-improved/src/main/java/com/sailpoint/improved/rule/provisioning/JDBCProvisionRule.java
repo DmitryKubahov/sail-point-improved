@@ -53,8 +53,11 @@ public abstract class JDBCProvisionRule
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            JDBCProvisionRule.ARG_PLAN_NAME,
-            JDBCProvisionRule.ARG_APPLICATION_NAME
+            JDBCProvisionRule.ARG_APPLICATION_NAME,
+            JDBCProvisionRule.ARG_SCHEMA_NAME,
+            JDBCProvisionRule.ARG_CONNECTION_NAME,
+            JDBCProvisionRule.ARG_PLAN_NAME
+
     );
 
     /**
