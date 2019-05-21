@@ -55,3 +55,20 @@ Contains java implementation for rule types:
 ** [*] CertificationSignOffApprover
 ** [*] IdentityTrigger
 ** [*] IdentitySelector
+
+* [*] *Provisioning rules*:
+** [*] BeforeProvisioning
+** [*] AfterProvisioning
+** [*] JDBCProvision
+** [*] JDBCOperationProvisioning
+** [*] SapHrProvision
+** [*] SapHrOperationProvisioning
+** [*] PeopleSoftHRMSProvision
+** [*] PeopleSoftHRMSOperationProvisioning
+** [*] Integration
+
+* [*] *Report rules*:
+** [*] ReportCustomizer
+** [*] ReportValidation
+** [*] ReportParameterQuery
+** [*] ReportParameterValue
