@@ -4,7 +4,6 @@ import com.sailpoint.annotation.Rule;
 import com.sailpoint.improved.rule.report.ReportCustomizerRule;
 import lombok.extern.slf4j.Slf4j;
 import sailpoint.api.SailPointContext;
-import sailpoint.tools.GeneralException;
 
 /**
  * Simple implementation of {@link ReportCustomizerRule} rule
@@ -14,12 +13,11 @@ import sailpoint.tools.GeneralException;
 public class SimpleReportCustomizerRule extends ReportCustomizerRule {
 
     /**
-     * Log current live report and return null
+     * Log current live report
      */
     @Override
-    protected Object internalExecute(SailPointContext context, ReportCustomizerRuleArguments arguments)
-            throws GeneralException {
+    protected void internalExecuteNoneOutput(SailPointContext sailPointContext,
+                                             ReportCustomizerRuleArguments arguments) {
         log.info("Lice report:[{}]", arguments.getReport());
-        return null;
     }
 }
