@@ -60,7 +60,7 @@ public class SAPBuildMapRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test map of execution
+     * - test attributes value
      * Expectation:
      * - application as in rule context args by name {@link SAPBuildMapRule#ARG_APPLICATION_NAME}
      * - schema as in rule context args by name {@link SAPBuildMapRule#ARG_SCHEMA_NAME}

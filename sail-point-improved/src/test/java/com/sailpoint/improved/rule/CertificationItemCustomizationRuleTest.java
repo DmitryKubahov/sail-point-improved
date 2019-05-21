@@ -71,7 +71,7 @@ public class CertificationItemCustomizationRuleTest {
      * - context as in sailpoint context in rule context
      */
     @Test
-    public void normalStringReturnTypeTest() throws GeneralException {
+    public void normalExecutionTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
         String testResult = UUID.randomUUID().toString();
 

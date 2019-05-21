@@ -57,7 +57,7 @@ public class ResourceObjectCustomizationRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test object of execution
+     * - test resource object
      * Expectation:
      * - object as in rule context args by name {@link ResourceObjectCustomizationRule#ARG_OBJECT_NAME}
      * - application as in rule context args by name {@link ResourceObjectCustomizationRule#ARG_APPLICATION_NAME}

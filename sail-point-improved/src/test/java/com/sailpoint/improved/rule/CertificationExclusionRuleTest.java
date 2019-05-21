@@ -59,7 +59,7 @@ public class CertificationExclusionRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test map of execution
+     * - test object value
      * Expectation:
      * - entity as in rule context args by name {@link CertificationExclusionRule#ARG_ENTITY_NAME}
      * - certification as in rule context args by name {@link CertificationExclusionRule#ARG_CERTIFICATION_NAME}
@@ -71,7 +71,7 @@ public class CertificationExclusionRuleTest {
      * - context as in sailpoint context in rule context
      */
     @Test
-    public void normalTest() throws GeneralException {
+    public void normalExecutionTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
         String testResult = UUID.randomUUID().toString();
 

@@ -56,11 +56,11 @@ public class CertificationItemCompletionRuleTest {
     }
 
     /**
-     * Test of normal execution with return list type of {@link Message}
+     * Test of normal execution
      * Input:
      * - valid rule context
      * Output:
-     * - test list of test messages value
+     * - random boolean test value
      * Expectation:
      * - certification as in rule context args by name {@link CertificationItemCompletionRule#ARG_CERTIFICATION_NAME}
      * - item as in rule context args by name {@link CertificationItemCompletionRule#ARG_ITEM_NAME}

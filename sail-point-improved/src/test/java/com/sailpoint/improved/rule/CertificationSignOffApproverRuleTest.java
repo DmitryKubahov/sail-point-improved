@@ -56,11 +56,11 @@ public class CertificationSignOffApproverRuleTest {
     }
 
     /**
-     * Test of normal execution with return list type of {@link Message}
+     * Test of normal execution
      * Input:
      * - valid rule context
      * Output:
-     * - test list of test messages value
+     * - test map object value
      * Expectation:
      * - certification as in rule context args by name {@link CertificationSignOffApproverRule#ARG_CERTIFICATION_NAME}
      * - certifier as in rule context args by name {@link CertificationSignOffApproverRule#ARG_CERTIFIER_NAME}

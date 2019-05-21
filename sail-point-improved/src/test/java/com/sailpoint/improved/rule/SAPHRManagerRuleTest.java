@@ -58,7 +58,7 @@ public class SAPHRManagerRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test map of execution
+     * - test random object value
      * Expectation:
      * - application as in rule context args by name {@link SAPHRManagerRule#ARG_APPLICATION_NAME}
      * - schema as in rule context args by name {@link SAPHRManagerRule#ARG_SCHEMA_NAME}

@@ -57,7 +57,7 @@ public class PreIterateRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test map of execution
+     * - test input stream
      * Expectation:
      * - application as in rule context args by name {@link PreIterateRule#ARG_APPLICATION_NAME}
      * - schema as in rule context args by name {@link PreIterateRule#ARG_SCHEMA_NAME}
