@@ -61,11 +61,11 @@ public class CertificationEntityCustomizationRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - certification as in rule context args by name {@link CertificationEntityCustomizationRule#ARG_CERTIFICATION_NAME}
-     * - certifiableEntity as in rule context args by name {@link CertificationEntityCustomizationRule#ARG_CERTIFIABLE_ENTITY_NAME}
-     * - entity as in rule context args by name {@link CertificationEntityCustomizationRule#ARG_ENTITY_NAME}
-     * - certContext as in rule context args by name {@link CertificationEntityCustomizationRule#ARG_CERT_CONTEXT_NAME}
-     * - state as in rule context args by name {@link CertificationEntityCustomizationRule#ARG_STATE_NAME}
+     * - certification as in rule context args by name {@link CertificationEntityCustomizationRule#ARG_CERTIFICATION}
+     * - certifiableEntity as in rule context args by name {@link CertificationEntityCustomizationRule#ARG_CERTIFIABLE_ENTITY}
+     * - entity as in rule context args by name {@link CertificationEntityCustomizationRule#ARG_ENTITY}
+     * - certContext as in rule context args by name {@link CertificationEntityCustomizationRule#ARG_CERT_CONTEXT}
+     * - state as in rule context args by name {@link CertificationEntityCustomizationRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -79,20 +79,20 @@ public class CertificationEntityCustomizationRuleTest {
                     .getArguments()[1];
             assertEquals("Certification is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationEntityCustomizationRule.ARG_CERTIFICATION_NAME),
+                            .get(CertificationEntityCustomizationRule.ARG_CERTIFICATION),
                     arguments.getCertification());
             assertEquals("CertifiableEntity is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationEntityCustomizationRule.ARG_CERTIFIABLE_ENTITY_NAME),
+                            .get(CertificationEntityCustomizationRule.ARG_CERTIFIABLE_ENTITY),
                     arguments.getCertifiableEntity());
             assertEquals("Entity is not match",
-                    testRuleContext.getArguments().get(CertificationEntityCustomizationRule.ARG_ENTITY_NAME),
+                    testRuleContext.getArguments().get(CertificationEntityCustomizationRule.ARG_ENTITY),
                     arguments.getEntity());
             assertEquals("CertificationContext is not match",
-                    testRuleContext.getArguments().get(CertificationEntityCustomizationRule.ARG_CERT_CONTEXT_NAME),
+                    testRuleContext.getArguments().get(CertificationEntityCustomizationRule.ARG_CERT_CONTEXT),
                     arguments.getCertContext());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(CertificationEntityCustomizationRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(CertificationEntityCustomizationRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -146,13 +146,13 @@ public class CertificationEntityCustomizationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertificationEntityCustomizationRule.ARG_CERTIFICATION_NAME, mock(Certification.class));
-        ruleParameters.put(CertificationEntityCustomizationRule.ARG_CERTIFIABLE_ENTITY_NAME, mock(
+        ruleParameters.put(CertificationEntityCustomizationRule.ARG_CERTIFICATION, mock(Certification.class));
+        ruleParameters.put(CertificationEntityCustomizationRule.ARG_CERTIFIABLE_ENTITY, mock(
                 AbstractCertifiableEntity.class));
-        ruleParameters.put(CertificationEntityCustomizationRule.ARG_ENTITY_NAME, mock(CertificationEntity.class));
+        ruleParameters.put(CertificationEntityCustomizationRule.ARG_ENTITY, mock(CertificationEntity.class));
         ruleParameters
-                .put(CertificationEntityCustomizationRule.ARG_CERT_CONTEXT_NAME, mock(CertificationContext.class));
-        ruleParameters.put(CertificationEntityCustomizationRule.ARG_STATE_NAME,
+                .put(CertificationEntityCustomizationRule.ARG_CERT_CONTEXT, mock(CertificationContext.class));
+        ruleParameters.put(CertificationEntityCustomizationRule.ARG_STATE,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }

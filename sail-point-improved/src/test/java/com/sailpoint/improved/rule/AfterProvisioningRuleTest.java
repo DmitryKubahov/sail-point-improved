@@ -59,9 +59,9 @@ public class AfterProvisioningRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - plan as in rule context args by name {@link AfterProvisioningRule#ARG_PLAN_NAME}
-     * - application as in rule context args by name {@link AfterProvisioningRule#ARG_APPLICATION_NAME}
-     * - result as in rule context args by name {@link AfterProvisioningRule#ARG_RESULT_NAME}
+     * - plan as in rule context args by name {@link AfterProvisioningRule#ARG_PLAN}
+     * - application as in rule context args by name {@link AfterProvisioningRule#ARG_APPLICATION}
+     * - result as in rule context args by name {@link AfterProvisioningRule#ARG_RESULT}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -73,10 +73,10 @@ public class AfterProvisioningRuleTest {
             assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
             AfterProvisioningRule.AfterProvisioningRuleArguments arguments = (AfterProvisioningRule.AfterProvisioningRuleArguments) invocation
                     .getArguments()[1];
-            assertEquals("Plan is not match", testRuleContext.getArguments().get(AfterProvisioningRule.ARG_PLAN_NAME),
+            assertEquals("Plan is not match", testRuleContext.getArguments().get(AfterProvisioningRule.ARG_PLAN),
                     arguments.getPlan());
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(AfterProvisioningRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(AfterProvisioningRule.ARG_APPLICATION),
                     arguments.getApplication());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -130,9 +130,9 @@ public class AfterProvisioningRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(AfterProvisioningRule.ARG_PLAN_NAME, mock(ProvisioningPlan.class));
-        ruleParameters.put(AfterProvisioningRule.ARG_APPLICATION_NAME, mock(Application.class));
-        ruleParameters.put(AfterProvisioningRule.ARG_RESULT_NAME, mock(ProvisioningResult.class));
+        ruleParameters.put(AfterProvisioningRule.ARG_PLAN, mock(ProvisioningPlan.class));
+        ruleParameters.put(AfterProvisioningRule.ARG_APPLICATION, mock(Application.class));
+        ruleParameters.put(AfterProvisioningRule.ARG_RESULT, mock(ProvisioningResult.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

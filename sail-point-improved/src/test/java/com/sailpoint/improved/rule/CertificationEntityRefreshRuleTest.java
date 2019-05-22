@@ -58,8 +58,8 @@ public class CertificationEntityRefreshRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - certification as in rule context args by name {@link CertificationEntityRefreshRule#ARG_CERTIFICATION_NAME}
-     * - certificationEntity as in rule context args by name {@link CertificationEntityRefreshRule#ARG_CERTIFICATION_ENTITY_NAME}
+     * - certification as in rule context args by name {@link CertificationEntityRefreshRule#ARG_CERTIFICATION}
+     * - certificationEntity as in rule context args by name {@link CertificationEntityRefreshRule#ARG_CERTIFICATION_ENTITY}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -73,11 +73,11 @@ public class CertificationEntityRefreshRuleTest {
                     .getArguments()[1];
             assertEquals("Certification is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationEntityRefreshRule.ARG_CERTIFICATION_NAME),
+                            .get(CertificationEntityRefreshRule.ARG_CERTIFICATION),
                     arguments.getCertification());
             assertEquals("CertificationEntity is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationEntityRefreshRule.ARG_CERTIFICATION_ENTITY_NAME),
+                            .get(CertificationEntityRefreshRule.ARG_CERTIFICATION_ENTITY),
                     arguments.getCertificationEntity());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -131,9 +131,9 @@ public class CertificationEntityRefreshRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertificationEntityRefreshRule.ARG_CERTIFICATION_NAME, mock(Certification.class));
+        ruleParameters.put(CertificationEntityRefreshRule.ARG_CERTIFICATION, mock(Certification.class));
         ruleParameters
-                .put(CertificationEntityRefreshRule.ARG_CERTIFICATION_ENTITY_NAME, mock(CertificationEntity.class));
+                .put(CertificationEntityRefreshRule.ARG_CERTIFICATION_ENTITY, mock(CertificationEntity.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

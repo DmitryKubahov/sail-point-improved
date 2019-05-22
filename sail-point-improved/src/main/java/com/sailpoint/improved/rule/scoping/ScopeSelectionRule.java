@@ -31,27 +31,27 @@ public abstract class ScopeSelectionRule
     /**
      * Name of identity argument name
      */
-    public static final String ARG_IDENTITY_NAME = "identity";
+    public static final String ARG_IDENTITY = "identity";
     /**
      * Name of scopeCorrelationAttribute argument name
      */
-    public static final String ARG_SCOPE_CORRELATION_ATTRIBUTE_NAME = "scopeCorrelationAttribute";
+    public static final String ARG_SCOPE_CORRELATION_ATTRIBUTE = "scopeCorrelationAttribute";
     /**
      * Name of scopeCorrelationAttributeValue argument name
      */
-    public static final String ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE_NAME = "scopeCorrelationAttributeValue";
+    public static final String ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE = "scopeCorrelationAttributeValue";
     /**
      * Name of candidateScopes argument name
      */
-    public static final String ARG_CANDIDATE_SCOPES_NAME = "candidateScopes";
+    public static final String ARG_CANDIDATE_SCOPES = "candidateScopes";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            ScopeSelectionRule.ARG_IDENTITY_NAME,
-            ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_NAME,
-            ScopeSelectionRule.ARG_CANDIDATE_SCOPES_NAME
+            ScopeSelectionRule.ARG_IDENTITY,
+            ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE,
+            ScopeSelectionRule.ARG_CANDIDATE_SCOPES
     );
 
     /**
@@ -72,15 +72,15 @@ public abstract class ScopeSelectionRule
             @NonNull JavaRuleContext javaRuleContext) {
         return ScopeSelectionRuleArguments.builder()
                 .identity((Identity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ScopeSelectionRule.ARG_IDENTITY_NAME))
+                        .getArgumentValueByName(javaRuleContext, ScopeSelectionRule.ARG_IDENTITY))
                 .scopeCorrelationAttribute((String) JavaRuleExecutorUtil
                         .getArgumentValueByName(javaRuleContext,
-                                ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_NAME))
+                                ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE))
                 .scopeCorrelationAttributeValue((String) JavaRuleExecutorUtil
                         .getArgumentValueByName(javaRuleContext,
-                                ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE_NAME))
+                                ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE))
                 .candidateScopes((List<Scope>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ScopeSelectionRule.ARG_CANDIDATE_SCOPES_NAME))
+                        .getArgumentValueByName(javaRuleContext, ScopeSelectionRule.ARG_CANDIDATE_SCOPES))
                 .build();
     }
 
@@ -98,22 +98,22 @@ public abstract class ScopeSelectionRule
         /**
          * Reference to the identity being assigned a scope
          */
-        @Argument(name = ScopeSelectionRule.ARG_IDENTITY_NAME)
+        @Argument(name = ScopeSelectionRule.ARG_IDENTITY)
         private final Identity identity;
         /**
          * Name of the scope correlation attribute specified in the scoping configuration
          */
-        @Argument(name = ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_NAME)
+        @Argument(name = ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE)
         private final String scopeCorrelationAttribute;
         /**
          * The value for the correlation attribute on the Identity
          */
-        @Argument(name = ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE_NAME)
+        @Argument(name = ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE)
         private final String scopeCorrelationAttributeValue;
         /**
          * List of scopes identified as candidates for assignment to the Identity; rule should select one of these and return it as the scope to assign
          */
-        @Argument(name = ScopeSelectionRule.ARG_CANDIDATE_SCOPES_NAME)
+        @Argument(name = ScopeSelectionRule.ARG_CANDIDATE_SCOPES)
         private final List<Scope> candidateScopes;
     }
 }

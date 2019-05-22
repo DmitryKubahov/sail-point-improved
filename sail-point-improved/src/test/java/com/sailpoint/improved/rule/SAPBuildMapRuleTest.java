@@ -18,7 +18,6 @@ import sailpoint.tools.GeneralException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
@@ -62,12 +61,12 @@ public class SAPBuildMapRuleTest {
      * Output:
      * - test attributes value
      * Expectation:
-     * - application as in rule context args by name {@link SAPBuildMapRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link SAPBuildMapRule#ARG_SCHEMA_NAME}
-     * - state as in rule context args by name {@link SAPBuildMapRule#ARG_STATE_NAME}
-     * - destination as in rule context args by name {@link SAPBuildMapRule#ARG_DESTINATION_NAME}
-     * - object as in rule context args by name {@link SAPBuildMapRule#ARG_OBJECT_NAME}
-     * - connector as in rule context args by name {@link SAPBuildMapRule#ARG_CONNECTOR_NAME}
+     * - application as in rule context args by name {@link SAPBuildMapRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link SAPBuildMapRule#ARG_SCHEMA}
+     * - state as in rule context args by name {@link SAPBuildMapRule#ARG_STATE}
+     * - destination as in rule context args by name {@link SAPBuildMapRule#ARG_DESTINATION}
+     * - object as in rule context args by name {@link SAPBuildMapRule#ARG_OBJECT}
+     * - connector as in rule context args by name {@link SAPBuildMapRule#ARG_CONNECTOR}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -80,22 +79,22 @@ public class SAPBuildMapRuleTest {
             SAPBuildMapRule.SAPBuildMapRuleArguments arguments = (SAPBuildMapRule.SAPBuildMapRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_STATE),
                     arguments.getState());
             assertEquals("Destination is not match",
-                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_DESTINATION_NAME),
+                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_DESTINATION),
                     arguments.getDestination());
             assertEquals("Object is not match",
-                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_OBJECT_NAME),
+                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_OBJECT),
                     arguments.getObject());
             assertEquals("Connector is not match",
-                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_CONNECTOR_NAME),
+                    testRuleContext.getArguments().get(SAPBuildMapRule.ARG_CONNECTOR),
                     arguments.getConnector());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -148,12 +147,12 @@ public class SAPBuildMapRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(SAPBuildMapRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(SAPBuildMapRule.ARG_SCHEMA_NAME, new Schema());
-        ruleParameters.put(SAPBuildMapRule.ARG_STATE_NAME, Collections.emptyMap());
-        ruleParameters.put(SAPBuildMapRule.ARG_DESTINATION_NAME, mock(JCoDestination.class));
-        ruleParameters.put(SAPBuildMapRule.ARG_OBJECT_NAME, mock(Attributes.class));
-        ruleParameters.put(SAPBuildMapRule.ARG_CONNECTOR_NAME, mock(SAPInternalConnector.class));
+        ruleParameters.put(SAPBuildMapRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(SAPBuildMapRule.ARG_SCHEMA, new Schema());
+        ruleParameters.put(SAPBuildMapRule.ARG_STATE, Collections.emptyMap());
+        ruleParameters.put(SAPBuildMapRule.ARG_DESTINATION, mock(JCoDestination.class));
+        ruleParameters.put(SAPBuildMapRule.ARG_OBJECT, mock(Attributes.class));
+        ruleParameters.put(SAPBuildMapRule.ARG_CONNECTOR, mock(SAPInternalConnector.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

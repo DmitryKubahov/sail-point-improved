@@ -62,12 +62,12 @@ public class FileParsingRuleTest {
      * Output:
      * - test map of execution
      * Expectation:
-     * - application as in rule context args by name {@link FileParsingRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link FileParsingRule#ARG_SCHEMA_NAME}
-     * - config as in rule context args by name {@link FileParsingRule#ARG_CONFIG_NAME}
-     * - inputStream as in rule context args by name {@link FileParsingRule#ARG_INPUT_STREAM_NAME}
-     * - reader as in rule context args by name {@link FileParsingRule#ARG_READER_NAME}
-     * - state as in rule context args by name {@link FileParsingRule#ARG_STATE_NAME}
+     * - application as in rule context args by name {@link FileParsingRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link FileParsingRule#ARG_SCHEMA}
+     * - config as in rule context args by name {@link FileParsingRule#ARG_CONFIG}
+     * - inputStream as in rule context args by name {@link FileParsingRule#ARG_INPUT_STREAM}
+     * - reader as in rule context args by name {@link FileParsingRule#ARG_READER}
+     * - state as in rule context args by name {@link FileParsingRule#ARG_STATE}
      */
     @Test
     public void normalTest() throws GeneralException {
@@ -79,22 +79,22 @@ public class FileParsingRuleTest {
             FileParsingRule.FileParsingRuleArguments arguments = (FileParsingRule.FileParsingRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(FileParsingRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(FileParsingRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(FileParsingRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(FileParsingRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("Config is not match",
-                    testRuleContext.getArguments().get(FileParsingRule.ARG_CONFIG_NAME),
+                    testRuleContext.getArguments().get(FileParsingRule.ARG_CONFIG),
                     arguments.getConfig());
             assertEquals("InputStream is not match",
-                    testRuleContext.getArguments().get(FileParsingRule.ARG_INPUT_STREAM_NAME),
+                    testRuleContext.getArguments().get(FileParsingRule.ARG_INPUT_STREAM),
                     arguments.getInputStream());
             assertEquals("Reader is not match",
-                    testRuleContext.getArguments().get(FileParsingRule.ARG_READER_NAME),
+                    testRuleContext.getArguments().get(FileParsingRule.ARG_READER),
                     arguments.getReader());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(FileParsingRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(FileParsingRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -146,12 +146,12 @@ public class FileParsingRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(FileParsingRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(FileParsingRule.ARG_SCHEMA_NAME, new Schema());
-        ruleParameters.put(FileParsingRule.ARG_CONFIG_NAME, mock(Attributes.class));
-        ruleParameters.put(FileParsingRule.ARG_INPUT_STREAM_NAME, mock(BufferedInputStream.class));
-        ruleParameters.put(FileParsingRule.ARG_READER_NAME, mock(BufferedReader.class));
-        ruleParameters.put(FileParsingRule.ARG_STATE_NAME,
+        ruleParameters.put(FileParsingRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(FileParsingRule.ARG_SCHEMA, new Schema());
+        ruleParameters.put(FileParsingRule.ARG_CONFIG, mock(Attributes.class));
+        ruleParameters.put(FileParsingRule.ARG_INPUT_STREAM, mock(BufferedInputStream.class));
+        ruleParameters.put(FileParsingRule.ARG_READER, mock(BufferedReader.class));
+        ruleParameters.put(FileParsingRule.ARG_STATE,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }

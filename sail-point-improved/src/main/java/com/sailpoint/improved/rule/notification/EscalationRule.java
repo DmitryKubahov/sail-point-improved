@@ -38,13 +38,13 @@ public abstract class EscalationRule
     /**
      * Name of item argument name
      */
-    public static final String ARG_ITEM_NAME = "item";
+    public static final String ARG_ITEM = "item";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            EscalationRule.ARG_ITEM_NAME
+            EscalationRule.ARG_ITEM
     );
 
     /**
@@ -65,7 +65,7 @@ public abstract class EscalationRule
             @NonNull JavaRuleContext javaRuleContext) {
         return EscalationRuleArguments.builder()
                 .item((Notifiable) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, EscalationRule.ARG_ITEM_NAME))
+                        .getArgumentValueByName(javaRuleContext, EscalationRule.ARG_ITEM))
                 .build();
     }
 
@@ -80,7 +80,7 @@ public abstract class EscalationRule
         /**
          * The Notifiable interface for the object (work item or certification) being escalated
          */
-        @Argument(name = EscalationRule.ARG_ITEM_NAME)
+        @Argument(name = EscalationRule.ARG_ITEM)
         private final Notifiable item;
     }
 }

@@ -10,7 +10,6 @@ import sailpoint.object.Certification;
 import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Rule;
 import sailpoint.tools.GeneralException;
-import sailpoint.tools.Message;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,7 +57,7 @@ public class CertificationAutomaticClosingRuleTest {
      * Output:
      * - random boolean test value
      * Expectation:
-     * - certification as in rule context args by name {@link CertificationAutomaticClosingRule#ARG_CERTIFICATION_NAME}
+     * - certification as in rule context args by name {@link CertificationAutomaticClosingRule#ARG_CERTIFICATION}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -72,7 +71,7 @@ public class CertificationAutomaticClosingRuleTest {
                     .getArguments()[1];
             assertEquals("Certification is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationAutomaticClosingRule.ARG_CERTIFICATION_NAME),
+                            .get(CertificationAutomaticClosingRule.ARG_CERTIFICATION),
                     arguments.getCertification());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -126,7 +125,7 @@ public class CertificationAutomaticClosingRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertificationAutomaticClosingRule.ARG_CERTIFICATION_NAME, mock(Certification.class));
+        ruleParameters.put(CertificationAutomaticClosingRule.ARG_CERTIFICATION, mock(Certification.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

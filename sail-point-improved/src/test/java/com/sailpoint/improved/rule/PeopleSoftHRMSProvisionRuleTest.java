@@ -61,11 +61,11 @@ public class PeopleSoftHRMSProvisionRuleTest {
      * Output:
      * - test provisioning result value
      * Expectation:
-     * - application as in rule context args by name {@link PeopleSoftHRMSProvisionRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link PeopleSoftHRMSProvisionRule#ARG_SCHEMA_NAME}
-     * - plan as in rule context args by name {@link PeopleSoftHRMSProvisionRule#ARG_PLAN_NAME}
-     * - request as in rule context args by name {@link PeopleSoftHRMSProvisionRule#ARG_REQUEST_NAME}
-     * - connector as in rule context args by name {@link PeopleSoftHRMSProvisionRule#ARG_CONNECTOR_NAME}
+     * - application as in rule context args by name {@link PeopleSoftHRMSProvisionRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link PeopleSoftHRMSProvisionRule#ARG_SCHEMA}
+     * - plan as in rule context args by name {@link PeopleSoftHRMSProvisionRule#ARG_PLAN}
+     * - request as in rule context args by name {@link PeopleSoftHRMSProvisionRule#ARG_REQUEST}
+     * - connector as in rule context args by name {@link PeopleSoftHRMSProvisionRule#ARG_CONNECTOR}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -78,19 +78,19 @@ public class PeopleSoftHRMSProvisionRuleTest {
             PeopleSoftHRMSProvisionRule.PeopleSoftHRMSProvisionRuleArguments arguments = (PeopleSoftHRMSProvisionRule.PeopleSoftHRMSProvisionRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(PeopleSoftHRMSProvisionRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(PeopleSoftHRMSProvisionRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(PeopleSoftHRMSProvisionRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(PeopleSoftHRMSProvisionRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("Plan is not match",
-                    testRuleContext.getArguments().get(PeopleSoftHRMSProvisionRule.ARG_PLAN_NAME),
+                    testRuleContext.getArguments().get(PeopleSoftHRMSProvisionRule.ARG_PLAN),
                     arguments.getPlan());
             assertEquals("Request is not match",
-                    testRuleContext.getArguments().get(PeopleSoftHRMSProvisionRule.ARG_REQUEST_NAME),
+                    testRuleContext.getArguments().get(PeopleSoftHRMSProvisionRule.ARG_REQUEST),
                     arguments.getRequest());
             assertEquals("Connector is not match",
-                    testRuleContext.getArguments().get(PeopleSoftHRMSProvisionRule.ARG_CONNECTOR_NAME),
+                    testRuleContext.getArguments().get(PeopleSoftHRMSProvisionRule.ARG_CONNECTOR),
                     arguments.getConnector());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -127,7 +127,7 @@ public class PeopleSoftHRMSProvisionRuleTest {
     /**
      * Test execution with valid arguments
      * Input:
-     * - valid rule context with {@link PeopleSoftHRMSProvisionRule#ARG_REQUEST_NAME} argument as null
+     * - valid rule context with {@link PeopleSoftHRMSProvisionRule#ARG_REQUEST} argument as null
      * Output:
      * - test provisioning result value
      * Expectation:
@@ -140,7 +140,7 @@ public class PeopleSoftHRMSProvisionRuleTest {
         ProvisioningResult testResult = mock(ProvisioningResult.class);
         when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
 
-        testRuleContext.getArguments().remove(PeopleSoftHRMSProvisionRule.ARG_REQUEST_NAME);
+        testRuleContext.getArguments().remove(PeopleSoftHRMSProvisionRule.ARG_REQUEST);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
@@ -168,12 +168,12 @@ public class PeopleSoftHRMSProvisionRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(PeopleSoftHRMSProvisionRule.ARG_APPLICATION_NAME, mock(Application.class));
-        ruleParameters.put(PeopleSoftHRMSProvisionRule.ARG_SCHEMA_NAME, mock(Schema.class));
-        ruleParameters.put(PeopleSoftHRMSProvisionRule.ARG_PLAN_NAME, mock(ProvisioningPlan.class));
+        ruleParameters.put(PeopleSoftHRMSProvisionRule.ARG_APPLICATION, mock(Application.class));
+        ruleParameters.put(PeopleSoftHRMSProvisionRule.ARG_SCHEMA, mock(Schema.class));
+        ruleParameters.put(PeopleSoftHRMSProvisionRule.ARG_PLAN, mock(ProvisioningPlan.class));
         ruleParameters
-                .put(PeopleSoftHRMSProvisionRule.ARG_REQUEST_NAME, mock(ProvisioningPlan.AbstractRequest.class));
-        ruleParameters.put(PeopleSoftHRMSProvisionRule.ARG_CONNECTOR_NAME, mock(PeopleSoftHRMSConnector.class));
+                .put(PeopleSoftHRMSProvisionRule.ARG_REQUEST, mock(ProvisioningPlan.AbstractRequest.class));
+        ruleParameters.put(PeopleSoftHRMSProvisionRule.ARG_CONNECTOR, mock(PeopleSoftHRMSConnector.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

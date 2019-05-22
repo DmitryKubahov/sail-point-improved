@@ -34,28 +34,28 @@ public abstract class WebServiceBeforeOperationRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of requestEndPoint argument name
      */
-    public static final String ARG_REQUEST_END_POINT_NAME = "requestEndPoint";
+    public static final String ARG_REQUEST_END_POINT = "requestEndPoint";
     /**
      * Name of oldResponseMap argument name
      */
-    public static final String ARG_OLD_RESPONSE_MAP_NAME = "oldResponseMap";
+    public static final String ARG_OLD_RESPONSE_MAP = "oldResponseMap";
     /**
      * Name of restClient argument name
      */
-    public static final String ARG_REST_CLIENT_NAME = "restClient";
+    public static final String ARG_REST_CLIENT = "restClient";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            WebServiceBeforeOperationRule.ARG_APPLICATION_NAME,
-            WebServiceBeforeOperationRule.ARG_REQUEST_END_POINT_NAME,
-            WebServiceBeforeOperationRule.ARG_OLD_RESPONSE_MAP_NAME,
-            WebServiceBeforeOperationRule.ARG_REST_CLIENT_NAME
+            WebServiceBeforeOperationRule.ARG_APPLICATION,
+            WebServiceBeforeOperationRule.ARG_REQUEST_END_POINT,
+            WebServiceBeforeOperationRule.ARG_OLD_RESPONSE_MAP,
+            WebServiceBeforeOperationRule.ARG_REST_CLIENT
     );
 
     /**
@@ -77,15 +77,15 @@ public abstract class WebServiceBeforeOperationRule
         return WebServiceBeforeOperationRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, WebServiceBeforeOperationRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, WebServiceBeforeOperationRule.ARG_APPLICATION))
                 .requestEndPoint((EndPoint) JavaRuleExecutorUtil.
                         getArgumentValueByName(javaRuleContext,
-                                WebServiceBeforeOperationRule.ARG_REQUEST_END_POINT_NAME))
+                                WebServiceBeforeOperationRule.ARG_REQUEST_END_POINT))
                 .oldResponseMap((Map<String, Object>) JavaRuleExecutorUtil.
                         getArgumentValueByName(javaRuleContext,
-                                WebServiceBeforeOperationRule.ARG_OLD_RESPONSE_MAP_NAME))
+                                WebServiceBeforeOperationRule.ARG_OLD_RESPONSE_MAP))
                 .restClient((WebServicesClient) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, WebServiceBeforeOperationRule.ARG_REST_CLIENT_NAME))
+                        getArgumentValueByName(javaRuleContext, WebServiceBeforeOperationRule.ARG_REST_CLIENT))
                 .build();
     }
 
@@ -103,7 +103,7 @@ public abstract class WebServiceBeforeOperationRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = WebServiceBeforeOperationRule.ARG_APPLICATION_NAME)
+        @Argument(name = WebServiceBeforeOperationRule.ARG_APPLICATION)
         private final Application application;
         /**
          * Current request information; contains:
@@ -114,17 +114,17 @@ public abstract class WebServiceBeforeOperationRule
          * - response attribute map
          * - successful response code
          */
-        @Argument(name = WebServiceBeforeOperationRule.ARG_REQUEST_END_POINT_NAME)
+        @Argument(name = WebServiceBeforeOperationRule.ARG_REQUEST_END_POINT)
         private final EndPoint requestEndPoint;
         /**
          * Earlier response object
          */
-        @Argument(name = WebServiceBeforeOperationRule.ARG_OLD_RESPONSE_MAP_NAME)
+        @Argument(name = WebServiceBeforeOperationRule.ARG_OLD_RESPONSE_MAP)
         private final Map<String, Object> oldResponseMap;
         /**
          * REST client object
          */
-        @Argument(name = WebServiceBeforeOperationRule.ARG_REST_CLIENT_NAME)
+        @Argument(name = WebServiceBeforeOperationRule.ARG_REST_CLIENT)
         private final WebServicesClient restClient;
     }
 }

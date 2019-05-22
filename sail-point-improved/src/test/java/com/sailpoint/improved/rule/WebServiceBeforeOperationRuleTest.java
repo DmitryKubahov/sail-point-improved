@@ -60,10 +60,10 @@ public class WebServiceBeforeOperationRuleTest {
      * Output:
      * - test end point value
      * Expectation:
-     * - application as in rule context args by name {@link WebServiceBeforeOperationRule#ARG_APPLICATION_NAME}
-     * - requestEndPoint as in rule context args by name {@link WebServiceBeforeOperationRule#ARG_REQUEST_END_POINT_NAME}
-     * - oldResponseMap as in rule context args by name {@link WebServiceBeforeOperationRule#ARG_OLD_RESPONSE_MAP_NAME}
-     * - restClient as in rule context args by name {@link WebServiceBeforeOperationRule#ARG_REST_CLIENT_NAME}
+     * - application as in rule context args by name {@link WebServiceBeforeOperationRule#ARG_APPLICATION}
+     * - requestEndPoint as in rule context args by name {@link WebServiceBeforeOperationRule#ARG_REQUEST_END_POINT}
+     * - oldResponseMap as in rule context args by name {@link WebServiceBeforeOperationRule#ARG_OLD_RESPONSE_MAP}
+     * - restClient as in rule context args by name {@link WebServiceBeforeOperationRule#ARG_REST_CLIENT}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -76,16 +76,16 @@ public class WebServiceBeforeOperationRuleTest {
             WebServiceBeforeOperationRule.WebServiceBeforeOperationRuleArguments arguments = (WebServiceBeforeOperationRule.WebServiceBeforeOperationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(WebServiceBeforeOperationRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(WebServiceBeforeOperationRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("RequestEndPoint is not match",
-                    testRuleContext.getArguments().get(WebServiceBeforeOperationRule.ARG_REQUEST_END_POINT_NAME),
+                    testRuleContext.getArguments().get(WebServiceBeforeOperationRule.ARG_REQUEST_END_POINT),
                     arguments.getRequestEndPoint());
             assertEquals("OldResponseMap is not match",
-                    testRuleContext.getArguments().get(WebServiceBeforeOperationRule.ARG_OLD_RESPONSE_MAP_NAME),
+                    testRuleContext.getArguments().get(WebServiceBeforeOperationRule.ARG_OLD_RESPONSE_MAP),
                     arguments.getOldResponseMap());
             assertEquals("RestClient is not match",
-                    testRuleContext.getArguments().get(WebServiceBeforeOperationRule.ARG_REST_CLIENT_NAME),
+                    testRuleContext.getArguments().get(WebServiceBeforeOperationRule.ARG_REST_CLIENT),
                     arguments.getRestClient());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -138,11 +138,11 @@ public class WebServiceBeforeOperationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(WebServiceBeforeOperationRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(WebServiceBeforeOperationRule.ARG_REQUEST_END_POINT_NAME, mock(EndPoint.class));
-        ruleParameters.put(WebServiceBeforeOperationRule.ARG_OLD_RESPONSE_MAP_NAME,
+        ruleParameters.put(WebServiceBeforeOperationRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(WebServiceBeforeOperationRule.ARG_REQUEST_END_POINT, mock(EndPoint.class));
+        ruleParameters.put(WebServiceBeforeOperationRule.ARG_OLD_RESPONSE_MAP,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
-        ruleParameters.put(WebServiceBeforeOperationRule.ARG_REST_CLIENT_NAME, mock(WebServicesClient.class));
+        ruleParameters.put(WebServiceBeforeOperationRule.ARG_REST_CLIENT, mock(WebServicesClient.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

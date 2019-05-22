@@ -32,23 +32,23 @@ public abstract class WorkItemForwardRule
     /**
      * Name of item argument name
      */
-    public static final String ARG_ITEM_NAME = "item";
+    public static final String ARG_ITEM = "item";
     /**
      * Name of owner argument name
      */
-    public static final String ARG_OWNER_NAME = "owner";
+    public static final String ARG_OWNER = "owner";
     /**
      * Name of identity argument name
      */
-    public static final String ARG_IDENTITY_NAME = "identity";
+    public static final String ARG_IDENTITY = "identity";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            WorkItemForwardRule.ARG_ITEM_NAME,
-            WorkItemForwardRule.ARG_OWNER_NAME,
-            WorkItemForwardRule.ARG_IDENTITY_NAME
+            WorkItemForwardRule.ARG_ITEM,
+            WorkItemForwardRule.ARG_OWNER,
+            WorkItemForwardRule.ARG_IDENTITY
     );
 
     /**
@@ -69,11 +69,11 @@ public abstract class WorkItemForwardRule
             @NonNull JavaRuleContext javaRuleContext) {
         return WorkItemForwardRuleArguments.builder()
                 .item((WorkItem) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, WorkItemForwardRule.ARG_ITEM_NAME))
+                        .getArgumentValueByName(javaRuleContext, WorkItemForwardRule.ARG_ITEM))
                 .owner((Identity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, WorkItemForwardRule.ARG_OWNER_NAME))
+                        .getArgumentValueByName(javaRuleContext, WorkItemForwardRule.ARG_OWNER))
                 .identity((Identity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, WorkItemForwardRule.ARG_IDENTITY_NAME))
+                        .getArgumentValueByName(javaRuleContext, WorkItemForwardRule.ARG_IDENTITY))
                 .build();
     }
 
@@ -90,17 +90,17 @@ public abstract class WorkItemForwardRule
         /**
          * Reference to the workItem being opened (some workItem arguments may not yet be set)
          */
-        @Argument(name = WorkItemForwardRule.ARG_ITEM_NAME)
+        @Argument(name = WorkItemForwardRule.ARG_ITEM)
         private final WorkItem item;
         /**
          * Reference to the Identity who currently owns the work item
          */
-        @Argument(name = WorkItemForwardRule.ARG_OWNER_NAME)
+        @Argument(name = WorkItemForwardRule.ARG_OWNER)
         private final Identity owner;
         /**
          * Reference to the same Identity object as owner (provided for backward compatibility to older versions of this rule)
          */
-        @Argument(name = WorkItemForwardRule.ARG_IDENTITY_NAME)
+        @Argument(name = WorkItemForwardRule.ARG_IDENTITY)
         private final Identity identity;
     }
 }

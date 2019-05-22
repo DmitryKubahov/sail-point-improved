@@ -60,10 +60,10 @@ public class ScopeSelectionRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - identity as in rule context args by name {@link ScopeSelectionRule#ARG_IDENTITY_NAME}
-     * - scopeSelectionAttribute as in rule context args by name {@link ScopeSelectionRule#ARG_SCOPE_CORRELATION_ATTRIBUTE_NAME}
-     * - scopeCorrelationAttribute as in rule context args by name {@link ScopeSelectionRule#ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE_NAME}
-     * - candidateScopes as in rule context args by name {@link ScopeSelectionRule#ARG_CANDIDATE_SCOPES_NAME}
+     * - identity as in rule context args by name {@link ScopeSelectionRule#ARG_IDENTITY}
+     * - scopeSelectionAttribute as in rule context args by name {@link ScopeSelectionRule#ARG_SCOPE_CORRELATION_ATTRIBUTE}
+     * - scopeCorrelationAttribute as in rule context args by name {@link ScopeSelectionRule#ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE}
+     * - candidateScopes as in rule context args by name {@link ScopeSelectionRule#ARG_CANDIDATE_SCOPES}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -76,16 +76,16 @@ public class ScopeSelectionRuleTest {
             ScopeSelectionRule.ScopeSelectionRuleArguments arguments = (ScopeSelectionRule.ScopeSelectionRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Identity is not match",
-                    testRuleContext.getArguments().get(ScopeSelectionRule.ARG_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(ScopeSelectionRule.ARG_IDENTITY),
                     arguments.getIdentity());
             assertEquals("ScopeSelectionAttribute is not match",
-                    testRuleContext.getArguments().get(ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_NAME),
+                    testRuleContext.getArguments().get(ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE),
                     arguments.getScopeCorrelationAttribute());
             assertEquals("ScopeSelectionAttributeValue is not match",
-                    testRuleContext.getArguments().get(ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE_NAME),
+                    testRuleContext.getArguments().get(ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE),
                     arguments.getScopeCorrelationAttributeValue());
             assertEquals("candidateScopes is not match",
-                    testRuleContext.getArguments().get(ScopeSelectionRule.ARG_CANDIDATE_SCOPES_NAME),
+                    testRuleContext.getArguments().get(ScopeSelectionRule.ARG_CANDIDATE_SCOPES),
                     arguments.getCandidateScopes());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -99,7 +99,7 @@ public class ScopeSelectionRuleTest {
     /**
      * Test execution with valid NULL arguments.
      * Input:
-     * - valid rule context, but {@link ScopeSelectionRule#ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE_NAME} attribute null
+     * - valid rule context, but {@link ScopeSelectionRule#ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE} attribute null
      * Output:
      * - General exception
      * Expectation:
@@ -111,7 +111,7 @@ public class ScopeSelectionRuleTest {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
         Scope testResult = mock(Scope.class);
 
-        testRuleContext.getArguments().remove(ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE_NAME);
+        testRuleContext.getArguments().remove(ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE);
         when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
@@ -163,11 +163,11 @@ public class ScopeSelectionRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(ScopeSelectionRule.ARG_IDENTITY_NAME, mock(Identity.class));
-        ruleParameters.put(ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_NAME, UUID.randomUUID().toString());
+        ruleParameters.put(ScopeSelectionRule.ARG_IDENTITY, mock(Identity.class));
+        ruleParameters.put(ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE, UUID.randomUUID().toString());
         ruleParameters
-                .put(ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE_NAME, UUID.randomUUID().toString());
-        ruleParameters.put(ScopeSelectionRule.ARG_CANDIDATE_SCOPES_NAME,
+                .put(ScopeSelectionRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE, UUID.randomUUID().toString());
+        ruleParameters.put(ScopeSelectionRule.ARG_CANDIDATE_SCOPES,
                 Collections.singletonList(new Scope(UUID.randomUUID().toString())));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }

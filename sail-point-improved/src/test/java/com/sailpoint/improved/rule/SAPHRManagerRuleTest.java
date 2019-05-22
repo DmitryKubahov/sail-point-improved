@@ -60,10 +60,10 @@ public class SAPHRManagerRuleTest {
      * Output:
      * - test random object value
      * Expectation:
-     * - application as in rule context args by name {@link SAPHRManagerRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link SAPHRManagerRule#ARG_SCHEMA_NAME}
-     * - destination as in rule context args by name {@link SAPHRManagerRule#ARG_DESTINATION_NAME}
-     * - connector as in rule context args by name {@link SAPHRManagerRule#ARG_CONNECTOR_NAME}
+     * - application as in rule context args by name {@link SAPHRManagerRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link SAPHRManagerRule#ARG_SCHEMA}
+     * - destination as in rule context args by name {@link SAPHRManagerRule#ARG_DESTINATION}
+     * - connector as in rule context args by name {@link SAPHRManagerRule#ARG_CONNECTOR}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -76,16 +76,16 @@ public class SAPHRManagerRuleTest {
             SAPHRManagerRule.SAPHRManagerRuleArguments arguments = (SAPHRManagerRule.SAPHRManagerRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(SAPHRManagerRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(SAPHRManagerRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(SAPHRManagerRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(SAPHRManagerRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("Destination is not match",
-                    testRuleContext.getArguments().get(SAPHRManagerRule.ARG_DESTINATION_NAME),
+                    testRuleContext.getArguments().get(SAPHRManagerRule.ARG_DESTINATION),
                     arguments.getDestination());
             assertEquals("Connector is not match",
-                    testRuleContext.getArguments().get(SAPHRManagerRule.ARG_CONNECTOR_NAME),
+                    testRuleContext.getArguments().get(SAPHRManagerRule.ARG_CONNECTOR),
                     arguments.getConnector());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -138,10 +138,10 @@ public class SAPHRManagerRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(SAPHRManagerRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(SAPHRManagerRule.ARG_SCHEMA_NAME, new Schema());
-        ruleParameters.put(SAPHRManagerRule.ARG_DESTINATION_NAME, mock(JCoDestination.class));
-        ruleParameters.put(SAPHRManagerRule.ARG_CONNECTOR_NAME, mock(SAPInternalConnector.class));
+        ruleParameters.put(SAPHRManagerRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(SAPHRManagerRule.ARG_SCHEMA, new Schema());
+        ruleParameters.put(SAPHRManagerRule.ARG_DESTINATION, mock(JCoDestination.class));
+        ruleParameters.put(SAPHRManagerRule.ARG_CONNECTOR, mock(SAPInternalConnector.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

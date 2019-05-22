@@ -44,23 +44,23 @@ public abstract class CertificationEntityCompletionRule<T extends Object>
     /**
      * Name of certification argument name
      */
-    public static final String ARG_CERTIFICATION_NAME = "certification";
+    public static final String ARG_CERTIFICATION = "certification";
     /**
      * Name of certificationEntity argument name
      */
-    public static final String ARG_CERTIFICATION_ENTITY_NAME = "certificationEntity";
+    public static final String ARG_CERTIFICATION_ENTITY = "certificationEntity";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            CertificationEntityCompletionRule.ARG_CERTIFICATION_NAME,
-            CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY_NAME,
-            CertificationEntityCompletionRule.ARG_STATE_NAME
+            CertificationEntityCompletionRule.ARG_CERTIFICATION,
+            CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY,
+            CertificationEntityCompletionRule.ARG_STATE
     );
 
     /**
@@ -82,11 +82,11 @@ public abstract class CertificationEntityCompletionRule<T extends Object>
             @NonNull JavaRuleContext javaRuleContext) {
         return CertificationEntityCompletionRuleArguments.builder()
                 .certification((Certification) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationEntityCompletionRule.ARG_CERTIFICATION_NAME))
+                        CertificationEntityCompletionRule.ARG_CERTIFICATION))
                 .certificationEntity((CertificationEntity) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY_NAME))
+                        CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY))
                 .state((Map<String, Object>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationEntityCompletionRule.ARG_STATE_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationEntityCompletionRule.ARG_STATE))
                 .build();
     }
 
@@ -103,19 +103,19 @@ public abstract class CertificationEntityCompletionRule<T extends Object>
         /**
          * A reference to the Certification object being refreshed
          */
-        @Argument(name = CertificationEntityCompletionRule.ARG_CERTIFICATION_NAME)
+        @Argument(name = CertificationEntityCompletionRule.ARG_CERTIFICATION)
         private final Certification certification;
         /**
          * A reference to the CertificationEntity object being refreshed
          */
-        @Argument(name = CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY_NAME)
+        @Argument(name = CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY)
         private final CertificationEntity certificationEntity;
         /**
          * Map in which any data can be stored;
          * shared across multiple rules run in the same completion process
          * (e.g. certificationItemCompletion and CertificationEntityCompletion rules can share a state map)
          */
-        @Argument(name = CertificationEntityCustomizationRule.ARG_STATE_NAME)
+        @Argument(name = CertificationEntityCustomizationRule.ARG_STATE)
         private final Map<String, Object> state;
     }
 }

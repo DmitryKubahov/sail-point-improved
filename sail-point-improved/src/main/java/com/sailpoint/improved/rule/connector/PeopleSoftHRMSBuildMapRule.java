@@ -36,42 +36,42 @@ public abstract class PeopleSoftHRMSBuildMapRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
     /**
      * Name of identity argument name
      */
-    public static final String ARG_IDENTITY_NAME = "identity";
+    public static final String ARG_IDENTITY = "identity";
     /**
      * Name of connection argument name
      */
-    public static final String ARG_CONNECTION_NAME = "connection";
+    public static final String ARG_CONNECTION = "connection";
     /**
      * Name of connector argument name
      */
-    public static final String ARG_CONNECTOR_NAME = "connector";
+    public static final String ARG_CONNECTOR = "connector";
     /**
      * Name of map argument name
      */
-    public static final String ARG_MAP_NAME = "map";
+    public static final String ARG_MAP = "map";
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            PeopleSoftHRMSBuildMapRule.ARG_APPLICATION_NAME,
-            PeopleSoftHRMSBuildMapRule.ARG_SCHEMA_NAME,
-            PeopleSoftHRMSBuildMapRule.ARG_STATE_NAME,
-            PeopleSoftHRMSBuildMapRule.ARG_IDENTITY_NAME,
-            PeopleSoftHRMSBuildMapRule.ARG_CONNECTION_NAME,
-            PeopleSoftHRMSBuildMapRule.ARG_CONNECTOR_NAME,
-            PeopleSoftHRMSBuildMapRule.ARG_MAP_NAME
+            PeopleSoftHRMSBuildMapRule.ARG_APPLICATION,
+            PeopleSoftHRMSBuildMapRule.ARG_SCHEMA,
+            PeopleSoftHRMSBuildMapRule.ARG_STATE,
+            PeopleSoftHRMSBuildMapRule.ARG_IDENTITY,
+            PeopleSoftHRMSBuildMapRule.ARG_CONNECTION,
+            PeopleSoftHRMSBuildMapRule.ARG_CONNECTOR,
+            PeopleSoftHRMSBuildMapRule.ARG_MAP
     );
 
     /**
@@ -93,19 +93,19 @@ public abstract class PeopleSoftHRMSBuildMapRule
         return PeopleSoftHRMSBuildMapRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_SCHEMA_NAME))
+                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_SCHEMA))
                 .state((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_STATE_NAME))
+                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_STATE))
                 .identity((String) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_IDENTITY_NAME))
+                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_IDENTITY))
                 .connection((Connection) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_CONNECTION_NAME))
+                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_CONNECTION))
                 .connector((PeopleSoftHRMSConnector) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_CONNECTOR_NAME))
+                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_CONNECTOR))
                 .map((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_MAP_NAME))
+                        getArgumentValueByName(javaRuleContext, PeopleSoftHRMSBuildMapRule.ARG_MAP))
                 .build();
     }
 
@@ -125,37 +125,37 @@ public abstract class PeopleSoftHRMSBuildMapRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_APPLICATION_NAME)
+        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Schema object that represents the object we are building
          */
-        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_SCHEMA_NAME)
+        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * A Map that can be used to store and share data between executions of this rule during a single aggregation run
          */
-        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_STATE_NAME)
+        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_STATE)
         private final Map<String, Object> state;
         /**
          * Name of the target identity
          */
-        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_IDENTITY_NAME)
+        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_IDENTITY)
         private final String identity;
         /**
          * Connection to the application database
          */
-        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_CONNECTION_NAME)
+        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_CONNECTION)
         private final Connection connection;
         /**
          * A reference to the current PeopleSoft HRMS Connector
          */
-        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_CONNECTOR_NAME)
+        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_CONNECTOR)
         private final PeopleSoftHRMSConnector connector;
         /**
          * Map of attributes pre-built by the connector, to which the rule can add more attributes, as needed
          */
-        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_MAP_NAME)
+        @Argument(name = PeopleSoftHRMSBuildMapRule.ARG_MAP)
         private final Map<String, Object> map;
     }
 }

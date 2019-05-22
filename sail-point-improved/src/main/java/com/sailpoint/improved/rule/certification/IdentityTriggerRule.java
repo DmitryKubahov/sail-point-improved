@@ -42,11 +42,11 @@ public abstract class IdentityTriggerRule
     /**
      * Name of previous identity argument name
      */
-    public static final String ARG_PREVIOUS_IDENTITY_NAME = "previousIdentity";
+    public static final String ARG_PREVIOUS_IDENTITY = "previousIdentity";
     /**
      * Name of new identity argument name
      */
-    public static final String ARG_NEW_IDENTITY_NAME = "newIdentity";
+    public static final String ARG_NEW_IDENTITY = "newIdentity";
 
     /**
      * Validation context error message. Parameters:
@@ -73,31 +73,31 @@ public abstract class IdentityTriggerRule
             @NonNull JavaRuleContext javaRuleContext) {
         return IdentityTriggerRuleArguments.builder()
                 .newIdentity((Identity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, IdentityTriggerRule.ARG_NEW_IDENTITY_NAME))
+                        .getArgumentValueByName(javaRuleContext, IdentityTriggerRule.ARG_NEW_IDENTITY))
                 .previousIdentity(
                         (Identity) JavaRuleExecutorUtil
                                 .getArgumentValueByName(javaRuleContext,
-                                        IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME))
+                                        IdentityTriggerRule.ARG_PREVIOUS_IDENTITY))
                 .build();
     }
 
     /**
      * Identity trigger rule validation.
-     * Arguments {@link IdentityTriggerRule#ARG_NEW_IDENTITY_NAME} and {@link IdentityTriggerRule#ARG_PREVIOUS_IDENTITY_NAME} can not be both null simultaneously.
+     * Arguments {@link IdentityTriggerRule#ARG_NEW_IDENTITY} and {@link IdentityTriggerRule#ARG_PREVIOUS_IDENTITY} can not be both null simultaneously.
      *
      * @param javaRuleContext - rule context to validate
      * @throws GeneralException - newIdentity and previousIdentity are null
      */
     @Override
     protected void internalValidateArguments(JavaRuleContext javaRuleContext) throws GeneralException {
-        log.debug("Validate arguments attributes: {} and {}", IdentityTriggerRule.ARG_NEW_IDENTITY_NAME,
-                IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME);
+        log.debug("Validate arguments attributes: {} and {}", IdentityTriggerRule.ARG_NEW_IDENTITY,
+                IdentityTriggerRule.ARG_PREVIOUS_IDENTITY);
         if (JavaRuleExecutorUtil
-                .getArgumentValueByName(javaRuleContext, IdentityTriggerRule.ARG_NEW_IDENTITY_NAME) == null
+                .getArgumentValueByName(javaRuleContext, IdentityTriggerRule.ARG_NEW_IDENTITY) == null
                 && JavaRuleExecutorUtil
-                .getArgumentValueByName(javaRuleContext, IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME) == null) {
+                .getArgumentValueByName(javaRuleContext, IdentityTriggerRule.ARG_PREVIOUS_IDENTITY) == null) {
             String errorMessage = MessageFormat.format(IdentityTriggerRule.VALIDATION_ERROR_MESSAGE,
-                    IdentityTriggerRule.ARG_NEW_IDENTITY_NAME, IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME);
+                    IdentityTriggerRule.ARG_NEW_IDENTITY, IdentityTriggerRule.ARG_PREVIOUS_IDENTITY);
             log.error("Identity trigger rule execution validation error:[{}]", errorMessage);
             throw new GeneralException(errorMessage);
         }
@@ -116,13 +116,13 @@ public abstract class IdentityTriggerRule
         /**
          * Identity as it existed before it was updated
          */
-        @Argument(name = ARG_PREVIOUS_IDENTITY_NAME)
+        @Argument(name = ARG_PREVIOUS_IDENTITY)
         private final Identity previousIdentity;
 
         /**
          * Identity as it existed after it was updated
          */
-        @Argument(name = ARG_NEW_IDENTITY_NAME)
+        @Argument(name = ARG_NEW_IDENTITY)
         private final Identity newIdentity;
     }
 }

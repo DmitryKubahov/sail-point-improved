@@ -61,12 +61,12 @@ public class FallbackWorkItemForwardRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - item as in rule context args by name {@link FallbackWorkItemForwardRule#ARG_ITEM_NAME}
-     * - owner as in rule context args by name {@link FallbackWorkItemForwardRule#ARG_OWNER_NAME}
-     * - creator as in rule context args by name {@link FallbackWorkItemForwardRule#ARG_CREATOR_NAME}
-     * - certifiers as in rule context args by name {@link FallbackWorkItemForwardRule#ARG_CERTIFIERS_NAME}
+     * - item as in rule context args by name {@link FallbackWorkItemForwardRule#ARG_ITEM}
+     * - owner as in rule context args by name {@link FallbackWorkItemForwardRule#ARG_OWNER}
+     * - creator as in rule context args by name {@link FallbackWorkItemForwardRule#ARG_CREATOR}
+     * - certifiers as in rule context args by name {@link FallbackWorkItemForwardRule#ARG_CERTIFIERS}
      * - certificationName as in rule context args by name {@link FallbackWorkItemForwardRule#ARG_CERTIFICATION_NAME}
-     * - certificationType as in rule context args by name {@link FallbackWorkItemForwardRule#ARG_CERTIFICATION_TYPE_NAME}
+     * - certificationType as in rule context args by name {@link FallbackWorkItemForwardRule#ARG_CERTIFICATION_TYPE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -79,22 +79,22 @@ public class FallbackWorkItemForwardRuleTest {
             FallbackWorkItemForwardRule.FallbackWorkItemForwardRuleArguments arguments = (FallbackWorkItemForwardRule.FallbackWorkItemForwardRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Item is not match",
-                    testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_ITEM_NAME),
+                    testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_ITEM),
                     arguments.getItem());
             assertEquals("Owner is not match",
-                    testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_OWNER_NAME),
+                    testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_OWNER),
                     arguments.getOwner());
             assertEquals("Creator is not match",
-                    testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_CREATOR_NAME),
+                    testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_CREATOR),
                     arguments.getCreator());
             assertEquals("Certifiers is not match",
-                    testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_CERTIFIERS_NAME),
+                    testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_CERTIFIERS),
                     arguments.getCertifiers());
             assertEquals("CertificationName is not match",
                     testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_CERTIFICATION_NAME),
                     arguments.getCertificationName());
             assertEquals("CertificationType is not match",
-                    testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_CERTIFICATION_TYPE_NAME),
+                    testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_CERTIFICATION_TYPE),
                     arguments.getCertificationType());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -171,14 +171,14 @@ public class FallbackWorkItemForwardRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(FallbackWorkItemForwardRule.ARG_ITEM_NAME, mock(WorkItem.class));
-        ruleParameters.put(FallbackWorkItemForwardRule.ARG_OWNER_NAME, mock(Identity.class));
-        ruleParameters.put(FallbackWorkItemForwardRule.ARG_CREATOR_NAME, UUID.randomUUID().toString());
-        ruleParameters.put(FallbackWorkItemForwardRule.ARG_CERTIFIERS_NAME,
+        ruleParameters.put(FallbackWorkItemForwardRule.ARG_ITEM, mock(WorkItem.class));
+        ruleParameters.put(FallbackWorkItemForwardRule.ARG_OWNER, mock(Identity.class));
+        ruleParameters.put(FallbackWorkItemForwardRule.ARG_CREATOR, UUID.randomUUID().toString());
+        ruleParameters.put(FallbackWorkItemForwardRule.ARG_CERTIFIERS,
                 Collections.singletonList(UUID.randomUUID().toString()));
         ruleParameters.put(FallbackWorkItemForwardRule.ARG_CERTIFICATION_NAME, UUID.randomUUID().toString());
         ruleParameters
-                .put(FallbackWorkItemForwardRule.ARG_CERTIFICATION_TYPE_NAME, Certification.Type.ApplicationOwner);
+                .put(FallbackWorkItemForwardRule.ARG_CERTIFICATION_TYPE, Certification.Type.ApplicationOwner);
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

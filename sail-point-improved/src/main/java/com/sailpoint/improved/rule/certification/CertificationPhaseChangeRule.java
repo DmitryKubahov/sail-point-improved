@@ -39,27 +39,27 @@ public abstract class CertificationPhaseChangeRule
     /**
      * Name of certification argument name
      */
-    public static final String ARG_CERTIFICATION_NAME = "certification";
+    public static final String ARG_CERTIFICATION = "certification";
     /**
      * Name of certificationItem argument name
      */
-    public static final String ARG_CERTIFICATION_ITEM_NAME = "certificationItem";
+    public static final String ARG_CERTIFICATION_ITEM = "certificationItem";
     /**
      * Name of previousPhase argument name
      */
-    public static final String ARG_PREVIOUS_PHASE_NAME = "previousPhase";
+    public static final String ARG_PREVIOUS_PHASE = "previousPhase";
     /**
      * Name of nextPhase argument name
      */
-    public static final String ARG_NEXT_PHASE_NAME = "nextPhase";
+    public static final String ARG_NEXT_PHASE = "nextPhase";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            CertificationPhaseChangeRule.ARG_CERTIFICATION_NAME,
-            CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM_NAME,
-            CertificationPhaseChangeRule.ARG_NEXT_PHASE_NAME
+            CertificationPhaseChangeRule.ARG_CERTIFICATION,
+            CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM,
+            CertificationPhaseChangeRule.ARG_NEXT_PHASE
     );
 
     /**
@@ -81,13 +81,13 @@ public abstract class CertificationPhaseChangeRule
             @NonNull JavaRuleContext javaRuleContext) {
         return CertificationPhaseChangeRuleArguments.builder()
                 .certification((Certification) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationPhaseChangeRule.ARG_CERTIFICATION_NAME))
+                        CertificationPhaseChangeRule.ARG_CERTIFICATION))
                 .certificationItem((CertificationItem) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM_NAME))
+                        CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM))
                 .previousPhase((Certification.Phase) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE_NAME))
+                        CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE))
                 .nextPhase((Certification.Phase) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationPhaseChangeRule.ARG_NEXT_PHASE_NAME))
+                        CertificationPhaseChangeRule.ARG_NEXT_PHASE))
                 .build();
     }
 
@@ -105,23 +105,23 @@ public abstract class CertificationPhaseChangeRule
         /**
          * Certification object undergoing phase transition
          */
-        @Argument(name = CertificationPhaseChangeRule.ARG_CERTIFICATION_NAME)
+        @Argument(name = CertificationPhaseChangeRule.ARG_CERTIFICATION)
         private final Certification certification;
         /**
          * CertificationItem undergoing phase transition; only passed in for transitions of continuous certifications,
          * where certificationItems are phased individually
          */
-        @Argument(name = CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM_NAME)
+        @Argument(name = CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM)
         private final CertificationItem certificationItem;
         /**
          * Phase being exited (may be null)
          */
-        @Argument(name = CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE_NAME)
+        @Argument(name = CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE)
         private final Certification.Phase previousPhase;
         /**
          * Phase to which the certification is being transitioned
          */
-        @Argument(name = CertificationPhaseChangeRule.ARG_NEXT_PHASE_NAME)
+        @Argument(name = CertificationPhaseChangeRule.ARG_NEXT_PHASE)
         private final Certification.Phase nextPhase;
     }
 }

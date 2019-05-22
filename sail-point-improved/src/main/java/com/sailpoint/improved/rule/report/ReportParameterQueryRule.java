@@ -33,23 +33,23 @@ public abstract class ReportParameterQueryRule
     /**
      * Name of value argument name
      */
-    public static final String ARG_VALUE_NAME = "value";
+    public static final String ARG_VALUE = "value";
     /**
      * Name of arguments argument name
      */
-    public static final String ARG_ARGUMENTS_NAME = "arguments";
+    public static final String ARG_ARGUMENTS = "arguments";
     /**
      * Name of queryOptions argument name
      */
-    public static final String ARG_QUERY_OPTIONS_NAME = "queryOptions";
+    public static final String ARG_QUERY_OPTIONS = "queryOptions";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            ReportParameterQueryRule.ARG_VALUE_NAME,
-            ReportParameterQueryRule.ARG_ARGUMENTS_NAME,
-            ReportParameterQueryRule.ARG_QUERY_OPTIONS_NAME
+            ReportParameterQueryRule.ARG_VALUE,
+            ReportParameterQueryRule.ARG_ARGUMENTS,
+            ReportParameterQueryRule.ARG_QUERY_OPTIONS
     );
 
     /**
@@ -70,11 +70,11 @@ public abstract class ReportParameterQueryRule
             @NonNull JavaRuleContext javaRuleContext) {
         return ReportParameterQueryRuleArguments.builder()
                 .value(JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ReportParameterQueryRule.ARG_VALUE_NAME))
+                        .getArgumentValueByName(javaRuleContext, ReportParameterQueryRule.ARG_VALUE))
                 .arguments((Attributes) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ReportParameterQueryRule.ARG_ARGUMENTS_NAME))
+                        .getArgumentValueByName(javaRuleContext, ReportParameterQueryRule.ARG_ARGUMENTS))
                 .queryOptions((QueryOptions) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ReportParameterQueryRule.ARG_QUERY_OPTIONS_NAME))
+                        .getArgumentValueByName(javaRuleContext, ReportParameterQueryRule.ARG_QUERY_OPTIONS))
                 .build();
     }
 
@@ -91,17 +91,17 @@ public abstract class ReportParameterQueryRule
         /**
          * Parameter value, as specified in report form
          */
-        @Argument(name = ReportParameterQueryRule.ARG_VALUE_NAME)
+        @Argument(name = ReportParameterQueryRule.ARG_VALUE)
         private final Object value;
         /**
          * Report arguments map
          */
-        @Argument(name = ReportParameterQueryRule.ARG_ARGUMENTS_NAME)
+        @Argument(name = ReportParameterQueryRule.ARG_ARGUMENTS)
         private final Attributes arguments;
         /**
          * Updated QueryOptions object to use as report filter
          */
-        @Argument(name = ReportParameterQueryRule.ARG_QUERY_OPTIONS_NAME)
+        @Argument(name = ReportParameterQueryRule.ARG_QUERY_OPTIONS)
         private final QueryOptions queryOptions;
     }
 }

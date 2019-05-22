@@ -58,8 +58,8 @@ public class IdentityTriggerRuleTest {
      * Output:
      * - test value of execution
      * Expectation:
-     * - newIdentity as in rule context args by name {@link IdentityTriggerRule#ARG_NEW_IDENTITY_NAME}
-     * - previousIdentity as in rule context args by name {@link IdentityTriggerRule#ARG_PREVIOUS_IDENTITY_NAME}
+     * - newIdentity as in rule context args by name {@link IdentityTriggerRule#ARG_NEW_IDENTITY}
+     * - previousIdentity as in rule context args by name {@link IdentityTriggerRule#ARG_PREVIOUS_IDENTITY}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -71,10 +71,10 @@ public class IdentityTriggerRuleTest {
             IdentityTriggerRule.IdentityTriggerRuleArguments arguments = (IdentityTriggerRule.IdentityTriggerRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("New identity is not match",
-                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_NEW_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_NEW_IDENTITY),
                     arguments.getNewIdentity());
             assertEquals("Previous identity is not match",
-                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY),
                     arguments.getPreviousIdentity());
             return testResult;
         }).when(identityTriggerRule).internalExecute(any(), any());
@@ -93,22 +93,22 @@ public class IdentityTriggerRuleTest {
      * - test value of execution
      * Expectation:
      * - newIdentity as null
-     * - previousIdentity as in rule context args by name {@link IdentityTriggerRule#ARG_PREVIOUS_IDENTITY_NAME}
+     * - previousIdentity as in rule context args by name {@link IdentityTriggerRule#ARG_PREVIOUS_IDENTITY}
      * - context as in sailpoint context in rule context
      */
     @Test
     public void newIdentityIsNullTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        testRuleContext.getArguments().remove(IdentityTriggerRule.ARG_NEW_IDENTITY_NAME);
+        testRuleContext.getArguments().remove(IdentityTriggerRule.ARG_NEW_IDENTITY);
         Boolean testResult = new Random().nextBoolean();
         doAnswer(invocation -> {
             assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
             IdentityTriggerRule.IdentityTriggerRuleArguments arguments = (IdentityTriggerRule.IdentityTriggerRuleArguments) invocation
                     .getArguments()[1];
             assertNull("New identity is not null",
-                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_NEW_IDENTITY_NAME));
+                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_NEW_IDENTITY));
             assertEquals("Previous identity is not match",
-                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY),
                     arguments.getPreviousIdentity());
             return testResult;
         }).when(identityTriggerRule).internalExecute(any(), any());
@@ -126,24 +126,24 @@ public class IdentityTriggerRuleTest {
      * Output:
      * - test value of execution
      * Expectation:
-     * - newIdentity as in rule context args by name {@link IdentityTriggerRule#ARG_NEW_IDENTITY_NAME}
+     * - newIdentity as in rule context args by name {@link IdentityTriggerRule#ARG_NEW_IDENTITY}
      * - previousIdentity as null
      * - context as in sailpoint context in rule context
      */
     @Test
     public void previousIdentityIsNullTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        testRuleContext.getArguments().remove(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME);
+        testRuleContext.getArguments().remove(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY);
         Boolean testResult = new Random().nextBoolean();
         doAnswer(invocation -> {
             assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
             IdentityTriggerRule.IdentityTriggerRuleArguments arguments = (IdentityTriggerRule.IdentityTriggerRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("New identity is not match",
-                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_NEW_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_NEW_IDENTITY),
                     arguments.getNewIdentity());
             assertNull("Previous identity is not null",
-                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME));
+                    testRuleContext.getArguments().get(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY));
             return testResult;
         }).when(identityTriggerRule).internalExecute(any(), any());
 
@@ -165,8 +165,8 @@ public class IdentityTriggerRuleTest {
     @Test
     public void previousIdentityAndNewIdentityAreNullsTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        testRuleContext.getArguments().remove(IdentityTriggerRule.ARG_NEW_IDENTITY_NAME);
-        testRuleContext.getArguments().remove(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME);
+        testRuleContext.getArguments().remove(IdentityTriggerRule.ARG_NEW_IDENTITY);
+        testRuleContext.getArguments().remove(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY);
 
         assertThrows(GeneralException.class, () -> identityTriggerRule.execute(testRuleContext));
         verify(identityTriggerRule).internalValidation(eq(testRuleContext));
@@ -192,8 +192,8 @@ public class IdentityTriggerRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(IdentityTriggerRule.ARG_NEW_IDENTITY_NAME, new Identity());
-        ruleParameters.put(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY_NAME, new Identity());
+        ruleParameters.put(IdentityTriggerRule.ARG_NEW_IDENTITY, new Identity());
+        ruleParameters.put(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY, new Identity());
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

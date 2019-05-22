@@ -8,8 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.object.Attributes;
-import sailpoint.object.Identity;
 import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Notifiable;
 import sailpoint.object.Rule;
@@ -31,13 +29,13 @@ public abstract class EmailRecipientRule
     /**
      * Name of item argument name
      */
-    public static final String ARG_ITEM_NAME = "item";
+    public static final String ARG_ITEM = "item";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            EmailRecipientRule.ARG_ITEM_NAME
+            EmailRecipientRule.ARG_ITEM
     );
 
     /**
@@ -58,7 +56,7 @@ public abstract class EmailRecipientRule
             @NonNull JavaRuleContext javaRuleContext) {
         return EmailRecipientRuleArguments.builder()
                 .item((Notifiable) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, EmailRecipientRule.ARG_ITEM_NAME))
+                        .getArgumentValueByName(javaRuleContext, EmailRecipientRule.ARG_ITEM))
                 .build();
     }
 
@@ -73,7 +71,7 @@ public abstract class EmailRecipientRule
         /**
          * The Notifiable interface for objects that can be reminded, escalated, and expired
          */
-        @Argument(name = EmailRecipientRule.ARG_ITEM_NAME)
+        @Argument(name = EmailRecipientRule.ARG_ITEM)
         private final Notifiable item;
     }
 }

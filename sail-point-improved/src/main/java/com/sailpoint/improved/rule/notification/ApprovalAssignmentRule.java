@@ -38,18 +38,18 @@ public abstract class ApprovalAssignmentRule
     /**
      * Name of approvals argument name
      */
-    public static final String ARG_APPROVALS_NAME = "approvals";
+    public static final String ARG_APPROVALS = "approvals";
     /**
      * Name of approvalSet argument name
      */
-    public static final String ARG_APPROVAL_SET_NAME = "approvalSet";
+    public static final String ARG_APPROVAL_SET = "approvalSet";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            ApprovalAssignmentRule.ARG_APPROVALS_NAME,
-            ApprovalAssignmentRule.ARG_APPROVAL_SET_NAME
+            ApprovalAssignmentRule.ARG_APPROVALS,
+            ApprovalAssignmentRule.ARG_APPROVAL_SET
     );
 
     /**
@@ -70,9 +70,9 @@ public abstract class ApprovalAssignmentRule
             @NonNull JavaRuleContext javaRuleContext) {
         return ApprovalAssignmentRuleArguments.builder()
                 .approvals((List<Workflow.Approval>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ApprovalAssignmentRule.ARG_APPROVALS_NAME))
+                        .getArgumentValueByName(javaRuleContext, ApprovalAssignmentRule.ARG_APPROVALS))
                 .approvalSet((ApprovalSet) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ApprovalAssignmentRule.ARG_APPROVAL_SET_NAME))
+                        .getArgumentValueByName(javaRuleContext, ApprovalAssignmentRule.ARG_APPROVAL_SET))
                 .build();
     }
 
@@ -90,12 +90,12 @@ public abstract class ApprovalAssignmentRule
          * - the definition
          * - the current state of the approval
          */
-        @Argument(name = ApprovalAssignmentRule.ARG_APPROVALS_NAME)
+        @Argument(name = ApprovalAssignmentRule.ARG_APPROVALS)
         private final List<Workflow.Approval> approvals;
         /**
          * Contains all the items to be approved in the set
          */
-        @Argument(name = ApprovalAssignmentRule.ARG_APPROVAL_SET_NAME)
+        @Argument(name = ApprovalAssignmentRule.ARG_APPROVAL_SET)
         private final ApprovalSet approvalSet;
     }
 }

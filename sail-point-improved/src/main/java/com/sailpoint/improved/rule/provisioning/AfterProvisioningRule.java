@@ -34,23 +34,23 @@ public abstract class AfterProvisioningRule
     /**
      * Name of plan argument name
      */
-    public static final String ARG_PLAN_NAME = "plan";
+    public static final String ARG_PLAN = "plan";
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of result argument name
      */
-    public static final String ARG_RESULT_NAME = "result";
+    public static final String ARG_RESULT = "result";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            AfterProvisioningRule.ARG_PLAN_NAME,
-            AfterProvisioningRule.ARG_APPLICATION_NAME,
-            AfterProvisioningRule.ARG_RESULT_NAME
+            AfterProvisioningRule.ARG_PLAN,
+            AfterProvisioningRule.ARG_APPLICATION,
+            AfterProvisioningRule.ARG_RESULT
     );
 
     /**
@@ -71,11 +71,11 @@ public abstract class AfterProvisioningRule
             @NonNull JavaRuleContext javaRuleContext) {
         return AfterProvisioningRuleArguments.builder()
                 .plan((ProvisioningPlan) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AfterProvisioningRule.ARG_PLAN_NAME))
+                        .getArgumentValueByName(javaRuleContext, AfterProvisioningRule.ARG_PLAN))
                 .application((Application) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AfterProvisioningRule.ARG_APPLICATION_NAME))
+                        .getArgumentValueByName(javaRuleContext, AfterProvisioningRule.ARG_APPLICATION))
                 .result((ProvisioningResult) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AfterProvisioningRule.ARG_RESULT_NAME))
+                        .getArgumentValueByName(javaRuleContext, AfterProvisioningRule.ARG_RESULT))
                 .build();
     }
 
@@ -92,17 +92,17 @@ public abstract class AfterProvisioningRule
         /**
          * Contains provisioning request details
          */
-        @Argument(name = AfterProvisioningRule.ARG_PLAN_NAME)
+        @Argument(name = AfterProvisioningRule.ARG_PLAN)
         private final ProvisioningPlan plan;
         /**
          * Application object containing this rule reference
          */
-        @Argument(name = AfterProvisioningRule.ARG_APPLICATION_NAME)
+        @Argument(name = AfterProvisioningRule.ARG_APPLICATION)
         private final Application application;
         /**
          * Contains provisioning request result
          */
-        @Argument(name = AfterProvisioningRule.ARG_RESULT_NAME)
+        @Argument(name = AfterProvisioningRule.ARG_RESULT)
         private final ProvisioningResult result;
     }
 }

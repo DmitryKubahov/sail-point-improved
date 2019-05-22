@@ -31,33 +31,33 @@ public abstract class WebServiceAfterOperationRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of requestEndPoint argument name
      */
-    public static final String ARG_REQUEST_END_POINT_NAME = "requestEndPoint";
+    public static final String ARG_REQUEST_END_POINT = "requestEndPoint";
     /**
      * Name of processedResponseObject argument name
      */
-    public static final String ARG_PROCESSED_RESPONSE_OBJECT_NAME = "processedResponseObject";
+    public static final String ARG_PROCESSED_RESPONSE_OBJECT = "processedResponseObject";
     /**
      * Name of rawResponseObject argument name
      */
-    public static final String ARG_RAW_RESPONSE_OBJECT_NAME = "rawResponseObject";
+    public static final String ARG_RAW_RESPONSE_OBJECT = "rawResponseObject";
     /**
      * Name of restClient argument name
      */
-    public static final String ARG_REST_CLIENT_NAME = "restClient";
+    public static final String ARG_REST_CLIENT = "restClient";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            WebServiceAfterOperationRule.ARG_APPLICATION_NAME,
-            WebServiceAfterOperationRule.ARG_REQUEST_END_POINT_NAME,
-            WebServiceAfterOperationRule.ARG_PROCESSED_RESPONSE_OBJECT_NAME,
-            WebServiceAfterOperationRule.ARG_RAW_RESPONSE_OBJECT_NAME,
-            WebServiceAfterOperationRule.ARG_REST_CLIENT_NAME
+            WebServiceAfterOperationRule.ARG_APPLICATION,
+            WebServiceAfterOperationRule.ARG_REQUEST_END_POINT,
+            WebServiceAfterOperationRule.ARG_PROCESSED_RESPONSE_OBJECT,
+            WebServiceAfterOperationRule.ARG_RAW_RESPONSE_OBJECT,
+            WebServiceAfterOperationRule.ARG_REST_CLIENT
     );
 
     /**
@@ -79,17 +79,17 @@ public abstract class WebServiceAfterOperationRule
         return WebServiceAfterOperationRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, WebServiceAfterOperationRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, WebServiceAfterOperationRule.ARG_APPLICATION))
                 .requestEndPoint((EndPoint) JavaRuleExecutorUtil.
                         getArgumentValueByName(javaRuleContext,
-                                WebServiceAfterOperationRule.ARG_REQUEST_END_POINT_NAME))
+                                WebServiceAfterOperationRule.ARG_REQUEST_END_POINT))
                 .processedResponseObject((List<Map<String, Object>>) JavaRuleExecutorUtil.
                         getArgumentValueByName(javaRuleContext,
-                                WebServiceAfterOperationRule.ARG_PROCESSED_RESPONSE_OBJECT_NAME))
+                                WebServiceAfterOperationRule.ARG_PROCESSED_RESPONSE_OBJECT))
                 .rawResponseObject((String) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        WebServiceAfterOperationRule.ARG_RAW_RESPONSE_OBJECT_NAME))
+                        WebServiceAfterOperationRule.ARG_RAW_RESPONSE_OBJECT))
                 .restClient((WebServicesClient) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, WebServiceAfterOperationRule.ARG_REST_CLIENT_NAME))
+                        getArgumentValueByName(javaRuleContext, WebServiceAfterOperationRule.ARG_REST_CLIENT))
                 .build();
     }
 
@@ -108,7 +108,7 @@ public abstract class WebServiceAfterOperationRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = WebServiceAfterOperationRule.ARG_APPLICATION_NAME)
+        @Argument(name = WebServiceAfterOperationRule.ARG_APPLICATION)
         private final Application application;
         /**
          * Current request information; contains:
@@ -119,22 +119,22 @@ public abstract class WebServiceAfterOperationRule
          * - response attribute map
          * - successful response code
          */
-        @Argument(name = WebServiceAfterOperationRule.ARG_REQUEST_END_POINT_NAME)
+        @Argument(name = WebServiceAfterOperationRule.ARG_REQUEST_END_POINT)
         private final EndPoint requestEndPoint;
         /**
          * Response Object processed by the Web Services connector
          */
-        @Argument(name = WebServiceAfterOperationRule.ARG_PROCESSED_RESPONSE_OBJECT_NAME)
+        @Argument(name = WebServiceAfterOperationRule.ARG_PROCESSED_RESPONSE_OBJECT)
         private final List<Map<String, Object>> processedResponseObject;
         /**
          * Response Object returned from the end system
          */
-        @Argument(name = WebServiceAfterOperationRule.ARG_RAW_RESPONSE_OBJECT_NAME)
+        @Argument(name = WebServiceAfterOperationRule.ARG_RAW_RESPONSE_OBJECT)
         private final String rawResponseObject;
         /**
          * REST client object
          */
-        @Argument(name = WebServiceAfterOperationRule.ARG_REST_CLIENT_NAME)
+        @Argument(name = WebServiceAfterOperationRule.ARG_REST_CLIENT)
         private final WebServicesClient restClient;
     }
 }

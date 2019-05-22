@@ -35,13 +35,13 @@ public abstract class CertificationAutomaticClosingRule
     /**
      * Name of certification argument name
      */
-    public static final String ARG_CERTIFICATION_NAME = "certification";
+    public static final String ARG_CERTIFICATION = "certification";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            CertificationAutomaticClosingRule.ARG_CERTIFICATION_NAME
+            CertificationAutomaticClosingRule.ARG_CERTIFICATION
     );
 
     /**
@@ -63,7 +63,7 @@ public abstract class CertificationAutomaticClosingRule
             @NonNull JavaRuleContext javaRuleContext) {
         return CertificationAutomaticClosingRuleArguments.builder()
                 .certification((Certification) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationAutomaticClosingRule.ARG_CERTIFICATION_NAME))
+                        CertificationAutomaticClosingRule.ARG_CERTIFICATION))
                 .build();
     }
 
@@ -78,7 +78,7 @@ public abstract class CertificationAutomaticClosingRule
         /**
          * A reference to the Certification object being closed
          */
-        @Argument(name = CertificationAutomaticClosingRule.ARG_CERTIFICATION_NAME)
+        @Argument(name = CertificationAutomaticClosingRule.ARG_CERTIFICATION)
         private final Certification certification;
     }
 }

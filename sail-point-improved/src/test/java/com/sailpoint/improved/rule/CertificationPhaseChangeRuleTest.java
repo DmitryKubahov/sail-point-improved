@@ -59,10 +59,10 @@ public class CertificationPhaseChangeRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - certification as in rule context args by name {@link CertificationPhaseChangeRule#ARG_CERTIFICATION_NAME}
-     * - certificationItem as in rule context args by name {@link CertificationPhaseChangeRule#ARG_CERTIFICATION_ITEM_NAME}
-     * - previousPhase as in rule context args by name {@link CertificationPhaseChangeRule#ARG_PREVIOUS_PHASE_NAME}
-     * - nextPhase as in rule context args by name {@link CertificationPhaseChangeRule#ARG_NEXT_PHASE_NAME}
+     * - certification as in rule context args by name {@link CertificationPhaseChangeRule#ARG_CERTIFICATION}
+     * - certificationItem as in rule context args by name {@link CertificationPhaseChangeRule#ARG_CERTIFICATION_ITEM}
+     * - previousPhase as in rule context args by name {@link CertificationPhaseChangeRule#ARG_PREVIOUS_PHASE}
+     * - nextPhase as in rule context args by name {@link CertificationPhaseChangeRule#ARG_NEXT_PHASE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -76,17 +76,17 @@ public class CertificationPhaseChangeRuleTest {
                     .getArguments()[1];
             assertEquals("Certification is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationPhaseChangeRule.ARG_CERTIFICATION_NAME),
+                            .get(CertificationPhaseChangeRule.ARG_CERTIFICATION),
                     arguments.getCertification());
             assertEquals("CertificationItem is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM_NAME),
+                            .get(CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM),
                     arguments.getCertificationItem());
             assertEquals("PreviousPhase is not match",
-                    testRuleContext.getArguments().get(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE_NAME),
+                    testRuleContext.getArguments().get(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE),
                     arguments.getPreviousPhase());
             assertEquals("NextPhase is not match",
-                    testRuleContext.getArguments().get(CertificationPhaseChangeRule.ARG_NEXT_PHASE_NAME),
+                    testRuleContext.getArguments().get(CertificationPhaseChangeRule.ARG_NEXT_PHASE),
                     arguments.getNextPhase());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -123,7 +123,7 @@ public class CertificationPhaseChangeRuleTest {
     /**
      * Test execution with valid NULL arguments.
      * Input:
-     * - valid rule context, but {@link CertificationPhaseChangeRule#ARG_PREVIOUS_PHASE_NAME} attribute null
+     * - valid rule context, but {@link CertificationPhaseChangeRule#ARG_PREVIOUS_PHASE} attribute null
      * Output:
      * - General exception
      * Expectation:
@@ -135,7 +135,7 @@ public class CertificationPhaseChangeRuleTest {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
         String testResult = UUID.randomUUID().toString();
 
-        testRuleContext.getArguments().remove(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE_NAME);
+        testRuleContext.getArguments().remove(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE);
         when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
@@ -163,10 +163,10 @@ public class CertificationPhaseChangeRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertificationPhaseChangeRule.ARG_CERTIFICATION_NAME, mock(Certification.class));
-        ruleParameters.put(CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM_NAME, mock(CertificationItem.class));
-        ruleParameters.put(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE_NAME, Certification.Phase.Active);
-        ruleParameters.put(CertificationPhaseChangeRule.ARG_NEXT_PHASE_NAME, Certification.Phase.Challenge);
+        ruleParameters.put(CertificationPhaseChangeRule.ARG_CERTIFICATION, mock(Certification.class));
+        ruleParameters.put(CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM, mock(CertificationItem.class));
+        ruleParameters.put(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE, Certification.Phase.Active);
+        ruleParameters.put(CertificationPhaseChangeRule.ARG_NEXT_PHASE, Certification.Phase.Challenge);
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

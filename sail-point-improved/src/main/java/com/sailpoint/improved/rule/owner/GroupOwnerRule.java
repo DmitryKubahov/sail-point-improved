@@ -30,18 +30,18 @@ public abstract class GroupOwnerRule
     /**
      * Name of factory argument name
      */
-    public static final String ARG_FACTORY_NAME = "factory";
+    public static final String ARG_FACTORY = "factory";
     /**
      * Name of group argument name
      */
-    public static final String ARG_GROUP_NAME = "group";
+    public static final String ARG_GROUP = "group";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            GroupOwnerRule.ARG_FACTORY_NAME,
-            GroupOwnerRule.ARG_GROUP_NAME
+            GroupOwnerRule.ARG_FACTORY,
+            GroupOwnerRule.ARG_GROUP
     );
 
     /**
@@ -62,9 +62,9 @@ public abstract class GroupOwnerRule
             @NonNull JavaRuleContext javaRuleContext) {
         return GroupOwnerRuleArguments.builder()
                 .factory((GroupFactory) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, GroupOwnerRule.ARG_FACTORY_NAME))
+                        .getArgumentValueByName(javaRuleContext, GroupOwnerRule.ARG_FACTORY))
                 .group((GroupDefinition) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, GroupOwnerRule.ARG_GROUP_NAME))
+                        .getArgumentValueByName(javaRuleContext, GroupOwnerRule.ARG_GROUP))
                 .build();
     }
 
@@ -80,12 +80,12 @@ public abstract class GroupOwnerRule
         /**
          * Reference to the groupFactory object from which the groups are generated
          */
-        @Argument(name = GroupOwnerRule.ARG_FACTORY_NAME)
+        @Argument(name = GroupOwnerRule.ARG_FACTORY)
         private final GroupFactory factory;
         /**
          * Reference to a single GroupDefinition from the factory
          */
-        @Argument(name = GroupOwnerRule.ARG_GROUP_NAME)
+        @Argument(name = GroupOwnerRule.ARG_GROUP)
         private final GroupDefinition group;
     }
 }

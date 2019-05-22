@@ -60,10 +60,10 @@ public class IdentityCreationRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - environment as in rule context args by name {@link IdentityCreationRule#ARG_ENVIRONMENT_NAME}
-     * - application as in rule context args by name {@link IdentityCreationRule#ARG_APPLICATION_NAME}
-     * - account as in rule context args by name {@link IdentityCreationRule#ARG_ACCOUNT_NAME}
-     * - identity as in rule context args by name {@link IdentityCreationRule#ARG_IDENTITY_NAME}
+     * - environment as in rule context args by name {@link IdentityCreationRule#ARG_ENVIRONMENT}
+     * - application as in rule context args by name {@link IdentityCreationRule#ARG_APPLICATION}
+     * - account as in rule context args by name {@link IdentityCreationRule#ARG_ACCOUNT}
+     * - identity as in rule context args by name {@link IdentityCreationRule#ARG_IDENTITY}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -76,16 +76,16 @@ public class IdentityCreationRuleTest {
             IdentityCreationRule.IdentityCreationRuleArguments arguments = (IdentityCreationRule.IdentityCreationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Environment is not match",
-                    testRuleContext.getArguments().get(IdentityCreationRule.ARG_ENVIRONMENT_NAME),
+                    testRuleContext.getArguments().get(IdentityCreationRule.ARG_ENVIRONMENT),
                     arguments.getEnvironment());
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(IdentityCreationRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(IdentityCreationRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Account is not match",
-                    testRuleContext.getArguments().get(IdentityCreationRule.ARG_ACCOUNT_NAME),
+                    testRuleContext.getArguments().get(IdentityCreationRule.ARG_ACCOUNT),
                     arguments.getAccount());
             assertEquals("Identity is not match",
-                    testRuleContext.getArguments().get(IdentityCreationRule.ARG_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(IdentityCreationRule.ARG_IDENTITY),
                     arguments.getIdentity());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -138,11 +138,11 @@ public class IdentityCreationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(IdentityCreationRule.ARG_ENVIRONMENT_NAME,
+        ruleParameters.put(IdentityCreationRule.ARG_ENVIRONMENT,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
-        ruleParameters.put(IdentityCreationRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(IdentityCreationRule.ARG_ACCOUNT_NAME, mock(ResourceObject.class));
-        ruleParameters.put(IdentityCreationRule.ARG_IDENTITY_NAME, mock(Identity.class));
+        ruleParameters.put(IdentityCreationRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(IdentityCreationRule.ARG_ACCOUNT, mock(ResourceObject.class));
+        ruleParameters.put(IdentityCreationRule.ARG_IDENTITY, mock(Identity.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

@@ -41,18 +41,18 @@ public abstract class RefreshRule
     /**
      * Name of environment argument name
      */
-    public static final String ARG_ENVIRONMENT_NAME = "environment";
+    public static final String ARG_ENVIRONMENT = "environment";
     /**
      * Name of identity argument name
      */
-    public static final String ARG_IDENTITY_NAME = "identity";
+    public static final String ARG_IDENTITY = "identity";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            RefreshRule.ARG_ENVIRONMENT_NAME,
-            RefreshRule.ARG_IDENTITY_NAME
+            RefreshRule.ARG_ENVIRONMENT,
+            RefreshRule.ARG_IDENTITY
     );
 
     /**
@@ -74,9 +74,9 @@ public abstract class RefreshRule
         return RefreshRuleArguments
                 .builder()
                 .environment((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, RefreshRule.ARG_ENVIRONMENT_NAME))
+                        getArgumentValueByName(javaRuleContext, RefreshRule.ARG_ENVIRONMENT))
                 .identity((Identity) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, RefreshRule.ARG_IDENTITY_NAME))
+                        getArgumentValueByName(javaRuleContext, RefreshRule.ARG_IDENTITY))
                 .build();
     }
 
@@ -92,12 +92,12 @@ public abstract class RefreshRule
         /**
          * Arguments passed to the aggregation or refresh task
          */
-        @Argument(name = RefreshRule.ARG_ENVIRONMENT_NAME)
+        @Argument(name = RefreshRule.ARG_ENVIRONMENT)
         private final Map<String, Object> environment;
         /**
          * Reference to the Identity object being refreshed
          */
-        @Argument(name = RefreshRule.ARG_IDENTITY_NAME)
+        @Argument(name = RefreshRule.ARG_IDENTITY)
         private final Identity identity;
     }
 }

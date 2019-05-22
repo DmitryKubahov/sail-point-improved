@@ -12,7 +12,6 @@ import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Rule;
 import sailpoint.object.Schema;
 
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -32,22 +31,22 @@ public abstract class PostIterateRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of stats argument name
      */
-    public static final String ARG_STATS_NAME = "stats";
+    public static final String ARG_STATS = "stats";
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            PostIterateRule.ARG_APPLICATION_NAME,
-            PostIterateRule.ARG_SCHEMA_NAME,
-            PostIterateRule.ARG_STATS_NAME
+            PostIterateRule.ARG_APPLICATION,
+            PostIterateRule.ARG_SCHEMA,
+            PostIterateRule.ARG_STATS
     );
 
     /**
@@ -68,11 +67,11 @@ public abstract class PostIterateRule
         return PostIterateRule.PostIterateRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_SCHEMA_NAME))
+                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_SCHEMA))
                 .stats((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_STATS_NAME))
+                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_STATS))
                 .build();
     }
 
@@ -120,12 +119,12 @@ public abstract class PostIterateRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = PostIterateRule.ARG_APPLICATION_NAME)
+        @Argument(name = PostIterateRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Schema object for the delimited file source being read
          */
-        @Argument(name = PostIterateRule.ARG_SCHEMA_NAME)
+        @Argument(name = PostIterateRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * A map passed by the connector of the stats for the file about to be iterated. Contains keys:
@@ -136,7 +135,7 @@ public abstract class PostIterateRule
          * • columnNames: (List) column names that were used during the iteration
          * • objectsIterated: (Long) total number of objects iterated during this run
          */
-        @Argument(name = PostIterateRule.ARG_STATS_NAME)
+        @Argument(name = PostIterateRule.ARG_STATS)
         private final Map<String, Object> stats;
     }
 }

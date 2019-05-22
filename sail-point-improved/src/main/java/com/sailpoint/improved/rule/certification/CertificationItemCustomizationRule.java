@@ -38,38 +38,38 @@ public abstract class CertificationItemCustomizationRule
     /**
      * Name of certification argument name
      */
-    public static final String ARG_CERTIFICATION_NAME = "certification";
+    public static final String ARG_CERTIFICATION = "certification";
     /**
      * Name of certifiable argument name
      */
-    public static final String ARG_CERTIFIABLE_NAME = "certifiable";
+    public static final String ARG_CERTIFIABLE = "certifiable";
     /**
      * Name of certifiableEntity argument name
      */
-    public static final String ARG_CERTIFIABLE_ENTITY_NAME = "certifiableEntity";
+    public static final String ARG_CERTIFIABLE_ENTITY = "certifiableEntity";
     /**
      * Name of item argument name
      */
-    public static final String ARG_ITEM_NAME = "item";
+    public static final String ARG_ITEM = "item";
     /**
      * Name of certContext argument name
      */
-    public static final String ARG_CERT_CONTEXT_NAME = "certContext";
+    public static final String ARG_CERT_CONTEXT = "certContext";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            CertificationItemCustomizationRule.ARG_CERTIFICATION_NAME,
-            CertificationItemCustomizationRule.ARG_CERTIFIABLE_NAME,
-            CertificationItemCustomizationRule.ARG_CERTIFIABLE_ENTITY_NAME,
-            CertificationItemCustomizationRule.ARG_ITEM_NAME,
-            CertificationItemCustomizationRule.ARG_CERT_CONTEXT_NAME,
-            CertificationItemCustomizationRule.ARG_STATE_NAME
+            CertificationItemCustomizationRule.ARG_CERTIFICATION,
+            CertificationItemCustomizationRule.ARG_CERTIFIABLE,
+            CertificationItemCustomizationRule.ARG_CERTIFIABLE_ENTITY,
+            CertificationItemCustomizationRule.ARG_ITEM,
+            CertificationItemCustomizationRule.ARG_CERT_CONTEXT,
+            CertificationItemCustomizationRule.ARG_STATE
     );
 
     /**
@@ -91,18 +91,18 @@ public abstract class CertificationItemCustomizationRule
             @NonNull JavaRuleContext javaRuleContext) {
         return CertificationItemCustomizationRuleArguments.builder()
                 .certification((Certification) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationItemCustomizationRule.ARG_CERTIFICATION_NAME))
+                        CertificationItemCustomizationRule.ARG_CERTIFICATION))
                 .certifiable((Certifiable) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationItemCustomizationRule.ARG_CERTIFIABLE_NAME))
+                        CertificationItemCustomizationRule.ARG_CERTIFIABLE))
                 .certifiableEntity(
                         (AbstractCertifiableEntity) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                                CertificationItemCustomizationRule.ARG_CERTIFIABLE_ENTITY_NAME))
+                                CertificationItemCustomizationRule.ARG_CERTIFIABLE_ENTITY))
                 .item((CertificationItem) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationItemCustomizationRule.ARG_ITEM_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationItemCustomizationRule.ARG_ITEM))
                 .certContext((CertificationContext) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationItemCustomizationRule.ARG_CERT_CONTEXT_NAME))
+                        CertificationItemCustomizationRule.ARG_CERT_CONTEXT))
                 .state((Map<String, Object>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationItemCustomizationRule.ARG_STATE_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationItemCustomizationRule.ARG_STATE))
                 .build();
     }
 
@@ -122,34 +122,34 @@ public abstract class CertificationItemCustomizationRule
         /**
          * Reference to the Certification to which the item is being added
          */
-        @Argument(name = CertificationItemCustomizationRule.ARG_CERTIFICATION_NAME)
+        @Argument(name = CertificationItemCustomizationRule.ARG_CERTIFICATION)
         private final Certification certification;
         /**
          * Reference to the Certifiable item being created into a CertificationItem
          */
-        @Argument(name = CertificationItemCustomizationRule.ARG_CERTIFIABLE_NAME)
+        @Argument(name = CertificationItemCustomizationRule.ARG_CERTIFIABLE)
         private final Certifiable certifiable;
         /**
          * Reference to the AbstractCertifiableEntity from which the certifiable was retrieved (Bundle, Identity, or AccountGroup object)
          */
-        @Argument(name = CertificationItemCustomizationRule.ARG_CERTIFIABLE_ENTITY_NAME)
+        @Argument(name = CertificationItemCustomizationRule.ARG_CERTIFIABLE_ENTITY)
         private final AbstractCertifiableEntity certifiableEntity;
         /**
          * Reference to the certificationItem to be customized
          */
-        @Argument(name = CertificationItemCustomizationRule.ARG_ITEM_NAME)
+        @Argument(name = CertificationItemCustomizationRule.ARG_ITEM)
         private final CertificationItem item;
         /**
          * CertificationContext being used to build the certification (rarely used in a rule)
          */
-        @Argument(name = CertificationItemCustomizationRule.ARG_CERTIFIABLE_ENTITY_NAME)
+        @Argument(name = CertificationItemCustomizationRule.ARG_CERTIFIABLE_ENTITY)
         private final CertificationContext certContext;
         /**
          * A Map that can be used to store and share data between executions of this rule during
          * a single certification generation process; rules executed in the same certification generation
          * share this state map, allowing data to be passed between them
          */
-        @Argument(name = CertificationItemCustomizationRule.ARG_STATE_NAME)
+        @Argument(name = CertificationItemCustomizationRule.ARG_STATE)
         private final Map<String, Object> state;
     }
 }

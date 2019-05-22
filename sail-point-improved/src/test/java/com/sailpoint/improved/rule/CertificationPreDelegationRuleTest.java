@@ -64,10 +64,10 @@ public class CertificationPreDelegationRuleTest {
      * Output:
      * - test map of execution
      * Expectation:
-     * - certification as in rule context args by name {@link CertificationPreDelegationRule#ARG_CERTIFICATION_NAME}
-     * - entity as in rule context args by name {@link CertificationPreDelegationRule#ARG_ENTITY_NAME}
-     * - certContext as in rule context args by name {@link CertificationPreDelegationRule#ARG_CERT_CONTEXT_NAME}
-     * - state as in rule context args by name {@link CertificationPreDelegationRule#ARG_STATE_NAME}
+     * - certification as in rule context args by name {@link CertificationPreDelegationRule#ARG_CERTIFICATION}
+     * - entity as in rule context args by name {@link CertificationPreDelegationRule#ARG_ENTITY}
+     * - certContext as in rule context args by name {@link CertificationPreDelegationRule#ARG_CERT_CONTEXT}
+     * - state as in rule context args by name {@link CertificationPreDelegationRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -80,16 +80,16 @@ public class CertificationPreDelegationRuleTest {
             CertificationPreDelegationRule.CertificationPreDelegationRuleArguments arguments = (CertificationPreDelegationRule.CertificationPreDelegationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Certification is not match",
-                    testRuleContext.getArguments().get(CertificationPreDelegationRule.ARG_CERTIFICATION_NAME),
+                    testRuleContext.getArguments().get(CertificationPreDelegationRule.ARG_CERTIFICATION),
                     arguments.getCertification());
             assertEquals("Entity is not match",
-                    testRuleContext.getArguments().get(CertificationPreDelegationRule.ARG_ENTITY_NAME),
+                    testRuleContext.getArguments().get(CertificationPreDelegationRule.ARG_ENTITY),
                     arguments.getEntity());
             assertEquals("CertificationContext is not match",
-                    testRuleContext.getArguments().get(CertificationPreDelegationRule.ARG_CERT_CONTEXT_NAME),
+                    testRuleContext.getArguments().get(CertificationPreDelegationRule.ARG_CERT_CONTEXT),
                     arguments.getCertContext());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(CertificationPreDelegationRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(CertificationPreDelegationRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -206,10 +206,10 @@ public class CertificationPreDelegationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertificationPreDelegationRule.ARG_CERTIFICATION_NAME, mock(Certification.class));
-        ruleParameters.put(CertificationPreDelegationRule.ARG_ENTITY_NAME, mock(CertificationEntity.class));
-        ruleParameters.put(CertificationPreDelegationRule.ARG_CERT_CONTEXT_NAME, mock(CertificationContext.class));
-        ruleParameters.put(CertificationPreDelegationRule.ARG_STATE_NAME,
+        ruleParameters.put(CertificationPreDelegationRule.ARG_CERTIFICATION, mock(Certification.class));
+        ruleParameters.put(CertificationPreDelegationRule.ARG_ENTITY, mock(CertificationEntity.class));
+        ruleParameters.put(CertificationPreDelegationRule.ARG_CERT_CONTEXT, mock(CertificationContext.class));
+        ruleParameters.put(CertificationPreDelegationRule.ARG_STATE,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }

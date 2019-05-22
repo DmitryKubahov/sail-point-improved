@@ -59,9 +59,9 @@ public class IntegrationRuleTest {
      * Output:
      * - test provisioning result value
      * Expectation:
-     * - identity as in rule context args by name {@link IntegrationRule#ARG_IDENTITY_NAME}
-     * - integration as in rule context args by name {@link IntegrationRule#ARG_INTEGRATION_NAME}
-     * - plan as in rule context args by name {@link IntegrationRule#ARG_PLAN_NAME}
+     * - identity as in rule context args by name {@link IntegrationRule#ARG_IDENTITY}
+     * - integration as in rule context args by name {@link IntegrationRule#ARG_INTEGRATION}
+     * - plan as in rule context args by name {@link IntegrationRule#ARG_PLAN}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -74,12 +74,12 @@ public class IntegrationRuleTest {
             IntegrationRule.IntegrationRuleArguments arguments = (IntegrationRule.IntegrationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Identity is not match",
-                    testRuleContext.getArguments().get(IntegrationRule.ARG_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(IntegrationRule.ARG_IDENTITY),
                     arguments.getIdentity());
             assertEquals("Integration is not match",
-                    testRuleContext.getArguments().get(IntegrationRule.ARG_INTEGRATION_NAME),
+                    testRuleContext.getArguments().get(IntegrationRule.ARG_INTEGRATION),
                     arguments.getIntegration());
-            assertEquals("Plan is not match", testRuleContext.getArguments().get(IntegrationRule.ARG_PLAN_NAME),
+            assertEquals("Plan is not match", testRuleContext.getArguments().get(IntegrationRule.ARG_PLAN),
                     arguments.getPlan());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -133,9 +133,9 @@ public class IntegrationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(IntegrationRule.ARG_IDENTITY_NAME, mock(Identity.class));
-        ruleParameters.put(IntegrationRule.ARG_INTEGRATION_NAME, mock(IntegrationConfig.class));
-        ruleParameters.put(IntegrationRule.ARG_PLAN_NAME, mock(ProvisioningPlan.class));
+        ruleParameters.put(IntegrationRule.ARG_IDENTITY, mock(Identity.class));
+        ruleParameters.put(IntegrationRule.ARG_INTEGRATION, mock(IntegrationConfig.class));
+        ruleParameters.put(IntegrationRule.ARG_PLAN, mock(ProvisioningPlan.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

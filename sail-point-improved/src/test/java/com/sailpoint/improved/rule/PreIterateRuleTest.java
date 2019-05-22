@@ -59,9 +59,9 @@ public class PreIterateRuleTest {
      * Output:
      * - test input stream
      * Expectation:
-     * - application as in rule context args by name {@link PreIterateRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link PreIterateRule#ARG_SCHEMA_NAME}
-     * - stats as in rule context args by name {@link PreIterateRule#ARG_STATS_NAME}
+     * - application as in rule context args by name {@link PreIterateRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link PreIterateRule#ARG_SCHEMA}
+     * - stats as in rule context args by name {@link PreIterateRule#ARG_STATS}
      */
     @Test
     public void normalTest() throws GeneralException {
@@ -73,13 +73,13 @@ public class PreIterateRuleTest {
             PreIterateRule.PreIterateRuleArguments arguments = (PreIterateRule.PreIterateRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(PreIterateRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(PreIterateRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(PreIterateRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(PreIterateRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("Stats is not match",
-                    testRuleContext.getArguments().get(PreIterateRule.ARG_STATS_NAME),
+                    testRuleContext.getArguments().get(PreIterateRule.ARG_STATS),
                     arguments.getStats());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -131,9 +131,9 @@ public class PreIterateRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(PreIterateRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(PreIterateRule.ARG_SCHEMA_NAME, new Schema());
-        ruleParameters.put(PreIterateRule.ARG_STATS_NAME, Collections.emptyMap());
+        ruleParameters.put(PreIterateRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(PreIterateRule.ARG_SCHEMA, new Schema());
+        ruleParameters.put(PreIterateRule.ARG_STATS, Collections.emptyMap());
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

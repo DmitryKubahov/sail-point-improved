@@ -62,12 +62,12 @@ public class SapHrProvisionRuleTest {
      * Output:
      * - test provisioning result value
      * Expectation:
-     * - application as in rule context args by name {@link SapHrProvisionRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link SapHrProvisionRule#ARG_SCHEMA_NAME}
-     * - destination as in rule context args by name {@link SapHrProvisionRule#ARG_DESTINATION_NAME}
-     * - plan as in rule context args by name {@link SapHrProvisionRule#ARG_PLAN_NAME}
-     * - request as in rule context args by name {@link SapHrProvisionRule#ARG_REQUEST_NAME}
-     * - connector as in rule context args by name {@link SapHrProvisionRule#ARG_CONNECTOR_NAME}
+     * - application as in rule context args by name {@link SapHrProvisionRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link SapHrProvisionRule#ARG_SCHEMA}
+     * - destination as in rule context args by name {@link SapHrProvisionRule#ARG_DESTINATION}
+     * - plan as in rule context args by name {@link SapHrProvisionRule#ARG_PLAN}
+     * - request as in rule context args by name {@link SapHrProvisionRule#ARG_REQUEST}
+     * - connector as in rule context args by name {@link SapHrProvisionRule#ARG_CONNECTOR}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -80,22 +80,22 @@ public class SapHrProvisionRuleTest {
             SapHrProvisionRule.SapHrProvisionRuleArguments arguments = (SapHrProvisionRule.SapHrProvisionRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("Destination is not match",
-                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_DESTINATION_NAME),
+                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_DESTINATION),
                     arguments.getDestination());
             assertEquals("Plan is not match",
-                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_PLAN_NAME),
+                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_PLAN),
                     arguments.getPlan());
             assertEquals("Request is not match",
-                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_REQUEST_NAME),
+                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_REQUEST),
                     arguments.getRequest());
             assertEquals("Connector is not match",
-                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_CONNECTOR_NAME),
+                    testRuleContext.getArguments().get(SapHrProvisionRule.ARG_CONNECTOR),
                     arguments.getConnector());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -132,7 +132,7 @@ public class SapHrProvisionRuleTest {
     /**
      * Test execution with valid arguments
      * Input:
-     * - valid rule context with {@link SapHrProvisionRule#ARG_REQUEST_NAME} argument as null
+     * - valid rule context with {@link SapHrProvisionRule#ARG_REQUEST} argument as null
      * Output:
      * - test provisioning result value
      * Expectation:
@@ -145,7 +145,7 @@ public class SapHrProvisionRuleTest {
         ProvisioningResult testResult = mock(ProvisioningResult.class);
         when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
 
-        testRuleContext.getArguments().remove(SapHrProvisionRule.ARG_REQUEST_NAME);
+        testRuleContext.getArguments().remove(SapHrProvisionRule.ARG_REQUEST);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
@@ -173,13 +173,13 @@ public class SapHrProvisionRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(SapHrProvisionRule.ARG_APPLICATION_NAME, mock(Application.class));
-        ruleParameters.put(SapHrProvisionRule.ARG_SCHEMA_NAME, mock(Schema.class));
-        ruleParameters.put(SapHrProvisionRule.ARG_DESTINATION_NAME, mock(JCoDestination.class));
-        ruleParameters.put(SapHrProvisionRule.ARG_PLAN_NAME, mock(ProvisioningPlan.class));
+        ruleParameters.put(SapHrProvisionRule.ARG_APPLICATION, mock(Application.class));
+        ruleParameters.put(SapHrProvisionRule.ARG_SCHEMA, mock(Schema.class));
+        ruleParameters.put(SapHrProvisionRule.ARG_DESTINATION, mock(JCoDestination.class));
+        ruleParameters.put(SapHrProvisionRule.ARG_PLAN, mock(ProvisioningPlan.class));
         ruleParameters
-                .put(SapHrProvisionRule.ARG_REQUEST_NAME, mock(ProvisioningPlan.AbstractRequest.class));
-        ruleParameters.put(SapHrProvisionRule.ARG_CONNECTOR_NAME, mock(SAPHRConnector.class));
+                .put(SapHrProvisionRule.ARG_REQUEST, mock(ProvisioningPlan.AbstractRequest.class));
+        ruleParameters.put(SapHrProvisionRule.ARG_CONNECTOR, mock(SAPHRConnector.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

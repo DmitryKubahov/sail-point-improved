@@ -60,10 +60,10 @@ public class CorrelationRuleTest {
      * Output:
      * - test map of execution
      * Expectation:
-     * - environment as in rule context args by name {@link CorrelationRule#ARG_ENVIRONMENT_NAME}
-     * - application as in rule context args by name {@link CorrelationRule#ARG_APPLICATION_NAME}
-     * - account as in rule context args by name {@link CorrelationRule#ARG_ACCOUNT_NAME}
-     * - link as in rule context args by name {@link CorrelationRule#ARG_LINK_NAME}
+     * - environment as in rule context args by name {@link CorrelationRule#ARG_ENVIRONMENT}
+     * - application as in rule context args by name {@link CorrelationRule#ARG_APPLICATION}
+     * - account as in rule context args by name {@link CorrelationRule#ARG_ACCOUNT}
+     * - link as in rule context args by name {@link CorrelationRule#ARG_LINK}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -76,16 +76,16 @@ public class CorrelationRuleTest {
             CorrelationRule.CorrelationRuleArguments arguments = (CorrelationRule.CorrelationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Environment is not match",
-                    testRuleContext.getArguments().get(CorrelationRule.ARG_ENVIRONMENT_NAME),
+                    testRuleContext.getArguments().get(CorrelationRule.ARG_ENVIRONMENT),
                     arguments.getEnvironment());
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(CorrelationRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(CorrelationRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Account is not match",
-                    testRuleContext.getArguments().get(CorrelationRule.ARG_ACCOUNT_NAME),
+                    testRuleContext.getArguments().get(CorrelationRule.ARG_ACCOUNT),
                     arguments.getAccount());
             assertEquals("Link is not match",
-                    testRuleContext.getArguments().get(CorrelationRule.ARG_LINK_NAME),
+                    testRuleContext.getArguments().get(CorrelationRule.ARG_LINK),
                     arguments.getLink());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -138,11 +138,11 @@ public class CorrelationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CorrelationRule.ARG_ENVIRONMENT_NAME,
+        ruleParameters.put(CorrelationRule.ARG_ENVIRONMENT,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
-        ruleParameters.put(CorrelationRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(CorrelationRule.ARG_ACCOUNT_NAME, mock(ResourceObject.class));
-        ruleParameters.put(CorrelationRule.ARG_LINK_NAME, mock(Link.class));
+        ruleParameters.put(CorrelationRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(CorrelationRule.ARG_ACCOUNT, mock(ResourceObject.class));
+        ruleParameters.put(CorrelationRule.ARG_LINK, mock(Link.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

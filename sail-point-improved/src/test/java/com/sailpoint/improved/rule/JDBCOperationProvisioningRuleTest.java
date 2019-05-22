@@ -60,11 +60,11 @@ public class JDBCOperationProvisioningRuleTest {
      * Output:
      * - test provisioning result value
      * Expectation:
-     * - application as in rule context args by name {@link JDBCOperationProvisioningRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link JDBCOperationProvisioningRule#ARG_SCHEMA_NAME}
-     * - connection as in rule context args by name {@link JDBCOperationProvisioningRule#ARG_CONNECTION_NAME}
-     * - plan as in rule context args by name {@link JDBCOperationProvisioningRule#ARG_PLAN_NAME}
-     * - request as in rule context args by name {@link JDBCOperationProvisioningRule#ARG_REQUEST_NAME}
+     * - application as in rule context args by name {@link JDBCOperationProvisioningRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link JDBCOperationProvisioningRule#ARG_SCHEMA}
+     * - connection as in rule context args by name {@link JDBCOperationProvisioningRule#ARG_CONNECTION}
+     * - plan as in rule context args by name {@link JDBCOperationProvisioningRule#ARG_PLAN}
+     * - request as in rule context args by name {@link JDBCOperationProvisioningRule#ARG_REQUEST}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -77,19 +77,19 @@ public class JDBCOperationProvisioningRuleTest {
             JDBCOperationProvisioningRule.JDBCOperationProvisioningRuleArguments arguments = (JDBCOperationProvisioningRule.JDBCOperationProvisioningRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(JDBCOperationProvisioningRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(JDBCOperationProvisioningRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(JDBCOperationProvisioningRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(JDBCOperationProvisioningRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("Connection is not match",
-                    testRuleContext.getArguments().get(JDBCOperationProvisioningRule.ARG_CONNECTION_NAME),
+                    testRuleContext.getArguments().get(JDBCOperationProvisioningRule.ARG_CONNECTION),
                     arguments.getConnection());
             assertEquals("Plan is not match",
-                    testRuleContext.getArguments().get(JDBCOperationProvisioningRule.ARG_PLAN_NAME),
+                    testRuleContext.getArguments().get(JDBCOperationProvisioningRule.ARG_PLAN),
                     arguments.getPlan());
             assertEquals("Request is not match",
-                    testRuleContext.getArguments().get(JDBCOperationProvisioningRule.ARG_REQUEST_NAME),
+                    testRuleContext.getArguments().get(JDBCOperationProvisioningRule.ARG_REQUEST),
                     arguments.getRequest());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -143,12 +143,12 @@ public class JDBCOperationProvisioningRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(JDBCOperationProvisioningRule.ARG_APPLICATION_NAME, mock(Application.class));
-        ruleParameters.put(JDBCOperationProvisioningRule.ARG_SCHEMA_NAME, mock(Schema.class));
-        ruleParameters.put(JDBCOperationProvisioningRule.ARG_CONNECTION_NAME, mock(Connection.class));
-        ruleParameters.put(JDBCOperationProvisioningRule.ARG_PLAN_NAME, mock(ProvisioningPlan.class));
+        ruleParameters.put(JDBCOperationProvisioningRule.ARG_APPLICATION, mock(Application.class));
+        ruleParameters.put(JDBCOperationProvisioningRule.ARG_SCHEMA, mock(Schema.class));
+        ruleParameters.put(JDBCOperationProvisioningRule.ARG_CONNECTION, mock(Connection.class));
+        ruleParameters.put(JDBCOperationProvisioningRule.ARG_PLAN, mock(ProvisioningPlan.class));
         ruleParameters
-                .put(JDBCOperationProvisioningRule.ARG_REQUEST_NAME, mock(ProvisioningPlan.AbstractRequest.class));
+                .put(JDBCOperationProvisioningRule.ARG_REQUEST, mock(ProvisioningPlan.AbstractRequest.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

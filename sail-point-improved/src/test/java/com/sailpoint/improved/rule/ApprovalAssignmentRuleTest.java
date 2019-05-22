@@ -59,8 +59,8 @@ public class ApprovalAssignmentRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - approvals as in rule context args by name {@link ApprovalAssignmentRule#ARG_APPROVALS_NAME}
-     * - approvalSet as in rule context args by name {@link ApprovalAssignmentRule#ARG_APPROVALS_NAME}
+     * - approvals as in rule context args by name {@link ApprovalAssignmentRule#ARG_APPROVALS}
+     * - approvalSet as in rule context args by name {@link ApprovalAssignmentRule#ARG_APPROVALS}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -73,10 +73,10 @@ public class ApprovalAssignmentRuleTest {
             ApprovalAssignmentRule.ApprovalAssignmentRuleArguments arguments = (ApprovalAssignmentRule.ApprovalAssignmentRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Approvals is not match",
-                    testRuleContext.getArguments().get(ApprovalAssignmentRule.ARG_APPROVALS_NAME),
+                    testRuleContext.getArguments().get(ApprovalAssignmentRule.ARG_APPROVALS),
                     arguments.getApprovals());
             assertEquals("ApprovalSet is not match",
-                    testRuleContext.getArguments().get(ApprovalAssignmentRule.ARG_APPROVAL_SET_NAME),
+                    testRuleContext.getArguments().get(ApprovalAssignmentRule.ARG_APPROVAL_SET),
                     arguments.getApprovalSet());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -130,9 +130,9 @@ public class ApprovalAssignmentRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(ApprovalAssignmentRule.ARG_APPROVALS_NAME,
+        ruleParameters.put(ApprovalAssignmentRule.ARG_APPROVALS,
                 Collections.singletonList(mock(Workflow.Approval.class)));
-        ruleParameters.put(ApprovalAssignmentRule.ARG_APPROVAL_SET_NAME, mock(ApprovalSet.class));
+        ruleParameters.put(ApprovalAssignmentRule.ARG_APPROVAL_SET, mock(ApprovalSet.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

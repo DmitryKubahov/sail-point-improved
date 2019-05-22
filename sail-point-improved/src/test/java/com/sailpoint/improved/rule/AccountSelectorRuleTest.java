@@ -66,15 +66,15 @@ public class AccountSelectorRuleTest {
      * Output:
      * - test link of execution
      * Expectation:
-     * - source as in rule context args by name {@link AccountSelectorRule#ARG_SOURCE_NAME}
-     * - role as in rule context args by name {@link AccountSelectorRule#ARG_ROLE_NAME}
-     * - identity as in rule context args by name {@link AccountSelectorRule#ARG_IDENTITY_NAME}
-     * - application as in rule context args by name {@link AccountSelectorRule#ARG_APPLICATION_NAME}
-     * - links as in rule context args by name {@link AccountSelectorRule#ARG_LINKS_NAME}
-     * - isSecondary as in rule context args by name {@link AccountSelectorRule#ARG_IS_SECONDARY_NAME}
-     * - project as in rule context args by name {@link AccountSelectorRule#ARG_PROJECT_NAME}
-     * - accountRequest as in rule context args by name {@link AccountSelectorRule#ARG_ACCOUNT_REQUEST_NAME}
-     * - allowCreate as in rule context args by name {@link AccountSelectorRule#ARG_ALLOW_CREATE_NAME}
+     * - source as in rule context args by name {@link AccountSelectorRule#ARG_SOURCE}
+     * - role as in rule context args by name {@link AccountSelectorRule#ARG_ROLE}
+     * - identity as in rule context args by name {@link AccountSelectorRule#ARG_IDENTITY}
+     * - application as in rule context args by name {@link AccountSelectorRule#ARG_APPLICATION}
+     * - links as in rule context args by name {@link AccountSelectorRule#ARG_LINKS}
+     * - isSecondary as in rule context args by name {@link AccountSelectorRule#ARG_IS_SECONDARY}
+     * - project as in rule context args by name {@link AccountSelectorRule#ARG_PROJECT}
+     * - accountRequest as in rule context args by name {@link AccountSelectorRule#ARG_ACCOUNT_REQUEST}
+     * - allowCreate as in rule context args by name {@link AccountSelectorRule#ARG_ALLOW_CREATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -88,31 +88,31 @@ public class AccountSelectorRuleTest {
             AccountSelectorRule.AccountSelectorRuleArguments arguments = (AccountSelectorRule.AccountSelectorRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Source is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_SOURCE_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_SOURCE),
                     arguments.getSource().name());
             assertEquals("Role is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ROLE_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ROLE),
                     arguments.getRole());
             assertEquals("Identity is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_IDENTITY),
                     arguments.getIdentity());
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Links is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_LINKS_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_LINKS),
                     arguments.getLinks());
             assertEquals("IsSecondary is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_IS_SECONDARY_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_IS_SECONDARY),
                     arguments.getIsSecondary());
             assertEquals("Project is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_PROJECT_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_PROJECT),
                     arguments.getProject());
             assertEquals("AccountRequest is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ACCOUNT_REQUEST_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ACCOUNT_REQUEST),
                     arguments.getAccountRequest());
             assertEquals("AllowCreate is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ALLOW_CREATE_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ALLOW_CREATE),
                     arguments.getAllowCreate());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -130,15 +130,15 @@ public class AccountSelectorRuleTest {
      * Output:
      * - test string of execution
      * Expectation:
-     * - source as in rule context args by name {@link AccountSelectorRule#ARG_SOURCE_NAME}
-     * - role as in rule context args by name {@link AccountSelectorRule#ARG_ROLE_NAME}
-     * - identity as in rule context args by name {@link AccountSelectorRule#ARG_IDENTITY_NAME}
-     * - application as in rule context args by name {@link AccountSelectorRule#ARG_APPLICATION_NAME}
-     * - links as in rule context args by name {@link AccountSelectorRule#ARG_LINKS_NAME}
-     * - isSecondary as in rule context args by name {@link AccountSelectorRule#ARG_IS_SECONDARY_NAME}
-     * - project as in rule context args by name {@link AccountSelectorRule#ARG_PROJECT_NAME}
-     * - accountRequest as in rule context args by name {@link AccountSelectorRule#ARG_ACCOUNT_REQUEST_NAME}
-     * - allowCreate as in rule context args by name {@link AccountSelectorRule#ARG_ALLOW_CREATE_NAME}
+     * - source as in rule context args by name {@link AccountSelectorRule#ARG_SOURCE}
+     * - role as in rule context args by name {@link AccountSelectorRule#ARG_ROLE}
+     * - identity as in rule context args by name {@link AccountSelectorRule#ARG_IDENTITY}
+     * - application as in rule context args by name {@link AccountSelectorRule#ARG_APPLICATION}
+     * - links as in rule context args by name {@link AccountSelectorRule#ARG_LINKS}
+     * - isSecondary as in rule context args by name {@link AccountSelectorRule#ARG_IS_SECONDARY}
+     * - project as in rule context args by name {@link AccountSelectorRule#ARG_PROJECT}
+     * - accountRequest as in rule context args by name {@link AccountSelectorRule#ARG_ACCOUNT_REQUEST}
+     * - allowCreate as in rule context args by name {@link AccountSelectorRule#ARG_ALLOW_CREATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -152,31 +152,31 @@ public class AccountSelectorRuleTest {
             AccountSelectorRule.AccountSelectorRuleArguments arguments = (AccountSelectorRule.AccountSelectorRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Source is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_SOURCE_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_SOURCE),
                     arguments.getSource().name());
             assertEquals("Role is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ROLE_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ROLE),
                     arguments.getRole());
             assertEquals("Identity is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_IDENTITY),
                     arguments.getIdentity());
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Links is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_LINKS_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_LINKS),
                     arguments.getLinks());
             assertEquals("IsSecondary is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_IS_SECONDARY_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_IS_SECONDARY),
                     arguments.getIsSecondary());
             assertEquals("Project is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_PROJECT_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_PROJECT),
                     arguments.getProject());
             assertEquals("AccountRequest is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ACCOUNT_REQUEST_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ACCOUNT_REQUEST),
                     arguments.getAccountRequest());
             assertEquals("AllowCreate is not match",
-                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ALLOW_CREATE_NAME),
+                    testRuleContext.getArguments().get(AccountSelectorRule.ARG_ALLOW_CREATE),
                     arguments.getAllowCreate());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -213,7 +213,7 @@ public class AccountSelectorRuleTest {
     /**
      * Test execution with valid NULL arguments.
      * Input:
-     * - valid rule context, but {@link AccountSelectorRule#ARG_LINKS_NAME} attribute null
+     * - valid rule context, but {@link AccountSelectorRule#ARG_LINKS} attribute null
      * Output:
      * - General exception
      * Expectation:
@@ -225,7 +225,7 @@ public class AccountSelectorRuleTest {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
         String testResult = UUID.randomUUID().toString();
 
-        testRuleContext.getArguments().remove(AccountSelectorRule.ARG_LINKS_NAME);
+        testRuleContext.getArguments().remove(AccountSelectorRule.ARG_LINKS);
         when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
@@ -252,15 +252,15 @@ public class AccountSelectorRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(AccountSelectorRule.ARG_SOURCE_NAME, Source.Aggregation.name());
-        ruleParameters.put(AccountSelectorRule.ARG_ROLE_NAME, mock(Bundle.class));
-        ruleParameters.put(AccountSelectorRule.ARG_IDENTITY_NAME, mock(Identity.class));
-        ruleParameters.put(AccountSelectorRule.ARG_APPLICATION_NAME, mock(Application.class));
-        ruleParameters.put(AccountSelectorRule.ARG_LINKS_NAME, Collections.singletonList(mock(Link.class)));
-        ruleParameters.put(AccountSelectorRule.ARG_IS_SECONDARY_NAME, new Random().nextBoolean());
-        ruleParameters.put(AccountSelectorRule.ARG_PROJECT_NAME, mock(ProvisioningProject.class));
-        ruleParameters.put(AccountSelectorRule.ARG_ACCOUNT_REQUEST_NAME, mock(ProvisioningPlan.AccountRequest.class));
-        ruleParameters.put(AccountSelectorRule.ARG_ALLOW_CREATE_NAME, new Random().nextBoolean());
+        ruleParameters.put(AccountSelectorRule.ARG_SOURCE, Source.Aggregation.name());
+        ruleParameters.put(AccountSelectorRule.ARG_ROLE, mock(Bundle.class));
+        ruleParameters.put(AccountSelectorRule.ARG_IDENTITY, mock(Identity.class));
+        ruleParameters.put(AccountSelectorRule.ARG_APPLICATION, mock(Application.class));
+        ruleParameters.put(AccountSelectorRule.ARG_LINKS, Collections.singletonList(mock(Link.class)));
+        ruleParameters.put(AccountSelectorRule.ARG_IS_SECONDARY, new Random().nextBoolean());
+        ruleParameters.put(AccountSelectorRule.ARG_PROJECT, mock(ProvisioningProject.class));
+        ruleParameters.put(AccountSelectorRule.ARG_ACCOUNT_REQUEST, mock(ProvisioningPlan.AccountRequest.class));
+        ruleParameters.put(AccountSelectorRule.ARG_ALLOW_CREATE, new Random().nextBoolean());
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

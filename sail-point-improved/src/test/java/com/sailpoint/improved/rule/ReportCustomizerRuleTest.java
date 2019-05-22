@@ -59,9 +59,9 @@ public class ReportCustomizerRuleTest {
      * Output:
      * - null, as rule does not return anything
      * Expectation:
-     * - taskDefinition as in rule context args by name {@link ReportCustomizerRule#ARG_TASK_DEFINITION_NAME}
-     * - report as in rule context args by name {@link ReportCustomizerRule#ARG_REPORT_NAME}
-     * - locale as in rule context args by name {@link ReportCustomizerRule#ARG_LOCALE_NAME}
+     * - taskDefinition as in rule context args by name {@link ReportCustomizerRule#ARG_TASK_DEFINITION}
+     * - report as in rule context args by name {@link ReportCustomizerRule#ARG_REPORT}
+     * - locale as in rule context args by name {@link ReportCustomizerRule#ARG_LOCALE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -73,13 +73,13 @@ public class ReportCustomizerRuleTest {
             ReportCustomizerRule.ReportCustomizerRuleArguments arguments = (ReportCustomizerRule.ReportCustomizerRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("TaskDefinition is not match",
-                    testRuleContext.getArguments().get(ReportCustomizerRule.ARG_TASK_DEFINITION_NAME),
+                    testRuleContext.getArguments().get(ReportCustomizerRule.ARG_TASK_DEFINITION),
                     arguments.getTaskDefinition());
             assertEquals("Report is not match",
-                    testRuleContext.getArguments().get(ReportCustomizerRule.ARG_REPORT_NAME),
+                    testRuleContext.getArguments().get(ReportCustomizerRule.ARG_REPORT),
                     arguments.getReport());
             assertEquals("Local is not match",
-                    testRuleContext.getArguments().get(ReportCustomizerRule.ARG_LOCALE_NAME),
+                    testRuleContext.getArguments().get(ReportCustomizerRule.ARG_LOCALE),
                     arguments.getLocale());
             return null;
         }).when(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
@@ -133,9 +133,9 @@ public class ReportCustomizerRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(ReportCustomizerRule.ARG_TASK_DEFINITION_NAME, mock(TaskDefinition.class));
-        ruleParameters.put(ReportCustomizerRule.ARG_REPORT_NAME, mock(LiveReport.class));
-        ruleParameters.put(ReportCustomizerRule.ARG_LOCALE_NAME, Locale.getDefault());
+        ruleParameters.put(ReportCustomizerRule.ARG_TASK_DEFINITION, mock(TaskDefinition.class));
+        ruleParameters.put(ReportCustomizerRule.ARG_REPORT, mock(LiveReport.class));
+        ruleParameters.put(ReportCustomizerRule.ARG_LOCALE, Locale.getDefault());
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

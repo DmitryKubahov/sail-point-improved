@@ -13,7 +13,6 @@ import sailpoint.object.Identity;
 import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Rule;
 import sailpoint.object.WorkItem;
-import sailpoint.object.Workflow;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,37 +36,37 @@ public abstract class FallbackWorkItemForwardRule
     /**
      * Name of item argument name
      */
-    public static final String ARG_ITEM_NAME = "item";
+    public static final String ARG_ITEM = "item";
     /**
      * Name of owner argument name
      */
-    public static final String ARG_OWNER_NAME = "owner";
+    public static final String ARG_OWNER = "owner";
     /**
      * Name of creator argument name
      */
-    public static final String ARG_CREATOR_NAME = "creator";
+    public static final String ARG_CREATOR = "creator";
     /**
      * Name of certifiers argument name
      */
-    public static final String ARG_CERTIFIERS_NAME = "certifiers";
+    public static final String ARG_CERTIFIERS = "certifiers";
     /**
-     * Name of name argument name
+     * Name of certification name argument name
      */
     public static final String ARG_CERTIFICATION_NAME = "name";
     /**
-     * Name of type argument name
+     * Name of certification type argument name
      */
-    public static final String ARG_CERTIFICATION_TYPE_NAME = "type";
+    public static final String ARG_CERTIFICATION_TYPE = "type";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            FallbackWorkItemForwardRule.ARG_ITEM_NAME,
-            FallbackWorkItemForwardRule.ARG_OWNER_NAME,
-            FallbackWorkItemForwardRule.ARG_CREATOR_NAME,
-            FallbackWorkItemForwardRule.ARG_CERTIFIERS_NAME,
-            FallbackWorkItemForwardRule.ARG_CERTIFICATION_TYPE_NAME
+            FallbackWorkItemForwardRule.ARG_ITEM,
+            FallbackWorkItemForwardRule.ARG_OWNER,
+            FallbackWorkItemForwardRule.ARG_CREATOR,
+            FallbackWorkItemForwardRule.ARG_CERTIFIERS,
+            FallbackWorkItemForwardRule.ARG_CERTIFICATION_TYPE
     );
 
     /**
@@ -88,18 +87,18 @@ public abstract class FallbackWorkItemForwardRule
             @NonNull JavaRuleContext javaRuleContext) {
         return FallbackWorkItemForwardRuleArguments.builder()
                 .item((WorkItem) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, FallbackWorkItemForwardRule.ARG_ITEM_NAME))
+                        .getArgumentValueByName(javaRuleContext, FallbackWorkItemForwardRule.ARG_ITEM))
                 .owner((Identity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, FallbackWorkItemForwardRule.ARG_OWNER_NAME))
+                        .getArgumentValueByName(javaRuleContext, FallbackWorkItemForwardRule.ARG_OWNER))
                 .creator((String) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, FallbackWorkItemForwardRule.ARG_CREATOR_NAME))
+                        .getArgumentValueByName(javaRuleContext, FallbackWorkItemForwardRule.ARG_CREATOR))
                 .certifiers((List<String>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, FallbackWorkItemForwardRule.ARG_CERTIFIERS_NAME))
+                        .getArgumentValueByName(javaRuleContext, FallbackWorkItemForwardRule.ARG_CERTIFIERS))
                 .certificationName((String) JavaRuleExecutorUtil
                         .getArgumentValueByName(javaRuleContext,
                                 FallbackWorkItemForwardRule.ARG_CERTIFICATION_NAME))
                 .certificationType((Certification.Type) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, FallbackWorkItemForwardRule.ARG_CERTIFICATION_TYPE_NAME))
+                        .getArgumentValueByName(javaRuleContext, FallbackWorkItemForwardRule.ARG_CERTIFICATION_TYPE))
                 .build();
     }
 
@@ -119,22 +118,22 @@ public abstract class FallbackWorkItemForwardRule
         /**
          * Reference to the workItem (some workItem arguments may not yet be set)
          */
-        @Argument(name = FallbackWorkItemForwardRule.ARG_ITEM_NAME)
+        @Argument(name = FallbackWorkItemForwardRule.ARG_ITEM)
         private final WorkItem item;
         /**
          * Reference to the Identity who currently owns the work item
          */
-        @Argument(name = FallbackWorkItemForwardRule.ARG_OWNER_NAME)
+        @Argument(name = FallbackWorkItemForwardRule.ARG_OWNER)
         private final Identity owner;
         /**
          * Name of Identity who created the certification belonging to this workItem
          */
-        @Argument(name = FallbackWorkItemForwardRule.ARG_CREATOR_NAME)
+        @Argument(name = FallbackWorkItemForwardRule.ARG_CREATOR)
         private final String creator;
         /**
          * List of certifier names for the certification belonging to the workItem
          */
-        @Argument(name = FallbackWorkItemForwardRule.ARG_CERTIFIERS_NAME)
+        @Argument(name = FallbackWorkItemForwardRule.ARG_CERTIFIERS)
         private final List<String> certifiers;
         /**
          * Name of the certification belonging to the workItem (may be null if not created yet)
@@ -144,7 +143,7 @@ public abstract class FallbackWorkItemForwardRule
         /**
          * Type of the certification belonging to the workItem
          */
-        @Argument(name = FallbackWorkItemForwardRule.ARG_CERTIFICATION_TYPE_NAME)
+        @Argument(name = FallbackWorkItemForwardRule.ARG_CERTIFICATION_TYPE)
         private final Certification.Type certificationType;
     }
 }

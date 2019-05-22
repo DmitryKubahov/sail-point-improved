@@ -61,13 +61,13 @@ public class CertificationExclusionRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - entity as in rule context args by name {@link CertificationExclusionRule#ARG_ENTITY_NAME}
-     * - certification as in rule context args by name {@link CertificationExclusionRule#ARG_CERTIFICATION_NAME}
-     * - certContext as in rule context args by name {@link CertificationExclusionRule#ARG_CERT_CONTEXT_NAME}
-     * - items as in rule context args by name {@link CertificationExclusionRule#ARG_ITEMS_NAME}
-     * - itemsToExclude as in rule context args by name {@link CertificationExclusionRule#ARG_ITEMS_TO_EXCLUDE_NAME}
-     * - state as in rule context args by name {@link CertificationExclusionRule#ARG_STATE_NAME}
-     * - identity as in rule context args by name {@link CertificationExclusionRule#ARG_IDENTITY_NAME}
+     * - entity as in rule context args by name {@link CertificationExclusionRule#ARG_ENTITY}
+     * - certification as in rule context args by name {@link CertificationExclusionRule#ARG_CERTIFICATION}
+     * - certContext as in rule context args by name {@link CertificationExclusionRule#ARG_CERT_CONTEXT}
+     * - items as in rule context args by name {@link CertificationExclusionRule#ARG_ITEMS}
+     * - itemsToExclude as in rule context args by name {@link CertificationExclusionRule#ARG_ITEMS_TO_EXCLUDE}
+     * - state as in rule context args by name {@link CertificationExclusionRule#ARG_STATE}
+     * - identity as in rule context args by name {@link CertificationExclusionRule#ARG_IDENTITY}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -80,25 +80,25 @@ public class CertificationExclusionRuleTest {
             CertificationExclusionRule.CertificationExclusionRuleArguments arguments = (CertificationExclusionRule.CertificationExclusionRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Entity is not match",
-                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_ENTITY_NAME),
+                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_ENTITY),
                     arguments.getEntity());
             assertEquals("Certification is not match",
-                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_CERTIFICATION_NAME),
+                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_CERTIFICATION),
                     arguments.getCertification());
             assertEquals("CertificationContext is not match",
-                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_CERT_CONTEXT_NAME),
+                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_CERT_CONTEXT),
                     arguments.getCertContext());
             assertEquals("Items is not match",
-                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_ITEMS_NAME),
+                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_ITEMS),
                     arguments.getItems());
             assertEquals("ItemsToExclude is not match",
-                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_ITEMS_TO_EXCLUDE_NAME),
+                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_ITEMS_TO_EXCLUDE),
                     arguments.getItemsToExclude());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_STATE),
                     arguments.getState());
             assertEquals("Identity is not match",
-                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(CertificationExclusionRule.ARG_IDENTITY),
                     arguments.getIdentity());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -151,16 +151,16 @@ public class CertificationExclusionRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertificationExclusionRule.ARG_ENTITY_NAME, mock(AbstractCertifiableEntity.class));
-        ruleParameters.put(CertificationExclusionRule.ARG_CERTIFICATION_NAME, mock(Certification.class));
-        ruleParameters.put(CertificationExclusionRule.ARG_CERT_CONTEXT_NAME, mock(CertificationContext.class));
+        ruleParameters.put(CertificationExclusionRule.ARG_ENTITY, mock(AbstractCertifiableEntity.class));
+        ruleParameters.put(CertificationExclusionRule.ARG_CERTIFICATION, mock(Certification.class));
+        ruleParameters.put(CertificationExclusionRule.ARG_CERT_CONTEXT, mock(CertificationContext.class));
         ruleParameters
-                .put(CertificationExclusionRule.ARG_ITEMS_NAME, Collections.singletonList(mock(Certifiable.class)));
-        ruleParameters.put(CertificationExclusionRule.ARG_ITEMS_TO_EXCLUDE_NAME,
+                .put(CertificationExclusionRule.ARG_ITEMS, Collections.singletonList(mock(Certifiable.class)));
+        ruleParameters.put(CertificationExclusionRule.ARG_ITEMS_TO_EXCLUDE,
                 Collections.singletonList(mock(Certifiable.class)));
-        ruleParameters.put(CertificationExclusionRule.ARG_STATE_NAME,
+        ruleParameters.put(CertificationExclusionRule.ARG_STATE,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
-        ruleParameters.put(CertificationExclusionRule.ARG_IDENTITY_NAME, mock(AbstractCertifiableEntity.class));
+        ruleParameters.put(CertificationExclusionRule.ARG_IDENTITY, mock(AbstractCertifiableEntity.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

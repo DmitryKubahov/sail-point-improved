@@ -60,10 +60,10 @@ public class JDBCProvisionRuleTest {
      * Output:
      * - test provisioning result value
      * Expectation:
-     * - application as in rule context args by name {@link JDBCProvisionRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link JDBCProvisionRule#ARG_SCHEMA_NAME}
-     * - connection as in rule context args by name {@link JDBCProvisionRule#ARG_CONNECTION_NAME}
-     * - plan as in rule context args by name {@link JDBCProvisionRule#ARG_PLAN_NAME}
+     * - application as in rule context args by name {@link JDBCProvisionRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link JDBCProvisionRule#ARG_SCHEMA}
+     * - connection as in rule context args by name {@link JDBCProvisionRule#ARG_CONNECTION}
+     * - plan as in rule context args by name {@link JDBCProvisionRule#ARG_PLAN}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -76,15 +76,15 @@ public class JDBCProvisionRuleTest {
             JDBCProvisionRule.JDBCProvisionRuleArguments arguments = (JDBCProvisionRule.JDBCProvisionRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(JDBCProvisionRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(JDBCProvisionRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(JDBCProvisionRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(JDBCProvisionRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("Connection is not match",
-                    testRuleContext.getArguments().get(JDBCProvisionRule.ARG_CONNECTION_NAME),
+                    testRuleContext.getArguments().get(JDBCProvisionRule.ARG_CONNECTION),
                     arguments.getConnection());
-            assertEquals("Plan is not match", testRuleContext.getArguments().get(JDBCProvisionRule.ARG_PLAN_NAME),
+            assertEquals("Plan is not match", testRuleContext.getArguments().get(JDBCProvisionRule.ARG_PLAN),
                     arguments.getPlan());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -138,10 +138,10 @@ public class JDBCProvisionRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(JDBCProvisionRule.ARG_APPLICATION_NAME, mock(Application.class));
-        ruleParameters.put(JDBCProvisionRule.ARG_SCHEMA_NAME, mock(Schema.class));
-        ruleParameters.put(JDBCProvisionRule.ARG_CONNECTION_NAME, mock(Connection.class));
-        ruleParameters.put(JDBCProvisionRule.ARG_PLAN_NAME, mock(ProvisioningPlan.class));
+        ruleParameters.put(JDBCProvisionRule.ARG_APPLICATION, mock(Application.class));
+        ruleParameters.put(JDBCProvisionRule.ARG_SCHEMA, mock(Schema.class));
+        ruleParameters.put(JDBCProvisionRule.ARG_CONNECTION, mock(Connection.class));
+        ruleParameters.put(JDBCProvisionRule.ARG_PLAN, mock(ProvisioningPlan.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

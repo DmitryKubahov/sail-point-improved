@@ -57,9 +57,9 @@ public class WorkItemForwardRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - item as in rule context args by name {@link WorkItemForwardRule#ARG_ITEM_NAME}
-     * - owner as in rule context args by name {@link WorkItemForwardRule#ARG_OWNER_NAME}
-     * - identity as in rule context args by name {@link WorkItemForwardRule#ARG_IDENTITY_NAME}
+     * - item as in rule context args by name {@link WorkItemForwardRule#ARG_ITEM}
+     * - owner as in rule context args by name {@link WorkItemForwardRule#ARG_OWNER}
+     * - identity as in rule context args by name {@link WorkItemForwardRule#ARG_IDENTITY}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -72,13 +72,13 @@ public class WorkItemForwardRuleTest {
             WorkItemForwardRule.WorkItemForwardRuleArguments arguments = (WorkItemForwardRule.WorkItemForwardRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Item is not match",
-                    testRuleContext.getArguments().get(WorkItemForwardRule.ARG_ITEM_NAME),
+                    testRuleContext.getArguments().get(WorkItemForwardRule.ARG_ITEM),
                     arguments.getItem());
             assertEquals("Owner is not match",
-                    testRuleContext.getArguments().get(WorkItemForwardRule.ARG_OWNER_NAME),
+                    testRuleContext.getArguments().get(WorkItemForwardRule.ARG_OWNER),
                     arguments.getOwner());
             assertEquals("Identity is not match",
-                    testRuleContext.getArguments().get(WorkItemForwardRule.ARG_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(WorkItemForwardRule.ARG_IDENTITY),
                     arguments.getIdentity());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -132,9 +132,9 @@ public class WorkItemForwardRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(WorkItemForwardRule.ARG_ITEM_NAME, mock(WorkItem.class));
-        ruleParameters.put(WorkItemForwardRule.ARG_OWNER_NAME, mock(Identity.class));
-        ruleParameters.put(WorkItemForwardRule.ARG_IDENTITY_NAME, mock(Identity.class));
+        ruleParameters.put(WorkItemForwardRule.ARG_ITEM, mock(WorkItem.class));
+        ruleParameters.put(WorkItemForwardRule.ARG_OWNER, mock(Identity.class));
+        ruleParameters.put(WorkItemForwardRule.ARG_IDENTITY, mock(Identity.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

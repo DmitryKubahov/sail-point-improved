@@ -41,32 +41,32 @@ public abstract class PeopleSoftHRMSProvisionRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of plan argument name
      */
-    public static final String ARG_PLAN_NAME = "plan";
+    public static final String ARG_PLAN = "plan";
     /**
      * Name of request argument name
      */
-    public static final String ARG_REQUEST_NAME = "request";
+    public static final String ARG_REQUEST = "request";
     /**
      * Name of connector argument name
      */
-    public static final String ARG_CONNECTOR_NAME = "connector";
+    public static final String ARG_CONNECTOR = "connector";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            PeopleSoftHRMSProvisionRule.ARG_APPLICATION_NAME,
-            PeopleSoftHRMSProvisionRule.ARG_SCHEMA_NAME,
-            PeopleSoftHRMSProvisionRule.ARG_PLAN_NAME,
-            PeopleSoftHRMSProvisionRule.ARG_CONNECTOR_NAME
+            PeopleSoftHRMSProvisionRule.ARG_APPLICATION,
+            PeopleSoftHRMSProvisionRule.ARG_SCHEMA,
+            PeopleSoftHRMSProvisionRule.ARG_PLAN,
+            PeopleSoftHRMSProvisionRule.ARG_CONNECTOR
     );
 
     /**
@@ -87,15 +87,15 @@ public abstract class PeopleSoftHRMSProvisionRule
             @NonNull JavaRuleContext javaRuleContext) {
         return PeopleSoftHRMSProvisionRuleArguments.builder()
                 .application((Application) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, PeopleSoftHRMSProvisionRule.ARG_APPLICATION_NAME))
+                        .getArgumentValueByName(javaRuleContext, PeopleSoftHRMSProvisionRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, PeopleSoftHRMSProvisionRule.ARG_SCHEMA_NAME))
+                        .getArgumentValueByName(javaRuleContext, PeopleSoftHRMSProvisionRule.ARG_SCHEMA))
                 .plan((ProvisioningPlan) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, PeopleSoftHRMSProvisionRule.ARG_PLAN_NAME))
+                        .getArgumentValueByName(javaRuleContext, PeopleSoftHRMSProvisionRule.ARG_PLAN))
                 .request((ProvisioningPlan.AbstractRequest) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, PeopleSoftHRMSProvisionRule.ARG_REQUEST_NAME))
+                        .getArgumentValueByName(javaRuleContext, PeopleSoftHRMSProvisionRule.ARG_REQUEST))
                 .connector((PeopleSoftHRMSConnector) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, PeopleSoftHRMSProvisionRule.ARG_CONNECTOR_NAME))
+                        .getArgumentValueByName(javaRuleContext, PeopleSoftHRMSProvisionRule.ARG_CONNECTOR))
                 .build();
     }
 
@@ -114,27 +114,27 @@ public abstract class PeopleSoftHRMSProvisionRule
         /**
          * Reference to the application object
          */
-        @Argument(name = PeopleSoftHRMSProvisionRule.ARG_APPLICATION_NAME)
+        @Argument(name = PeopleSoftHRMSProvisionRule.ARG_APPLICATION)
         private final Application application;
         /**
          * Reference to the application schema
          */
-        @Argument(name = PeopleSoftHRMSProvisionRule.ARG_SCHEMA_NAME)
+        @Argument(name = PeopleSoftHRMSProvisionRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * Provisioning plan containing the provisioning request(s)
          */
-        @Argument(name = PeopleSoftHRMSProvisionRule.ARG_PLAN_NAME)
+        @Argument(name = PeopleSoftHRMSProvisionRule.ARG_PLAN)
         private final ProvisioningPlan plan;
         /**
          * AccountRequest being processed; always null for this global rule; only set for {@link PeopleSoftHRMSOperationProvisioningRule}
          */
-        @Argument(name = PeopleSoftHRMSProvisionRule.ARG_REQUEST_NAME)
+        @Argument(name = PeopleSoftHRMSProvisionRule.ARG_REQUEST)
         private final ProvisioningPlan.AbstractRequest request;
         /**
          * Application connector being used for the operation
          */
-        @Argument(name = PeopleSoftHRMSProvisionRule.ARG_CONNECTOR_NAME)
+        @Argument(name = PeopleSoftHRMSProvisionRule.ARG_CONNECTOR)
         private final PeopleSoftHRMSConnector connector;
 
     }

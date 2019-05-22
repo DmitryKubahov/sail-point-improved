@@ -31,22 +31,22 @@ public abstract class ScopeCorrelationRule
     /**
      * Name of identity argument name
      */
-    public static final String ARG_IDENTITY_NAME = "identity";
+    public static final String ARG_IDENTITY = "identity";
     /**
      * Name of scopeCorrelationAttribute argument name
      */
-    public static final String ARG_SCOPE_CORRELATION_ATTRIBUTE_NAME = "scopeCorrelationAttribute";
+    public static final String ARG_SCOPE_CORRELATION_ATTRIBUTE = "scopeCorrelationAttribute";
     /**
      * Name of scopeCorrelationAttributeValue argument name
      */
-    public static final String ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE_NAME = "scopeCorrelationAttributeValue";
+    public static final String ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE = "scopeCorrelationAttributeValue";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            ScopeCorrelationRule.ARG_IDENTITY_NAME,
-            ScopeCorrelationRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_NAME
+            ScopeCorrelationRule.ARG_IDENTITY,
+            ScopeCorrelationRule.ARG_SCOPE_CORRELATION_ATTRIBUTE
     );
 
     /**
@@ -67,13 +67,13 @@ public abstract class ScopeCorrelationRule
             @NonNull JavaRuleContext javaRuleContext) {
         return ScopeCorrelationRuleArguments.builder()
                 .identity((Identity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ScopeCorrelationRule.ARG_IDENTITY_NAME))
+                        .getArgumentValueByName(javaRuleContext, ScopeCorrelationRule.ARG_IDENTITY))
                 .scopeCorrelationAttribute((String) JavaRuleExecutorUtil
                         .getArgumentValueByName(javaRuleContext,
-                                ScopeCorrelationRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_NAME))
+                                ScopeCorrelationRule.ARG_SCOPE_CORRELATION_ATTRIBUTE))
                 .scopeCorrelationAttributeValue((String) JavaRuleExecutorUtil
                         .getArgumentValueByName(javaRuleContext,
-                                ScopeCorrelationRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE_NAME))
+                                ScopeCorrelationRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE))
                 .build();
     }
 
@@ -90,17 +90,17 @@ public abstract class ScopeCorrelationRule
         /**
          * Reference to the identity being assigned a scope
          */
-        @Argument(name = ScopeCorrelationRule.ARG_IDENTITY_NAME)
+        @Argument(name = ScopeCorrelationRule.ARG_IDENTITY)
         private final Identity identity;
         /**
          * Name of the scope correlation attribute specified in the scoping configuration
          */
-        @Argument(name = ScopeCorrelationRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_NAME)
+        @Argument(name = ScopeCorrelationRule.ARG_SCOPE_CORRELATION_ATTRIBUTE)
         private final String scopeCorrelationAttribute;
         /**
          * The value for the correlation attribute on the Identity
          */
-        @Argument(name = ScopeCorrelationRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE_NAME)
+        @Argument(name = ScopeCorrelationRule.ARG_SCOPE_CORRELATION_ATTRIBUTE_VALUE)
         private final String scopeCorrelationAttributeValue;
     }
 }

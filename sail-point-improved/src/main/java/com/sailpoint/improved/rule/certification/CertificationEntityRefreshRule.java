@@ -35,18 +35,18 @@ public abstract class CertificationEntityRefreshRule
     /**
      * Name of certification argument name
      */
-    public static final String ARG_CERTIFICATION_NAME = "certification";
+    public static final String ARG_CERTIFICATION = "certification";
     /**
      * Name of certificationEntity argument name
      */
-    public static final String ARG_CERTIFICATION_ENTITY_NAME = "certificationEntity";
+    public static final String ARG_CERTIFICATION_ENTITY = "certificationEntity";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            CertificationEntityRefreshRule.ARG_CERTIFICATION_NAME,
-            CertificationEntityRefreshRule.ARG_CERTIFICATION_ENTITY_NAME
+            CertificationEntityRefreshRule.ARG_CERTIFICATION,
+            CertificationEntityRefreshRule.ARG_CERTIFICATION_ENTITY
     );
 
     /**
@@ -68,9 +68,9 @@ public abstract class CertificationEntityRefreshRule
             @NonNull JavaRuleContext javaRuleContext) {
         return CertificationEntityRefreshRuleArguments.builder()
                 .certification((Certification) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationEntityRefreshRule.ARG_CERTIFICATION_NAME))
+                        CertificationEntityRefreshRule.ARG_CERTIFICATION))
                 .certificationEntity((CertificationEntity) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationEntityRefreshRule.ARG_CERTIFICATION_ENTITY_NAME))
+                        CertificationEntityRefreshRule.ARG_CERTIFICATION_ENTITY))
                 .build();
     }
 
@@ -86,12 +86,12 @@ public abstract class CertificationEntityRefreshRule
         /**
          * Reference to the certification object to which this entity belongs
          */
-        @Argument(name = CertificationEntityRefreshRule.ARG_CERTIFICATION_NAME)
+        @Argument(name = CertificationEntityRefreshRule.ARG_CERTIFICATION)
         private final Certification certification;
         /**
          * Reference to the certificationEntity object that was refreshed, causing launch of this rule
          */
-        @Argument(name = CertificationEntityRefreshRule.ARG_CERTIFICATION_ENTITY_NAME)
+        @Argument(name = CertificationEntityRefreshRule.ARG_CERTIFICATION_ENTITY)
         private final CertificationEntity certificationEntity;
     }
 }

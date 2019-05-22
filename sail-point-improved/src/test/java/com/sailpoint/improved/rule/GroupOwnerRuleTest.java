@@ -58,8 +58,8 @@ public class GroupOwnerRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - factory as in rule context args by name {@link GroupOwnerRule#ARG_FACTORY_NAME}
-     * - group as in rule context args by name {@link GroupOwnerRule#ARG_GROUP_NAME}
+     * - factory as in rule context args by name {@link GroupOwnerRule#ARG_FACTORY}
+     * - group as in rule context args by name {@link GroupOwnerRule#ARG_GROUP}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -72,10 +72,10 @@ public class GroupOwnerRuleTest {
             GroupOwnerRule.GroupOwnerRuleArguments arguments = (GroupOwnerRule.GroupOwnerRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Factory is not match",
-                    testRuleContext.getArguments().get(GroupOwnerRule.ARG_FACTORY_NAME),
+                    testRuleContext.getArguments().get(GroupOwnerRule.ARG_FACTORY),
                     arguments.getFactory());
             assertEquals("Group is not match",
-                    testRuleContext.getArguments().get(GroupOwnerRule.ARG_GROUP_NAME),
+                    testRuleContext.getArguments().get(GroupOwnerRule.ARG_GROUP),
                     arguments.getGroup());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -129,8 +129,8 @@ public class GroupOwnerRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(GroupOwnerRule.ARG_FACTORY_NAME, mock(GroupFactory.class));
-        ruleParameters.put(GroupOwnerRule.ARG_GROUP_NAME, mock(GroupDefinition.class));
+        ruleParameters.put(GroupOwnerRule.ARG_FACTORY, mock(GroupFactory.class));
+        ruleParameters.put(GroupOwnerRule.ARG_GROUP, mock(GroupDefinition.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

@@ -59,10 +59,10 @@ public class ResourceObjectCustomizationRuleTest {
      * Output:
      * - test resource object
      * Expectation:
-     * - object as in rule context args by name {@link ResourceObjectCustomizationRule#ARG_OBJECT_NAME}
-     * - application as in rule context args by name {@link ResourceObjectCustomizationRule#ARG_APPLICATION_NAME}
-     * - connector as in rule context args by name {@link ResourceObjectCustomizationRule#ARG_CONNECTOR_NAME}
-     * - state as in rule context args by name {@link ResourceObjectCustomizationRule#ARG_STATE_NAME}
+     * - object as in rule context args by name {@link ResourceObjectCustomizationRule#ARG_OBJECT}
+     * - application as in rule context args by name {@link ResourceObjectCustomizationRule#ARG_APPLICATION}
+     * - connector as in rule context args by name {@link ResourceObjectCustomizationRule#ARG_CONNECTOR}
+     * - state as in rule context args by name {@link ResourceObjectCustomizationRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -75,16 +75,16 @@ public class ResourceObjectCustomizationRuleTest {
             ResourceObjectCustomizationRule.ResourceObjectCustomizationRuleArguments arguments = (ResourceObjectCustomizationRule.ResourceObjectCustomizationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Object is not match",
-                    testRuleContext.getArguments().get(ResourceObjectCustomizationRule.ARG_OBJECT_NAME),
+                    testRuleContext.getArguments().get(ResourceObjectCustomizationRule.ARG_OBJECT),
                     arguments.getObject());
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(ResourceObjectCustomizationRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(ResourceObjectCustomizationRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Connector is not match",
-                    testRuleContext.getArguments().get(ResourceObjectCustomizationRule.ARG_CONNECTOR_NAME),
+                    testRuleContext.getArguments().get(ResourceObjectCustomizationRule.ARG_CONNECTOR),
                     arguments.getConnector());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(ResourceObjectCustomizationRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(ResourceObjectCustomizationRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -137,10 +137,10 @@ public class ResourceObjectCustomizationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(ResourceObjectCustomizationRule.ARG_OBJECT_NAME, mock(ResourceObject.class));
-        ruleParameters.put(ResourceObjectCustomizationRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(ResourceObjectCustomizationRule.ARG_CONNECTOR_NAME, mock(AbstractConnector.class));
-        ruleParameters.put(ResourceObjectCustomizationRule.ARG_STATE_NAME, Collections.emptyMap());
+        ruleParameters.put(ResourceObjectCustomizationRule.ARG_OBJECT, mock(ResourceObject.class));
+        ruleParameters.put(ResourceObjectCustomizationRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(ResourceObjectCustomizationRule.ARG_CONNECTOR, mock(AbstractConnector.class));
+        ruleParameters.put(ResourceObjectCustomizationRule.ARG_STATE, Collections.emptyMap());
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

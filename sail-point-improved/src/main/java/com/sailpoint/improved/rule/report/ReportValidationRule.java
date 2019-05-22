@@ -34,23 +34,23 @@ public abstract class ReportValidationRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_REPORT_NAME = "report";
+    public static final String ARG_REPORT = "report";
     /**
      * Name of form argument name
      */
-    public static final String ARG_FORM_NAME = "form";
+    public static final String ARG_FORM = "form";
     /**
      * Name of locale argument name
      */
-    public static final String ARG_LOCALE_NAME = "locale";
+    public static final String ARG_LOCALE = "locale";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            ReportValidationRule.ARG_REPORT_NAME,
-            ReportValidationRule.ARG_FORM_NAME,
-            ReportValidationRule.ARG_LOCALE_NAME
+            ReportValidationRule.ARG_REPORT,
+            ReportValidationRule.ARG_FORM,
+            ReportValidationRule.ARG_LOCALE
     );
 
     /**
@@ -71,11 +71,11 @@ public abstract class ReportValidationRule
             @NonNull JavaRuleContext javaRuleContext) {
         return ReportValidationRuleArguments.builder()
                 .report((LiveReport) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ReportValidationRule.ARG_REPORT_NAME))
+                        .getArgumentValueByName(javaRuleContext, ReportValidationRule.ARG_REPORT))
                 .form((Form) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ReportValidationRule.ARG_FORM_NAME))
+                        .getArgumentValueByName(javaRuleContext, ReportValidationRule.ARG_FORM))
                 .locale((Locale) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ReportValidationRule.ARG_LOCALE_NAME))
+                        .getArgumentValueByName(javaRuleContext, ReportValidationRule.ARG_LOCALE))
                 .build();
     }
 
@@ -92,17 +92,17 @@ public abstract class ReportValidationRule
         /**
          * The report definition itself
          */
-        @Argument(name = ReportValidationRule.ARG_REPORT_NAME)
+        @Argument(name = ReportValidationRule.ARG_REPORT)
         private final LiveReport report;
         /**
          * Form for rendering parameter UI, requiring validation of user input
          */
-        @Argument(name = ReportValidationRule.ARG_FORM_NAME)
+        @Argument(name = ReportValidationRule.ARG_FORM)
         private final Form form;
         /**
          * Represents a specific geographical, political, or cultural region; used for locale-specific rendering/calculations (e.g. number formatting)
          */
-        @Argument(name = ReportValidationRule.ARG_LOCALE_NAME)
+        @Argument(name = ReportValidationRule.ARG_LOCALE)
         private final Locale locale;
     }
 }

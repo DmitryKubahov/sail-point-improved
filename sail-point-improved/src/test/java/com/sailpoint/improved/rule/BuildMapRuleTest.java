@@ -59,11 +59,11 @@ public class BuildMapRuleTest {
      * Output:
      * - test map of execution
      * Expectation:
-     * - application as in rule context args by name {@link BuildMapRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link BuildMapRule#ARG_SCHEMA_NAME}
-     * - state as in rule context args by name {@link BuildMapRule#ARG_STATE_NAME}
-     * - record as in rule context args by name {@link BuildMapRule#ARG_RECORD_NAME}
-     * - cols as in rule context args by name {@link BuildMapRule#ARG_COLUMNS_NAME}
+     * - application as in rule context args by name {@link BuildMapRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link BuildMapRule#ARG_SCHEMA}
+     * - state as in rule context args by name {@link BuildMapRule#ARG_STATE}
+     * - record as in rule context args by name {@link BuildMapRule#ARG_RECORD}
+     * - cols as in rule context args by name {@link BuildMapRule#ARG_COLUMNS}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -77,19 +77,19 @@ public class BuildMapRuleTest {
             BuildMapRule.BuildMapRuleArguments arguments = (BuildMapRule.BuildMapRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(BuildMapRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(BuildMapRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(BuildMapRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(BuildMapRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(BuildMapRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(BuildMapRule.ARG_STATE),
                     arguments.getState());
             assertEquals("Record is not match",
-                    testRuleContext.getArguments().get(BuildMapRule.ARG_RECORD_NAME),
+                    testRuleContext.getArguments().get(BuildMapRule.ARG_RECORD),
                     arguments.getRecord());
             assertEquals("Columns are not match",
-                    testRuleContext.getArguments().get(BuildMapRule.ARG_COLUMNS_NAME),
+                    testRuleContext.getArguments().get(BuildMapRule.ARG_COLUMNS),
                     arguments.getColumns());
             return testResult;
         }).when(buildMapRule).internalExecute(eq(sailPointContext), any());
@@ -142,11 +142,11 @@ public class BuildMapRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(BuildMapRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(BuildMapRule.ARG_SCHEMA_NAME, new Schema());
-        ruleParameters.put(BuildMapRule.ARG_STATE_NAME, Collections.emptyMap());
-        ruleParameters.put(BuildMapRule.ARG_RECORD_NAME, Collections.singletonList(UUID.randomUUID().toString()));
-        ruleParameters.put(BuildMapRule.ARG_COLUMNS_NAME, Collections.singletonList(UUID.randomUUID().toString()));
+        ruleParameters.put(BuildMapRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(BuildMapRule.ARG_SCHEMA, new Schema());
+        ruleParameters.put(BuildMapRule.ARG_STATE, Collections.emptyMap());
+        ruleParameters.put(BuildMapRule.ARG_RECORD, Collections.singletonList(UUID.randomUUID().toString()));
+        ruleParameters.put(BuildMapRule.ARG_COLUMNS, Collections.singletonList(UUID.randomUUID().toString()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

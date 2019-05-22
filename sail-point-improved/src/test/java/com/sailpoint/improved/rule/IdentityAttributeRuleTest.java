@@ -62,12 +62,12 @@ public class IdentityAttributeRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - environment as in rule context args by name {@link IdentityAttributeRule#ARG_ENVIRONMENT_NAME}
-     * - identity as in rule context args by name {@link IdentityAttributeRule#ARG_IDENTITY_NAME}
-     * - attributeDefinition as in rule context args by name {@link IdentityAttributeRule#ARG_ATTRIBUTE_DEFINITION_NAME}
-     * - link as in rule context args by name {@link IdentityAttributeRule#ARG_LINK_NAME}
-     * - attributeSource as in rule context args by name {@link IdentityAttributeRule#ARG_ATTRIBUTE_SOURCE_NAME}
-     * - oldValue as in rule context args by name {@link IdentityAttributeRule#ARG_OLD_VALUE_NAME}
+     * - environment as in rule context args by name {@link IdentityAttributeRule#ARG_ENVIRONMENT}
+     * - identity as in rule context args by name {@link IdentityAttributeRule#ARG_IDENTITY}
+     * - attributeDefinition as in rule context args by name {@link IdentityAttributeRule#ARG_ATTRIBUTE_DEFINITION}
+     * - link as in rule context args by name {@link IdentityAttributeRule#ARG_LINK}
+     * - attributeSource as in rule context args by name {@link IdentityAttributeRule#ARG_ATTRIBUTE_SOURCE}
+     * - oldValue as in rule context args by name {@link IdentityAttributeRule#ARG_OLD_VALUE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -80,22 +80,22 @@ public class IdentityAttributeRuleTest {
             IdentityAttributeRule.IdentityAttributeRuleArguments arguments = (IdentityAttributeRule.IdentityAttributeRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Environment is not match",
-                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_ENVIRONMENT_NAME),
+                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_ENVIRONMENT),
                     arguments.getEnvironment());
             assertEquals("Identity is not match",
-                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_IDENTITY),
                     arguments.getIdentity());
             assertEquals("AttributeDefinition is not match",
-                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_ATTRIBUTE_DEFINITION_NAME),
+                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_ATTRIBUTE_DEFINITION),
                     arguments.getAttributeDefinition());
             assertEquals("Link is not match",
-                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_LINK_NAME),
+                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_LINK),
                     arguments.getLink());
             assertEquals("AttributeSource is not match",
-                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_ATTRIBUTE_SOURCE_NAME),
+                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_ATTRIBUTE_SOURCE),
                     arguments.getAttributeSource());
             assertEquals("OldValue is not match",
-                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_OLD_VALUE_NAME),
+                    testRuleContext.getArguments().get(IdentityAttributeRule.ARG_OLD_VALUE),
                     arguments.getOldValue());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -109,7 +109,7 @@ public class IdentityAttributeRuleTest {
     /**
      * Test execution with valid NULL arguments.
      * Input:
-     * - valid rule context, but {@link IdentityAttributeRule#ARG_LINK_NAME} attribute null
+     * - valid rule context, but {@link IdentityAttributeRule#ARG_LINK} attribute null
      * Output:
      * - General exception
      * Expectation:
@@ -121,7 +121,7 @@ public class IdentityAttributeRuleTest {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
         Object testResult = UUID.randomUUID();
 
-        testRuleContext.getArguments().remove(IdentityAttributeRule.ARG_LINK_NAME);
+        testRuleContext.getArguments().remove(IdentityAttributeRule.ARG_LINK);
         when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
@@ -132,7 +132,7 @@ public class IdentityAttributeRuleTest {
     /**
      * Test execution with valid NULL arguments.
      * Input:
-     * - valid rule context, but {@link IdentityAttributeRule#ARG_OLD_VALUE_NAME} attribute null
+     * - valid rule context, but {@link IdentityAttributeRule#ARG_OLD_VALUE} attribute null
      * Output:
      * - General exception
      * Expectation:
@@ -144,7 +144,7 @@ public class IdentityAttributeRuleTest {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
         Object testResult = UUID.randomUUID();
 
-        testRuleContext.getArguments().remove(IdentityAttributeRule.ARG_OLD_VALUE_NAME);
+        testRuleContext.getArguments().remove(IdentityAttributeRule.ARG_OLD_VALUE);
         when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
@@ -195,13 +195,13 @@ public class IdentityAttributeRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(IdentityAttributeRule.ARG_ENVIRONMENT_NAME,
+        ruleParameters.put(IdentityAttributeRule.ARG_ENVIRONMENT,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
-        ruleParameters.put(IdentityAttributeRule.ARG_IDENTITY_NAME, mock(Identity.class));
-        ruleParameters.put(IdentityAttributeRule.ARG_ATTRIBUTE_DEFINITION_NAME, mock(AttributeDefinition.class));
-        ruleParameters.put(IdentityAttributeRule.ARG_LINK_NAME, mock(Link.class));
-        ruleParameters.put(IdentityAttributeRule.ARG_ATTRIBUTE_SOURCE_NAME, mock(AttributeSource.class));
-        ruleParameters.put(IdentityAttributeRule.ARG_OLD_VALUE_NAME, UUID.randomUUID());
+        ruleParameters.put(IdentityAttributeRule.ARG_IDENTITY, mock(Identity.class));
+        ruleParameters.put(IdentityAttributeRule.ARG_ATTRIBUTE_DEFINITION, mock(AttributeDefinition.class));
+        ruleParameters.put(IdentityAttributeRule.ARG_LINK, mock(Link.class));
+        ruleParameters.put(IdentityAttributeRule.ARG_ATTRIBUTE_SOURCE, mock(AttributeSource.class));
+        ruleParameters.put(IdentityAttributeRule.ARG_OLD_VALUE, UUID.randomUUID());
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

@@ -39,37 +39,37 @@ public abstract class SapHrProvisionRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of destination argument name
      */
-    public static final String ARG_DESTINATION_NAME = "destination";
+    public static final String ARG_DESTINATION = "destination";
     /**
      * Name of plan argument name
      */
-    public static final String ARG_PLAN_NAME = "plan";
+    public static final String ARG_PLAN = "plan";
     /**
      * Name of request argument name
      */
-    public static final String ARG_REQUEST_NAME = "request";
+    public static final String ARG_REQUEST = "request";
     /**
      * Name of connector argument name
      */
-    public static final String ARG_CONNECTOR_NAME = "connector";
+    public static final String ARG_CONNECTOR = "connector";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            SapHrProvisionRule.ARG_APPLICATION_NAME,
-            SapHrProvisionRule.ARG_SCHEMA_NAME,
-            SapHrProvisionRule.ARG_DESTINATION_NAME,
-            SapHrProvisionRule.ARG_PLAN_NAME,
-            SapHrProvisionRule.ARG_CONNECTOR_NAME
+            SapHrProvisionRule.ARG_APPLICATION,
+            SapHrProvisionRule.ARG_SCHEMA,
+            SapHrProvisionRule.ARG_DESTINATION,
+            SapHrProvisionRule.ARG_PLAN,
+            SapHrProvisionRule.ARG_CONNECTOR
     );
 
     /**
@@ -90,17 +90,17 @@ public abstract class SapHrProvisionRule
             @NonNull JavaRuleContext javaRuleContext) {
         return SapHrProvisionRuleArguments.builder()
                 .application((Application) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_APPLICATION_NAME))
+                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_SCHEMA_NAME))
+                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_SCHEMA))
                 .destination((JCoDestination) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_DESTINATION_NAME))
+                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_DESTINATION))
                 .plan((ProvisioningPlan) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_PLAN_NAME))
+                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_PLAN))
                 .request((ProvisioningPlan.AbstractRequest) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_REQUEST_NAME))
+                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_REQUEST))
                 .connector((SAPHRConnector) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_CONNECTOR_NAME))
+                        .getArgumentValueByName(javaRuleContext, SapHrProvisionRule.ARG_CONNECTOR))
                 .build();
     }
 
@@ -120,32 +120,32 @@ public abstract class SapHrProvisionRule
         /**
          * Reference to the application object
          */
-        @Argument(name = SapHrProvisionRule.ARG_APPLICATION_NAME)
+        @Argument(name = SapHrProvisionRule.ARG_APPLICATION)
         private final Application application;
         /**
          * Reference to the application schema
          */
-        @Argument(name = SapHrProvisionRule.ARG_SCHEMA_NAME)
+        @Argument(name = SapHrProvisionRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * A connected and ready to use SAP destination object that can be used to call BAPI function modules and call to SAP tables
          */
-        @Argument(name = SapHrProvisionRule.ARG_DESTINATION_NAME)
+        @Argument(name = SapHrProvisionRule.ARG_DESTINATION)
         private final JCoDestination destination;
         /**
          * Provisioning plan containing the provisioning request(s)
          */
-        @Argument(name = SapHrProvisionRule.ARG_PLAN_NAME)
+        @Argument(name = SapHrProvisionRule.ARG_PLAN)
         private final ProvisioningPlan plan;
         /**
          * AccountRequest being processed; always null for this global rule; only set for {@link SapHrOperationProvisioningRule}
          */
-        @Argument(name = SapHrProvisionRule.ARG_REQUEST_NAME)
+        @Argument(name = SapHrProvisionRule.ARG_REQUEST)
         private final ProvisioningPlan.AbstractRequest request;
         /**
          * Application connector being used for the operation
          */
-        @Argument(name = SapHrProvisionRule.ARG_CONNECTOR_NAME)
+        @Argument(name = SapHrProvisionRule.ARG_CONNECTOR)
         private final SAPHRConnector connector;
 
     }

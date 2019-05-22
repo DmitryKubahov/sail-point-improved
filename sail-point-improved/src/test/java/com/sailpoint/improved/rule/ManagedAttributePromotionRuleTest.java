@@ -59,9 +59,9 @@ public class ManagedAttributePromotionRuleTest {
      * Output:
      * - test map of execution
      * Expectation:
-     * - attribute as in rule context args by name {@link ManagedAttributePromotionRule#ARG_ATTRIBUTE_NAME}
-     * - application as in rule context args by name {@link ManagedAttributePromotionRule#ARG_APPLICATION_NAME}
-     * - state as in rule context args by name {@link ManagedAttributePromotionRule#ARG_STATE_NAME}
+     * - attribute as in rule context args by name {@link ManagedAttributePromotionRule#ARG_ATTRIBUTE}
+     * - application as in rule context args by name {@link ManagedAttributePromotionRule#ARG_APPLICATION}
+     * - state as in rule context args by name {@link ManagedAttributePromotionRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -74,13 +74,13 @@ public class ManagedAttributePromotionRuleTest {
             ManagedAttributePromotionRule.ManagedAttributePromotionRuleArguments arguments = (ManagedAttributePromotionRule.ManagedAttributePromotionRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Attribute is not match",
-                    testRuleContext.getArguments().get(ManagedAttributePromotionRule.ARG_ATTRIBUTE_NAME),
+                    testRuleContext.getArguments().get(ManagedAttributePromotionRule.ARG_ATTRIBUTE),
                     arguments.getAttribute());
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(ManagedAttributePromotionRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(ManagedAttributePromotionRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(ManagedAttributePromotionRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(ManagedAttributePromotionRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -133,9 +133,9 @@ public class ManagedAttributePromotionRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(ManagedAttributePromotionRule.ARG_ATTRIBUTE_NAME, mock(ManagedAttribute.class));
-        ruleParameters.put(ManagedAttributePromotionRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(ManagedAttributePromotionRule.ARG_STATE_NAME,
+        ruleParameters.put(ManagedAttributePromotionRule.ARG_ATTRIBUTE, mock(ManagedAttribute.class));
+        ruleParameters.put(ManagedAttributePromotionRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(ManagedAttributePromotionRule.ARG_STATE,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }

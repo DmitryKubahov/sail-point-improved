@@ -60,9 +60,9 @@ public class TransformationRuleTest {
      * Output:
      * - test resource object value
      * Expectation:
-     * - application as in rule context args by name {@link TransformationRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link TransformationRule#ARG_SCHEMA_NAME}
-     * - object as in rule context args by name {@link TransformationRule#ARG_OBJECT_NAME}
+     * - application as in rule context args by name {@link TransformationRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link TransformationRule#ARG_SCHEMA}
+     * - object as in rule context args by name {@link TransformationRule#ARG_OBJECT}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -76,13 +76,13 @@ public class TransformationRuleTest {
             TransformationRule.TransformationRuleArguments arguments = (TransformationRule.TransformationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(TransformationRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(TransformationRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(TransformationRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(TransformationRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("Object is not match",
-                    testRuleContext.getArguments().get(TransformationRule.ARG_OBJECT_NAME),
+                    testRuleContext.getArguments().get(TransformationRule.ARG_OBJECT),
                     arguments.getObject());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -135,9 +135,9 @@ public class TransformationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(TransformationRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(TransformationRule.ARG_SCHEMA_NAME, new Schema());
-        ruleParameters.put(TransformationRule.ARG_OBJECT_NAME,
+        ruleParameters.put(TransformationRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(TransformationRule.ARG_SCHEMA, new Schema());
+        ruleParameters.put(TransformationRule.ARG_OBJECT,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }

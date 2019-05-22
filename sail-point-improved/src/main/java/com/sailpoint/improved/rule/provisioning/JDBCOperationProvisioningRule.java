@@ -40,33 +40,33 @@ public abstract class JDBCOperationProvisioningRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of connection argument name
      */
-    public static final String ARG_CONNECTION_NAME = "connection";
+    public static final String ARG_CONNECTION = "connection";
     /**
      * Name of plan argument name
      */
-    public static final String ARG_PLAN_NAME = "plan";
+    public static final String ARG_PLAN = "plan";
     /**
      * Name of request argument name
      */
-    public static final String ARG_REQUEST_NAME = "request";
+    public static final String ARG_REQUEST = "request";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            JDBCOperationProvisioningRule.ARG_APPLICATION_NAME,
-            JDBCOperationProvisioningRule.ARG_SCHEMA_NAME,
-            JDBCOperationProvisioningRule.ARG_CONNECTION_NAME,
-            JDBCOperationProvisioningRule.ARG_PLAN_NAME,
-            JDBCOperationProvisioningRule.ARG_REQUEST_NAME
+            JDBCOperationProvisioningRule.ARG_APPLICATION,
+            JDBCOperationProvisioningRule.ARG_SCHEMA,
+            JDBCOperationProvisioningRule.ARG_CONNECTION,
+            JDBCOperationProvisioningRule.ARG_PLAN,
+            JDBCOperationProvisioningRule.ARG_REQUEST
     );
 
     /**
@@ -87,15 +87,15 @@ public abstract class JDBCOperationProvisioningRule
             @NonNull JavaRuleContext javaRuleContext) {
         return JDBCOperationProvisioningRuleArguments.builder()
                 .application((Application) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, JDBCOperationProvisioningRule.ARG_APPLICATION_NAME))
+                        .getArgumentValueByName(javaRuleContext, JDBCOperationProvisioningRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, JDBCOperationProvisioningRule.ARG_SCHEMA_NAME))
+                        .getArgumentValueByName(javaRuleContext, JDBCOperationProvisioningRule.ARG_SCHEMA))
                 .connection((Connection) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, JDBCOperationProvisioningRule.ARG_CONNECTION_NAME))
+                        .getArgumentValueByName(javaRuleContext, JDBCOperationProvisioningRule.ARG_CONNECTION))
                 .plan((ProvisioningPlan) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, JDBCOperationProvisioningRule.ARG_PLAN_NAME))
+                        .getArgumentValueByName(javaRuleContext, JDBCOperationProvisioningRule.ARG_PLAN))
                 .request((ProvisioningPlan.AbstractRequest) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, JDBCOperationProvisioningRule.ARG_REQUEST_NAME))
+                        .getArgumentValueByName(javaRuleContext, JDBCOperationProvisioningRule.ARG_REQUEST))
                 .build();
     }
 
@@ -114,27 +114,27 @@ public abstract class JDBCOperationProvisioningRule
         /**
          * Reference to the application object
          */
-        @Argument(name = JDBCOperationProvisioningRule.ARG_APPLICATION_NAME)
+        @Argument(name = JDBCOperationProvisioningRule.ARG_APPLICATION)
         private final Application application;
         /**
          * Reference to the application schema
          */
-        @Argument(name = JDBCOperationProvisioningRule.ARG_SCHEMA_NAME)
+        @Argument(name = JDBCOperationProvisioningRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * Connection object to connect to the JDBC database
          */
-        @Argument(name = JDBCOperationProvisioningRule.ARG_CONNECTION_NAME)
+        @Argument(name = JDBCOperationProvisioningRule.ARG_CONNECTION)
         private final Connection connection;
         /**
          * Provisioning plan containing the provisioning request(s)
          */
-        @Argument(name = JDBCOperationProvisioningRule.ARG_PLAN_NAME)
+        @Argument(name = JDBCOperationProvisioningRule.ARG_PLAN)
         private final ProvisioningPlan plan;
         /**
          * AbstractRequest object containing the account request (or object request, in the case of group provisioning) to be processed
          */
-        @Argument(name = JDBCOperationProvisioningRule.ARG_REQUEST_NAME)
+        @Argument(name = JDBCOperationProvisioningRule.ARG_REQUEST)
         private final ProvisioningPlan.AbstractRequest request;
 
     }

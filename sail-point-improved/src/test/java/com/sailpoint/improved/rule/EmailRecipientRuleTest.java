@@ -59,7 +59,7 @@ public class EmailRecipientRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - item as in rule context args by name {@link EmailRecipientRule#ARG_ITEM_NAME}
+     * - item as in rule context args by name {@link EmailRecipientRule#ARG_ITEM}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -72,7 +72,7 @@ public class EmailRecipientRuleTest {
             EmailRecipientRule.EmailRecipientRuleArguments arguments = (EmailRecipientRule.EmailRecipientRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Item is not match",
-                    testRuleContext.getArguments().get(EmailRecipientRule.ARG_ITEM_NAME),
+                    testRuleContext.getArguments().get(EmailRecipientRule.ARG_ITEM),
                     arguments.getItem());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -126,7 +126,7 @@ public class EmailRecipientRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(EmailRecipientRule.ARG_ITEM_NAME, mock(Notifiable.class));
+        ruleParameters.put(EmailRecipientRule.ARG_ITEM, mock(Notifiable.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

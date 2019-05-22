@@ -57,7 +57,7 @@ public class EscalationRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - item as in rule context args by name {@link EscalationRule#ARG_ITEM_NAME}
+     * - item as in rule context args by name {@link EscalationRule#ARG_ITEM}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -70,7 +70,7 @@ public class EscalationRuleTest {
             EscalationRule.EscalationRuleArguments arguments = (EscalationRule.EscalationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Item is not match",
-                    testRuleContext.getArguments().get(EscalationRule.ARG_ITEM_NAME),
+                    testRuleContext.getArguments().get(EscalationRule.ARG_ITEM),
                     arguments.getItem());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -124,7 +124,7 @@ public class EscalationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(EscalationRule.ARG_ITEM_NAME, mock(Notifiable.class));
+        ruleParameters.put(EscalationRule.ARG_ITEM, mock(Notifiable.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

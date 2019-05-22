@@ -53,36 +53,36 @@ public abstract class ManagerCorrelationRule
     /**
      * Name of environment argument name
      */
-    public static final String ARG_ENVIRONMENT_NAME = "environment";
+    public static final String ARG_ENVIRONMENT = "environment";
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of instance argument name
      */
-    public static final String ARG_INSTANCE_NAME = "instance";
+    public static final String ARG_INSTANCE = "instance";
     /**
      * Name of connector argument name
      */
-    public static final String ARG_CONNECTOR_NAME = "connector";
+    public static final String ARG_CONNECTOR = "connector";
     /**
      * Name of link argument name
      */
-    public static final String ARG_LINK_NAME = "link";
+    public static final String ARG_LINK = "link";
     /**
      * Name of managerAttributeValue argument name
      */
-    public static final String ARG_MANAGER_ATTRIBUTE_VALUE_NAME = "managerAttributeValue";
+    public static final String ARG_MANAGER_ATTRIBUTE_VALUE = "managerAttributeValue";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            ManagerCorrelationRule.ARG_ENVIRONMENT_NAME,
-            ManagerCorrelationRule.ARG_APPLICATION_NAME,
-            ManagerCorrelationRule.ARG_CONNECTOR_NAME,
-            ManagerCorrelationRule.ARG_LINK_NAME
+            ManagerCorrelationRule.ARG_ENVIRONMENT,
+            ManagerCorrelationRule.ARG_APPLICATION,
+            ManagerCorrelationRule.ARG_CONNECTOR,
+            ManagerCorrelationRule.ARG_LINK
     );
 
     /**
@@ -104,18 +104,18 @@ public abstract class ManagerCorrelationRule
         return ManagerCorrelationRuleArguments
                 .builder()
                 .environment((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ManagerCorrelationRule.ARG_ENVIRONMENT_NAME))
+                        getArgumentValueByName(javaRuleContext, ManagerCorrelationRule.ARG_ENVIRONMENT))
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ManagerCorrelationRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, ManagerCorrelationRule.ARG_APPLICATION))
                 .instance((String) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ManagerCorrelationRule.ARG_INSTANCE_NAME))
+                        getArgumentValueByName(javaRuleContext, ManagerCorrelationRule.ARG_INSTANCE))
                 .connector((AbstractConnector) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ManagerCorrelationRule.ARG_CONNECTOR_NAME))
+                        getArgumentValueByName(javaRuleContext, ManagerCorrelationRule.ARG_CONNECTOR))
                 .link((Link) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ManagerCorrelationRule.ARG_LINK_NAME))
+                        getArgumentValueByName(javaRuleContext, ManagerCorrelationRule.ARG_LINK))
                 .managerAttributeValue((String) JavaRuleExecutorUtil.
                         getArgumentValueByName(javaRuleContext,
-                                ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE_NAME))
+                                ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE))
                 .build();
     }
 
@@ -135,32 +135,32 @@ public abstract class ManagerCorrelationRule
         /**
          * Map of arguments passed to the aggregation task
          */
-        @Argument(name = ManagerCorrelationRule.ARG_ENVIRONMENT_NAME)
+        @Argument(name = ManagerCorrelationRule.ARG_ENVIRONMENT)
         private final Map<String, Object> environment;
         /**
          * A reference to the Application object
          */
-        @Argument(name = ManagerCorrelationRule.ARG_APPLICATION_NAME)
+        @Argument(name = ManagerCorrelationRule.ARG_APPLICATION)
         private final Application application;
         /**
          * Application instance name (if not null)
          */
-        @Argument(name = ManagerCorrelationRule.ARG_INSTANCE_NAME)
+        @Argument(name = ManagerCorrelationRule.ARG_INSTANCE)
         private final String instance;
         /**
          * A reference to the Connector object used by this application
          */
-        @Argument(name = ManagerCorrelationRule.ARG_CONNECTOR_NAME)
+        @Argument(name = ManagerCorrelationRule.ARG_CONNECTOR)
         private final AbstractConnector connector;
         /**
          * A reference to the account link
          */
-        @Argument(name = ManagerCorrelationRule.ARG_LINK_NAME)
+        @Argument(name = ManagerCorrelationRule.ARG_LINK)
         private final Link link;
         /**
          * Manager attribute value being used to correlated to an Identity
          */
-        @Argument(name = ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE_NAME)
+        @Argument(name = ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE)
         private final String managerAttributeValue;
     }
 }

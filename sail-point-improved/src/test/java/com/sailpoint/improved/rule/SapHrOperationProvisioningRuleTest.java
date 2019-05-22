@@ -61,12 +61,12 @@ public class SapHrOperationProvisioningRuleTest {
      * Output:
      * - test provisioning result value
      * Expectation:
-     * - application as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_SCHEMA_NAME}
-     * - destination as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_DESTINATION_NAME}
-     * - connection as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_CONNECTION_NAME}
-     * - plan as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_PLAN_NAME}
-     * - request as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_REQUEST_NAME}
+     * - application as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_SCHEMA}
+     * - destination as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_DESTINATION}
+     * - connection as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_CONNECTION}
+     * - plan as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_PLAN}
+     * - request as in rule context args by name {@link SapHrOperationProvisioningRule#ARG_REQUEST}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -79,22 +79,22 @@ public class SapHrOperationProvisioningRuleTest {
             SapHrOperationProvisioningRule.SapHrOperationProvisioningRuleArguments arguments = (SapHrOperationProvisioningRule.SapHrOperationProvisioningRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("Destination is not match",
-                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_DESTINATION_NAME),
+                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_DESTINATION),
                     arguments.getDestination());
             assertEquals("Connection is not match",
-                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_CONNECTION_NAME),
+                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_CONNECTION),
                     arguments.getConnection());
             assertEquals("Plan is not match",
-                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_PLAN_NAME),
+                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_PLAN),
                     arguments.getPlan());
             assertEquals("Request is not match",
-                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_REQUEST_NAME),
+                    testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_REQUEST),
                     arguments.getRequest());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -148,13 +148,13 @@ public class SapHrOperationProvisioningRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(SapHrOperationProvisioningRule.ARG_APPLICATION_NAME, mock(Application.class));
-        ruleParameters.put(SapHrOperationProvisioningRule.ARG_SCHEMA_NAME, mock(Schema.class));
-        ruleParameters.put(SapHrOperationProvisioningRule.ARG_DESTINATION_NAME, mock(JCoDestination.class));
-        ruleParameters.put(SapHrOperationProvisioningRule.ARG_CONNECTION_NAME, mock(Connection.class));
-        ruleParameters.put(SapHrOperationProvisioningRule.ARG_PLAN_NAME, mock(ProvisioningPlan.class));
+        ruleParameters.put(SapHrOperationProvisioningRule.ARG_APPLICATION, mock(Application.class));
+        ruleParameters.put(SapHrOperationProvisioningRule.ARG_SCHEMA, mock(Schema.class));
+        ruleParameters.put(SapHrOperationProvisioningRule.ARG_DESTINATION, mock(JCoDestination.class));
+        ruleParameters.put(SapHrOperationProvisioningRule.ARG_CONNECTION, mock(Connection.class));
+        ruleParameters.put(SapHrOperationProvisioningRule.ARG_PLAN, mock(ProvisioningPlan.class));
         ruleParameters
-                .put(SapHrOperationProvisioningRule.ARG_REQUEST_NAME, mock(ProvisioningPlan.AbstractRequest.class));
+                .put(SapHrOperationProvisioningRule.ARG_REQUEST, mock(ProvisioningPlan.AbstractRequest.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

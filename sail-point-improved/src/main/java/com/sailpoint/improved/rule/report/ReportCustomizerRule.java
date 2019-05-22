@@ -35,23 +35,23 @@ public abstract class ReportCustomizerRule
     /**
      * Name of taskDefinition argument name
      */
-    public static final String ARG_TASK_DEFINITION_NAME = "taskDefinition";
+    public static final String ARG_TASK_DEFINITION = "taskDefinition";
     /**
      * Name of application argument name
      */
-    public static final String ARG_REPORT_NAME = "report";
+    public static final String ARG_REPORT = "report";
     /**
      * Name of locale argument name
      */
-    public static final String ARG_LOCALE_NAME = "locale";
+    public static final String ARG_LOCALE = "locale";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            ReportCustomizerRule.ARG_TASK_DEFINITION_NAME,
-            ReportCustomizerRule.ARG_REPORT_NAME,
-            ReportCustomizerRule.ARG_LOCALE_NAME
+            ReportCustomizerRule.ARG_TASK_DEFINITION,
+            ReportCustomizerRule.ARG_REPORT,
+            ReportCustomizerRule.ARG_LOCALE
     );
 
     /**
@@ -72,11 +72,11 @@ public abstract class ReportCustomizerRule
             @NonNull JavaRuleContext javaRuleContext) {
         return ReportCustomizerRuleArguments.builder()
                 .taskDefinition((TaskDefinition) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ReportCustomizerRule.ARG_TASK_DEFINITION_NAME))
+                        .getArgumentValueByName(javaRuleContext, ReportCustomizerRule.ARG_TASK_DEFINITION))
                 .report((LiveReport) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ReportCustomizerRule.ARG_REPORT_NAME))
+                        .getArgumentValueByName(javaRuleContext, ReportCustomizerRule.ARG_REPORT))
                 .locale((Locale) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ReportCustomizerRule.ARG_LOCALE_NAME))
+                        .getArgumentValueByName(javaRuleContext, ReportCustomizerRule.ARG_LOCALE))
                 .build();
     }
 
@@ -93,17 +93,17 @@ public abstract class ReportCustomizerRule
         /**
          * Reference to the taskDefinition object that contains the report definition
          */
-        @Argument(name = ReportCustomizerRule.ARG_TASK_DEFINITION_NAME)
+        @Argument(name = ReportCustomizerRule.ARG_TASK_DEFINITION)
         private final TaskDefinition taskDefinition;
         /**
          * The report definition itself
          */
-        @Argument(name = ReportCustomizerRule.ARG_REPORT_NAME)
+        @Argument(name = ReportCustomizerRule.ARG_REPORT)
         private final LiveReport report;
         /**
          * Represents a specific geographical, political, or cultural region; used for locale-specific rendering/calculations (e.g. number formatting)
          */
-        @Argument(name = ReportCustomizerRule.ARG_LOCALE_NAME)
+        @Argument(name = ReportCustomizerRule.ARG_LOCALE)
         private final Locale locale;
     }
 }

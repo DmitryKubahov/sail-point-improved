@@ -58,8 +58,8 @@ public class RefreshRuleTest {
      * Output:
      * - test random object value
      * Expectation:
-     * - environment as in rule context args by name {@link RefreshRule#ARG_ENVIRONMENT_NAME}
-     * - identity as in rule context args by name {@link RefreshRule#ARG_IDENTITY_NAME}
+     * - environment as in rule context args by name {@link RefreshRule#ARG_ENVIRONMENT}
+     * - identity as in rule context args by name {@link RefreshRule#ARG_IDENTITY}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -72,10 +72,10 @@ public class RefreshRuleTest {
             RefreshRule.RefreshRuleArguments arguments = (RefreshRule.RefreshRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Environment is not match",
-                    testRuleContext.getArguments().get(RefreshRule.ARG_ENVIRONMENT_NAME),
+                    testRuleContext.getArguments().get(RefreshRule.ARG_ENVIRONMENT),
                     arguments.getEnvironment());
             assertEquals("Identity is not match",
-                    testRuleContext.getArguments().get(RefreshRule.ARG_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(RefreshRule.ARG_IDENTITY),
                     arguments.getIdentity());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -128,9 +128,9 @@ public class RefreshRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(RefreshRule.ARG_ENVIRONMENT_NAME,
+        ruleParameters.put(RefreshRule.ARG_ENVIRONMENT,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
-        ruleParameters.put(RefreshRule.ARG_IDENTITY_NAME, mock(Identity.class));
+        ruleParameters.put(RefreshRule.ARG_IDENTITY, mock(Identity.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

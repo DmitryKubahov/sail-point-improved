@@ -35,28 +35,28 @@ public abstract class JDBCProvisionRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of connection argument name
      */
-    public static final String ARG_CONNECTION_NAME = "connection";
+    public static final String ARG_CONNECTION = "connection";
     /**
      * Name of plan argument name
      */
-    public static final String ARG_PLAN_NAME = "plan";
+    public static final String ARG_PLAN = "plan";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            JDBCProvisionRule.ARG_APPLICATION_NAME,
-            JDBCProvisionRule.ARG_SCHEMA_NAME,
-            JDBCProvisionRule.ARG_CONNECTION_NAME,
-            JDBCProvisionRule.ARG_PLAN_NAME
+            JDBCProvisionRule.ARG_APPLICATION,
+            JDBCProvisionRule.ARG_SCHEMA,
+            JDBCProvisionRule.ARG_CONNECTION,
+            JDBCProvisionRule.ARG_PLAN
 
     );
 
@@ -78,13 +78,13 @@ public abstract class JDBCProvisionRule
             @NonNull JavaRuleContext javaRuleContext) {
         return JDBCProvisionRuleArguments.builder()
                 .application((Application) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, JDBCProvisionRule.ARG_APPLICATION_NAME))
+                        .getArgumentValueByName(javaRuleContext, JDBCProvisionRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, JDBCProvisionRule.ARG_SCHEMA_NAME))
+                        .getArgumentValueByName(javaRuleContext, JDBCProvisionRule.ARG_SCHEMA))
                 .connection((Connection) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, JDBCProvisionRule.ARG_CONNECTION_NAME))
+                        .getArgumentValueByName(javaRuleContext, JDBCProvisionRule.ARG_CONNECTION))
                 .plan((ProvisioningPlan) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, JDBCProvisionRule.ARG_PLAN_NAME))
+                        .getArgumentValueByName(javaRuleContext, JDBCProvisionRule.ARG_PLAN))
                 .build();
     }
 
@@ -102,22 +102,22 @@ public abstract class JDBCProvisionRule
         /**
          * Reference to the application object
          */
-        @Argument(name = JDBCProvisionRule.ARG_APPLICATION_NAME)
+        @Argument(name = JDBCProvisionRule.ARG_APPLICATION)
         private final Application application;
         /**
          * Reference to the application schema
          */
-        @Argument(name = JDBCProvisionRule.ARG_SCHEMA_NAME)
+        @Argument(name = JDBCProvisionRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * Connection object to connect to the JDBC database
          */
-        @Argument(name = JDBCProvisionRule.ARG_CONNECTION_NAME)
+        @Argument(name = JDBCProvisionRule.ARG_CONNECTION)
         private final Connection connection;
         /**
          * Provisioning plan containing the provisioning request(s)
          */
-        @Argument(name = JDBCProvisionRule.ARG_PLAN_NAME)
+        @Argument(name = JDBCProvisionRule.ARG_PLAN)
         private final ProvisioningPlan plan;
 
     }

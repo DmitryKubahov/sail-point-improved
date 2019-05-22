@@ -25,18 +25,18 @@ public abstract class RACFPermissionCustomizationRule
     /**
      * Name of permission argument name
      */
-    public static final String ARG_PERMISSION_NAME = "permission";
+    public static final String ARG_PERMISSION = "permission";
     /**
      * Name of line argument name
      */
-    public static final String ARG_LINE_NAME = "line";
+    public static final String ARG_LINE = "line";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            RACFPermissionCustomizationRule.ARG_PERMISSION_NAME,
-            RACFPermissionCustomizationRule.ARG_LINE_NAME
+            RACFPermissionCustomizationRule.ARG_PERMISSION,
+            RACFPermissionCustomizationRule.ARG_LINE
     );
 
     /**
@@ -58,9 +58,9 @@ public abstract class RACFPermissionCustomizationRule
         return RACFPermissionCustomizationRuleArguments
                 .builder()
                 .permission((Permission) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, RACFPermissionCustomizationRule.ARG_PERMISSION_NAME))
+                        getArgumentValueByName(javaRuleContext, RACFPermissionCustomizationRule.ARG_PERMISSION))
                 .line((String) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, RACFPermissionCustomizationRule.ARG_LINE_NAME))
+                        .getArgumentValueByName(javaRuleContext, RACFPermissionCustomizationRule.ARG_LINE))
                 .build();
     }
 
@@ -76,12 +76,12 @@ public abstract class RACFPermissionCustomizationRule
         /**
          * Permission object (map), as built from RACF record (line) directly
          */
-        @Argument(name = RACFPermissionCustomizationRule.ARG_PERMISSION_NAME)
+        @Argument(name = RACFPermissionCustomizationRule.ARG_PERMISSION)
         private final Permission permission;
         /**
          * Individual record read from RACF
          */
-        @Argument(name = RACFPermissionCustomizationRule.ARG_LINE_NAME)
+        @Argument(name = RACFPermissionCustomizationRule.ARG_LINE)
         private final String line;
     }
 }

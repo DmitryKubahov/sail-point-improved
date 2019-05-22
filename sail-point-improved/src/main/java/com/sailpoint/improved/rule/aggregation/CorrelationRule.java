@@ -60,28 +60,28 @@ public abstract class CorrelationRule
     /**
      * Name of environment argument name
      */
-    public static final String ARG_ENVIRONMENT_NAME = "environment";
+    public static final String ARG_ENVIRONMENT = "environment";
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of account argument name
      */
-    public static final String ARG_ACCOUNT_NAME = "account";
+    public static final String ARG_ACCOUNT = "account";
     /**
      * Name of link argument name
      */
-    public static final String ARG_LINK_NAME = "link";
+    public static final String ARG_LINK = "link";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            CorrelationRule.ARG_ENVIRONMENT_NAME,
-            CorrelationRule.ARG_APPLICATION_NAME,
-            CorrelationRule.ARG_ACCOUNT_NAME,
-            CorrelationRule.ARG_LINK_NAME
+            CorrelationRule.ARG_ENVIRONMENT,
+            CorrelationRule.ARG_APPLICATION,
+            CorrelationRule.ARG_ACCOUNT,
+            CorrelationRule.ARG_LINK
     );
 
     /**
@@ -103,13 +103,13 @@ public abstract class CorrelationRule
         return CorrelationRuleArguments
                 .builder()
                 .environment((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, CorrelationRule.ARG_ENVIRONMENT_NAME))
+                        getArgumentValueByName(javaRuleContext, CorrelationRule.ARG_ENVIRONMENT))
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, CorrelationRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, CorrelationRule.ARG_APPLICATION))
                 .account((ResourceObject) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, CorrelationRule.ARG_ACCOUNT_NAME))
+                        getArgumentValueByName(javaRuleContext, CorrelationRule.ARG_ACCOUNT))
                 .link((Link) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, CorrelationRule.ARG_LINK_NAME))
+                        getArgumentValueByName(javaRuleContext, CorrelationRule.ARG_LINK))
                 .build();
     }
 
@@ -127,22 +127,22 @@ public abstract class CorrelationRule
         /**
          * Map of arguments passed to the aggregation task
          */
-        @Argument(name = CorrelationRule.ARG_ENVIRONMENT_NAME)
+        @Argument(name = CorrelationRule.ARG_ENVIRONMENT)
         private final Map<String, Object> environment;
         /**
          * A reference to the Application object
          */
-        @Argument(name = CorrelationRule.ARG_APPLICATION_NAME)
+        @Argument(name = CorrelationRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the ResourceObject passed from the connector
          */
-        @Argument(name = CorrelationRule.ARG_ACCOUNT_NAME)
+        @Argument(name = CorrelationRule.ARG_ACCOUNT)
         private final ResourceObject account;
         /**
          * A reference to the existing link identified based on the resourceObject, if any
          */
-        @Argument(name = CorrelationRule.ARG_LINK_NAME)
+        @Argument(name = CorrelationRule.ARG_LINK)
         private final Link link;
     }
 }

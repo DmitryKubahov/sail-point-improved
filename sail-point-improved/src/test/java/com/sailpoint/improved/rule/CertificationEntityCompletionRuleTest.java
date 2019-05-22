@@ -62,9 +62,9 @@ public class CertificationEntityCompletionRuleTest {
      * Output:
      * - test list of test messages value
      * Expectation:
-     * - certification as in rule context args by name {@link CertificationEntityCompletionRule#ARG_CERTIFICATION_NAME}
-     * - certificationEntity as in rule context args by name {@link CertificationEntityCompletionRule#ARG_CERTIFICATION_ENTITY_NAME}
-     * - state as in rule context args by name {@link CertificationEntityCompletionRule#ARG_STATE_NAME}
+     * - certification as in rule context args by name {@link CertificationEntityCompletionRule#ARG_CERTIFICATION}
+     * - certificationEntity as in rule context args by name {@link CertificationEntityCompletionRule#ARG_CERTIFICATION_ENTITY}
+     * - state as in rule context args by name {@link CertificationEntityCompletionRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -78,15 +78,15 @@ public class CertificationEntityCompletionRuleTest {
                     .getArguments()[1];
             assertEquals("Certification is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationEntityCompletionRule.ARG_CERTIFICATION_NAME),
+                            .get(CertificationEntityCompletionRule.ARG_CERTIFICATION),
                     arguments.getCertification());
             assertEquals("CertificationEntity is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY_NAME),
+                            .get(CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY),
                     arguments.getCertificationEntity());
             assertEquals("State is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationEntityCompletionRule.ARG_STATE_NAME),
+                            .get(CertificationEntityCompletionRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -104,9 +104,9 @@ public class CertificationEntityCompletionRuleTest {
      * Output:
      * - test list of test strings value
      * Expectation:
-     * - certification as in rule context args by name {@link CertificationEntityCompletionRule#ARG_CERTIFICATION_NAME}
-     * - certificationEntity as in rule context args by name {@link CertificationEntityCompletionRule#ARG_CERTIFICATION_ENTITY_NAME}
-     * - state as in rule context args by name {@link CertificationEntityCompletionRule#ARG_STATE_NAME}
+     * - certification as in rule context args by name {@link CertificationEntityCompletionRule#ARG_CERTIFICATION}
+     * - certificationEntity as in rule context args by name {@link CertificationEntityCompletionRule#ARG_CERTIFICATION_ENTITY}
+     * - state as in rule context args by name {@link CertificationEntityCompletionRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -120,15 +120,15 @@ public class CertificationEntityCompletionRuleTest {
                     .getArguments()[1];
             assertEquals("Certification is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationEntityCompletionRule.ARG_CERTIFICATION_NAME),
+                            .get(CertificationEntityCompletionRule.ARG_CERTIFICATION),
                     arguments.getCertification());
             assertEquals("CertificationEntity is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY_NAME),
+                            .get(CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY),
                     arguments.getCertificationEntity());
             assertEquals("State is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationEntityCompletionRule.ARG_STATE_NAME),
+                            .get(CertificationEntityCompletionRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -182,10 +182,10 @@ public class CertificationEntityCompletionRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertificationEntityCompletionRule.ARG_CERTIFICATION_NAME, mock(Certification.class));
+        ruleParameters.put(CertificationEntityCompletionRule.ARG_CERTIFICATION, mock(Certification.class));
         ruleParameters
-                .put(CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY_NAME, mock(CertificationEntity.class));
-        ruleParameters.put(CertificationEntityCustomizationRule.ARG_STATE_NAME,
+                .put(CertificationEntityCompletionRule.ARG_CERTIFICATION_ENTITY, mock(CertificationEntity.class));
+        ruleParameters.put(CertificationEntityCustomizationRule.ARG_STATE,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }

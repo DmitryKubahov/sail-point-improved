@@ -40,23 +40,23 @@ public abstract class TransformationRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of object argument name
      */
-    public static final String ARG_OBJECT_NAME = "object";
+    public static final String ARG_OBJECT = "object";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            TransformationRule.ARG_APPLICATION_NAME,
-            TransformationRule.ARG_SCHEMA_NAME,
-            TransformationRule.ARG_OBJECT_NAME
+            TransformationRule.ARG_APPLICATION,
+            TransformationRule.ARG_SCHEMA,
+            TransformationRule.ARG_OBJECT
     );
 
     /**
@@ -77,11 +77,11 @@ public abstract class TransformationRule
         return TransformationRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, TransformationRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, TransformationRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, TransformationRule.ARG_SCHEMA_NAME))
+                        getArgumentValueByName(javaRuleContext, TransformationRule.ARG_SCHEMA))
                 .object((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, TransformationRule.ARG_OBJECT_NAME))
+                        getArgumentValueByName(javaRuleContext, TransformationRule.ARG_OBJECT))
                 .build();
     }
 
@@ -98,17 +98,17 @@ public abstract class TransformationRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = TransformationRule.ARG_APPLICATION_NAME)
+        @Argument(name = TransformationRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Schema object for the Delimited File source being read
          */
-        @Argument(name = TransformationRule.ARG_SCHEMA_NAME)
+        @Argument(name = TransformationRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * The incoming Map object
          */
-        @Argument(name = TransformationRule.ARG_OBJECT_NAME)
+        @Argument(name = TransformationRule.ARG_OBJECT)
         private final Map<String, Object> object;
     }
 }

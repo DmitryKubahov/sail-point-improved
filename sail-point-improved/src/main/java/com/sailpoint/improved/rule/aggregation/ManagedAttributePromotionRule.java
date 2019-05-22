@@ -41,23 +41,23 @@ public abstract class ManagedAttributePromotionRule
     /**
      * Name of attribute argument name
      */
-    public static final String ARG_ATTRIBUTE_NAME = "attribute";
+    public static final String ARG_ATTRIBUTE = "attribute";
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            ManagedAttributePromotionRule.ARG_ATTRIBUTE_NAME,
-            ManagedAttributePromotionRule.ARG_APPLICATION_NAME,
-            ManagedAttributePromotionRule.ARG_STATE_NAME
+            ManagedAttributePromotionRule.ARG_ATTRIBUTE,
+            ManagedAttributePromotionRule.ARG_APPLICATION,
+            ManagedAttributePromotionRule.ARG_STATE
     );
 
     /**
@@ -79,11 +79,11 @@ public abstract class ManagedAttributePromotionRule
         return ManagedAttributePromotionRuleArguments
                 .builder()
                 .attribute((ManagedAttribute) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ManagedAttributePromotionRule.ARG_ATTRIBUTE_NAME))
+                        getArgumentValueByName(javaRuleContext, ManagedAttributePromotionRule.ARG_ATTRIBUTE))
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ManagedAttributePromotionRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, ManagedAttributePromotionRule.ARG_APPLICATION))
                 .state((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ManagedAttributePromotionRule.ARG_STATE_NAME))
+                        getArgumentValueByName(javaRuleContext, ManagedAttributePromotionRule.ARG_STATE))
                 .build();
     }
 
@@ -100,18 +100,18 @@ public abstract class ManagedAttributePromotionRule
         /**
          * A reference to the managed attribute being created
          */
-        @Argument(name = ManagedAttributePromotionRule.ARG_ATTRIBUTE_NAME)
+        @Argument(name = ManagedAttributePromotionRule.ARG_ATTRIBUTE)
         private final ManagedAttribute attribute;
         /**
          * A reference to the application object to which this managed attribute belongs
          */
-        @Argument(name = ManagedAttributePromotionRule.ARG_APPLICATION_NAME)
+        @Argument(name = ManagedAttributePromotionRule.ARG_APPLICATION)
         private final Application application;
         /**
          * Map in which any data can be stored; available to the rule in subsequent rule executions within the same
          * task so expensive data (requiring time-intensive lookups) can be saved and shared between rule executions
          */
-        @Argument(name = ManagedAttributePromotionRule.ARG_STATE_NAME)
+        @Argument(name = ManagedAttributePromotionRule.ARG_STATE)
         private final Map<String, Object> state;
     }
 }

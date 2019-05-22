@@ -34,36 +34,36 @@ public abstract class IdentityAttributeRule
     /**
      * Name of environment argument name
      */
-    public static final String ARG_ENVIRONMENT_NAME = "environment";
+    public static final String ARG_ENVIRONMENT = "environment";
     /**
      * Name of identity argument name
      */
-    public static final String ARG_IDENTITY_NAME = "identity";
+    public static final String ARG_IDENTITY = "identity";
     /**
      * Name of attributeDefinition argument name
      */
-    public static final String ARG_ATTRIBUTE_DEFINITION_NAME = "attributeDefinition";
+    public static final String ARG_ATTRIBUTE_DEFINITION = "attributeDefinition";
     /**
      * Name of link argument name
      */
-    public static final String ARG_LINK_NAME = "link";
+    public static final String ARG_LINK = "link";
     /**
      * Name of attributeSource argument name
      */
-    public static final String ARG_ATTRIBUTE_SOURCE_NAME = "attributeSource";
+    public static final String ARG_ATTRIBUTE_SOURCE = "attributeSource";
     /**
      * Name of oldValue argument name
      */
-    public static final String ARG_OLD_VALUE_NAME = "oldValue";
+    public static final String ARG_OLD_VALUE = "oldValue";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            IdentityAttributeRule.ARG_ENVIRONMENT_NAME,
-            IdentityAttributeRule.ARG_IDENTITY_NAME,
-            IdentityAttributeRule.ARG_ATTRIBUTE_DEFINITION_NAME,
-            IdentityAttributeRule.ARG_ATTRIBUTE_SOURCE_NAME
+            IdentityAttributeRule.ARG_ENVIRONMENT,
+            IdentityAttributeRule.ARG_IDENTITY,
+            IdentityAttributeRule.ARG_ATTRIBUTE_DEFINITION,
+            IdentityAttributeRule.ARG_ATTRIBUTE_SOURCE
     );
 
     /**
@@ -84,17 +84,17 @@ public abstract class IdentityAttributeRule
             @NonNull JavaRuleContext javaRuleContext) {
         return IdentityAttributeRuleArguments.builder()
                 .environment((Map<String, Object>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_ENVIRONMENT_NAME))
+                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_ENVIRONMENT))
                 .identity((Identity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_IDENTITY_NAME))
+                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_IDENTITY))
                 .attributeDefinition((AttributeDefinition) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_ATTRIBUTE_DEFINITION_NAME))
+                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_ATTRIBUTE_DEFINITION))
                 .link((Link) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_LINK_NAME))
+                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_LINK))
                 .attributeSource((AttributeSource) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_ATTRIBUTE_SOURCE_NAME))
+                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_ATTRIBUTE_SOURCE))
                 .oldValue(JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_OLD_VALUE_NAME))
+                        .getArgumentValueByName(javaRuleContext, IdentityAttributeRule.ARG_OLD_VALUE))
                 .build();
     }
 
@@ -114,32 +114,32 @@ public abstract class IdentityAttributeRule
         /**
          * Map of arguments to the aggregation or refresh task that is executing the rule in attribute promotion
          */
-        @Argument(name = IdentityAttributeRule.ARG_ENVIRONMENT_NAME)
+        @Argument(name = IdentityAttributeRule.ARG_ENVIRONMENT)
         private final Map<String, Object> environment;
         /**
          * Reference to identity object that represents the user being aggregated/refreshed
          */
-        @Argument(name = IdentityAttributeRule.ARG_IDENTITY_NAME)
+        @Argument(name = IdentityAttributeRule.ARG_IDENTITY)
         private final Identity identity;
         /**
          * Reference to the attributeDefinition object for this attribute
          */
-        @Argument(name = IdentityAttributeRule.ARG_ATTRIBUTE_DEFINITION_NAME)
+        @Argument(name = IdentityAttributeRule.ARG_ATTRIBUTE_DEFINITION)
         private final AttributeDefinition attributeDefinition;
         /**
          * Only included as an argument for application rules, not global rules
          */
-        @Argument(name = IdentityAttributeRule.ARG_LINK_NAME)
+        @Argument(name = IdentityAttributeRule.ARG_LINK)
         private final Link link;
         /**
          * Attribute source definition (see AttributeSource object XML above for an example)
          */
-        @Argument(name = IdentityAttributeRule.ARG_ATTRIBUTE_SOURCE_NAME)
+        @Argument(name = IdentityAttributeRule.ARG_ATTRIBUTE_SOURCE)
         private final AttributeSource attributeSource;
         /**
          * Attribute value of target identity attribute before the rule runs
          */
-        @Argument(name = IdentityAttributeRule.ARG_OLD_VALUE_NAME)
+        @Argument(name = IdentityAttributeRule.ARG_OLD_VALUE)
         private final Object oldValue;
     }
 }
