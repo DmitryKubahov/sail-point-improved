@@ -36,28 +36,28 @@ public abstract class CertificationItemCompletionRule
     /**
      * Name of certification argument name
      */
-    public static final String ARG_CERTIFICATION_NAME = "certification";
+    public static final String ARG_CERTIFICATION = "certification";
     /**
      * Name of item argument name
      */
-    public static final String ARG_ITEM_NAME = "item";
+    public static final String ARG_ITEM = "item";
     /**
      * Name of entity argument name
      */
-    public static final String ARG_ENTITY_NAME = "entity";
+    public static final String ARG_ENTITY = "entity";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            CertificationItemCompletionRule.ARG_CERTIFICATION_NAME,
-            CertificationItemCompletionRule.ARG_ITEM_NAME,
-            CertificationItemCompletionRule.ARG_ENTITY_NAME,
-            CertificationItemCompletionRule.ARG_STATE_NAME
+            CertificationItemCompletionRule.ARG_CERTIFICATION,
+            CertificationItemCompletionRule.ARG_ITEM,
+            CertificationItemCompletionRule.ARG_ENTITY,
+            CertificationItemCompletionRule.ARG_STATE
     );
 
     /**
@@ -79,13 +79,13 @@ public abstract class CertificationItemCompletionRule
             @NonNull JavaRuleContext javaRuleContext) {
         return CertificationItemCompletionRuleArguments.builder()
                 .certification((Certification) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationItemCompletionRule.ARG_CERTIFICATION_NAME))
+                        CertificationItemCompletionRule.ARG_CERTIFICATION))
                 .item((CertificationItem) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationItemCompletionRule.ARG_ITEM_NAME))
+                        CertificationItemCompletionRule.ARG_ITEM))
                 .entity((CertificationItem) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationItemCompletionRule.ARG_ENTITY_NAME))
+                        CertificationItemCompletionRule.ARG_ENTITY))
                 .state((Map<String, Object>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationItemCompletionRule.ARG_STATE_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationItemCompletionRule.ARG_STATE))
                 .build();
     }
 
@@ -103,25 +103,25 @@ public abstract class CertificationItemCompletionRule
         /**
          * A reference to the Certification object to which the Item (and entity) belong
          */
-        @Argument(name = CertificationItemCompletionRule.ARG_CERTIFICATION_NAME)
+        @Argument(name = CertificationItemCompletionRule.ARG_CERTIFICATION)
         private final Certification certification;
         /**
          * A reference to the CertificationItem object being completed
          */
-        @Argument(name = CertificationItemCompletionRule.ARG_ITEM_NAME)
+        @Argument(name = CertificationItemCompletionRule.ARG_ITEM)
         private final CertificationItem item;
         /**
          * A second reference to the CertificationItem object being completed;
          * exists as a synonym for item
          */
-        @Argument(name = CertificationItemCompletionRule.ARG_ENTITY_NAME)
+        @Argument(name = CertificationItemCompletionRule.ARG_ENTITY)
         private final CertificationItem entity;
         /**
          * Map in which any data can be stored;
          * shared across multiple rules run in the same completion process
          * (e.g. certificationItemCompletion and CertificationItemCompletion rules can share a state map)
          */
-        @Argument(name = CertificationEntityCustomizationRule.ARG_STATE_NAME)
+        @Argument(name = CertificationEntityCustomizationRule.ARG_STATE)
         private final Map<String, Object> state;
     }
 }

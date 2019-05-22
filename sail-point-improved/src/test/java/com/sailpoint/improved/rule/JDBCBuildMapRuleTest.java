@@ -61,10 +61,10 @@ public class JDBCBuildMapRuleTest {
      * Output:
      * - test map of execution
      * Expectation:
-     * - application as in rule context args by name {@link JDBCBuildMapRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link JDBCBuildMapRule#ARG_SCHEMA_NAME}
-     * - state as in rule context args by name {@link JDBCBuildMapRule#ARG_STATE_NAME}
-     * - connection as in rule context args by name {@link JDBCBuildMapRule#ARG_CONNECTION_NAME}
+     * - application as in rule context args by name {@link JDBCBuildMapRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link JDBCBuildMapRule#ARG_SCHEMA}
+     * - state as in rule context args by name {@link JDBCBuildMapRule#ARG_STATE}
+     * - connection as in rule context args by name {@link JDBCBuildMapRule#ARG_CONNECTION}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -78,16 +78,16 @@ public class JDBCBuildMapRuleTest {
             JDBCBuildMapRule.JDBCBuildMapRuleArguments arguments = (JDBCBuildMapRule.JDBCBuildMapRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(JDBCBuildMapRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(JDBCBuildMapRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(JDBCBuildMapRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(JDBCBuildMapRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(JDBCBuildMapRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(JDBCBuildMapRule.ARG_STATE),
                     arguments.getState());
             assertEquals("Connection is not match",
-                    testRuleContext.getArguments().get(JDBCBuildMapRule.ARG_CONNECTION_NAME),
+                    testRuleContext.getArguments().get(JDBCBuildMapRule.ARG_CONNECTION),
                     arguments.getConnection());
             return testResult;
         }).when(jdbcBuildMapRule).internalExecute(eq(sailPointContext), any());
@@ -111,7 +111,7 @@ public class JDBCBuildMapRuleTest {
     @Test
     public void applicationNullTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        testRuleContext.getArguments().remove(JDBCBuildMapRule.ARG_APPLICATION_NAME);
+        testRuleContext.getArguments().remove(JDBCBuildMapRule.ARG_APPLICATION);
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
@@ -131,7 +131,7 @@ public class JDBCBuildMapRuleTest {
     @Test
     public void schemaNullTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        testRuleContext.getArguments().remove(JDBCBuildMapRule.ARG_SCHEMA_NAME);
+        testRuleContext.getArguments().remove(JDBCBuildMapRule.ARG_SCHEMA);
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
@@ -151,7 +151,7 @@ public class JDBCBuildMapRuleTest {
     @Test
     public void stateNullTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        testRuleContext.getArguments().remove(JDBCBuildMapRule.ARG_STATE_NAME);
+        testRuleContext.getArguments().remove(JDBCBuildMapRule.ARG_STATE);
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
@@ -171,7 +171,7 @@ public class JDBCBuildMapRuleTest {
     @Test
     public void resultSetNullTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        testRuleContext.getArguments().remove(JDBCBuildMapRule.ARG_RESULT_SET_NAME);
+        testRuleContext.getArguments().remove(JDBCBuildMapRule.ARG_RESULT_SET);
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
@@ -191,7 +191,7 @@ public class JDBCBuildMapRuleTest {
     @Test
     public void connectionNullTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        testRuleContext.getArguments().remove(JDBCBuildMapRule.ARG_CONNECTION_NAME);
+        testRuleContext.getArguments().remove(JDBCBuildMapRule.ARG_CONNECTION);
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
@@ -217,11 +217,11 @@ public class JDBCBuildMapRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(JDBCBuildMapRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(JDBCBuildMapRule.ARG_SCHEMA_NAME, new Schema());
-        ruleParameters.put(JDBCBuildMapRule.ARG_STATE_NAME, Collections.emptyMap());
-        ruleParameters.put(JDBCBuildMapRule.ARG_RESULT_SET_NAME, mock(ResultSet.class));
-        ruleParameters.put(JDBCBuildMapRule.ARG_CONNECTION_NAME, mock(Connection.class));
+        ruleParameters.put(JDBCBuildMapRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(JDBCBuildMapRule.ARG_SCHEMA, new Schema());
+        ruleParameters.put(JDBCBuildMapRule.ARG_STATE, Collections.emptyMap());
+        ruleParameters.put(JDBCBuildMapRule.ARG_RESULT_SET, mock(ResultSet.class));
+        ruleParameters.put(JDBCBuildMapRule.ARG_CONNECTION, mock(Connection.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

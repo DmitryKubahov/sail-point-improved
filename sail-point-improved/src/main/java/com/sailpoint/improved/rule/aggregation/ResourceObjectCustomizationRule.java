@@ -42,28 +42,28 @@ public abstract class ResourceObjectCustomizationRule
     /**
      * Name of object argument name
      */
-    public static final String ARG_OBJECT_NAME = "object";
+    public static final String ARG_OBJECT = "object";
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of connector argument name
      */
-    public static final String ARG_CONNECTOR_NAME = "connector";
+    public static final String ARG_CONNECTOR = "connector";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            ResourceObjectCustomizationRule.ARG_OBJECT_NAME,
-            ResourceObjectCustomizationRule.ARG_APPLICATION_NAME,
-            ResourceObjectCustomizationRule.ARG_CONNECTOR_NAME,
-            ResourceObjectCustomizationRule.ARG_STATE_NAME
+            ResourceObjectCustomizationRule.ARG_OBJECT,
+            ResourceObjectCustomizationRule.ARG_APPLICATION,
+            ResourceObjectCustomizationRule.ARG_CONNECTOR,
+            ResourceObjectCustomizationRule.ARG_STATE
     );
 
     /**
@@ -85,13 +85,13 @@ public abstract class ResourceObjectCustomizationRule
         return ResourceObjectCustomizationRuleArguments
                 .builder()
                 .object((ResourceObject) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ResourceObjectCustomizationRule.ARG_OBJECT_NAME))
+                        getArgumentValueByName(javaRuleContext, ResourceObjectCustomizationRule.ARG_OBJECT))
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ResourceObjectCustomizationRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, ResourceObjectCustomizationRule.ARG_APPLICATION))
                 .connector((AbstractConnector) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ResourceObjectCustomizationRule.ARG_CONNECTOR_NAME))
+                        getArgumentValueByName(javaRuleContext, ResourceObjectCustomizationRule.ARG_CONNECTOR))
                 .state((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, ResourceObjectCustomizationRule.ARG_STATE_NAME))
+                        getArgumentValueByName(javaRuleContext, ResourceObjectCustomizationRule.ARG_STATE))
                 .build();
     }
 
@@ -109,22 +109,22 @@ public abstract class ResourceObjectCustomizationRule
         /**
          * A reference to the resource object built by the connector
          */
-        @Argument(name = ResourceObjectCustomizationRule.ARG_OBJECT_NAME)
+        @Argument(name = ResourceObjectCustomizationRule.ARG_OBJECT)
         private final ResourceObject object;
         /**
          * A reference to the Application object
          */
-        @Argument(name = ResourceObjectCustomizationRule.ARG_APPLICATION_NAME)
+        @Argument(name = ResourceObjectCustomizationRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Connector object used by this application
          */
-        @Argument(name = ResourceObjectCustomizationRule.ARG_CONNECTOR_NAME)
+        @Argument(name = ResourceObjectCustomizationRule.ARG_CONNECTOR)
         private final AbstractConnector connector;
         /**
          * A Map that can be used to store and share data between executions of this rule during a single aggregation run
          */
-        @Argument(name = ResourceObjectCustomizationRule.ARG_STATE_NAME)
+        @Argument(name = ResourceObjectCustomizationRule.ARG_STATE)
         private final Map<String, Object> state;
     }
 }

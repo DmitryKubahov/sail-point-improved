@@ -61,12 +61,12 @@ public class ManagerCorrelationRuleTest {
      * Output:
      * - test map of execution
      * Expectation:
-     * - environment as in rule context args by name {@link ManagerCorrelationRule#ARG_ENVIRONMENT_NAME}
-     * - application as in rule context args by name {@link ManagerCorrelationRule#ARG_APPLICATION_NAME}
-     * - instance as in rule context args by name {@link ManagerCorrelationRule#ARG_INSTANCE_NAME}
-     * - connector as in rule context args by name {@link ManagerCorrelationRule#ARG_CONNECTOR_NAME}
-     * - link as in rule context args by name {@link ManagerCorrelationRule#ARG_LINK_NAME}
-     * - managerAttributeValue as in rule context args by name {@link ManagerCorrelationRule#ARG_MANAGER_ATTRIBUTE_VALUE_NAME}
+     * - environment as in rule context args by name {@link ManagerCorrelationRule#ARG_ENVIRONMENT}
+     * - application as in rule context args by name {@link ManagerCorrelationRule#ARG_APPLICATION}
+     * - instance as in rule context args by name {@link ManagerCorrelationRule#ARG_INSTANCE}
+     * - connector as in rule context args by name {@link ManagerCorrelationRule#ARG_CONNECTOR}
+     * - link as in rule context args by name {@link ManagerCorrelationRule#ARG_LINK}
+     * - managerAttributeValue as in rule context args by name {@link ManagerCorrelationRule#ARG_MANAGER_ATTRIBUTE_VALUE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -80,22 +80,22 @@ public class ManagerCorrelationRuleTest {
             ManagerCorrelationRule.ManagerCorrelationRuleArguments arguments = (ManagerCorrelationRule.ManagerCorrelationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Environment is not match",
-                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_ENVIRONMENT_NAME),
+                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_ENVIRONMENT),
                     arguments.getEnvironment());
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Instance is not match",
-                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_INSTANCE_NAME),
+                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_INSTANCE),
                     arguments.getInstance());
             assertEquals("Connector is not match",
-                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_CONNECTOR_NAME),
+                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_CONNECTOR),
                     arguments.getConnector());
             assertEquals("Link is not match",
-                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_LINK_NAME),
+                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_LINK),
                     arguments.getLink());
             assertEquals("ManagerAttributeValue is not match",
-                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE_NAME),
+                    testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE),
                     arguments.getManagerAttributeValue());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -132,7 +132,7 @@ public class ManagerCorrelationRuleTest {
     /**
      * Test execution with valid NULL arguments.
      * Input:
-     * - valid rule context, but {@link ManagerCorrelationRule#ARG_INSTANCE_NAME} attribute null
+     * - valid rule context, but {@link ManagerCorrelationRule#ARG_INSTANCE} attribute null
      * Output:
      * - General exception
      * Expectation:
@@ -145,7 +145,7 @@ public class ManagerCorrelationRuleTest {
         Map<String, Object> testResult = new HashMap<>();
         testResult.put(UUID.randomUUID().toString(), UUID.randomUUID().toString());
 
-        testRuleContext.getArguments().remove(ManagerCorrelationRule.ARG_INSTANCE_NAME);
+        testRuleContext.getArguments().remove(ManagerCorrelationRule.ARG_INSTANCE);
         when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
@@ -156,7 +156,7 @@ public class ManagerCorrelationRuleTest {
     /**
      * Test execution with valid NULL arguments.
      * Input:
-     * - valid rule context, but {@link ManagerCorrelationRule#ARG_MANAGER_ATTRIBUTE_VALUE_NAME} attribute null
+     * - valid rule context, but {@link ManagerCorrelationRule#ARG_MANAGER_ATTRIBUTE_VALUE} attribute null
      * Output:
      * - General exception
      * Expectation:
@@ -169,7 +169,7 @@ public class ManagerCorrelationRuleTest {
         Map<String, Object> testResult = new HashMap<>();
         testResult.put(UUID.randomUUID().toString(), UUID.randomUUID().toString());
 
-        testRuleContext.getArguments().remove(ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE_NAME);
+        testRuleContext.getArguments().remove(ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE);
         when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
@@ -196,13 +196,13 @@ public class ManagerCorrelationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(ManagerCorrelationRule.ARG_ENVIRONMENT_NAME,
+        ruleParameters.put(ManagerCorrelationRule.ARG_ENVIRONMENT,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
-        ruleParameters.put(ManagerCorrelationRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(ManagerCorrelationRule.ARG_INSTANCE_NAME, UUID.randomUUID().toString());
-        ruleParameters.put(ManagerCorrelationRule.ARG_CONNECTOR_NAME, mock(AbstractConnector.class));
-        ruleParameters.put(ManagerCorrelationRule.ARG_LINK_NAME, mock(Link.class));
-        ruleParameters.put(ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE_NAME, UUID.randomUUID().toString());
+        ruleParameters.put(ManagerCorrelationRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(ManagerCorrelationRule.ARG_INSTANCE, UUID.randomUUID().toString());
+        ruleParameters.put(ManagerCorrelationRule.ARG_CONNECTOR, mock(AbstractConnector.class));
+        ruleParameters.put(ManagerCorrelationRule.ARG_LINK, mock(Link.class));
+        ruleParameters.put(ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE, UUID.randomUUID().toString());
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

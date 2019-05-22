@@ -16,10 +16,9 @@ public class SimpleCertificationPhaseChangeRule extends CertificationPhaseChange
      * Log current prev and next phase by INFO and return next phase
      */
     @Override
-    protected Object internalExecute(SailPointContext context, CertificationPhaseChangeRuleArguments arguments) {
-
+    protected void internalExecuteNoneOutput(SailPointContext context,
+                                             CertificationPhaseChangeRuleArguments arguments) {
         log.info("Previous phase:[{}]", arguments.getPreviousPhase());
         log.info("Next phase:[{}]", arguments.getNextPhase());
-        return arguments.getNextPhase();
     }
 }

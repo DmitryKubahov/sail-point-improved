@@ -16,10 +16,8 @@ public class SimpleBeforeProvisioningRule extends BeforeProvisioningRule {
      * Log current plan and return it
      */
     @Override
-    protected Object internalExecute(SailPointContext context,
-                                     BeforeProvisioningRule.BeforeProvisioningRuleArguments arguments) {
-
+    protected void internalExecuteNoneOutput(SailPointContext context,
+                                             BeforeProvisioningRule.BeforeProvisioningRuleArguments arguments) {
         log.info("Provisioning plan:[{}]", arguments.getPlan());
-        return arguments.getPlan();
     }
 }

@@ -2,7 +2,7 @@ package com.sailpoint.improved.rule.aggregation;
 
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
-import com.sailpoint.improved.rule.AbstractJavaRuleExecutor;
+import com.sailpoint.improved.rule.AbstractNoneOutputJavaRuleExecutor;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
@@ -37,33 +37,33 @@ import java.util.Map;
  */
 @Slf4j
 public abstract class IdentityCreationRule
-        extends AbstractJavaRuleExecutor<Object, IdentityCreationRule.IdentityCreationRuleArguments> {
+        extends AbstractNoneOutputJavaRuleExecutor<IdentityCreationRule.IdentityCreationRuleArguments> {
 
     /**
      * Name of environment argument name
      */
-    public static final String ARG_ENVIRONMENT_NAME = "environment";
+    public static final String ARG_ENVIRONMENT = "environment";
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of account argument name
      */
-    public static final String ARG_ACCOUNT_NAME = "account";
+    public static final String ARG_ACCOUNT = "account";
     /**
      * Name of identity argument name
      */
-    public static final String ARG_IDENTITY_NAME = "identity";
+    public static final String ARG_IDENTITY = "identity";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            IdentityCreationRule.ARG_ENVIRONMENT_NAME,
-            IdentityCreationRule.ARG_APPLICATION_NAME,
-            IdentityCreationRule.ARG_ACCOUNT_NAME,
-            IdentityCreationRule.ARG_IDENTITY_NAME
+            IdentityCreationRule.ARG_ENVIRONMENT,
+            IdentityCreationRule.ARG_APPLICATION,
+            IdentityCreationRule.ARG_ACCOUNT,
+            IdentityCreationRule.ARG_IDENTITY
     );
 
     /**
@@ -85,13 +85,13 @@ public abstract class IdentityCreationRule
         return IdentityCreationRuleArguments
                 .builder()
                 .environment((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, IdentityCreationRule.ARG_ENVIRONMENT_NAME))
+                        getArgumentValueByName(javaRuleContext, IdentityCreationRule.ARG_ENVIRONMENT))
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, IdentityCreationRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, IdentityCreationRule.ARG_APPLICATION))
                 .account((ResourceObject) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, IdentityCreationRule.ARG_ACCOUNT_NAME))
+                        getArgumentValueByName(javaRuleContext, IdentityCreationRule.ARG_ACCOUNT))
                 .identity((Identity) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, IdentityCreationRule.ARG_IDENTITY_NAME))
+                        getArgumentValueByName(javaRuleContext, IdentityCreationRule.ARG_IDENTITY))
                 .build();
     }
 
@@ -109,22 +109,22 @@ public abstract class IdentityCreationRule
         /**
          * Map of arguments passed to the aggregation task
          */
-        @Argument(name = IdentityCreationRule.ARG_ENVIRONMENT_NAME)
+        @Argument(name = IdentityCreationRule.ARG_ENVIRONMENT)
         private final Map<String, Object> environment;
         /**
          * Reference to the application object from which the account was read
          */
-        @Argument(name = IdentityCreationRule.ARG_APPLICATION_NAME)
+        @Argument(name = IdentityCreationRule.ARG_APPLICATION)
         private final Application application;
         /**
          * Reference to the ResourceObject representing the account
          */
-        @Argument(name = IdentityCreationRule.ARG_ACCOUNT_NAME)
+        @Argument(name = IdentityCreationRule.ARG_ACCOUNT)
         private final ResourceObject account;
         /**
          * Reference to the Identity being created
          */
-        @Argument(name = IdentityCreationRule.ARG_IDENTITY_NAME)
+        @Argument(name = IdentityCreationRule.ARG_IDENTITY)
         private final Identity identity;
     }
 }

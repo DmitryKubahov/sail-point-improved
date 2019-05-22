@@ -39,33 +39,33 @@ public abstract class MergeMapsRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of current argument name
      */
-    public static final String ARG_CURRENT_NAME = "current";
+    public static final String ARG_CURRENT = "current";
     /**
      * Name of newObject argument name
      */
-    public static final String ARG_NEW_OBJECT_NAME = "newObject";
+    public static final String ARG_NEW_OBJECT = "newObject";
     /**
      * Name of mergeAttrs argument name
      */
-    public static final String ARG_MERGE_ATTRS_NAME = "mergeAttrs";
+    public static final String ARG_MERGE_ATTRS = "mergeAttrs";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            MergeMapsRule.ARG_APPLICATION_NAME,
-            MergeMapsRule.ARG_SCHEMA_NAME,
-            MergeMapsRule.ARG_CURRENT_NAME,
-            MergeMapsRule.ARG_NEW_OBJECT_NAME,
-            MergeMapsRule.ARG_MERGE_ATTRS_NAME
+            MergeMapsRule.ARG_APPLICATION,
+            MergeMapsRule.ARG_SCHEMA,
+            MergeMapsRule.ARG_CURRENT,
+            MergeMapsRule.ARG_NEW_OBJECT,
+            MergeMapsRule.ARG_MERGE_ATTRS
     );
 
     /**
@@ -86,15 +86,15 @@ public abstract class MergeMapsRule
         return MergeMapsRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, MergeMapsRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, MergeMapsRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, MergeMapsRule.ARG_SCHEMA_NAME))
+                        getArgumentValueByName(javaRuleContext, MergeMapsRule.ARG_SCHEMA))
                 .current((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, MergeMapsRule.ARG_CURRENT_NAME))
+                        getArgumentValueByName(javaRuleContext, MergeMapsRule.ARG_CURRENT))
                 .newObject((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, MergeMapsRule.ARG_NEW_OBJECT_NAME))
+                        getArgumentValueByName(javaRuleContext, MergeMapsRule.ARG_NEW_OBJECT))
                 .mergeAttrs((List<String>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, MergeMapsRule.ARG_MERGE_ATTRS_NAME))
+                        getArgumentValueByName(javaRuleContext, MergeMapsRule.ARG_MERGE_ATTRS))
                 .build();
     }
 
@@ -113,27 +113,27 @@ public abstract class MergeMapsRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = MergeMapsRule.ARG_APPLICATION_NAME)
+        @Argument(name = MergeMapsRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Schema object for the Delimited File or JDBC source being read
          */
-        @Argument(name = MergeMapsRule.ARG_SCHEMA_NAME)
+        @Argument(name = MergeMapsRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * The current Map object
          */
-        @Argument(name = MergeMapsRule.ARG_CURRENT_NAME)
+        @Argument(name = MergeMapsRule.ARG_CURRENT)
         private final Map<String, Object> current;
         /**
          * The map representation of the next row that potentially needs to be merged into the current object based on mergeAttrs
          */
-        @Argument(name = MergeMapsRule.ARG_NEW_OBJECT_NAME)
+        @Argument(name = MergeMapsRule.ARG_NEW_OBJECT)
         private final Map<String, Object> newObject;
         /**
          * Names of attributes that need to be merged, specified as part of the application configuration
          */
-        @Argument(name = MergeMapsRule.ARG_MERGE_ATTRS_NAME)
+        @Argument(name = MergeMapsRule.ARG_MERGE_ATTRS)
         private final List<String> mergeAttrs;
 
     }

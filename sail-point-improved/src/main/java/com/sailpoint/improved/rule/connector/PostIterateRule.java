@@ -2,7 +2,7 @@ package com.sailpoint.improved.rule.connector;
 
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
-import com.sailpoint.improved.rule.AbstractJavaRuleExecutor;
+import com.sailpoint.improved.rule.AbstractNoneOutputJavaRuleExecutor;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +12,6 @@ import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Rule;
 import sailpoint.object.Schema;
 
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -24,30 +23,34 @@ import java.util.Map;
  * CustomGlobal), clean up files, or mark statistics in a configuration object that will be used by the {@link PreIterateRule}
  * during a subsequent aggregation. Since it runs only once per aggregation, this rule generally has a minimal
  * impact on aggregation performance.
+ * <p>
+ * Outputs:
+ * None. The rule’s logic acts upon objects outside of the aggregation data flow, so subsequent steps in
+ * the process do not expect a return value from this rule and will not act upon it if one were provided.
  */
 @Slf4j
 public abstract class PostIterateRule
-        extends AbstractJavaRuleExecutor<Object, PostIterateRule.PostIterateRuleArguments> {
+        extends AbstractNoneOutputJavaRuleExecutor<PostIterateRule.PostIterateRuleArguments> {
 
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of stats argument name
      */
-    public static final String ARG_STATS_NAME = "stats";
+    public static final String ARG_STATS = "stats";
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            PostIterateRule.ARG_APPLICATION_NAME,
-            PostIterateRule.ARG_SCHEMA_NAME,
-            PostIterateRule.ARG_STATS_NAME
+            PostIterateRule.ARG_APPLICATION,
+            PostIterateRule.ARG_SCHEMA,
+            PostIterateRule.ARG_STATS
     );
 
     /**
@@ -68,11 +71,11 @@ public abstract class PostIterateRule
         return PostIterateRule.PostIterateRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_SCHEMA_NAME))
+                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_SCHEMA))
                 .stats((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_STATS_NAME))
+                        getArgumentValueByName(javaRuleContext, PostIterateRule.ARG_STATS))
                 .build();
     }
 
@@ -120,12 +123,12 @@ public abstract class PostIterateRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = PostIterateRule.ARG_APPLICATION_NAME)
+        @Argument(name = PostIterateRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Schema object for the delimited file source being read
          */
-        @Argument(name = PostIterateRule.ARG_SCHEMA_NAME)
+        @Argument(name = PostIterateRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * A map passed by the connector of the stats for the file about to be iterated. Contains keys:
@@ -136,7 +139,7 @@ public abstract class PostIterateRule
          * • columnNames: (List) column names that were used during the iteration
          * • objectsIterated: (Long) total number of objects iterated during this run
          */
-        @Argument(name = PostIterateRule.ARG_STATS_NAME)
+        @Argument(name = PostIterateRule.ARG_STATS)
         private final Map<String, Object> stats;
     }
 }

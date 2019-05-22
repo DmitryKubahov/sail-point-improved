@@ -12,12 +12,10 @@ import sailpoint.object.Identity;
 import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Rule;
 import sailpoint.tools.GeneralException;
-import sailpoint.tools.Message;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
@@ -62,9 +60,9 @@ public class CertificationSignOffApproverRuleTest {
      * Output:
      * - test map object value
      * Expectation:
-     * - certification as in rule context args by name {@link CertificationSignOffApproverRule#ARG_CERTIFICATION_NAME}
-     * - certifier as in rule context args by name {@link CertificationSignOffApproverRule#ARG_CERTIFIER_NAME}
-     * - state as in rule context args by name {@link CertificationSignOffApproverRule#ARG_STATE_NAME}
+     * - certification as in rule context args by name {@link CertificationSignOffApproverRule#ARG_CERTIFICATION}
+     * - certifier as in rule context args by name {@link CertificationSignOffApproverRule#ARG_CERTIFIER}
+     * - state as in rule context args by name {@link CertificationSignOffApproverRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -78,15 +76,15 @@ public class CertificationSignOffApproverRuleTest {
                     .getArguments()[1];
             assertEquals("Certification is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationSignOffApproverRule.ARG_CERTIFICATION_NAME),
+                            .get(CertificationSignOffApproverRule.ARG_CERTIFICATION),
                     arguments.getCertification());
             assertEquals("Certifier is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationSignOffApproverRule.ARG_CERTIFIER_NAME),
+                            .get(CertificationSignOffApproverRule.ARG_CERTIFIER),
                     arguments.getCertifier());
             assertEquals("State is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationSignOffApproverRule.ARG_STATE_NAME),
+                            .get(CertificationSignOffApproverRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -140,9 +138,9 @@ public class CertificationSignOffApproverRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertificationSignOffApproverRule.ARG_CERTIFICATION_NAME, mock(Certification.class));
-        ruleParameters.put(CertificationSignOffApproverRule.ARG_CERTIFIER_NAME, mock(Identity.class));
-        ruleParameters.put(CertificationEntityCustomizationRule.ARG_STATE_NAME,
+        ruleParameters.put(CertificationSignOffApproverRule.ARG_CERTIFICATION, mock(Certification.class));
+        ruleParameters.put(CertificationSignOffApproverRule.ARG_CERTIFIER, mock(Identity.class));
+        ruleParameters.put(CertificationEntityCustomizationRule.ARG_STATE,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }

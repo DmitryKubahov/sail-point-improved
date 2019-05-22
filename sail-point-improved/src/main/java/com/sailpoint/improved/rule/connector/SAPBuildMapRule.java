@@ -36,37 +36,37 @@ public abstract class SAPBuildMapRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
     /**
      * Name of destination argument name
      */
-    public static final String ARG_DESTINATION_NAME = "destination";
+    public static final String ARG_DESTINATION = "destination";
     /**
      * Name of connection argument name
      */
-    public static final String ARG_OBJECT_NAME = "object";
+    public static final String ARG_OBJECT = "object";
     /**
      * Name of connector argument name
      */
-    public static final String ARG_CONNECTOR_NAME = "connector";
+    public static final String ARG_CONNECTOR = "connector";
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            SAPBuildMapRule.ARG_APPLICATION_NAME,
-            SAPBuildMapRule.ARG_SCHEMA_NAME,
-            SAPBuildMapRule.ARG_STATE_NAME,
-            SAPBuildMapRule.ARG_DESTINATION_NAME,
-            SAPBuildMapRule.ARG_OBJECT_NAME,
-            SAPBuildMapRule.ARG_CONNECTOR_NAME
+            SAPBuildMapRule.ARG_APPLICATION,
+            SAPBuildMapRule.ARG_SCHEMA,
+            SAPBuildMapRule.ARG_STATE,
+            SAPBuildMapRule.ARG_DESTINATION,
+            SAPBuildMapRule.ARG_OBJECT,
+            SAPBuildMapRule.ARG_CONNECTOR
     );
 
     /**
@@ -87,17 +87,17 @@ public abstract class SAPBuildMapRule
         return SAPBuildMapRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_SCHEMA_NAME))
+                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_SCHEMA))
                 .state((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_STATE_NAME))
+                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_STATE))
                 .destination((JCoDestination) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_DESTINATION_NAME))
+                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_DESTINATION))
                 .object((Attributes) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_OBJECT_NAME))
+                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_OBJECT))
                 .connector((SAPInternalConnector) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_CONNECTOR_NAME))
+                        getArgumentValueByName(javaRuleContext, SAPBuildMapRule.ARG_CONNECTOR))
                 .build();
     }
 
@@ -117,34 +117,34 @@ public abstract class SAPBuildMapRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = SAPBuildMapRule.ARG_APPLICATION_NAME)
+        @Argument(name = SAPBuildMapRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Schema object that represents the object we are building
          */
-        @Argument(name = SAPBuildMapRule.ARG_SCHEMA_NAME)
+        @Argument(name = SAPBuildMapRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * A Map that can be used to store and share data between executions of this rule during a single aggregation run
          */
-        @Argument(name = SAPBuildMapRule.ARG_STATE_NAME)
+        @Argument(name = SAPBuildMapRule.ARG_STATE)
         private final Map<String, Object> state;
         /**
          * A connected and ready to use SAP destination object that can be used to call BAPI function modules and call to SAP tables
          */
-        @Argument(name = SAPBuildMapRule.ARG_DESTINATION_NAME)
+        @Argument(name = SAPBuildMapRule.ARG_DESTINATION)
         private final JCoDestination destination;
         /**
          * A reference to a SailPoint attributes object (basically a Map object with some added convenience methods) that holds the
          * attributes that have been built up by the default connector implementation. The rule should modify this object to change, add or
          * remove attributes from the map.
          */
-        @Argument(name = SAPBuildMapRule.ARG_OBJECT_NAME)
+        @Argument(name = SAPBuildMapRule.ARG_OBJECT)
         private final Attributes object;
         /**
          * A reference to the current SAP Connector
          */
-        @Argument(name = SAPBuildMapRule.ARG_CONNECTOR_NAME)
+        @Argument(name = SAPBuildMapRule.ARG_CONNECTOR)
         private final SAPInternalConnector connector;
     }
 }

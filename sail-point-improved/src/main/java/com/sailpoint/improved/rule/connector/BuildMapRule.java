@@ -33,32 +33,32 @@ public abstract class BuildMapRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
     /**
      * Name of record argument name
      */
-    public static final String ARG_RECORD_NAME = "record";
+    public static final String ARG_RECORD = "record";
     /**
      * Name of cols argument name
      */
-    public static final String ARG_COLUMNS_NAME = "cols";
+    public static final String ARG_COLUMNS = "cols";
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            BuildMapRule.ARG_APPLICATION_NAME,
-            BuildMapRule.ARG_SCHEMA_NAME,
-            BuildMapRule.ARG_STATE_NAME,
-            BuildMapRule.ARG_RECORD_NAME,
-            BuildMapRule.ARG_COLUMNS_NAME
+            BuildMapRule.ARG_APPLICATION,
+            BuildMapRule.ARG_SCHEMA,
+            BuildMapRule.ARG_STATE,
+            BuildMapRule.ARG_RECORD,
+            BuildMapRule.ARG_COLUMNS
     );
 
     /**
@@ -79,15 +79,15 @@ public abstract class BuildMapRule
         return BuildMapRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, BuildMapRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, BuildMapRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, BuildMapRule.ARG_SCHEMA_NAME))
+                        getArgumentValueByName(javaRuleContext, BuildMapRule.ARG_SCHEMA))
                 .state((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, BuildMapRule.ARG_STATE_NAME))
+                        getArgumentValueByName(javaRuleContext, BuildMapRule.ARG_STATE))
                 .record((List<String>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, BuildMapRule.ARG_RECORD_NAME))
+                        getArgumentValueByName(javaRuleContext, BuildMapRule.ARG_RECORD))
                 .columns((List<String>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, BuildMapRule.ARG_COLUMNS_NAME))
+                        getArgumentValueByName(javaRuleContext, BuildMapRule.ARG_COLUMNS))
                 .build();
     }
 
@@ -106,27 +106,27 @@ public abstract class BuildMapRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = BuildMapRule.ARG_APPLICATION_NAME)
+        @Argument(name = BuildMapRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Schema object for the delimited File source being read
          */
-        @Argument(name = BuildMapRule.ARG_SCHEMA_NAME)
+        @Argument(name = BuildMapRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * A Map that can be used to store and share data between executions of this rule during a single aggregation run
          */
-        @Argument(name = BuildMapRule.ARG_STATE_NAME)
+        @Argument(name = BuildMapRule.ARG_STATE)
         private final Map<String, Object> state;
         /**
          * An ordered list of the values for the current record (parsed based on the specified delimiter)
          */
-        @Argument(name = BuildMapRule.ARG_RECORD_NAME)
+        @Argument(name = BuildMapRule.ARG_RECORD)
         private final List<String> record;
         /**
          * An ordered list of the column names from the file’s header record or specified Columns list
          */
-        @Argument(name = BuildMapRule.ARG_COLUMNS_NAME)
+        @Argument(name = BuildMapRule.ARG_COLUMNS)
         private final List<String> columns;
     }
 }

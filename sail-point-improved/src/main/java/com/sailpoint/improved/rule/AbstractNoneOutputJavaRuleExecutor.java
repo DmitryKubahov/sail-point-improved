@@ -8,7 +8,7 @@ import sailpoint.tools.GeneralException;
 import java.util.List;
 
 /**
- * Abstract class for java rule executor,
+ * Abstract class for java rule without outputs
  */
 @Slf4j
 @Getter

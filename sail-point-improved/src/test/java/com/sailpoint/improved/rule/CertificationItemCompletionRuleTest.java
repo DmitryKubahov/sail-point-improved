@@ -12,7 +12,6 @@ import sailpoint.object.CertificationItem;
 import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Rule;
 import sailpoint.tools.GeneralException;
-import sailpoint.tools.Message;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -62,10 +61,10 @@ public class CertificationItemCompletionRuleTest {
      * Output:
      * - random boolean test value
      * Expectation:
-     * - certification as in rule context args by name {@link CertificationItemCompletionRule#ARG_CERTIFICATION_NAME}
-     * - item as in rule context args by name {@link CertificationItemCompletionRule#ARG_ITEM_NAME}
-     * - entity as in rule context args by name {@link CertificationItemCompletionRule#ARG_ENTITY_NAME}
-     * - state as in rule context args by name {@link CertificationItemCompletionRule#ARG_STATE_NAME}
+     * - certification as in rule context args by name {@link CertificationItemCompletionRule#ARG_CERTIFICATION}
+     * - item as in rule context args by name {@link CertificationItemCompletionRule#ARG_ITEM}
+     * - entity as in rule context args by name {@link CertificationItemCompletionRule#ARG_ENTITY}
+     * - state as in rule context args by name {@link CertificationItemCompletionRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -79,19 +78,19 @@ public class CertificationItemCompletionRuleTest {
                     .getArguments()[1];
             assertEquals("Certification is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationItemCompletionRule.ARG_CERTIFICATION_NAME),
+                            .get(CertificationItemCompletionRule.ARG_CERTIFICATION),
                     arguments.getCertification());
             assertEquals("Item is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationItemCompletionRule.ARG_ITEM_NAME),
+                            .get(CertificationItemCompletionRule.ARG_ITEM),
                     arguments.getItem());
             assertEquals("Entity is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationItemCompletionRule.ARG_ENTITY_NAME),
+                            .get(CertificationItemCompletionRule.ARG_ENTITY),
                     arguments.getEntity());
             assertEquals("State is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationItemCompletionRule.ARG_STATE_NAME),
+                            .get(CertificationItemCompletionRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -145,12 +144,12 @@ public class CertificationItemCompletionRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertificationItemCompletionRule.ARG_CERTIFICATION_NAME, mock(Certification.class));
+        ruleParameters.put(CertificationItemCompletionRule.ARG_CERTIFICATION, mock(Certification.class));
         ruleParameters
-                .put(CertificationItemCompletionRule.ARG_ENTITY_NAME, mock(CertificationItem.class));
+                .put(CertificationItemCompletionRule.ARG_ENTITY, mock(CertificationItem.class));
         ruleParameters
-                .put(CertificationItemCompletionRule.ARG_ITEM_NAME, mock(CertificationItem.class));
-        ruleParameters.put(CertificationEntityCustomizationRule.ARG_STATE_NAME,
+                .put(CertificationItemCompletionRule.ARG_ITEM, mock(CertificationItem.class));
+        ruleParameters.put(CertificationEntityCustomizationRule.ARG_STATE,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }

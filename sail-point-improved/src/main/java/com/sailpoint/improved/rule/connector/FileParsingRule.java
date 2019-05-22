@@ -35,37 +35,37 @@ public abstract class FileParsingRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of config argument name
      */
-    public static final String ARG_CONFIG_NAME = "config";
+    public static final String ARG_CONFIG = "config";
     /**
      * Name of inputStream argument name
      */
-    public static final String ARG_INPUT_STREAM_NAME = "inputStream";
+    public static final String ARG_INPUT_STREAM = "inputStream";
     /**
      * Name of reader argument name
      */
-    public static final String ARG_READER_NAME = "reader";
+    public static final String ARG_READER = "reader";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            FileParsingRule.ARG_APPLICATION_NAME,
-            FileParsingRule.ARG_SCHEMA_NAME,
-            FileParsingRule.ARG_CONFIG_NAME,
-            FileParsingRule.ARG_INPUT_STREAM_NAME,
-            FileParsingRule.ARG_READER_NAME,
-            FileParsingRule.ARG_STATE_NAME
+            FileParsingRule.ARG_APPLICATION,
+            FileParsingRule.ARG_SCHEMA,
+            FileParsingRule.ARG_CONFIG,
+            FileParsingRule.ARG_INPUT_STREAM,
+            FileParsingRule.ARG_READER,
+            FileParsingRule.ARG_STATE
     );
 
     /**
@@ -86,17 +86,17 @@ public abstract class FileParsingRule
         return FileParsingRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_SCHEMA_NAME))
+                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_SCHEMA))
                 .config((Attributes) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_CONFIG_NAME))
+                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_CONFIG))
                 .inputStream((BufferedInputStream) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_INPUT_STREAM_NAME))
+                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_INPUT_STREAM))
                 .reader((BufferedReader) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_READER_NAME))
+                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_READER))
                 .state((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_STATE_NAME))
+                        getArgumentValueByName(javaRuleContext, FileParsingRule.ARG_STATE))
                 .build();
     }
 
@@ -116,32 +116,32 @@ public abstract class FileParsingRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = FileParsingRule.ARG_APPLICATION_NAME)
+        @Argument(name = FileParsingRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Schema object for the delimited file source being read
          */
-        @Argument(name = FileParsingRule.ARG_SCHEMA_NAME)
+        @Argument(name = FileParsingRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * Attributes Map of Application configuration attributes
          */
-        @Argument(name = FileParsingRule.ARG_CONFIG_NAME)
+        @Argument(name = FileParsingRule.ARG_CONFIG)
         private final Attributes config;
         /**
          * A reference to the file input stream
          */
-        @Argument(name = FileParsingRule.ARG_INPUT_STREAM_NAME)
+        @Argument(name = FileParsingRule.ARG_INPUT_STREAM)
         private final BufferedInputStream inputStream;
         /**
          * A reader wrapping the inputStream
          */
-        @Argument(name = FileParsingRule.ARG_READER_NAME)
+        @Argument(name = FileParsingRule.ARG_READER)
         private final BufferedReader reader;
         /**
          * A Map that can be used to store and share data between executions of this rule during a single aggregation run
          */
-        @Argument(name = FileParsingRule.ARG_STATE_NAME)
+        @Argument(name = FileParsingRule.ARG_STATE)
         private final Map<String, Object> state;
     }
 }

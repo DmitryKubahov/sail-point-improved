@@ -10,12 +10,9 @@ import sailpoint.object.Identity;
 import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Rule;
 import sailpoint.tools.GeneralException;
-import sailpoint.tools.Message;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
@@ -59,7 +56,7 @@ public class IdentitySelectorRuleTest {
      * Output:
      * - random boolean test value
      * Expectation:
-     * - identity as in rule context args by name {@link IdentitySelectorRule#ARG_IDENTITY_NAME}
+     * - identity as in rule context args by name {@link IdentitySelectorRule#ARG_IDENTITY}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -72,7 +69,7 @@ public class IdentitySelectorRuleTest {
             IdentitySelectorRule.IdentitySelectorRuleArguments arguments = (IdentitySelectorRule.IdentitySelectorRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Identity is not match",
-                    testRuleContext.getArguments().get(IdentitySelectorRule.ARG_IDENTITY_NAME),
+                    testRuleContext.getArguments().get(IdentitySelectorRule.ARG_IDENTITY),
                     arguments.getIdentity());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -126,7 +123,7 @@ public class IdentitySelectorRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(IdentitySelectorRule.ARG_IDENTITY_NAME, mock(Identity.class));
+        ruleParameters.put(IdentitySelectorRule.ARG_IDENTITY, mock(Identity.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

@@ -3,7 +3,6 @@ package com.sailpoint.improved.rule.certification;
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
 import com.sailpoint.improved.rule.AbstractJavaRuleExecutor;
-import com.sailpoint.improved.rule.connector.FileParsingRule;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
@@ -50,43 +49,43 @@ public abstract class CertificationExclusionRule
     /**
      * Name of entity argument name
      */
-    public static final String ARG_ENTITY_NAME = "entity";
+    public static final String ARG_ENTITY = "entity";
     /**
      * Name of certification argument name
      */
-    public static final String ARG_CERTIFICATION_NAME = "certification";
+    public static final String ARG_CERTIFICATION = "certification";
     /**
      * Name of certContext argument name
      */
-    public static final String ARG_CERT_CONTEXT_NAME = "certContext";
+    public static final String ARG_CERT_CONTEXT = "certContext";
     /**
      * Name of items argument name
      */
-    public static final String ARG_ITEMS_NAME = "items";
+    public static final String ARG_ITEMS = "items";
     /**
      * Name of itemsToExclude argument name
      */
-    public static final String ARG_ITEMS_TO_EXCLUDE_NAME = "itemsToExclude";
+    public static final String ARG_ITEMS_TO_EXCLUDE = "itemsToExclude";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
     /**
      * Name of identity argument name
      */
-    public static final String ARG_IDENTITY_NAME = "identity";
+    public static final String ARG_IDENTITY = "identity";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            CertificationExclusionRule.ARG_ENTITY_NAME,
-            CertificationExclusionRule.ARG_CERTIFICATION_NAME,
-            CertificationExclusionRule.ARG_CERT_CONTEXT_NAME,
-            CertificationExclusionRule.ARG_ITEMS_NAME,
-            CertificationExclusionRule.ARG_ITEMS_TO_EXCLUDE_NAME,
-            CertificationExclusionRule.ARG_STATE_NAME,
-            CertificationExclusionRule.ARG_IDENTITY_NAME
+            CertificationExclusionRule.ARG_ENTITY,
+            CertificationExclusionRule.ARG_CERTIFICATION,
+            CertificationExclusionRule.ARG_CERT_CONTEXT,
+            CertificationExclusionRule.ARG_ITEMS,
+            CertificationExclusionRule.ARG_ITEMS_TO_EXCLUDE,
+            CertificationExclusionRule.ARG_STATE,
+            CertificationExclusionRule.ARG_IDENTITY
     );
 
     /**
@@ -107,19 +106,19 @@ public abstract class CertificationExclusionRule
             @NonNull JavaRuleContext javaRuleContext) {
         return CertificationExclusionRuleArguments.builder()
                 .entity((AbstractCertifiableEntity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_ENTITY_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_ENTITY))
                 .certification((Certification) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_CERTIFICATION_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_CERTIFICATION))
                 .certContext((CertificationContext) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_CERT_CONTEXT_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_CERT_CONTEXT))
                 .items((List<Certifiable>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_ITEMS_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_ITEMS))
                 .itemsToExclude((List<Certifiable>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_ITEMS_TO_EXCLUDE_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_ITEMS_TO_EXCLUDE))
                 .state((Map<String, Object>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_STATE_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_STATE))
                 .identity((AbstractCertifiableEntity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_IDENTITY_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationExclusionRule.ARG_IDENTITY))
                 .build();
     }
 
@@ -140,41 +139,41 @@ public abstract class CertificationExclusionRule
         /**
          * The entity being considered for certification: a Bundle, Account Group, or Identity object
          */
-        @Argument(name = CertificationExclusionRule.ARG_ENTITY_NAME)
+        @Argument(name = CertificationExclusionRule.ARG_ENTITY)
         private final AbstractCertifiableEntity entity;
         /**
          * The current certification object being constructed
          */
-        @Argument(name = CertificationExclusionRule.ARG_CERTIFICATION_NAME)
+        @Argument(name = CertificationExclusionRule.ARG_CERTIFICATION)
         private final Certification certification;
         /**
          * The CertificationContext interface used in generating this certification (rarely used within rules; the values accessible through
          * this are also available on the certification or certificationDefinition)
          */
-        @Argument(name = CertificationExclusionRule.ARG_CERT_CONTEXT_NAME)
+        @Argument(name = CertificationExclusionRule.ARG_CERT_CONTEXT)
         private final CertificationContext certContext;
         /**
          * List of Certifiable items for a given identity; this rule must remove items from this list to prevent
          * them from being certified
          */
-        @Argument(name = CertificationExclusionRule.ARG_ITEMS_NAME)
+        @Argument(name = CertificationExclusionRule.ARG_ITEMS)
         private final List<Certifiable> items;
         /**
          * List of Certifiable items to be excluded from the certification; this rule must add items to this list
          * to have them included in the Exclusions list visible from the certification after it is generated
          */
-        @Argument(name = CertificationExclusionRule.ARG_ITEMS_TO_EXCLUDE_NAME)
+        @Argument(name = CertificationExclusionRule.ARG_ITEMS_TO_EXCLUDE)
         private final List<Certifiable> itemsToExclude;
         /**
          * Map in which any data can be stored; shared across multiple rules in the certification generation process
          */
-        @Argument(name = CertificationExclusionRule.ARG_STATE_NAME)
+        @Argument(name = CertificationExclusionRule.ARG_STATE)
         private final Map<String, Object> state;
         /**
          * A second copy of the AbstractCertifiableEntity if it is an Identity object; this is passed in for
          * backward compatibility only; newly written rules should reference the entity argument instead
          */
-        @Argument(name = CertificationExclusionRule.ARG_IDENTITY_NAME)
+        @Argument(name = CertificationExclusionRule.ARG_IDENTITY)
         private final AbstractCertifiableEntity identity;
     }
 }

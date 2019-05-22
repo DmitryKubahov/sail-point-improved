@@ -14,10 +14,10 @@ import sailpoint.tools.GeneralException;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
@@ -25,7 +25,6 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Test for {@link CertificationPhaseChangeRule} class
@@ -57,18 +56,17 @@ public class CertificationPhaseChangeRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test object value
+     * - null, as it is a rule without outputs
      * Expectation:
-     * - certification as in rule context args by name {@link CertificationPhaseChangeRule#ARG_CERTIFICATION_NAME}
-     * - certificationItem as in rule context args by name {@link CertificationPhaseChangeRule#ARG_CERTIFICATION_ITEM_NAME}
-     * - previousPhase as in rule context args by name {@link CertificationPhaseChangeRule#ARG_PREVIOUS_PHASE_NAME}
-     * - nextPhase as in rule context args by name {@link CertificationPhaseChangeRule#ARG_NEXT_PHASE_NAME}
+     * - certification as in rule context args by name {@link CertificationPhaseChangeRule#ARG_CERTIFICATION}
+     * - certificationItem as in rule context args by name {@link CertificationPhaseChangeRule#ARG_CERTIFICATION_ITEM}
+     * - previousPhase as in rule context args by name {@link CertificationPhaseChangeRule#ARG_PREVIOUS_PHASE}
+     * - nextPhase as in rule context args by name {@link CertificationPhaseChangeRule#ARG_NEXT_PHASE}
      * - context as in sailpoint context in rule context
      */
     @Test
     public void normalExecutionTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        String testResult = UUID.randomUUID().toString();
 
         doAnswer(invocation -> {
             assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
@@ -76,25 +74,26 @@ public class CertificationPhaseChangeRuleTest {
                     .getArguments()[1];
             assertEquals("Certification is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationPhaseChangeRule.ARG_CERTIFICATION_NAME),
+                            .get(CertificationPhaseChangeRule.ARG_CERTIFICATION),
                     arguments.getCertification());
             assertEquals("CertificationItem is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM_NAME),
+                            .get(CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM),
                     arguments.getCertificationItem());
             assertEquals("PreviousPhase is not match",
-                    testRuleContext.getArguments().get(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE_NAME),
+                    testRuleContext.getArguments().get(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE),
                     arguments.getPreviousPhase());
             assertEquals("NextPhase is not match",
-                    testRuleContext.getArguments().get(CertificationPhaseChangeRule.ARG_NEXT_PHASE_NAME),
+                    testRuleContext.getArguments().get(CertificationPhaseChangeRule.ARG_NEXT_PHASE),
                     arguments.getNextPhase());
-            return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+            return null;
+        }).when(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
 
-        assertEquals(testResult, testRule.execute(testRuleContext));
+        assertNull(testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
         verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
     }
 
     /**
@@ -117,30 +116,30 @@ public class CertificationPhaseChangeRuleTest {
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
             verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecuteNoneOutput(eq(sailPointContext), any());
         }
     }
 
     /**
      * Test execution with valid NULL arguments.
      * Input:
-     * - valid rule context, but {@link CertificationPhaseChangeRule#ARG_PREVIOUS_PHASE_NAME} attribute null
+     * - valid rule context, but {@link CertificationPhaseChangeRule#ARG_PREVIOUS_PHASE} attribute null
      * Output:
      * - General exception
      * Expectation:
      * - call internalValidation
      * - call internalExecute
+     * - call internalExecuteNoneOutput
      */
     @Test
     public void nullInstanceArgumentValueTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        String testResult = UUID.randomUUID().toString();
+        testRuleContext.getArguments().remove(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE);
 
-        testRuleContext.getArguments().remove(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE_NAME);
-        when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
-
-        assertEquals(testResult, testRule.execute(testRuleContext));
+        testRule.execute(testRuleContext);
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
     }
 
     /**
@@ -163,10 +162,10 @@ public class CertificationPhaseChangeRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertificationPhaseChangeRule.ARG_CERTIFICATION_NAME, mock(Certification.class));
-        ruleParameters.put(CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM_NAME, mock(CertificationItem.class));
-        ruleParameters.put(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE_NAME, Certification.Phase.Active);
-        ruleParameters.put(CertificationPhaseChangeRule.ARG_NEXT_PHASE_NAME, Certification.Phase.Challenge);
+        ruleParameters.put(CertificationPhaseChangeRule.ARG_CERTIFICATION, mock(Certification.class));
+        ruleParameters.put(CertificationPhaseChangeRule.ARG_CERTIFICATION_ITEM, mock(CertificationItem.class));
+        ruleParameters.put(CertificationPhaseChangeRule.ARG_PREVIOUS_PHASE, Certification.Phase.Active);
+        ruleParameters.put(CertificationPhaseChangeRule.ARG_NEXT_PHASE, Certification.Phase.Challenge);
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

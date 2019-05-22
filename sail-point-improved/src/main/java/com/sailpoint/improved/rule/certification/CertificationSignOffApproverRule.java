@@ -42,23 +42,23 @@ public abstract class CertificationSignOffApproverRule
     /**
      * Name of certification argument name
      */
-    public static final String ARG_CERTIFICATION_NAME = "certification";
+    public static final String ARG_CERTIFICATION = "certification";
     /**
      * Name of certifier argument name
      */
-    public static final String ARG_CERTIFIER_NAME = "certifier";
+    public static final String ARG_CERTIFIER = "certifier";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            CertificationSignOffApproverRule.ARG_CERTIFICATION_NAME,
-            CertificationSignOffApproverRule.ARG_CERTIFIER_NAME,
-            CertificationSignOffApproverRule.ARG_STATE_NAME
+            CertificationSignOffApproverRule.ARG_CERTIFICATION,
+            CertificationSignOffApproverRule.ARG_CERTIFIER,
+            CertificationSignOffApproverRule.ARG_STATE
     );
 
     /**
@@ -80,11 +80,11 @@ public abstract class CertificationSignOffApproverRule
             @NonNull JavaRuleContext javaRuleContext) {
         return CertificationSignOffApproverRuleArguments.builder()
                 .certification((Certification) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationSignOffApproverRule.ARG_CERTIFICATION_NAME))
+                        CertificationSignOffApproverRule.ARG_CERTIFICATION))
                 .certifier((Identity) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        CertificationSignOffApproverRule.ARG_CERTIFIER_NAME))
+                        CertificationSignOffApproverRule.ARG_CERTIFIER))
                 .state((Map<String, Object>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationSignOffApproverRule.ARG_STATE_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationSignOffApproverRule.ARG_STATE))
                 .build();
     }
 
@@ -101,17 +101,17 @@ public abstract class CertificationSignOffApproverRule
         /**
          * A reference to the Certification object being closed
          */
-        @Argument(name = CertificationSignOffApproverRule.ARG_CERTIFICATION_NAME)
+        @Argument(name = CertificationSignOffApproverRule.ARG_CERTIFICATION)
         private final Certification certification;
         /**
          * Reference to the Identity who was assigned as the certifier for this certification
          */
-        @Argument(name = CertificationSignOffApproverRule.ARG_CERTIFIER_NAME)
+        @Argument(name = CertificationSignOffApproverRule.ARG_CERTIFIER)
         private final Identity certifier;
         /**
          * A map of values that can be shared between rules; allows passing of data between rules
          */
-        @Argument(name = CertificationEntityCustomizationRule.ARG_STATE_NAME)
+        @Argument(name = CertificationEntityCustomizationRule.ARG_STATE)
         private final Map<String, Object> state;
     }
 }

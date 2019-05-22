@@ -14,7 +14,6 @@ import sailpoint.object.Rule;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Like an IdentityTrigger, an IdentitySelector rule can apply to a Certification Event or a Lifecycle Event and
@@ -45,13 +44,13 @@ public abstract class IdentitySelectorRule
     /**
      * Name of identity argument name
      */
-    public static final String ARG_IDENTITY_NAME = "identity";
+    public static final String ARG_IDENTITY = "identity";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Collections.singletonList(
-            IdentitySelectorRule.ARG_IDENTITY_NAME
+            IdentitySelectorRule.ARG_IDENTITY
     );
 
     /**
@@ -73,7 +72,7 @@ public abstract class IdentitySelectorRule
             @NonNull JavaRuleContext javaRuleContext) {
         return IdentitySelectorRuleArguments.builder()
                 .identity((Identity) JavaRuleExecutorUtil.getArgumentValueByName(javaRuleContext,
-                        IdentitySelectorRule.ARG_IDENTITY_NAME))
+                        IdentitySelectorRule.ARG_IDENTITY))
                 .build();
     }
 
@@ -89,7 +88,7 @@ public abstract class IdentitySelectorRule
          * Identity object on which the triggering action has occurred (post-change version unless change is a delete action,
          * in which case pre-change version is passed to rule)
          */
-        @Argument(name = IdentitySelectorRule.ARG_IDENTITY_NAME)
+        @Argument(name = IdentitySelectorRule.ARG_IDENTITY)
         private final Identity identity;
     }
 }

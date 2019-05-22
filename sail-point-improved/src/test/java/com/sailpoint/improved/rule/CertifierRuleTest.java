@@ -61,9 +61,9 @@ public class CertifierRuleTest {
      * Output:
      * - test string value
      * Expectation:
-     * - factory as in rule context args by name {@link CertifierRule#ARG_FACTORY_NAME}
-     * - group as in rule context args by name {@link CertifierRule#ARG_GROUP_NAME}
-     * - state as in rule context args by name {@link CertifierRule#ARG_STATE_NAME}
+     * - factory as in rule context args by name {@link CertifierRule#ARG_FACTORY}
+     * - group as in rule context args by name {@link CertifierRule#ARG_GROUP}
+     * - state as in rule context args by name {@link CertifierRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -76,13 +76,13 @@ public class CertifierRuleTest {
             CertifierRule.CertifierRuleArguments arguments = (CertifierRule.CertifierRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Factory is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_FACTORY_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_FACTORY),
                     arguments.getFactory());
             assertEquals("Group is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_GROUP_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_GROUP),
                     arguments.getGroup());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -100,9 +100,9 @@ public class CertifierRuleTest {
      * Output:
      * - test identity value
      * Expectation:
-     * - factory as in rule context args by name {@link CertifierRule#ARG_FACTORY_NAME}
-     * - group as in rule context args by name {@link CertifierRule#ARG_GROUP_NAME}
-     * - state as in rule context args by name {@link CertifierRule#ARG_STATE_NAME}
+     * - factory as in rule context args by name {@link CertifierRule#ARG_FACTORY}
+     * - group as in rule context args by name {@link CertifierRule#ARG_GROUP}
+     * - state as in rule context args by name {@link CertifierRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -115,13 +115,13 @@ public class CertifierRuleTest {
             CertifierRule.CertifierRuleArguments arguments = (CertifierRule.CertifierRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Factory is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_FACTORY_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_FACTORY),
                     arguments.getFactory());
             assertEquals("Group is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_GROUP_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_GROUP),
                     arguments.getGroup());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -139,9 +139,9 @@ public class CertifierRuleTest {
      * Output:
      * - test list of string value
      * Expectation:
-     * - factory as in rule context args by name {@link CertifierRule#ARG_FACTORY_NAME}
-     * - group as in rule context args by name {@link CertifierRule#ARG_GROUP_NAME}
-     * - state as in rule context args by name {@link CertifierRule#ARG_STATE_NAME}
+     * - factory as in rule context args by name {@link CertifierRule#ARG_FACTORY}
+     * - group as in rule context args by name {@link CertifierRule#ARG_GROUP}
+     * - state as in rule context args by name {@link CertifierRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -154,13 +154,13 @@ public class CertifierRuleTest {
             CertifierRule.CertifierRuleArguments arguments = (CertifierRule.CertifierRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Factory is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_FACTORY_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_FACTORY),
                     arguments.getFactory());
             assertEquals("Group is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_GROUP_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_GROUP),
                     arguments.getGroup());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -178,9 +178,9 @@ public class CertifierRuleTest {
      * Output:
      * - list of test identity value
      * Expectation:
-     * - factory as in rule context args by name {@link CertifierRule#ARG_FACTORY_NAME}
-     * - group as in rule context args by name {@link CertifierRule#ARG_GROUP_NAME}
-     * - state as in rule context args by name {@link CertifierRule#ARG_STATE_NAME}
+     * - factory as in rule context args by name {@link CertifierRule#ARG_FACTORY}
+     * - group as in rule context args by name {@link CertifierRule#ARG_GROUP}
+     * - state as in rule context args by name {@link CertifierRule#ARG_STATE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -193,13 +193,13 @@ public class CertifierRuleTest {
             CertifierRule.CertifierRuleArguments arguments = (CertifierRule.CertifierRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Factory is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_FACTORY_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_FACTORY),
                     arguments.getFactory());
             assertEquals("Group is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_GROUP_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_GROUP),
                     arguments.getGroup());
             assertEquals("State is not match",
-                    testRuleContext.getArguments().get(CertifierRule.ARG_STATE_NAME),
+                    testRuleContext.getArguments().get(CertifierRule.ARG_STATE),
                     arguments.getState());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -252,9 +252,9 @@ public class CertifierRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertifierRule.ARG_FACTORY_NAME, mock(GroupFactory.class));
-        ruleParameters.put(CertifierRule.ARG_GROUP_NAME, mock(GroupDefinition.class));
-        ruleParameters.put(CertifierRule.ARG_STATE_NAME,
+        ruleParameters.put(CertifierRule.ARG_FACTORY, mock(GroupFactory.class));
+        ruleParameters.put(CertifierRule.ARG_GROUP, mock(GroupDefinition.class));
+        ruleParameters.put(CertifierRule.ARG_STATE,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }

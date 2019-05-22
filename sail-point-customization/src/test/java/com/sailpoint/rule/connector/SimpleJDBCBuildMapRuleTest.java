@@ -130,11 +130,11 @@ public class SimpleJDBCBuildMapRuleTest {
      */
     private Map<String, Object> buildJDBCRuleArguments() {
         Map<String, Object> arguments = new HashMap<>();
-        arguments.put(JDBCBuildMapRule.ARG_APPLICATION_NAME, mock(Application.class));
-        arguments.put(JDBCBuildMapRule.ARG_SCHEMA_NAME, mock(Schema.class));
-        arguments.put(JDBCBuildMapRule.ARG_STATE_NAME, Collections.emptyMap());
-        arguments.put(JDBCBuildMapRule.ARG_CONNECTION_NAME, mock(Connection.class));
-        arguments.put(JDBCBuildMapRule.ARG_RESULT_SET_NAME, mock(ResultSet.class));
+        arguments.put(JDBCBuildMapRule.ARG_APPLICATION, mock(Application.class));
+        arguments.put(JDBCBuildMapRule.ARG_SCHEMA, mock(Schema.class));
+        arguments.put(JDBCBuildMapRule.ARG_STATE, Collections.emptyMap());
+        arguments.put(JDBCBuildMapRule.ARG_CONNECTION, mock(Connection.class));
+        arguments.put(JDBCBuildMapRule.ARG_RESULT_SET, mock(ResultSet.class));
         return arguments;
     }
 

@@ -3,7 +3,6 @@ package com.sailpoint.improved.rule.certification;
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
 import com.sailpoint.improved.rule.AbstractJavaRuleExecutor;
-import com.sailpoint.improved.rule.connector.FileParsingRule;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
@@ -52,28 +51,28 @@ public abstract class CertificationPreDelegationRule
     /**
      * Name of certification argument name
      */
-    public static final String ARG_CERTIFICATION_NAME = "certification";
+    public static final String ARG_CERTIFICATION = "certification";
     /**
      * Name of entity argument name
      */
-    public static final String ARG_ENTITY_NAME = "entity";
+    public static final String ARG_ENTITY = "entity";
     /**
      * Name of certContext argument name
      */
-    public static final String ARG_CERT_CONTEXT_NAME = "certContext";
+    public static final String ARG_CERT_CONTEXT = "certContext";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            CertificationPreDelegationRule.ARG_CERTIFICATION_NAME,
-            CertificationPreDelegationRule.ARG_ENTITY_NAME,
-            CertificationPreDelegationRule.ARG_CERT_CONTEXT_NAME,
-            CertificationPreDelegationRule.ARG_STATE_NAME
+            CertificationPreDelegationRule.ARG_CERTIFICATION,
+            CertificationPreDelegationRule.ARG_ENTITY,
+            CertificationPreDelegationRule.ARG_CERT_CONTEXT,
+            CertificationPreDelegationRule.ARG_STATE
     );
 
     /**
@@ -94,13 +93,13 @@ public abstract class CertificationPreDelegationRule
             @NonNull JavaRuleContext javaRuleContext) {
         return CertificationPreDelegationRuleArguments.builder()
                 .certification((Certification) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationPreDelegationRule.ARG_CERTIFICATION_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationPreDelegationRule.ARG_CERTIFICATION))
                 .entity((CertificationEntity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationPreDelegationRule.ARG_ENTITY_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationPreDelegationRule.ARG_ENTITY))
                 .certContext((CertificationContext) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationPreDelegationRule.ARG_CERT_CONTEXT_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationPreDelegationRule.ARG_CERT_CONTEXT))
                 .state((Map<String, Object>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertificationPreDelegationRule.ARG_STATE_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertificationPreDelegationRule.ARG_STATE))
                 .build();
     }
 
@@ -227,23 +226,23 @@ public abstract class CertificationPreDelegationRule
         /**
          * Reference to the Certification object being created
          */
-        @Argument(name = CertificationPreDelegationRule.ARG_CERTIFICATION_NAME)
+        @Argument(name = CertificationPreDelegationRule.ARG_CERTIFICATION)
         private final Certification certification;
         /**
          * Reference to the CertificationEntity object being considered for predelegation
          */
-        @Argument(name = CertificationPreDelegationRule.ARG_ENTITY_NAME)
+        @Argument(name = CertificationPreDelegationRule.ARG_ENTITY)
         private final CertificationEntity entity;
         /**
          * Reference to the CertificationContext interface being  used to create this certification (rarely used within
          * rules; the values accessible through this are also available on the certification or certificationDefinition)
          */
-        @Argument(name = CertificationPreDelegationRule.ARG_CERT_CONTEXT_NAME)
+        @Argument(name = CertificationPreDelegationRule.ARG_CERT_CONTEXT)
         private final CertificationContext certContext;
         /**
          * Map in which any data can be stored; shared across multiple rules in the certification generation process
          */
-        @Argument(name = CertificationPreDelegationRule.ARG_STATE_NAME)
+        @Argument(name = CertificationPreDelegationRule.ARG_STATE)
         private final Map<String, Object> state;
     }
 }

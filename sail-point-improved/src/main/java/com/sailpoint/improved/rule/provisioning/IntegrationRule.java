@@ -36,23 +36,23 @@ public abstract class IntegrationRule
     /**
      * Name of identity argument name
      */
-    public static final String ARG_IDENTITY_NAME = "identity";
+    public static final String ARG_IDENTITY = "identity";
     /**
      * Name of integration argument name
      */
-    public static final String ARG_INTEGRATION_NAME = "integration";
+    public static final String ARG_INTEGRATION = "integration";
     /**
      * Name of plan argument name
      */
-    public static final String ARG_PLAN_NAME = "plan";
+    public static final String ARG_PLAN = "plan";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            IntegrationRule.ARG_IDENTITY_NAME,
-            IntegrationRule.ARG_INTEGRATION_NAME,
-            IntegrationRule.ARG_PLAN_NAME
+            IntegrationRule.ARG_IDENTITY,
+            IntegrationRule.ARG_INTEGRATION,
+            IntegrationRule.ARG_PLAN
     );
 
     /**
@@ -73,11 +73,11 @@ public abstract class IntegrationRule
             @NonNull JavaRuleContext javaRuleContext) {
         return IntegrationRuleArguments.builder()
                 .identity((Identity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, IntegrationRule.ARG_IDENTITY_NAME))
+                        .getArgumentValueByName(javaRuleContext, IntegrationRule.ARG_IDENTITY))
                 .integration((IntegrationConfig) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, IntegrationRule.ARG_INTEGRATION_NAME))
+                        .getArgumentValueByName(javaRuleContext, IntegrationRule.ARG_INTEGRATION))
                 .plan((ProvisioningPlan) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, IntegrationRule.ARG_PLAN_NAME))
+                        .getArgumentValueByName(javaRuleContext, IntegrationRule.ARG_PLAN))
 
                 .build();
     }
@@ -95,17 +95,17 @@ public abstract class IntegrationRule
         /**
          * Reference to the Identity object for which the provisioning request has been made
          */
-        @Argument(name = IntegrationRule.ARG_IDENTITY_NAME)
+        @Argument(name = IntegrationRule.ARG_IDENTITY)
         private final Identity identity;
         /**
          * Reference to the integrationConfig (or ProvisioningConfig cast as an integrationConfig) that defines provisioning to the application
          */
-        @Argument(name = IntegrationRule.ARG_INTEGRATION_NAME)
+        @Argument(name = IntegrationRule.ARG_INTEGRATION)
         private final IntegrationConfig integration;
         /**
          * Reference to the ProvisioningPlan object containing the requested provisioning action
          */
-        @Argument(name = IntegrationRule.ARG_PLAN_NAME)
+        @Argument(name = IntegrationRule.ARG_PLAN)
         private final ProvisioningPlan plan;
     }
 }

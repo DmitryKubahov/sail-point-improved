@@ -57,8 +57,8 @@ public class RACFPermissionCustomizationRuleTest {
      * Output:
      * - test permission value
      * Expectation:
-     * - permission as in rule context args by name {@link RACFPermissionCustomizationRule#ARG_PERMISSION_NAME}
-     * - line as in rule context args by name {@link RACFPermissionCustomizationRule#ARG_LINE_NAME}
+     * - permission as in rule context args by name {@link RACFPermissionCustomizationRule#ARG_PERMISSION}
+     * - line as in rule context args by name {@link RACFPermissionCustomizationRule#ARG_LINE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -71,10 +71,10 @@ public class RACFPermissionCustomizationRuleTest {
             RACFPermissionCustomizationRule.RACFPermissionCustomizationRuleArguments arguments = (RACFPermissionCustomizationRule.RACFPermissionCustomizationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Permission is not match",
-                    testRuleContext.getArguments().get(RACFPermissionCustomizationRule.ARG_PERMISSION_NAME),
+                    testRuleContext.getArguments().get(RACFPermissionCustomizationRule.ARG_PERMISSION),
                     arguments.getPermission());
             assertEquals("Line is not match",
-                    testRuleContext.getArguments().get(RACFPermissionCustomizationRule.ARG_LINE_NAME),
+                    testRuleContext.getArguments().get(RACFPermissionCustomizationRule.ARG_LINE),
                     arguments.getLine());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -128,8 +128,8 @@ public class RACFPermissionCustomizationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(RACFPermissionCustomizationRule.ARG_PERMISSION_NAME, mock(Permission.class));
-        ruleParameters.put(RACFPermissionCustomizationRule.ARG_LINE_NAME, UUID.randomUUID().toString());
+        ruleParameters.put(RACFPermissionCustomizationRule.ARG_PERMISSION, mock(Permission.class));
+        ruleParameters.put(RACFPermissionCustomizationRule.ARG_LINE, UUID.randomUUID().toString());
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

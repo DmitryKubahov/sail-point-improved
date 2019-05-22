@@ -57,8 +57,8 @@ public class ReportParameterValueRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - value as in rule context args by name {@link ReportParameterValueRule#ARG_VALUE_NAME}
-     * - arguments as in rule context args by name {@link ReportParameterValueRule#ARG_ARGUMENTS_NAME}
+     * - value as in rule context args by name {@link ReportParameterValueRule#ARG_VALUE}
+     * - arguments as in rule context args by name {@link ReportParameterValueRule#ARG_ARGUMENTS}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -71,10 +71,10 @@ public class ReportParameterValueRuleTest {
             ReportParameterValueRule.ReportParameterValueRuleArguments arguments = (ReportParameterValueRule.ReportParameterValueRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Value is not match",
-                    testRuleContext.getArguments().get(ReportParameterValueRule.ARG_VALUE_NAME),
+                    testRuleContext.getArguments().get(ReportParameterValueRule.ARG_VALUE),
                     arguments.getValue());
             assertEquals("Arguments is not match",
-                    testRuleContext.getArguments().get(ReportParameterValueRule.ARG_ARGUMENTS_NAME),
+                    testRuleContext.getArguments().get(ReportParameterValueRule.ARG_ARGUMENTS),
                     arguments.getArguments());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -128,8 +128,8 @@ public class ReportParameterValueRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(ReportParameterValueRule.ARG_VALUE_NAME, new Object());
-        ruleParameters.put(ReportParameterValueRule.ARG_ARGUMENTS_NAME, mock(Attributes.class));
+        ruleParameters.put(ReportParameterValueRule.ARG_VALUE, new Object());
+        ruleParameters.put(ReportParameterValueRule.ARG_ARGUMENTS, mock(Attributes.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

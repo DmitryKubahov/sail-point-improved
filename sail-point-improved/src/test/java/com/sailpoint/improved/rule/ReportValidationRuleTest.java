@@ -62,9 +62,9 @@ public class ReportValidationRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - report as in rule context args by name {@link ReportValidationRule#ARG_REPORT_NAME}
-     * - form as in rule context args by name {@link ReportValidationRule#ARG_FORM_NAME}
-     * - locale as in rule context args by name {@link ReportValidationRule#ARG_LOCALE_NAME}
+     * - report as in rule context args by name {@link ReportValidationRule#ARG_REPORT}
+     * - form as in rule context args by name {@link ReportValidationRule#ARG_FORM}
+     * - locale as in rule context args by name {@link ReportValidationRule#ARG_LOCALE}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -77,13 +77,13 @@ public class ReportValidationRuleTest {
             ReportValidationRule.ReportValidationRuleArguments arguments = (ReportValidationRule.ReportValidationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Report is not match",
-                    testRuleContext.getArguments().get(ReportValidationRule.ARG_REPORT_NAME),
+                    testRuleContext.getArguments().get(ReportValidationRule.ARG_REPORT),
                     arguments.getReport());
             assertEquals("Form is not match",
-                    testRuleContext.getArguments().get(ReportValidationRule.ARG_FORM_NAME),
+                    testRuleContext.getArguments().get(ReportValidationRule.ARG_FORM),
                     arguments.getForm());
             assertEquals("Local is not match",
-                    testRuleContext.getArguments().get(ReportValidationRule.ARG_LOCALE_NAME),
+                    testRuleContext.getArguments().get(ReportValidationRule.ARG_LOCALE),
                     arguments.getLocale());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -137,9 +137,9 @@ public class ReportValidationRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(ReportValidationRule.ARG_REPORT_NAME, mock(LiveReport.class));
-        ruleParameters.put(ReportValidationRule.ARG_FORM_NAME, mock(Form.class));
-        ruleParameters.put(ReportValidationRule.ARG_LOCALE_NAME, Locale.getDefault());
+        ruleParameters.put(ReportValidationRule.ARG_REPORT, mock(LiveReport.class));
+        ruleParameters.put(ReportValidationRule.ARG_FORM, mock(Form.class));
+        ruleParameters.put(ReportValidationRule.ARG_LOCALE, Locale.getDefault());
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

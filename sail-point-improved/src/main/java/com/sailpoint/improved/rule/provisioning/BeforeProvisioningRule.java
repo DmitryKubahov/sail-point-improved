@@ -2,7 +2,7 @@ package com.sailpoint.improved.rule.provisioning;
 
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
-import com.sailpoint.improved.rule.AbstractJavaRuleExecutor;
+import com.sailpoint.improved.rule.AbstractNoneOutputJavaRuleExecutor;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
@@ -27,23 +27,23 @@ import java.util.List;
  */
 @Slf4j
 public abstract class BeforeProvisioningRule
-        extends AbstractJavaRuleExecutor<Object, BeforeProvisioningRule.BeforeProvisioningRuleArguments> {
+        extends AbstractNoneOutputJavaRuleExecutor<BeforeProvisioningRule.BeforeProvisioningRuleArguments> {
 
     /**
      * Name of plan argument name
      */
-    public static final String ARG_PLAN_NAME = "plan";
+    public static final String ARG_PLAN = "plan";
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            BeforeProvisioningRule.ARG_PLAN_NAME,
-            BeforeProvisioningRule.ARG_APPLICATION_NAME
+            BeforeProvisioningRule.ARG_PLAN,
+            BeforeProvisioningRule.ARG_APPLICATION
     );
 
     /**
@@ -64,9 +64,9 @@ public abstract class BeforeProvisioningRule
             @NonNull JavaRuleContext javaRuleContext) {
         return BeforeProvisioningRuleArguments.builder()
                 .plan((ProvisioningPlan) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, BeforeProvisioningRule.ARG_PLAN_NAME))
+                        .getArgumentValueByName(javaRuleContext, BeforeProvisioningRule.ARG_PLAN))
                 .application((Application) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, BeforeProvisioningRule.ARG_APPLICATION_NAME))
+                        .getArgumentValueByName(javaRuleContext, BeforeProvisioningRule.ARG_APPLICATION))
                 .build();
     }
 
@@ -82,12 +82,12 @@ public abstract class BeforeProvisioningRule
         /**
          * Contains provisioning request details
          */
-        @Argument(name = BeforeProvisioningRule.ARG_PLAN_NAME)
+        @Argument(name = BeforeProvisioningRule.ARG_PLAN)
         private final ProvisioningPlan plan;
         /**
          * Application object containing this rule reference
          */
-        @Argument(name = BeforeProvisioningRule.ARG_APPLICATION_NAME)
+        @Argument(name = BeforeProvisioningRule.ARG_APPLICATION)
         private final Application application;
     }
 }

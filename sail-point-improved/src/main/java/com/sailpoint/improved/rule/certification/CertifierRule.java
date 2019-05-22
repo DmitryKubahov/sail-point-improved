@@ -43,23 +43,23 @@ public abstract class CertifierRule<T extends Object>
     /**
      * Name of factory argument name
      */
-    public static final String ARG_FACTORY_NAME = "factory";
+    public static final String ARG_FACTORY = "factory";
     /**
      * Name of group argument name
      */
-    public static final String ARG_GROUP_NAME = "group";
+    public static final String ARG_GROUP = "group";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            CertifierRule.ARG_FACTORY_NAME,
-            CertifierRule.ARG_GROUP_NAME,
-            CertifierRule.ARG_STATE_NAME
+            CertifierRule.ARG_FACTORY,
+            CertifierRule.ARG_GROUP,
+            CertifierRule.ARG_STATE
     );
 
     /**
@@ -80,11 +80,11 @@ public abstract class CertifierRule<T extends Object>
             @NonNull JavaRuleContext javaRuleContext) {
         return CertifierRuleArguments.builder()
                 .factory((GroupFactory) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertifierRule.ARG_FACTORY_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertifierRule.ARG_FACTORY))
                 .group((GroupDefinition) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertifierRule.ARG_GROUP_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertifierRule.ARG_GROUP))
                 .state((Map<String, Object>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, CertifierRule.ARG_STATE_NAME))
+                        .getArgumentValueByName(javaRuleContext, CertifierRule.ARG_STATE))
                 .build();
     }
 
@@ -101,17 +101,17 @@ public abstract class CertifierRule<T extends Object>
         /**
          * The groupFactory object that created the group(s) being certified
          */
-        @Argument(name = CertifierRule.ARG_FACTORY_NAME)
+        @Argument(name = CertifierRule.ARG_FACTORY)
         private final GroupFactory factory;
         /**
          * The group object whose members are being assigned a certifier by the rule
          */
-        @Argument(name = CertifierRule.ARG_GROUP_NAME)
+        @Argument(name = CertifierRule.ARG_GROUP)
         private final GroupDefinition group;
         /**
          * Map in which any data can be stored; shared across multiple rules in the certification generation process
          */
-        @Argument(name = CertifierRule.ARG_STATE_NAME)
+        @Argument(name = CertifierRule.ARG_STATE)
         private final Map<String, Object> state;
     }
 }

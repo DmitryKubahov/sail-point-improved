@@ -33,22 +33,22 @@ public abstract class PreIterateRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of stats argument name
      */
-    public static final String ARG_STATS_NAME = "stats";
+    public static final String ARG_STATS = "stats";
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            PreIterateRule.ARG_APPLICATION_NAME,
-            PreIterateRule.ARG_SCHEMA_NAME,
-            PreIterateRule.ARG_STATS_NAME
+            PreIterateRule.ARG_APPLICATION,
+            PreIterateRule.ARG_SCHEMA,
+            PreIterateRule.ARG_STATS
     );
 
     /**
@@ -69,11 +69,11 @@ public abstract class PreIterateRule
         return PreIterateRule.PreIterateRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PreIterateRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, PreIterateRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PreIterateRule.ARG_SCHEMA_NAME))
+                        getArgumentValueByName(javaRuleContext, PreIterateRule.ARG_SCHEMA))
                 .stats((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, PreIterateRule.ARG_STATS_NAME))
+                        getArgumentValueByName(javaRuleContext, PreIterateRule.ARG_STATS))
                 .build();
     }
 
@@ -111,12 +111,12 @@ public abstract class PreIterateRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = PreIterateRule.ARG_APPLICATION_NAME)
+        @Argument(name = PreIterateRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Schema object for the delimited file source being read
          */
-        @Argument(name = PreIterateRule.ARG_SCHEMA_NAME)
+        @Argument(name = PreIterateRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * A map passed by the connector of the stats for the file about to be iterated. Contains keys:
@@ -125,7 +125,7 @@ public abstract class PreIterateRule
          * • length: (Long) file length in bytes
          * • lastModified: (Long) last time the file was updated (Java GMT)
          */
-        @Argument(name = PreIterateRule.ARG_STATS_NAME)
+        @Argument(name = PreIterateRule.ARG_STATS)
         private final Map<String, Object> stats;
     }
 }

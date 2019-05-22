@@ -60,10 +60,10 @@ public class GroupAggregationRefreshRuleTest {
      * Output:
      * - test map of execution
      * Expectation:
-     * - environment as in rule context args by name {@link GroupAggregationRefreshRule#ARG_ENVIRONMENT_NAME}
-     * - obj as in rule context args by name {@link GroupAggregationRefreshRule#ARG_OBJECT_NAME}
-     * - accountGroup as in rule context args by name {@link GroupAggregationRefreshRule#ARG_ACCOUNT_GROUP_NAME}
-     * - groupApplication as in rule context args by name {@link GroupAggregationRefreshRule#ARG_GROUP_APPLICATION_NAME}
+     * - environment as in rule context args by name {@link GroupAggregationRefreshRule#ARG_ENVIRONMENT}
+     * - obj as in rule context args by name {@link GroupAggregationRefreshRule#ARG_OBJECT}
+     * - accountGroup as in rule context args by name {@link GroupAggregationRefreshRule#ARG_ACCOUNT_GROUP}
+     * - groupApplication as in rule context args by name {@link GroupAggregationRefreshRule#ARG_GROUP_APPLICATION}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -76,16 +76,16 @@ public class GroupAggregationRefreshRuleTest {
             GroupAggregationRefreshRule.GroupAggregationRefreshRuleArguments arguments = (GroupAggregationRefreshRule.GroupAggregationRefreshRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Environment is not match",
-                    testRuleContext.getArguments().get(GroupAggregationRefreshRule.ARG_ENVIRONMENT_NAME),
+                    testRuleContext.getArguments().get(GroupAggregationRefreshRule.ARG_ENVIRONMENT),
                     arguments.getEnvironment());
             assertEquals("Obj is not match",
-                    testRuleContext.getArguments().get(GroupAggregationRefreshRule.ARG_OBJECT_NAME),
+                    testRuleContext.getArguments().get(GroupAggregationRefreshRule.ARG_OBJECT),
                     arguments.getObject());
             assertEquals("AccountGroup is not match",
-                    testRuleContext.getArguments().get(GroupAggregationRefreshRule.ARG_ACCOUNT_GROUP_NAME),
+                    testRuleContext.getArguments().get(GroupAggregationRefreshRule.ARG_ACCOUNT_GROUP),
                     arguments.getAccountGroup());
             assertEquals("GroupApplication is not match",
-                    testRuleContext.getArguments().get(GroupAggregationRefreshRule.ARG_GROUP_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(GroupAggregationRefreshRule.ARG_GROUP_APPLICATION),
                     arguments.getGroupApplication());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -138,11 +138,11 @@ public class GroupAggregationRefreshRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(GroupAggregationRefreshRule.ARG_ENVIRONMENT_NAME,
+        ruleParameters.put(GroupAggregationRefreshRule.ARG_ENVIRONMENT,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
-        ruleParameters.put(GroupAggregationRefreshRule.ARG_OBJECT_NAME, mock(ResourceObject.class));
-        ruleParameters.put(GroupAggregationRefreshRule.ARG_ACCOUNT_GROUP_NAME, mock(ManagedAttribute.class));
-        ruleParameters.put(GroupAggregationRefreshRule.ARG_GROUP_APPLICATION_NAME, mock(Application.class));
+        ruleParameters.put(GroupAggregationRefreshRule.ARG_OBJECT, mock(ResourceObject.class));
+        ruleParameters.put(GroupAggregationRefreshRule.ARG_ACCOUNT_GROUP, mock(ManagedAttribute.class));
+        ruleParameters.put(GroupAggregationRefreshRule.ARG_GROUP_APPLICATION, mock(Application.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

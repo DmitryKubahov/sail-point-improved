@@ -12,7 +12,6 @@ import sailpoint.object.Rule;
 import sailpoint.object.Schema;
 import sailpoint.tools.GeneralException;
 
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +19,7 @@ import java.util.UUID;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
@@ -58,37 +58,37 @@ public class PostIterateRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test input stream
+     * - null, as it is a rule without outputs
      * Expectation:
-     * - application as in rule context args by name {@link PostIterateRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link PostIterateRule#ARG_SCHEMA_NAME}
-     * - stats as in rule context args by name {@link PostIterateRule#ARG_STATS_NAME}
+     * - application as in rule context args by name {@link PostIterateRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link PostIterateRule#ARG_SCHEMA}
+     * - stats as in rule context args by name {@link PostIterateRule#ARG_STATS}
      */
     @Test
     public void normalTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        InputStream testResult = mock(InputStream.class);
 
         doAnswer(invocation -> {
             assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
             PostIterateRule.PostIterateRuleArguments arguments = (PostIterateRule.PostIterateRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(PostIterateRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(PostIterateRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(PostIterateRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(PostIterateRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("Stats is not match",
-                    testRuleContext.getArguments().get(PostIterateRule.ARG_STATS_NAME),
+                    testRuleContext.getArguments().get(PostIterateRule.ARG_STATS),
                     arguments.getStats());
-            return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+            return null;
+        }).when(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
 
-        assertEquals(testResult, testRule.execute(testRuleContext));
+        assertNull(testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
         verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
     }
 
     /**
@@ -110,6 +110,7 @@ public class PostIterateRuleTest {
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
             verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecuteNoneOutput(eq(sailPointContext), any());
         }
     }
 
@@ -132,9 +133,9 @@ public class PostIterateRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(PostIterateRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(PostIterateRule.ARG_SCHEMA_NAME, new Schema());
-        ruleParameters.put(PostIterateRule.ARG_STATS_NAME,
+        ruleParameters.put(PostIterateRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(PostIterateRule.ARG_SCHEMA, new Schema());
+        ruleParameters.put(PostIterateRule.ARG_STATS,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }

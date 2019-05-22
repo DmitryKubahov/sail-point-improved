@@ -31,27 +31,27 @@ public abstract class SAPHRManagerRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of destination argument name
      */
-    public static final String ARG_DESTINATION_NAME = "destination";
+    public static final String ARG_DESTINATION = "destination";
     /**
      * Name of connector argument name
      */
-    public static final String ARG_CONNECTOR_NAME = "connector";
+    public static final String ARG_CONNECTOR = "connector";
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            SAPHRManagerRule.ARG_APPLICATION_NAME,
-            SAPHRManagerRule.ARG_SCHEMA_NAME,
-            SAPHRManagerRule.ARG_DESTINATION_NAME,
-            SAPHRManagerRule.ARG_CONNECTOR_NAME
+            SAPHRManagerRule.ARG_APPLICATION,
+            SAPHRManagerRule.ARG_SCHEMA,
+            SAPHRManagerRule.ARG_DESTINATION,
+            SAPHRManagerRule.ARG_CONNECTOR
     );
 
     /**
@@ -72,13 +72,13 @@ public abstract class SAPHRManagerRule
         return SAPHRManagerRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, SAPHRManagerRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, SAPHRManagerRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, SAPHRManagerRule.ARG_SCHEMA_NAME))
+                        getArgumentValueByName(javaRuleContext, SAPHRManagerRule.ARG_SCHEMA))
                 .destination((JCoDestination) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, SAPHRManagerRule.ARG_DESTINATION_NAME))
+                        getArgumentValueByName(javaRuleContext, SAPHRManagerRule.ARG_DESTINATION))
                 .connector((SAPInternalConnector) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, SAPHRManagerRule.ARG_CONNECTOR_NAME))
+                        getArgumentValueByName(javaRuleContext, SAPHRManagerRule.ARG_CONNECTOR))
                 .build();
     }
 
@@ -96,22 +96,22 @@ public abstract class SAPHRManagerRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = SAPHRManagerRule.ARG_APPLICATION_NAME)
+        @Argument(name = SAPHRManagerRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Schema object that represents the object we are building
          */
-        @Argument(name = SAPHRManagerRule.ARG_SCHEMA_NAME)
+        @Argument(name = SAPHRManagerRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * A connected and ready to use SAP destination object that can be used to call BAPI function modules and call to SAP tables
          */
-        @Argument(name = SAPHRManagerRule.ARG_DESTINATION_NAME)
+        @Argument(name = SAPHRManagerRule.ARG_DESTINATION)
         private final JCoDestination destination;
         /**
          * A reference to the current SAP Connector
          */
-        @Argument(name = SAPHRManagerRule.ARG_CONNECTOR_NAME)
+        @Argument(name = SAPHRManagerRule.ARG_CONNECTOR)
         private final SAPInternalConnector connector;
     }
 }

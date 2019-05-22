@@ -14,10 +14,10 @@ import sailpoint.tools.GeneralException;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
@@ -56,33 +56,33 @@ public class BeforeProvisioningRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test object value
+     * - null as it is a rule without outputs
      * Expectation:
-     * - plan as in rule context args by name {@link BeforeProvisioningRule#ARG_PLAN_NAME}
-     * - application as in rule context args by name {@link BeforeProvisioningRule#ARG_APPLICATION_NAME}
+     * - plan as in rule context args by name {@link BeforeProvisioningRule#ARG_PLAN}
+     * - application as in rule context args by name {@link BeforeProvisioningRule#ARG_APPLICATION}
      * - context as in sailpoint context in rule context
      */
     @Test
     public void normalExecutionTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        String testResult = UUID.randomUUID().toString();
 
         doAnswer(invocation -> {
             assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
             BeforeProvisioningRule.BeforeProvisioningRuleArguments arguments = (BeforeProvisioningRule.BeforeProvisioningRuleArguments) invocation
                     .getArguments()[1];
-            assertEquals("Plan is not match", testRuleContext.getArguments().get(BeforeProvisioningRule.ARG_PLAN_NAME),
+            assertEquals("Plan is not match", testRuleContext.getArguments().get(BeforeProvisioningRule.ARG_PLAN),
                     arguments.getPlan());
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(BeforeProvisioningRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(BeforeProvisioningRule.ARG_APPLICATION),
                     arguments.getApplication());
-            return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+            return null;
+        }).when(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
 
-        assertEquals(testResult, testRule.execute(testRuleContext));
+        assertNull(testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
         verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
     }
 
     /**
@@ -105,6 +105,7 @@ public class BeforeProvisioningRuleTest {
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
             verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecuteNoneOutput(eq(sailPointContext), any());
         }
     }
 
@@ -128,8 +129,8 @@ public class BeforeProvisioningRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(BeforeProvisioningRule.ARG_PLAN_NAME, mock(ProvisioningPlan.class));
-        ruleParameters.put(BeforeProvisioningRule.ARG_APPLICATION_NAME, mock(Application.class));
+        ruleParameters.put(BeforeProvisioningRule.ARG_PLAN, mock(ProvisioningPlan.class));
+        ruleParameters.put(BeforeProvisioningRule.ARG_APPLICATION, mock(Application.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

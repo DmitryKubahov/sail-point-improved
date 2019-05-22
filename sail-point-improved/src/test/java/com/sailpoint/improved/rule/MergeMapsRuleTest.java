@@ -59,11 +59,11 @@ public class MergeMapsRuleTest {
      * Output:
      * - test map of execution
      * Expectation:
-     * - application as in rule context args by name {@link MergeMapsRule#ARG_APPLICATION_NAME}
-     * - schema as in rule context args by name {@link MergeMapsRule#ARG_SCHEMA_NAME}
-     * - current as in rule context args by name {@link MergeMapsRule#ARG_CURRENT_NAME}
-     * - newObject as in rule context args by name {@link MergeMapsRule#ARG_NEW_OBJECT_NAME}
-     * - mergeAttrs as in rule context args by name {@link MergeMapsRule#ARG_MERGE_ATTRS_NAME}
+     * - application as in rule context args by name {@link MergeMapsRule#ARG_APPLICATION}
+     * - schema as in rule context args by name {@link MergeMapsRule#ARG_SCHEMA}
+     * - current as in rule context args by name {@link MergeMapsRule#ARG_CURRENT}
+     * - newObject as in rule context args by name {@link MergeMapsRule#ARG_NEW_OBJECT}
+     * - mergeAttrs as in rule context args by name {@link MergeMapsRule#ARG_MERGE_ATTRS}
      */
     @Test
     public void normalTest() throws GeneralException {
@@ -75,19 +75,19 @@ public class MergeMapsRuleTest {
             MergeMapsRule.MergeMapsRuleArguments arguments = (MergeMapsRule.MergeMapsRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
-                    testRuleContext.getArguments().get(MergeMapsRule.ARG_APPLICATION_NAME),
+                    testRuleContext.getArguments().get(MergeMapsRule.ARG_APPLICATION),
                     arguments.getApplication());
             assertEquals("Schema is not match",
-                    testRuleContext.getArguments().get(MergeMapsRule.ARG_SCHEMA_NAME),
+                    testRuleContext.getArguments().get(MergeMapsRule.ARG_SCHEMA),
                     arguments.getSchema());
             assertEquals("Current is not match",
-                    testRuleContext.getArguments().get(MergeMapsRule.ARG_CURRENT_NAME),
+                    testRuleContext.getArguments().get(MergeMapsRule.ARG_CURRENT),
                     arguments.getCurrent());
             assertEquals("NewObject is not match",
-                    testRuleContext.getArguments().get(MergeMapsRule.ARG_NEW_OBJECT_NAME),
+                    testRuleContext.getArguments().get(MergeMapsRule.ARG_NEW_OBJECT),
                     arguments.getNewObject());
             assertEquals("MergeAttrs is not match",
-                    testRuleContext.getArguments().get(MergeMapsRule.ARG_MERGE_ATTRS_NAME),
+                    testRuleContext.getArguments().get(MergeMapsRule.ARG_MERGE_ATTRS),
                     arguments.getMergeAttrs());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -139,13 +139,13 @@ public class MergeMapsRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(MergeMapsRule.ARG_APPLICATION_NAME, new Application());
-        ruleParameters.put(MergeMapsRule.ARG_SCHEMA_NAME, new Schema());
-        ruleParameters.put(MergeMapsRule.ARG_CURRENT_NAME,
+        ruleParameters.put(MergeMapsRule.ARG_APPLICATION, new Application());
+        ruleParameters.put(MergeMapsRule.ARG_SCHEMA, new Schema());
+        ruleParameters.put(MergeMapsRule.ARG_CURRENT,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
-        ruleParameters.put(MergeMapsRule.ARG_NEW_OBJECT_NAME,
+        ruleParameters.put(MergeMapsRule.ARG_NEW_OBJECT,
                 Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID()));
-        ruleParameters.put(MergeMapsRule.ARG_MERGE_ATTRS_NAME, Collections.singletonList(UUID.randomUUID().toString()));
+        ruleParameters.put(MergeMapsRule.ARG_MERGE_ATTRS, Collections.singletonList(UUID.randomUUID().toString()));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

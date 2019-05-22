@@ -31,18 +31,18 @@ public abstract class ReportParameterValueRule
     /**
      * Name of value argument name
      */
-    public static final String ARG_VALUE_NAME = "value";
+    public static final String ARG_VALUE = "value";
     /**
      * Name of arguments argument name
      */
-    public static final String ARG_ARGUMENTS_NAME = "arguments";
+    public static final String ARG_ARGUMENTS = "arguments";
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            ReportParameterValueRule.ARG_VALUE_NAME,
-            ReportParameterValueRule.ARG_ARGUMENTS_NAME
+            ReportParameterValueRule.ARG_VALUE,
+            ReportParameterValueRule.ARG_ARGUMENTS
     );
 
     /**
@@ -63,9 +63,9 @@ public abstract class ReportParameterValueRule
             @NonNull JavaRuleContext javaRuleContext) {
         return ReportParameterValueRuleArguments.builder()
                 .value(JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ReportParameterValueRule.ARG_VALUE_NAME))
+                        .getArgumentValueByName(javaRuleContext, ReportParameterValueRule.ARG_VALUE))
                 .arguments((Attributes) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, ReportParameterValueRule.ARG_ARGUMENTS_NAME))
+                        .getArgumentValueByName(javaRuleContext, ReportParameterValueRule.ARG_ARGUMENTS))
                 .build();
     }
 
@@ -81,12 +81,12 @@ public abstract class ReportParameterValueRule
         /**
          * Parameter value, as specified in report form
          */
-        @Argument(name = ReportParameterValueRule.ARG_VALUE_NAME)
+        @Argument(name = ReportParameterValueRule.ARG_VALUE)
         private final Object value;
         /**
          * Report arguments map
          */
-        @Argument(name = ReportParameterValueRule.ARG_ARGUMENTS_NAME)
+        @Argument(name = ReportParameterValueRule.ARG_ARGUMENTS)
         private final Attributes arguments;
     }
 }

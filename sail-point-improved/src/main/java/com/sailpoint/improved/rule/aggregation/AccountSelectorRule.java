@@ -60,53 +60,53 @@ public abstract class AccountSelectorRule<T extends Object>
     /**
      * Name of source argument name
      */
-    public static final String ARG_SOURCE_NAME = "source";
+    public static final String ARG_SOURCE = "source";
     /**
      * Name of role argument name
      */
-    public static final String ARG_ROLE_NAME = "role";
+    public static final String ARG_ROLE = "role";
     /**
      * Name of identity argument name
      */
-    public static final String ARG_IDENTITY_NAME = "identity";
+    public static final String ARG_IDENTITY = "identity";
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of links argument name
      */
-    public static final String ARG_LINKS_NAME = "links";
+    public static final String ARG_LINKS = "links";
     /**
      * Name of isSecondary argument name
      */
-    public static final String ARG_IS_SECONDARY_NAME = "isSecondary";
+    public static final String ARG_IS_SECONDARY = "isSecondary";
     /**
      * Name of project argument name
      */
-    public static final String ARG_PROJECT_NAME = "project";
+    public static final String ARG_PROJECT = "project";
     /**
      * Name of accountRequest argument name
      */
-    public static final String ARG_ACCOUNT_REQUEST_NAME = "accountRequest";
+    public static final String ARG_ACCOUNT_REQUEST = "accountRequest";
     /**
      * Name of allowCreate argument name
      */
-    public static final String ARG_ALLOW_CREATE_NAME = "allowCreate";
+    public static final String ARG_ALLOW_CREATE = "allowCreate";
 
 
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            AccountSelectorRule.ARG_SOURCE_NAME,
-            AccountSelectorRule.ARG_ROLE_NAME,
-            AccountSelectorRule.ARG_IDENTITY_NAME,
-            AccountSelectorRule.ARG_APPLICATION_NAME,
-            AccountSelectorRule.ARG_IS_SECONDARY_NAME,
-            AccountSelectorRule.ARG_PROJECT_NAME,
-            AccountSelectorRule.ARG_ACCOUNT_REQUEST_NAME,
-            AccountSelectorRule.ARG_ALLOW_CREATE_NAME
+            AccountSelectorRule.ARG_SOURCE,
+            AccountSelectorRule.ARG_ROLE,
+            AccountSelectorRule.ARG_IDENTITY,
+            AccountSelectorRule.ARG_APPLICATION,
+            AccountSelectorRule.ARG_IS_SECONDARY,
+            AccountSelectorRule.ARG_PROJECT,
+            AccountSelectorRule.ARG_ACCOUNT_REQUEST,
+            AccountSelectorRule.ARG_ALLOW_CREATE
     );
 
     /**
@@ -128,23 +128,23 @@ public abstract class AccountSelectorRule<T extends Object>
         return AccountSelectorRuleArguments
                 .builder()
                 .source(Source.valueOf((String) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_SOURCE_NAME)))
+                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_SOURCE)))
                 .role((Bundle) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_ROLE_NAME))
+                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_ROLE))
                 .identity((Identity) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_IDENTITY_NAME))
+                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_IDENTITY))
                 .application((Application) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_APPLICATION_NAME))
+                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_APPLICATION))
                 .links((List<Link>) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_LINKS_NAME))
+                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_LINKS))
                 .isSecondary((Boolean) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_IS_SECONDARY_NAME))
+                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_IS_SECONDARY))
                 .project((ProvisioningProject) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_PROJECT_NAME))
+                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_PROJECT))
                 .accountRequest((ProvisioningPlan.AccountRequest) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_ACCOUNT_REQUEST_NAME))
+                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_ACCOUNT_REQUEST))
                 .allowCreate((Boolean) JavaRuleExecutorUtil
-                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_ALLOW_CREATE_NAME))
+                        .getArgumentValueByName(javaRuleContext, AccountSelectorRule.ARG_ALLOW_CREATE))
                 .build();
     }
 
@@ -167,47 +167,47 @@ public abstract class AccountSelectorRule<T extends Object>
         /**
          * Enum value defining the source of the request (UI, LCM, Task, etc.)
          */
-        @Argument(name = AccountSelectorRule.ARG_SOURCE_NAME)
+        @Argument(name = AccountSelectorRule.ARG_SOURCE)
         private final Source source;
         /**
          * The IT role being provisioned
          */
-        @Argument(name = AccountSelectorRule.ARG_ROLE_NAME)
+        @Argument(name = AccountSelectorRule.ARG_ROLE)
         private final Bundle role;
         /**
          * The Identity to whom the role is being provisioned
          */
-        @Argument(name = AccountSelectorRule.ARG_IDENTITY_NAME)
+        @Argument(name = AccountSelectorRule.ARG_IDENTITY)
         private final Identity identity;
         /**
          * The Target application on which the entitlements will be provisioned
          */
-        @Argument(name = AccountSelectorRule.ARG_APPLICATION_NAME)
+        @Argument(name = AccountSelectorRule.ARG_APPLICATION)
         private final Application application;
         /**
          * List of all available links held by the Identity
          */
-        @Argument(name = AccountSelectorRule.ARG_LINKS_NAME)
+        @Argument(name = AccountSelectorRule.ARG_LINKS)
         private final List<Link> links;
         /**
          * True if this is not the first assignment of this role to this user
          */
-        @Argument(name = AccountSelectorRule.ARG_IS_SECONDARY_NAME)
+        @Argument(name = AccountSelectorRule.ARG_IS_SECONDARY)
         private final Boolean isSecondary;
         /**
          * Provisioning project for the provisioning request
          */
-        @Argument(name = AccountSelectorRule.ARG_PROJECT_NAME)
+        @Argument(name = AccountSelectorRule.ARG_PROJECT)
         private final ProvisioningProject project;
         /**
          * Account request containing details to be provisioned to the selected target account
          */
-        @Argument(name = AccountSelectorRule.ARG_ACCOUNT_REQUEST_NAME)
+        @Argument(name = AccountSelectorRule.ARG_ACCOUNT_REQUEST)
         private final ProvisioningPlan.AccountRequest accountRequest;
         /**
          * True if account creation is allowed (i.e. if the system can accept and act upon the return from the rule of a new Link with no nativeIdentity)
          */
-        @Argument(name = AccountSelectorRule.ARG_ALLOW_CREATE_NAME)
+        @Argument(name = AccountSelectorRule.ARG_ALLOW_CREATE)
         private final Boolean allowCreate;
     }
 }

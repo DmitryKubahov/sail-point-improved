@@ -10,14 +10,13 @@ import sailpoint.object.Certification;
 import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Rule;
 import sailpoint.tools.GeneralException;
-import sailpoint.tools.Message;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
@@ -56,15 +55,14 @@ public class CertificationAutomaticClosingRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - random boolean test value
+     * - null, as it is a rule without output
      * Expectation:
-     * - certification as in rule context args by name {@link CertificationAutomaticClosingRule#ARG_CERTIFICATION_NAME}
+     * - certification as in rule context args by name {@link CertificationAutomaticClosingRule#ARG_CERTIFICATION}
      * - context as in sailpoint context in rule context
      */
     @Test
     public void normalExecutionTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        Boolean testResult = new Random().nextBoolean();
 
         doAnswer(invocation -> {
             assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
@@ -72,15 +70,16 @@ public class CertificationAutomaticClosingRuleTest {
                     .getArguments()[1];
             assertEquals("Certification is not match",
                     testRuleContext.getArguments()
-                            .get(CertificationAutomaticClosingRule.ARG_CERTIFICATION_NAME),
+                            .get(CertificationAutomaticClosingRule.ARG_CERTIFICATION),
                     arguments.getCertification());
-            return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+            return null;
+        }).when(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
 
-        assertEquals(testResult, testRule.execute(testRuleContext));
+        assertNull(testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
         verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
     }
 
     /**
@@ -103,6 +102,7 @@ public class CertificationAutomaticClosingRuleTest {
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
             verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecuteNoneOutput(eq(sailPointContext), any());
         }
     }
 
@@ -126,7 +126,7 @@ public class CertificationAutomaticClosingRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(CertificationAutomaticClosingRule.ARG_CERTIFICATION_NAME, mock(Certification.class));
+        ruleParameters.put(CertificationAutomaticClosingRule.ARG_CERTIFICATION, mock(Certification.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }

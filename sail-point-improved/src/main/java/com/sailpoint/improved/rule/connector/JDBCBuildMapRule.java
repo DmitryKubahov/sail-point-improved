@@ -36,32 +36,32 @@ public abstract class JDBCBuildMapRule
     /**
      * Name of application argument name
      */
-    public static final String ARG_APPLICATION_NAME = "application";
+    public static final String ARG_APPLICATION = "application";
     /**
      * Name of schema argument name
      */
-    public static final String ARG_SCHEMA_NAME = "schema";
+    public static final String ARG_SCHEMA = "schema";
     /**
      * Name of state argument name
      */
-    public static final String ARG_STATE_NAME = "state";
+    public static final String ARG_STATE = "state";
     /**
      * Name of result set argument name
      */
-    public static final String ARG_RESULT_SET_NAME = "result";
+    public static final String ARG_RESULT_SET = "result";
     /**
      * Name of connection argument name
      */
-    public static final String ARG_CONNECTION_NAME = "connection";
+    public static final String ARG_CONNECTION = "connection";
     /**
      * None nulls arguments
      */
     public static final List<String> NONE_NULL_ARGUMENTS_NAME = Arrays.asList(
-            JDBCBuildMapRule.ARG_APPLICATION_NAME,
-            JDBCBuildMapRule.ARG_SCHEMA_NAME,
-            JDBCBuildMapRule.ARG_STATE_NAME,
-            JDBCBuildMapRule.ARG_RESULT_SET_NAME,
-            JDBCBuildMapRule.ARG_CONNECTION_NAME
+            JDBCBuildMapRule.ARG_APPLICATION,
+            JDBCBuildMapRule.ARG_SCHEMA,
+            JDBCBuildMapRule.ARG_STATE,
+            JDBCBuildMapRule.ARG_RESULT_SET,
+            JDBCBuildMapRule.ARG_CONNECTION
     );
 
     /**
@@ -82,15 +82,15 @@ public abstract class JDBCBuildMapRule
         return JDBCBuildMapRuleArguments
                 .builder()
                 .application((Application) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_APPLICATION_NAME))
+                        getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_APPLICATION))
                 .schema((Schema) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_SCHEMA_NAME))
+                        getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_SCHEMA))
                 .state((Map<String, Object>) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_STATE_NAME))
+                        getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_STATE))
                 .result((ResultSet) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_RESULT_SET_NAME))
+                        getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_RESULT_SET))
                 .connection((Connection) JavaRuleExecutorUtil.
-                        getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_CONNECTION_NAME))
+                        getArgumentValueByName(javaRuleContext, JDBCBuildMapRule.ARG_CONNECTION))
                 .build();
     }
 
@@ -108,27 +108,27 @@ public abstract class JDBCBuildMapRule
         /**
          * A reference to the Application object
          */
-        @Argument(name = JDBCBuildMapRule.ARG_APPLICATION_NAME)
+        @Argument(name = JDBCBuildMapRule.ARG_APPLICATION)
         private final Application application;
         /**
          * A reference to the Schema object for the JDBC source being read
          */
-        @Argument(name = JDBCBuildMapRule.ARG_SCHEMA_NAME)
+        @Argument(name = JDBCBuildMapRule.ARG_SCHEMA)
         private final Schema schema;
         /**
          * A Map that can be used to store and share data between executions of this rule during a single aggregation run
          */
-        @Argument(name = JDBCBuildMapRule.ARG_STATE_NAME)
+        @Argument(name = JDBCBuildMapRule.ARG_STATE)
         private final Map<String, Object> state;
         /**
          * The current ResultSet from the JDBC connector
          */
-        @Argument(name = JDBCBuildMapRule.ARG_RESULT_SET_NAME)
+        @Argument(name = JDBCBuildMapRule.ARG_RESULT_SET)
         private final ResultSet result;
         /**
          * A reference to the current SQL connection
          */
-        @Argument(name = JDBCBuildMapRule.ARG_CONNECTION_NAME)
+        @Argument(name = JDBCBuildMapRule.ARG_CONNECTION)
         private final Connection connection;
     }
 }

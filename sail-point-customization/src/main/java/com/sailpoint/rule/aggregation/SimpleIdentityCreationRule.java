@@ -17,10 +17,9 @@ public class SimpleIdentityCreationRule extends IdentityCreationRule {
      * Log {@link Identity#ATT_LASTNAME} and {@link Identity#ATT_FIRSTNAME} by INFO level
      */
     @Override
-    protected Object internalExecute(SailPointContext context,
-                                     IdentityCreationRuleArguments arguments) {
+    protected void internalExecuteNoneOutput(SailPointContext context,
+                                             IdentityCreationRuleArguments arguments) {
         log.info("First name:[{}]", arguments.getIdentity().getFirstname());
         log.info("Last name:[{}]", arguments.getIdentity().getLastname());
-        return arguments.getIdentity();
     }
 }

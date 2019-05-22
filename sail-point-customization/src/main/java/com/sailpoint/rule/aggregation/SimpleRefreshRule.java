@@ -16,8 +16,7 @@ public class SimpleRefreshRule extends RefreshRule {
      * Log identity display name by INFO log
      */
     @Override
-    protected Object internalExecute(SailPointContext context, RefreshRuleArguments arguments) {
+    protected void internalExecuteNoneOutput(SailPointContext context, RefreshRuleArguments arguments) {
         log.info("Identity display name:[{}]", arguments.getIdentity().getDisplayName());
-        return arguments.getIdentity();
     }
 }

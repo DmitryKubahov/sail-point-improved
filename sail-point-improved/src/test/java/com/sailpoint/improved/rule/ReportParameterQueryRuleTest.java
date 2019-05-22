@@ -59,9 +59,9 @@ public class ReportParameterQueryRuleTest {
      * Output:
      * - test object value
      * Expectation:
-     * - value as in rule context args by name {@link ReportParameterQueryRule#ARG_VALUE_NAME}
-     * - arguments as in rule context args by name {@link ReportParameterQueryRule#ARG_ARGUMENTS_NAME}
-     * - queryOptions as in rule context args by name {@link ReportParameterQueryRule#ARG_QUERY_OPTIONS_NAME}
+     * - value as in rule context args by name {@link ReportParameterQueryRule#ARG_VALUE}
+     * - arguments as in rule context args by name {@link ReportParameterQueryRule#ARG_ARGUMENTS}
+     * - queryOptions as in rule context args by name {@link ReportParameterQueryRule#ARG_QUERY_OPTIONS}
      * - context as in sailpoint context in rule context
      */
     @Test
@@ -74,13 +74,13 @@ public class ReportParameterQueryRuleTest {
             ReportParameterQueryRule.ReportParameterQueryRuleArguments arguments = (ReportParameterQueryRule.ReportParameterQueryRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Value is not match",
-                    testRuleContext.getArguments().get(ReportParameterQueryRule.ARG_VALUE_NAME),
+                    testRuleContext.getArguments().get(ReportParameterQueryRule.ARG_VALUE),
                     arguments.getValue());
             assertEquals("Arguments is not match",
-                    testRuleContext.getArguments().get(ReportParameterQueryRule.ARG_ARGUMENTS_NAME),
+                    testRuleContext.getArguments().get(ReportParameterQueryRule.ARG_ARGUMENTS),
                     arguments.getArguments());
             assertEquals("QueryOptions is not match",
-                    testRuleContext.getArguments().get(ReportParameterQueryRule.ARG_QUERY_OPTIONS_NAME),
+                    testRuleContext.getArguments().get(ReportParameterQueryRule.ARG_QUERY_OPTIONS),
                     arguments.getQueryOptions());
             return testResult;
         }).when(testRule).internalExecute(eq(sailPointContext), any());
@@ -134,9 +134,9 @@ public class ReportParameterQueryRuleTest {
      */
     private JavaRuleContext buildTestJavaRuleContext() {
         Map<String, Object> ruleParameters = new HashMap<>();
-        ruleParameters.put(ReportParameterQueryRule.ARG_VALUE_NAME, new Object());
-        ruleParameters.put(ReportParameterQueryRule.ARG_ARGUMENTS_NAME, mock(Attributes.class));
-        ruleParameters.put(ReportParameterQueryRule.ARG_QUERY_OPTIONS_NAME, mock(QueryOptions.class));
+        ruleParameters.put(ReportParameterQueryRule.ARG_VALUE, new Object());
+        ruleParameters.put(ReportParameterQueryRule.ARG_ARGUMENTS, mock(Attributes.class));
+        ruleParameters.put(ReportParameterQueryRule.ARG_QUERY_OPTIONS, mock(QueryOptions.class));
         return new JavaRuleContext(this.sailPointContext, ruleParameters);
     }
 }
