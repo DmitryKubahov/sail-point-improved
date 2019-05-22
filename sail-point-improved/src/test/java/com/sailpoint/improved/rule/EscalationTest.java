@@ -57,7 +57,7 @@ public class EscalationTest {
      * Output:
      * - test object value
      * Expectation:
-     * - newOwner as in rule context args by name {@link EscalationRule#ARG_ITEM_NAME}
+     * - item as in rule context args by name {@link EscalationRule#ARG_ITEM_NAME}
      * - context as in sailpoint context in rule context
      */
     @Test
