@@ -15,10 +15,10 @@ import sailpoint.tools.GeneralException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.UUID;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
@@ -57,7 +57,7 @@ public class ReportCustomizerRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test object value
+     * - null, as rule does not return anything
      * Expectation:
      * - taskDefinition as in rule context args by name {@link ReportCustomizerRule#ARG_TASK_DEFINITION_NAME}
      * - report as in rule context args by name {@link ReportCustomizerRule#ARG_REPORT_NAME}
@@ -67,7 +67,6 @@ public class ReportCustomizerRuleTest {
     @Test
     public void normalExecutionTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        String testResult = UUID.randomUUID().toString();
 
         doAnswer(invocation -> {
             assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
@@ -82,10 +81,10 @@ public class ReportCustomizerRuleTest {
             assertEquals("Local is not match",
                     testRuleContext.getArguments().get(ReportCustomizerRule.ARG_LOCALE_NAME),
                     arguments.getLocale());
-            return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+            return null;
+        }).when(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
 
-        assertEquals(testResult, testRule.execute(testRuleContext));
+        assertNull(testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
         verify(testRule).internalExecute(eq(sailPointContext), any());
