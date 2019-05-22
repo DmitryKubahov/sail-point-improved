@@ -28,7 +28,7 @@ import static org.mockito.Mockito.verify;
 /**
  * Test for {@link EscalationRule} class
  */
-public class EscalationTest {
+public class EscalationRuleTest {
 
     /**
      * Test instance of {@link EscalationRule}
@@ -41,7 +41,7 @@ public class EscalationTest {
     private SailPointContext sailPointContext;
 
     /**
-     * Init {@link EscalationTest#testRule} and {@link EscalationTest#sailPointContext} for test
+     * Init {@link EscalationRuleTest#testRule} and {@link EscalationRuleTest#sailPointContext} for test
      */
     @Before
     public void init() {
