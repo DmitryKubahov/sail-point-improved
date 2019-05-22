@@ -72,3 +72,23 @@ Contains java implementation for rule types:
 ** [*] ReportValidation
 ** [*] ReportParameterQuery
 ** [*] ReportParameterValue
+
+* [*] *Notification/Assignment rules*:
+** [*] EmailRecipient
+** [*] Escalation
+** [*] ApprovalAssignment
+** [*] FallbackWorkItemForward
+** [*] WorkItemForward
+
+* [*] *Owner rules*:
+** [*] GroupOwner
+
+* [*] *Scoping rules*:
+** [*] ScopeCorrelation
+** [*] ScopeSelection
+
+* [*] *Identity and Account Mapping rules*:
+** [*] IdentityAttribute
+** [*] IdentityAttributeTarget
+** [*] Listener
+** [*] LinkAttribute
