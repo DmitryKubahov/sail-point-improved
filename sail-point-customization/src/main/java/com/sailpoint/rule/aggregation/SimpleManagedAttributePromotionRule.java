@@ -16,9 +16,8 @@ public class SimpleManagedAttributePromotionRule extends ManagedAttributePromoti
      * Log managed attribute promotion rule by INFO level
      */
     @Override
-    protected Object internalExecute(SailPointContext context,
-                                     ManagedAttributePromotionRuleArguments arguments) {
+    protected void internalExecuteNoneOutput(SailPointContext context,
+                                             ManagedAttributePromotionRuleArguments arguments) {
         log.info("Managed attribute promotion rule:[{}]", arguments.getAttribute());
-        return arguments.getAttribute();
     }
 }

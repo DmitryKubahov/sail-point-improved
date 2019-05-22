@@ -3,6 +3,7 @@ package com.sailpoint.improved.rule.aggregation;
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
 import com.sailpoint.improved.rule.AbstractJavaRuleExecutor;
+import com.sailpoint.improved.rule.AbstractNoneOutputJavaRuleExecutor;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
@@ -35,8 +36,7 @@ import java.util.Map;
  * None. The identity object passed as parameter to the rule should be edited directly by the rule.
  */
 @Slf4j
-public abstract class RefreshRule
-        extends AbstractJavaRuleExecutor<Object, RefreshRule.RefreshRuleArguments> {
+public abstract class RefreshRule extends AbstractNoneOutputJavaRuleExecutor<RefreshRule.RefreshRuleArguments> {
 
     /**
      * Name of environment argument name

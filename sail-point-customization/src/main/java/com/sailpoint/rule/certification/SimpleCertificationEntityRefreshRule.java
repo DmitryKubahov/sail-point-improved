@@ -16,9 +16,8 @@ public class SimpleCertificationEntityRefreshRule extends CertificationEntityRef
      * Log current certification entity by INFO and return it
      */
     @Override
-    protected Object internalExecute(SailPointContext context, CertificationEntityRefreshRuleArguments arguments) {
-
+    protected void internalExecuteNoneOutput(SailPointContext context,
+                                             CertificationEntityRefreshRuleArguments arguments) {
         log.info("Certification entity:[{}]", arguments.getCertificationEntity());
-        return arguments.getCertificationEntity();
     }
 }

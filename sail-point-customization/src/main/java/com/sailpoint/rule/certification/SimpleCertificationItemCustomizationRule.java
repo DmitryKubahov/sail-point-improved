@@ -16,11 +16,9 @@ public class SimpleCertificationItemCustomizationRule extends CertificationItemC
      * Log current certifiable entity and certification item by INFO and return item
      */
     @Override
-    protected Object internalExecute(SailPointContext context,
-                                     CertificationItemCustomizationRuleArguments arguments) {
-
+    protected void internalExecuteNoneOutput(SailPointContext context,
+                                             CertificationItemCustomizationRuleArguments arguments) {
         log.info("Certifiable entity:[{}]", arguments.getCertifiableEntity());
         log.info("Certifiable item:[{}]", arguments.getItem());
-        return arguments.getItem();
     }
 }

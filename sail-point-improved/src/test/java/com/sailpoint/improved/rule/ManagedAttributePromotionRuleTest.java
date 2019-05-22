@@ -19,6 +19,7 @@ import java.util.UUID;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
@@ -57,7 +58,7 @@ public class ManagedAttributePromotionRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test map of execution
+     * - null as it is a rule without outputs
      * Expectation:
      * - attribute as in rule context args by name {@link ManagedAttributePromotionRule#ARG_ATTRIBUTE}
      * - application as in rule context args by name {@link ManagedAttributePromotionRule#ARG_APPLICATION}
@@ -67,8 +68,6 @@ public class ManagedAttributePromotionRuleTest {
     @Test
     public void normalTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        Map<String, Object> testResult = Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID());
-
         doAnswer(invocation -> {
             assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
             ManagedAttributePromotionRule.ManagedAttributePromotionRuleArguments arguments = (ManagedAttributePromotionRule.ManagedAttributePromotionRuleArguments) invocation
@@ -82,13 +81,14 @@ public class ManagedAttributePromotionRuleTest {
             assertEquals("State is not match",
                     testRuleContext.getArguments().get(ManagedAttributePromotionRule.ARG_STATE),
                     arguments.getState());
-            return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+            return null;
+        }).when(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
 
-        assertEquals(testResult, testRule.execute(testRuleContext));
+        assertNull(testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
         verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
     }
 
     /**
@@ -111,6 +111,7 @@ public class ManagedAttributePromotionRuleTest {
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
             verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecuteNoneOutput(eq(sailPointContext), any());
         }
     }
 

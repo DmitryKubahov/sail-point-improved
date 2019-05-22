@@ -22,6 +22,7 @@ import java.util.UUID;
 
 import static com.sailpoint.improved.JUnit4Helper.assertThrows;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
@@ -60,7 +61,7 @@ public class CertificationItemCustomizationRuleTest {
      * Input:
      * - valid rule context
      * Output:
-     * - test object value
+     * - null, as it is a rule without outputs
      * Expectation:
      * - certification as in rule context args by name {@link CertificationItemCustomizationRule#ARG_CERTIFICATION}
      * - certifiable as in rule context args by name {@link CertificationItemCustomizationRule#ARG_CERTIFIABLE}
@@ -73,7 +74,6 @@ public class CertificationItemCustomizationRuleTest {
     @Test
     public void normalExecutionTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        String testResult = UUID.randomUUID().toString();
 
         doAnswer(invocation -> {
             assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
@@ -100,13 +100,14 @@ public class CertificationItemCustomizationRuleTest {
             assertEquals("State is not match",
                     testRuleContext.getArguments().get(CertificationItemCustomizationRule.ARG_STATE),
                     arguments.getState());
-            return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+            return null;
+        }).when(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
 
-        assertEquals(testResult, testRule.execute(testRuleContext));
+        assertNull(testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
         verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
     }
 
     /**
@@ -129,6 +130,7 @@ public class CertificationItemCustomizationRuleTest {
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
             verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecuteNoneOutput(eq(sailPointContext), any());
         }
     }
 

@@ -3,6 +3,7 @@ package com.sailpoint.improved.rule.aggregation;
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
 import com.sailpoint.improved.rule.AbstractJavaRuleExecutor;
+import com.sailpoint.improved.rule.AbstractNoneOutputJavaRuleExecutor;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
@@ -31,12 +32,12 @@ import java.util.Map;
  * identity attributes are refreshed (including manager correlation) but before any Refresh rule specified for the
  * task is run.
  * <p>
- * Outputs: None; the ManagedAttribute object passed as parameter to the rule should be edited directly by the
- * rule.
+ * Outputs:
+ * None; the ManagedAttribute object passed as parameter to the rule should be edited directly by the rule.
  */
 @Slf4j
 public abstract class ManagedAttributePromotionRule
-        extends AbstractJavaRuleExecutor<Object, ManagedAttributePromotionRule.ManagedAttributePromotionRuleArguments> {
+        extends AbstractNoneOutputJavaRuleExecutor<ManagedAttributePromotionRule.ManagedAttributePromotionRuleArguments> {
 
     /**
      * Name of attribute argument name

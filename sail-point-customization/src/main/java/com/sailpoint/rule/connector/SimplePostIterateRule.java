@@ -16,10 +16,9 @@ public class SimplePostIterateRule extends PostIterateRule {
      * Null. Just print stats to log by INFO level
      */
     @Override
-    protected Object internalExecute(SailPointContext context,
-                                     PostIterateRuleArguments arguments) {
+    protected void internalExecuteNoneOutput(SailPointContext context,
+                                             PostIterateRuleArguments arguments) {
         log.debug("Try to get default map");
         log.info("Stats:[{}]", arguments.getStats());
-        return null;
     }
 }

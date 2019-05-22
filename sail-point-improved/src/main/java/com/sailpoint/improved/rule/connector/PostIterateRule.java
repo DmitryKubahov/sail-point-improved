@@ -2,7 +2,7 @@ package com.sailpoint.improved.rule.connector;
 
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
-import com.sailpoint.improved.rule.AbstractJavaRuleExecutor;
+import com.sailpoint.improved.rule.AbstractNoneOutputJavaRuleExecutor;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
@@ -23,10 +23,14 @@ import java.util.Map;
  * CustomGlobal), clean up files, or mark statistics in a configuration object that will be used by the {@link PreIterateRule}
  * during a subsequent aggregation. Since it runs only once per aggregation, this rule generally has a minimal
  * impact on aggregation performance.
+ * <p>
+ * Outputs:
+ * None. The rule’s logic acts upon objects outside of the aggregation data flow, so subsequent steps in
+ * the process do not expect a return value from this rule and will not act upon it if one were provided.
  */
 @Slf4j
 public abstract class PostIterateRule
-        extends AbstractJavaRuleExecutor<Object, PostIterateRule.PostIterateRuleArguments> {
+        extends AbstractNoneOutputJavaRuleExecutor<PostIterateRule.PostIterateRuleArguments> {
 
     /**
      * Name of application argument name

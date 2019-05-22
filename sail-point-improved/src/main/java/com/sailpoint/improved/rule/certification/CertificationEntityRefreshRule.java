@@ -3,6 +3,7 @@ package com.sailpoint.improved.rule.certification;
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
 import com.sailpoint.improved.rule.AbstractJavaRuleExecutor;
+import com.sailpoint.improved.rule.AbstractNoneOutputJavaRuleExecutor;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
@@ -30,7 +31,7 @@ import java.util.List;
  */
 @Slf4j
 public abstract class CertificationEntityRefreshRule
-        extends AbstractJavaRuleExecutor<Object, CertificationEntityRefreshRule.CertificationEntityRefreshRuleArguments> {
+        extends AbstractNoneOutputJavaRuleExecutor<CertificationEntityRefreshRule.CertificationEntityRefreshRuleArguments> {
 
     /**
      * Name of certification argument name

@@ -2,7 +2,7 @@ package com.sailpoint.improved.rule.provisioning;
 
 import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentsContainer;
-import com.sailpoint.improved.rule.AbstractJavaRuleExecutor;
+import com.sailpoint.improved.rule.AbstractNoneOutputJavaRuleExecutor;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
@@ -25,11 +25,11 @@ import java.util.List;
  * regardless of connector type.
  * <p>
  * Output:
- * Outputs: none; the rule’s actions are outside the direct provisioning process so no return value is expected or used
+ * None; the rule’s actions are outside the direct provisioning process so no return value is expected or used
  */
 @Slf4j
 public abstract class AfterProvisioningRule
-        extends AbstractJavaRuleExecutor<Object, AfterProvisioningRule.AfterProvisioningRuleArguments> {
+        extends AbstractNoneOutputJavaRuleExecutor<AfterProvisioningRule.AfterProvisioningRuleArguments> {
 
     /**
      * Name of plan argument name

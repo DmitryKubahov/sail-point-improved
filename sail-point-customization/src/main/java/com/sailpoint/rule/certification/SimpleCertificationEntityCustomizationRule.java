@@ -16,10 +16,8 @@ public class SimpleCertificationEntityCustomizationRule extends CertificationEnt
      * Log current certifiable entity by INFO and return it
      */
     @Override
-    protected Object internalExecute(SailPointContext context,
-                                     CertificationEntityCustomizationRuleArguments arguments) {
-
+    protected void internalExecuteNoneOutput(SailPointContext context,
+                                             CertificationEntityCustomizationRuleArguments arguments) {
         log.info("Certifiable entity:[{}]", arguments.getCertifiableEntity());
-        return arguments.getCertifiableEntity();
     }
 }

@@ -27,7 +27,6 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Test for {@link ListenerRule} class
@@ -106,6 +105,7 @@ public class ListenerRuleTest {
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
         verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
     }
 
     /**
@@ -121,14 +121,12 @@ public class ListenerRuleTest {
     @Test
     public void nullOldValueArgumentValueTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
-        Object testResult = UUID.randomUUID();
-
         testRuleContext.getArguments().remove(ListenerRule.ARG_OLD_VALUE);
-        when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
 
-        assertEquals(testResult, testRule.execute(testRuleContext));
+        testRule.execute(testRuleContext);
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
     }
 
     /**
@@ -149,6 +147,7 @@ public class ListenerRuleTest {
         testRule.execute(testRuleContext);
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
     }
 
     /**
@@ -171,6 +170,7 @@ public class ListenerRuleTest {
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
             verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecuteNoneOutput(eq(sailPointContext), any());
         }
     }
 

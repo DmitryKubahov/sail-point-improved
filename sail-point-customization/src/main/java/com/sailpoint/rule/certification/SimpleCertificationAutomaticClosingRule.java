@@ -16,9 +16,8 @@ public class SimpleCertificationAutomaticClosingRule extends CertificationAutoma
      * Log current certification by INFO and return it
      */
     @Override
-    protected Object internalExecute(SailPointContext context, CertificationAutomaticClosingRuleArguments arguments) {
-
+    protected void internalExecuteNoneOutput(SailPointContext context,
+                                             CertificationAutomaticClosingRuleArguments arguments) {
         log.info("Certification:[{}]", arguments.getCertification());
-        return arguments.getCertification();
     }
 }

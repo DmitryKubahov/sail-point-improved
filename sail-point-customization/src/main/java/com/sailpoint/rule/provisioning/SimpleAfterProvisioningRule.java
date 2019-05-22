@@ -16,8 +16,7 @@ public class SimpleAfterProvisioningRule extends AfterProvisioningRule {
      * Log current result and return it
      */
     @Override
-    protected Object internalExecute(SailPointContext context, AfterProvisioningRuleArguments arguments) {
+    protected void internalExecuteNoneOutput(SailPointContext context, AfterProvisioningRuleArguments arguments) {
         log.info("Provisioning result:[{}]", arguments.getResult());
-        return arguments.getResult();
     }
 }
