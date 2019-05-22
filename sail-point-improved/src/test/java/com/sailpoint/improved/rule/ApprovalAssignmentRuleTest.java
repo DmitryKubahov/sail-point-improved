@@ -30,7 +30,7 @@ import static org.mockito.Mockito.verify;
 /**
  * Test for {@link ApprovalAssignmentRule} class
  */
-public class ApprovalAssignmentTest {
+public class ApprovalAssignmentRuleTest {
 
     /**
      * Test instance of {@link ApprovalAssignmentRule}
@@ -43,7 +43,7 @@ public class ApprovalAssignmentTest {
     private SailPointContext sailPointContext;
 
     /**
-     * Init {@link ApprovalAssignmentTest#testRule} and {@link ApprovalAssignmentTest#sailPointContext} for test
+     * Init {@link ApprovalAssignmentRuleTest#testRule} and {@link ApprovalAssignmentRuleTest#sailPointContext} for test
      */
     @Before
     public void init() {
