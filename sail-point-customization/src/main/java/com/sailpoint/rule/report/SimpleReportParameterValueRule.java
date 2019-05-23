@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.report.ReportParameterValueRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 /**
  * Simple implementation of {@link ReportParameterValueRule} rule
@@ -19,7 +19,7 @@ public class SimpleReportParameterValueRule extends ReportParameterValueRule {
      */
     @Override
     @Argument(name = "result", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Object internalExecute(SailPointContext sailPointContext,
+    protected Object internalExecute(JavaRuleContext context,
                                      ReportParameterValueRuleArguments arguments) {
         log.info("Report parameter value:[{}]", arguments.getValue());
         return arguments.getValue();

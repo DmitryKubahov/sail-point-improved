@@ -72,7 +72,7 @@ public class JDBCProvisionRuleTest {
         ProvisioningResult testResult = mock(ProvisioningResult.class);
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             JDBCProvisionRule.JDBCProvisionRuleArguments arguments = (JDBCProvisionRule.JDBCProvisionRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
@@ -87,12 +87,12 @@ public class JDBCProvisionRuleTest {
             assertEquals("Plan is not match", testRuleContext.getArguments().get(JDBCProvisionRule.ARG_PLAN),
                     arguments.getPlan());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -114,7 +114,7 @@ public class JDBCProvisionRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

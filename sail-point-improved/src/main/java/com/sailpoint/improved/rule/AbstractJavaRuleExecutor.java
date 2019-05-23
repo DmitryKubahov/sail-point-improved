@@ -3,7 +3,6 @@ package com.sailpoint.improved.rule;
 import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
 import sailpoint.object.JavaRuleContext;
 import sailpoint.object.JavaRuleExecutor;
 import sailpoint.tools.GeneralException;
@@ -68,7 +67,7 @@ public abstract class AbstractJavaRuleExecutor<T extends Object, C> implements J
 
         log.trace("Rule:[{}], stage: execute rule", ruleType);
 
-        return internalExecute(javaRuleContext.getContext(), containerArguments);
+        return internalExecute(javaRuleContext, containerArguments);
     }
 
     /**
@@ -82,12 +81,12 @@ public abstract class AbstractJavaRuleExecutor<T extends Object, C> implements J
     /**
      * Internal execution of java rule
      *
-     * @param sailPointContext   - sail point context
+     * @param javaRuleContext    - java rule context
      * @param containerArguments - argument container for current rule
      * @return rule execution result
      * @throws GeneralException - execution error
      */
-    protected abstract T internalExecute(SailPointContext sailPointContext, C containerArguments)
+    protected abstract T internalExecute(JavaRuleContext javaRuleContext, C containerArguments)
             throws GeneralException;
 
     /**

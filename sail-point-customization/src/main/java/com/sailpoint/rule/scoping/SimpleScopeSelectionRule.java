@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.scoping.ScopeSelectionRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Scope;
 
 /**
@@ -20,7 +20,7 @@ public class SimpleScopeSelectionRule extends ScopeSelectionRule {
      */
     @Override
     @Argument(name = "scope", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Scope internalExecute(SailPointContext sailPointContext,
+    protected Scope internalExecute(JavaRuleContext context,
                                     ScopeSelectionRuleArguments arguments) {
         log.info("Current identity:[{}]", arguments.getIdentity());
         return new Scope("All");

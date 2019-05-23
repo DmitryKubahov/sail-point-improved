@@ -69,7 +69,7 @@ public class PreIterateRuleTest {
         InputStream testResult = mock(InputStream.class);
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             PreIterateRule.PreIterateRuleArguments arguments = (PreIterateRule.PreIterateRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
@@ -82,12 +82,12 @@ public class PreIterateRuleTest {
                     testRuleContext.getArguments().get(PreIterateRule.ARG_STATS),
                     arguments.getStats());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -108,7 +108,7 @@ public class PreIterateRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

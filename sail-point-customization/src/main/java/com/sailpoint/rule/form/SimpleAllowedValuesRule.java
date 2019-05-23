@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.form.AllowedValuesRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ public class SimpleAllowedValuesRule extends AllowedValuesRule {
      */
     @Override
     @Argument(name = "value", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected String internalExecute(SailPointContext sailPointContext, AllowedValuesRuleArguments arguments) {
+    protected String internalExecute(JavaRuleContext context, AllowedValuesRuleArguments arguments) {
         log.info("Current identity:[{}]", arguments.getIdentity());
         log.info("Current form:[{}]", arguments.getForm());
         log.info("Current field:[{}]", arguments.getField());

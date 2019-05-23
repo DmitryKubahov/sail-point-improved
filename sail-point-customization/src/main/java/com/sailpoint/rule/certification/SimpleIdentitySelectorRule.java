@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.certification.IdentitySelectorRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 /**
  * Simple implementation of {@link IdentitySelectorRule} rule
@@ -19,7 +19,7 @@ public class SimpleIdentitySelectorRule extends IdentitySelectorRule {
      */
     @Override
     @Argument(name = "success", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Boolean internalExecute(SailPointContext context,
+    protected Boolean internalExecute(JavaRuleContext context,
                                       IdentitySelectorRuleArguments arguments) {
 
         log.info("Identity:[{}]", arguments.getIdentity());

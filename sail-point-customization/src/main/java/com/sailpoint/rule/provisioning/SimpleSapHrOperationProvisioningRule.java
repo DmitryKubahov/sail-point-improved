@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.provisioning.SapHrOperationProvisioningRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.object.ProvisioningResult;
 
 /**
@@ -20,7 +20,7 @@ public class SimpleSapHrOperationProvisioningRule extends SapHrOperationProvisio
      */
     @Override
     @Argument(name = "result", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected ProvisioningResult internalExecute(SailPointContext context,
+    protected ProvisioningResult internalExecute(JavaRuleContext context,
                                                  SapHrOperationProvisioningRuleArguments arguments) {
 
         log.info("Provisioning plan:[{}]", arguments.getPlan());

@@ -67,7 +67,7 @@ public class ReportParameterValueRuleTest {
         Object testResult = UUID.randomUUID();
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             ReportParameterValueRule.ReportParameterValueRuleArguments arguments = (ReportParameterValueRule.ReportParameterValueRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Value is not match",
@@ -77,12 +77,12 @@ public class ReportParameterValueRuleTest {
                     testRuleContext.getArguments().get(ReportParameterValueRule.ARG_ARGUMENTS),
                     arguments.getArguments());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -104,7 +104,7 @@ public class ReportParameterValueRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

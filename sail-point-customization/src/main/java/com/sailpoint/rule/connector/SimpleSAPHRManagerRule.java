@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.connector.SAPHRManagerRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 /**
  * Simple implementation of {@link SAPHRManagerRule} rule
@@ -19,7 +19,7 @@ public class SimpleSAPHRManagerRule extends SAPHRManagerRule {
      */
     @Override
     @Argument(name = "supervisor", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected String internalExecute(SailPointContext context, SAPHRManagerRuleArguments arguments) {
+    protected String internalExecute(JavaRuleContext context, SAPHRManagerRuleArguments arguments) {
         return null;
     }
 }

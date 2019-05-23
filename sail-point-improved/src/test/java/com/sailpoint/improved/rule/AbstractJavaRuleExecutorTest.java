@@ -63,7 +63,7 @@ public class AbstractJavaRuleExecutorTest {
     public void normalTest() throws GeneralException {
         String testValue = UUID.randomUUID().toString();
         JavaRuleContext javaRuleContext = new JavaRuleContext(this.sailPointContext, Collections.emptyMap());
-        when(abstractJavaRuleExecutor.internalExecute(eq(this.sailPointContext), any())).thenReturn(testValue);
+        when(abstractJavaRuleExecutor.internalExecute(eq(javaRuleContext), any())).thenReturn(testValue);
 
         assertEquals("Expected result of rule execution is not match", testValue,
                 this.abstractJavaRuleExecutor.execute(javaRuleContext));

@@ -3,7 +3,7 @@ package com.sailpoint.rule.mapping;
 import com.sailpoint.annotation.Rule;
 import com.sailpoint.improved.rule.mapping.ListenerRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 /**
  * Simple implementation of {@link ListenerRule} rule
@@ -16,7 +16,7 @@ public class SimpleListenerRule extends ListenerRule {
      * Log new and old value
      */
     @Override
-    protected void internalExecuteNoneOutput(SailPointContext sailPointContext,
+    protected void internalExecuteNoneOutput(JavaRuleContext context,
                                              ListenerRuleArguments arguments) {
         log.info("Old value:[{}]", arguments.getOldValue());
         log.info("New value:[{}]", arguments.getNewValue());

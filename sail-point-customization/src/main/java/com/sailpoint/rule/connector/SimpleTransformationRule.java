@@ -5,8 +5,8 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.connector.TransformationRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
 import sailpoint.connector.AbstractConnector;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.object.ResourceObject;
 
 /**
@@ -21,7 +21,7 @@ public class SimpleTransformationRule extends TransformationRule {
      */
     @Override
     @Argument(name = "resourceObject", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected ResourceObject internalExecute(SailPointContext context,
+    protected ResourceObject internalExecute(JavaRuleContext context,
                                              TransformationRuleArguments arguments) {
         log.debug("Try to get default resource object");
         ResourceObject resourceObject = AbstractConnector

@@ -2,7 +2,7 @@ package com.sailpoint.improved.rule;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.tools.GeneralException;
 
 import java.util.List;
@@ -27,25 +27,25 @@ public abstract class AbstractNoneOutputJavaRuleExecutor<C> extends AbstractJava
     /**
      * Internal execution of java rule
      *
-     * @param sailPointContext   - sail point context
+     * @param javaRuleContext    - java rule context
      * @param containerArguments - argument container for current rule
      * @return rule execution result
      * @throws GeneralException - execution error
      */
-    protected Object internalExecute(SailPointContext sailPointContext, C containerArguments)
+    protected Object internalExecute(JavaRuleContext javaRuleContext, C containerArguments)
             throws GeneralException {
-        internalExecuteNoneOutput(sailPointContext, containerArguments);
+        internalExecuteNoneOutput(javaRuleContext, containerArguments);
         return null;
     }
 
     /**
      * Internal execution of java rule without output
      *
-     * @param sailPointContext   - sail point context
+     * @param javaRuleContext    - java rule context
      * @param containerArguments - argument container for current rule
      * @throws GeneralException - execution error
      */
-    protected abstract void internalExecuteNoneOutput(SailPointContext sailPointContext, C containerArguments)
+    protected abstract void internalExecuteNoneOutput(JavaRuleContext javaRuleContext, C containerArguments)
             throws GeneralException;
 
 

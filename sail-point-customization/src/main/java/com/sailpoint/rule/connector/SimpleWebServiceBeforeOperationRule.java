@@ -5,8 +5,8 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.connector.WebServiceBeforeOperationRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
 import sailpoint.connector.webservices.EndPoint;
+import sailpoint.object.JavaRuleContext;
 
 /**
  * Simple implementation of {@link WebServiceBeforeOperationRule} rule
@@ -20,7 +20,7 @@ public class SimpleWebServiceBeforeOperationRule extends WebServiceBeforeOperati
      */
     @Override
     @Argument(name = "endpoint", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected EndPoint internalExecute(SailPointContext context,
+    protected EndPoint internalExecute(JavaRuleContext context,
                                        WebServiceBeforeOperationRuleArguments arguments) {
         log.info("EndPoint full path:[{}]", arguments.getRequestEndPoint().getFullUrl());
         return arguments.getRequestEndPoint();

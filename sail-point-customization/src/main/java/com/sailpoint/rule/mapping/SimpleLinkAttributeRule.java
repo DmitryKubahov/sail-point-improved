@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.mapping.LinkAttributeRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ public class SimpleLinkAttributeRule extends LinkAttributeRule {
      */
     @Override
     @Argument(name = "value", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Object internalExecute(SailPointContext sailPointContext,
+    protected Object internalExecute(JavaRuleContext context,
                                      LinkAttributeRule.LinkAttributeRuleArguments arguments) {
         log.info("Current link:[{}]", arguments.getLink());
         return UUID.randomUUID().toString();

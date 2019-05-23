@@ -5,8 +5,8 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.aggregation.CorrelationRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
 import sailpoint.object.Identity;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.object.ResourceObject;
 import sailpoint.workflow.IdentityLibrary;
 
@@ -32,7 +32,7 @@ public class SimpleCorrelationRule extends CorrelationRule {
      */
     @Override
     @Argument(name = "map", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Map<String, Object> internalExecute(SailPointContext context,
+    protected Map<String, Object> internalExecute(JavaRuleContext context,
                                                   CorrelationRuleArguments arguments) {
         Map<String, Object> returnMap = new HashMap<>();
         ResourceObject account = arguments.getAccount();

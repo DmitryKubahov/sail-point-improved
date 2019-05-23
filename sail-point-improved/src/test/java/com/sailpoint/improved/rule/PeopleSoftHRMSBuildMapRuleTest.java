@@ -76,7 +76,7 @@ public class PeopleSoftHRMSBuildMapRuleTest {
         Map<String, Object> testResult = Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID());
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             PeopleSoftHRMSBuildMapRule.PeopleSoftHRMSBuildMapRuleArguments arguments = (PeopleSoftHRMSBuildMapRule.PeopleSoftHRMSBuildMapRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
@@ -101,12 +101,12 @@ public class PeopleSoftHRMSBuildMapRuleTest {
                     testRuleContext.getArguments().get(PeopleSoftHRMSBuildMapRule.ARG_MAP),
                     arguments.getMap());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -128,7 +128,7 @@ public class PeopleSoftHRMSBuildMapRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

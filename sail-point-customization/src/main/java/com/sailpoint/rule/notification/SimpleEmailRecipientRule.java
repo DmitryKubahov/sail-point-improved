@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.notification.EmailRecipientRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +22,7 @@ public class SimpleEmailRecipientRule extends EmailRecipientRule {
      */
     @Override
     @Argument(name = "result", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected List<String> internalExecute(SailPointContext sailPointContext,
+    protected List<String> internalExecute(JavaRuleContext context,
                                            EmailRecipientRule.EmailRecipientRuleArguments arguments) {
         log.info("Report parameter value:[{}]", arguments.getItem());
         return Collections.singletonList("spadmin");

@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.mapping.IdentityAttributeRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ public class SimpleIdentityAttributeRule extends IdentityAttributeRule {
      */
     @Override
     @Argument(name = "attributeValue", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Object internalExecute(SailPointContext sailPointContext,
+    protected Object internalExecute(JavaRuleContext context,
                                      IdentityAttributeRule.IdentityAttributeRuleArguments arguments) {
         log.info("Current attribute definition:[{}]", arguments.getAttributeDefinition());
         log.info("Current attribute source:[{}]", arguments.getAttributeSource());

@@ -73,7 +73,7 @@ public class BuildMapRuleTest {
         testResult.put(UUID.randomUUID().toString(), UUID.randomUUID().toString());
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             BuildMapRule.BuildMapRuleArguments arguments = (BuildMapRule.BuildMapRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
@@ -92,12 +92,12 @@ public class BuildMapRuleTest {
                     testRuleContext.getArguments().get(BuildMapRule.ARG_COLUMNS),
                     arguments.getColumns());
             return testResult;
-        }).when(buildMapRule).internalExecute(eq(sailPointContext), any());
+        }).when(buildMapRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, buildMapRule.execute(testRuleContext));
         verify(buildMapRule).internalValidation(eq(testRuleContext));
         verify(buildMapRule).execute(eq(testRuleContext));
-        verify(buildMapRule).internalExecute(eq(sailPointContext), any());
+        verify(buildMapRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -119,7 +119,7 @@ public class BuildMapRuleTest {
 
             assertThrows(GeneralException.class, () -> buildMapRule.execute(testRuleContext));
             verify(buildMapRule).internalValidation(eq(testRuleContext));
-            verify(buildMapRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(buildMapRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

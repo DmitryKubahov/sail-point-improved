@@ -3,7 +3,7 @@ package com.sailpoint.rule.certification;
 import com.sailpoint.annotation.Rule;
 import com.sailpoint.improved.rule.certification.CertificationEntityCustomizationRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 /**
  * Simple implementation of {@link CertificationEntityCustomizationRule} rule
@@ -16,7 +16,7 @@ public class SimpleCertificationEntityCustomizationRule extends CertificationEnt
      * Log current certifiable entity by INFO and return it
      */
     @Override
-    protected void internalExecuteNoneOutput(SailPointContext context,
+    protected void internalExecuteNoneOutput(JavaRuleContext context,
                                              CertificationEntityCustomizationRuleArguments arguments) {
         log.info("Certifiable entity:[{}]", arguments.getCertifiableEntity());
     }

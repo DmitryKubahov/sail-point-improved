@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.aggregation.ResourceObjectCustomizationRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.object.ResourceObject;
 
 /**
@@ -20,7 +20,7 @@ public class SimpleResourceObjectCustomizationRule extends ResourceObjectCustomi
      */
     @Override
     @Argument(name = "object", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected ResourceObject internalExecute(SailPointContext context,
+    protected ResourceObject internalExecute(JavaRuleContext context,
                                              ResourceObjectCustomizationRuleArguments arguments) {
         log.debug("Get default object");
         ResourceObject object = arguments.getObject();

@@ -5,8 +5,8 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.notification.FallbackWorkItemForwardRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
 import sailpoint.object.Identity;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.tools.GeneralException;
 
 /**
@@ -23,9 +23,9 @@ public class SimpleFallbackWorkItemForwardRule extends FallbackWorkItemForwardRu
      */
     @Override
     @Argument(name = "newOwner", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Identity internalExecute(SailPointContext sailPointContext,
+    protected Identity internalExecute(JavaRuleContext context,
                                        FallbackWorkItemForwardRuleArguments arguments) throws GeneralException {
         log.info("Current owner:{}", arguments.getOwner());
-        return sailPointContext.getObjectByName(Identity.class, "spadmin");
+        return context.getContext().getObjectByName(Identity.class, "spadmin");
     }
 }

@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.provisioning.IntegrationRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.object.ProvisioningResult;
 
 /**
@@ -20,7 +20,7 @@ public class SimpleIntegrationRule extends IntegrationRule {
      */
     @Override
     @Argument(name = "result", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected ProvisioningResult internalExecute(SailPointContext context, IntegrationRuleArguments arguments) {
+    protected ProvisioningResult internalExecute(JavaRuleContext context, IntegrationRuleArguments arguments) {
         log.info("Provisioning plan:[{}]", arguments.getPlan());
         return new ProvisioningResult();
     }

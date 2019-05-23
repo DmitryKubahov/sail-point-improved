@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.form.FieldValueRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ public class SimpleFieldValueRule extends FieldValueRule {
      */
     @Override
     @Argument(name = "value", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected String internalExecute(SailPointContext sailPointContext,
+    protected String internalExecute(JavaRuleContext context,
                                      FieldValueRule.FieldValueRuleArguments arguments) {
         log.info("Current identity:[{}]", arguments.getIdentity());
         return UUID.randomUUID().toString();
