@@ -5,8 +5,8 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.connector.SAPBuildMapRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
 import sailpoint.object.Attributes;
+import sailpoint.object.JavaRuleContext;
 
 /**
  * Simple implementation of {@link SAPBuildMapRule} rule
@@ -20,7 +20,7 @@ public class SimpleSAPBuildMapRule extends SAPBuildMapRule {
      */
     @Override
     @Argument(name = "object", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Attributes internalExecute(SailPointContext context,
+    protected Attributes internalExecute(JavaRuleContext context,
                                          SAPBuildMapRuleArguments arguments) {
         return arguments.getObject();
     }

@@ -74,7 +74,7 @@ public class JDBCBuildMapRuleTest {
         testResult.put(UUID.randomUUID().toString(), UUID.randomUUID().toString());
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             JDBCBuildMapRule.JDBCBuildMapRuleArguments arguments = (JDBCBuildMapRule.JDBCBuildMapRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
@@ -90,12 +90,12 @@ public class JDBCBuildMapRuleTest {
                     testRuleContext.getArguments().get(JDBCBuildMapRule.ARG_CONNECTION),
                     arguments.getConnection());
             return testResult;
-        }).when(jdbcBuildMapRule).internalExecute(eq(sailPointContext), any());
+        }).when(jdbcBuildMapRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
         verify(jdbcBuildMapRule).execute(eq(testRuleContext));
-        verify(jdbcBuildMapRule).internalExecute(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -115,7 +115,7 @@ public class JDBCBuildMapRuleTest {
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).internalExecute(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule, never()).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -135,7 +135,7 @@ public class JDBCBuildMapRuleTest {
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).internalExecute(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule, never()).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -155,7 +155,7 @@ public class JDBCBuildMapRuleTest {
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).internalExecute(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule, never()).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -175,7 +175,7 @@ public class JDBCBuildMapRuleTest {
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).internalExecute(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule, never()).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -195,7 +195,7 @@ public class JDBCBuildMapRuleTest {
 
         assertThrows(GeneralException.class, () -> jdbcBuildMapRule.execute(testRuleContext));
         verify(jdbcBuildMapRule).internalValidation(eq(testRuleContext));
-        verify(jdbcBuildMapRule, never()).internalExecute(eq(sailPointContext), any());
+        verify(jdbcBuildMapRule, never()).internalExecute(eq(testRuleContext), any());
     }
 
     /**

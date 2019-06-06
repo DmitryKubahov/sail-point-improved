@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.connector.PeopleSoftHRMSBuildMapRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.Collections;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class SimplePeopleSoftHRMSBuildMapRule extends PeopleSoftHRMSBuildMapRule
      */
     @Override
     @Argument(name = "map", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Map<String, Object> internalExecute(SailPointContext context,
+    protected Map<String, Object> internalExecute(JavaRuleContext context,
                                                   PeopleSoftHRMSBuildMapRuleArguments arguments) {
         return Collections.emptyMap();
     }

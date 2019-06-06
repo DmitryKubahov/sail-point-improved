@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.report.ReportValidationRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.tools.Message;
 
 import java.util.Collections;
@@ -23,7 +23,7 @@ public class SimpleReportValidationRule extends ReportValidationRule {
      */
     @Override
     @Argument(name = "errors", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected List<Message> internalExecute(SailPointContext sailPointContext,
+    protected List<Message> internalExecute(JavaRuleContext context,
                                             ReportValidationRuleArguments arguments) {
         log.info("Live report:[{}]", arguments.getReport());
         log.info("Report form:[{}]", arguments.getForm());

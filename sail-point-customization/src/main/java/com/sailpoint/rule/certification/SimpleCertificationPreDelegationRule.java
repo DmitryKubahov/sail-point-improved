@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.certification.CertificationPreDelegationRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.Map;
 import java.util.Random;
@@ -23,7 +23,7 @@ public class SimpleCertificationPreDelegationRule extends CertificationPreDelega
      */
     @Override
     @Argument(name = "map", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Map<String, Object> internalExecute(SailPointContext context,
+    protected Map<String, Object> internalExecute(JavaRuleContext context,
                                                   CertificationPreDelegationRuleArguments arguments) {
 
         log.info("Build random result map");

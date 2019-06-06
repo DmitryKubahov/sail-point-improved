@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.certification.CertifierRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +23,7 @@ public class SimpleCertifierRule extends CertifierRule<List<String>> {
      */
     @Override
     @Argument(name = "certifiers", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected List<String> internalExecute(SailPointContext context,
+    protected List<String> internalExecute(JavaRuleContext context,
                                            CertifierRuleArguments arguments) {
 
         log.info("Group:[{}]", arguments.getGroup());

@@ -75,7 +75,7 @@ public class SapHrOperationProvisioningRuleTest {
         ProvisioningResult testResult = mock(ProvisioningResult.class);
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             SapHrOperationProvisioningRule.SapHrOperationProvisioningRuleArguments arguments = (SapHrOperationProvisioningRule.SapHrOperationProvisioningRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
@@ -97,12 +97,12 @@ public class SapHrOperationProvisioningRuleTest {
                     testRuleContext.getArguments().get(SapHrOperationProvisioningRule.ARG_REQUEST),
                     arguments.getRequest());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -124,7 +124,7 @@ public class SapHrOperationProvisioningRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

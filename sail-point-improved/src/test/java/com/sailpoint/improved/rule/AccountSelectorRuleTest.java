@@ -84,7 +84,7 @@ public class AccountSelectorRuleTest {
         Link testResult = mock(Link.class);
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             AccountSelectorRule.AccountSelectorRuleArguments arguments = (AccountSelectorRule.AccountSelectorRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Source is not match",
@@ -115,12 +115,12 @@ public class AccountSelectorRuleTest {
                     testRuleContext.getArguments().get(AccountSelectorRule.ARG_ALLOW_CREATE),
                     arguments.getAllowCreate());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -148,7 +148,7 @@ public class AccountSelectorRuleTest {
         String testResult = UUID.randomUUID().toString();
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             AccountSelectorRule.AccountSelectorRuleArguments arguments = (AccountSelectorRule.AccountSelectorRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Source is not match",
@@ -179,12 +179,12 @@ public class AccountSelectorRuleTest {
                     testRuleContext.getArguments().get(AccountSelectorRule.ARG_ALLOW_CREATE),
                     arguments.getAllowCreate());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -206,7 +206,7 @@ public class AccountSelectorRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 
@@ -226,11 +226,11 @@ public class AccountSelectorRuleTest {
         String testResult = UUID.randomUUID().toString();
 
         testRuleContext.getArguments().remove(AccountSelectorRule.ARG_LINKS);
-        when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
+        when(testRule.internalExecute(eq(testRuleContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**

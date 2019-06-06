@@ -72,7 +72,7 @@ public class CorrelationRuleTest {
         Map<String, Object> testResult = Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID());
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             CorrelationRule.CorrelationRuleArguments arguments = (CorrelationRule.CorrelationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Environment is not match",
@@ -88,12 +88,12 @@ public class CorrelationRuleTest {
                     testRuleContext.getArguments().get(CorrelationRule.ARG_LINK),
                     arguments.getLink());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -115,7 +115,7 @@ public class CorrelationRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

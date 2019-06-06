@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.certification.CertificationItemCompletionRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 /**
  * Simple implementation of {@link CertificationItemCompletionRule} rule
@@ -19,7 +19,7 @@ public class SimpleCertificationItemCompletionRule extends CertificationItemComp
      */
     @Override
     @Argument(name = "complete", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Boolean internalExecute(SailPointContext context,
+    protected Boolean internalExecute(JavaRuleContext context,
                                       CertificationItemCompletionRuleArguments arguments) {
 
         log.info("Item:[{}]", arguments.getItem());

@@ -76,7 +76,7 @@ public class IdentityAttributeRuleTest {
         Object testResult = UUID.randomUUID();
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             IdentityAttributeRule.IdentityAttributeRuleArguments arguments = (IdentityAttributeRule.IdentityAttributeRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Environment is not match",
@@ -98,12 +98,12 @@ public class IdentityAttributeRuleTest {
                     testRuleContext.getArguments().get(IdentityAttributeRule.ARG_OLD_VALUE),
                     arguments.getOldValue());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -122,11 +122,11 @@ public class IdentityAttributeRuleTest {
         Object testResult = UUID.randomUUID();
 
         testRuleContext.getArguments().remove(IdentityAttributeRule.ARG_LINK);
-        when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
+        when(testRule.internalExecute(eq(testRuleContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -145,11 +145,11 @@ public class IdentityAttributeRuleTest {
         Object testResult = UUID.randomUUID();
 
         testRuleContext.getArguments().remove(IdentityAttributeRule.ARG_OLD_VALUE);
-        when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
+        when(testRule.internalExecute(eq(testRuleContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -171,7 +171,7 @@ public class IdentityAttributeRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

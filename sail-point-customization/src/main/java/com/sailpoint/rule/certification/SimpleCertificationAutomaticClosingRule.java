@@ -3,7 +3,7 @@ package com.sailpoint.rule.certification;
 import com.sailpoint.annotation.Rule;
 import com.sailpoint.improved.rule.certification.CertificationAutomaticClosingRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 /**
  * Simple implementation of {@link CertificationAutomaticClosingRule} rule
@@ -16,7 +16,7 @@ public class SimpleCertificationAutomaticClosingRule extends CertificationAutoma
      * Log current certification by INFO and return it
      */
     @Override
-    protected void internalExecuteNoneOutput(SailPointContext context,
+    protected void internalExecuteNoneOutput(JavaRuleContext context,
                                              CertificationAutomaticClosingRuleArguments arguments) {
         log.info("Certification:[{}]", arguments.getCertification());
     }

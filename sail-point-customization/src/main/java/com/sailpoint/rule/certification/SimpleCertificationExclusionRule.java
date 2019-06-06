@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.certification.CertificationExclusionRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ public class SimpleCertificationExclusionRule extends CertificationExclusionRule
      */
     @Override
     @Argument(name = "explanation", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected String internalExecute(SailPointContext context,
+    protected String internalExecute(JavaRuleContext context,
                                      CertificationExclusionRule.CertificationExclusionRuleArguments arguments) {
 
         log.info("Certification:[{}]", arguments.getCertification());

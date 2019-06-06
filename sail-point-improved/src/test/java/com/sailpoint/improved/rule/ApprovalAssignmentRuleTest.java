@@ -69,7 +69,7 @@ public class ApprovalAssignmentRuleTest {
         List<Workflow.Approval> testResult = Collections.singletonList(mock(Workflow.Approval.class));
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             ApprovalAssignmentRule.ApprovalAssignmentRuleArguments arguments = (ApprovalAssignmentRule.ApprovalAssignmentRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Approvals is not match",
@@ -79,12 +79,12 @@ public class ApprovalAssignmentRuleTest {
                     testRuleContext.getArguments().get(ApprovalAssignmentRule.ARG_APPROVAL_SET),
                     arguments.getApprovalSet());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -106,7 +106,7 @@ public class ApprovalAssignmentRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

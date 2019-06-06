@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.connector.MergeMapsRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class SimpleMergeMapsRule extends MergeMapsRule {
      */
     @Override
     @Argument(name = "merged", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Map<String, Object> internalExecute(SailPointContext context, MergeMapsRuleArguments arguments) {
+    protected Map<String, Object> internalExecute(JavaRuleContext context, MergeMapsRuleArguments arguments) {
         log.info("Current:[{}]", arguments.getCurrent());
         log.info("Merged attributes:[{}]", arguments.getMergeAttrs());
         return arguments.getCurrent();

@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.connector.FileParsingRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.Collections;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class SimpleFileParsingRule extends FileParsingRule {
      */
     @Override
     @Argument(name = "map", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Map<String, Object> internalExecute(SailPointContext context, FileParsingRuleArguments arguments) {
+    protected Map<String, Object> internalExecute(JavaRuleContext context, FileParsingRuleArguments arguments) {
         return Collections.emptyMap();
     }
 }

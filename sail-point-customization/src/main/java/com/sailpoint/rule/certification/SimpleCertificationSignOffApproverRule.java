@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.certification.CertificationSignOffApproverRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.workflow.IdentityLibrary;
 
 import java.util.Collections;
@@ -24,7 +24,7 @@ public class SimpleCertificationSignOffApproverRule extends CertificationSignOff
      */
     @Override
     @Argument(name = "results", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Map<String, Object> internalExecute(SailPointContext context,
+    protected Map<String, Object> internalExecute(JavaRuleContext context,
                                                   CertificationSignOffApproverRuleArguments arguments) {
 
         log.info("Certifier:[{}]", arguments.getCertifier());

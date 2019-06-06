@@ -7,6 +7,7 @@ import com.sailpoint.improved.rule.util.JavaRuleExecutorUtil;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import sailpoint.api.Correlator;
 import sailpoint.object.Application;
 import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Link;
@@ -45,12 +46,12 @@ import java.util.Map;
  * Outputs:
  * Map that identifies the manager’s Identity; may contain
  * any of the following:
- * “identityName”, “[identity.name value]”
+ * - {@link Correlator#RULE_RETURN_IDENTITY_NAME}, “[identity.name value]”
  * or
- * “identity”, [Identity object]
+ * - {@link Correlator#RULE_RETURN_IDENTITY}, [Identity object]
  * or
- * “identityAttributeName”, “[attribute name]”
- * “identityAttributeValue”, “[attribute value]”
+ * - {@link Correlator#RULE_RETURN_IDENTITY_ATTRIBUTE}, “[attribute name]”
+ * - {@link Correlator#RULE_RETURN_IDENTITY_ATTRIBUTE_VALUE}, “[attribute value]”
  * where the attribute value uniquely identifies one Identity
  */
 @Slf4j

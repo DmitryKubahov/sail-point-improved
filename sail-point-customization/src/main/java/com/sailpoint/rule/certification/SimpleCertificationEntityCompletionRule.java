@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.certification.CertificationEntityCompletionRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.tools.Message;
 
 import java.util.Collections;
@@ -24,7 +24,7 @@ public class SimpleCertificationEntityCompletionRule extends CertificationEntity
      */
     @Override
     @Argument(name = "messages", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected List<Message> internalExecute(SailPointContext context,
+    protected List<Message> internalExecute(JavaRuleContext context,
                                             CertificationEntityCompletionRuleArguments arguments) {
 
         log.info("Certification entity:[{}]", arguments.getCertificationEntity());

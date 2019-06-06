@@ -68,7 +68,7 @@ public class LinkAttributeRuleTest {
         Object testResult = UUID.randomUUID();
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             LinkAttributeRule.LinkAttributeRuleArguments arguments = (LinkAttributeRule.LinkAttributeRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Environment is not match",
@@ -78,12 +78,12 @@ public class LinkAttributeRuleTest {
                     testRuleContext.getArguments().get(LinkAttributeRule.ARG_LINK),
                     arguments.getLink());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -105,7 +105,7 @@ public class LinkAttributeRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

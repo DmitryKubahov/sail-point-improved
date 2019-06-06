@@ -67,7 +67,7 @@ public class IdentityTriggerRuleTest {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
         Boolean testResult = new Random().nextBoolean();
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             IdentityTriggerRule.IdentityTriggerRuleArguments arguments = (IdentityTriggerRule.IdentityTriggerRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("New identity is not match",
@@ -82,7 +82,7 @@ public class IdentityTriggerRuleTest {
         assertEquals(testResult, identityTriggerRule.execute(testRuleContext));
         verify(identityTriggerRule).internalValidation(eq(testRuleContext));
         verify(identityTriggerRule).execute(eq(testRuleContext));
-        verify(identityTriggerRule).internalExecute(eq(sailPointContext), any());
+        verify(identityTriggerRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -102,7 +102,7 @@ public class IdentityTriggerRuleTest {
         testRuleContext.getArguments().remove(IdentityTriggerRule.ARG_NEW_IDENTITY);
         Boolean testResult = new Random().nextBoolean();
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             IdentityTriggerRule.IdentityTriggerRuleArguments arguments = (IdentityTriggerRule.IdentityTriggerRuleArguments) invocation
                     .getArguments()[1];
             assertNull("New identity is not null",
@@ -116,7 +116,7 @@ public class IdentityTriggerRuleTest {
         assertEquals(testResult, identityTriggerRule.execute(testRuleContext));
         verify(identityTriggerRule).internalValidation(eq(testRuleContext));
         verify(identityTriggerRule).execute(eq(testRuleContext));
-        verify(identityTriggerRule).internalExecute(eq(sailPointContext), any());
+        verify(identityTriggerRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -136,7 +136,7 @@ public class IdentityTriggerRuleTest {
         testRuleContext.getArguments().remove(IdentityTriggerRule.ARG_PREVIOUS_IDENTITY);
         Boolean testResult = new Random().nextBoolean();
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             IdentityTriggerRule.IdentityTriggerRuleArguments arguments = (IdentityTriggerRule.IdentityTriggerRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("New identity is not match",
@@ -150,7 +150,7 @@ public class IdentityTriggerRuleTest {
         assertEquals(testResult, identityTriggerRule.execute(testRuleContext));
         verify(identityTriggerRule).internalValidation(eq(testRuleContext));
         verify(identityTriggerRule).execute(eq(testRuleContext));
-        verify(identityTriggerRule).internalExecute(eq(sailPointContext), any());
+        verify(identityTriggerRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -170,7 +170,7 @@ public class IdentityTriggerRuleTest {
 
         assertThrows(GeneralException.class, () -> identityTriggerRule.execute(testRuleContext));
         verify(identityTriggerRule).internalValidation(eq(testRuleContext));
-        verify(identityTriggerRule, never()).internalExecute(eq(sailPointContext), any());
+        verify(identityTriggerRule, never()).internalExecute(eq(testRuleContext), any());
     }
 
     /**

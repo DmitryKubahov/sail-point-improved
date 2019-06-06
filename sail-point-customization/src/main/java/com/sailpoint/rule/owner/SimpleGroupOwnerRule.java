@@ -5,8 +5,8 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.owner.GroupOwnerRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
 import sailpoint.object.Identity;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.tools.GeneralException;
 
 /**
@@ -21,9 +21,9 @@ public class SimpleGroupOwnerRule extends GroupOwnerRule {
      */
     @Override
     @Argument(name = "owner", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Identity internalExecute(SailPointContext sailPointContext,
+    protected Identity internalExecute(JavaRuleContext context,
                                        GroupOwnerRule.GroupOwnerRuleArguments arguments) throws GeneralException {
         log.info("Current group:[{}]", arguments.getGroup());
-        return sailPointContext.getObjectByName(Identity.class, "spadmin");
+        return context.getContext().getObjectByName(Identity.class, "spadmin");
     }
 }

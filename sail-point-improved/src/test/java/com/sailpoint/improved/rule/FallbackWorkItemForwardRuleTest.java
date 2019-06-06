@@ -75,7 +75,7 @@ public class FallbackWorkItemForwardRuleTest {
         Identity testResult = mock(Identity.class);
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             FallbackWorkItemForwardRule.FallbackWorkItemForwardRuleArguments arguments = (FallbackWorkItemForwardRule.FallbackWorkItemForwardRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Item is not match",
@@ -97,12 +97,12 @@ public class FallbackWorkItemForwardRuleTest {
                     testRuleContext.getArguments().get(FallbackWorkItemForwardRule.ARG_CERTIFICATION_TYPE),
                     arguments.getCertificationType());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -121,11 +121,11 @@ public class FallbackWorkItemForwardRuleTest {
         Identity testResult = mock(Identity.class);
 
         testRuleContext.getArguments().remove(FallbackWorkItemForwardRule.ARG_CERTIFICATION_NAME);
-        when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
+        when(testRule.internalExecute(eq(testRuleContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -147,7 +147,7 @@ public class FallbackWorkItemForwardRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

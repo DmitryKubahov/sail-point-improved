@@ -72,7 +72,7 @@ public class SAPHRManagerRuleTest {
         String testResult = UUID.randomUUID().toString();
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             SAPHRManagerRule.SAPHRManagerRuleArguments arguments = (SAPHRManagerRule.SAPHRManagerRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Application is not match",
@@ -88,12 +88,12 @@ public class SAPHRManagerRuleTest {
                     testRuleContext.getArguments().get(SAPHRManagerRule.ARG_CONNECTOR),
                     arguments.getConnector());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -115,7 +115,7 @@ public class SAPHRManagerRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

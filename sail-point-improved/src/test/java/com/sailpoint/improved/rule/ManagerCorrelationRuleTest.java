@@ -76,7 +76,7 @@ public class ManagerCorrelationRuleTest {
         testResult.put(UUID.randomUUID().toString(), UUID.randomUUID().toString());
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             ManagerCorrelationRule.ManagerCorrelationRuleArguments arguments = (ManagerCorrelationRule.ManagerCorrelationRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Environment is not match",
@@ -98,12 +98,12 @@ public class ManagerCorrelationRuleTest {
                     testRuleContext.getArguments().get(ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE),
                     arguments.getManagerAttributeValue());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -125,7 +125,7 @@ public class ManagerCorrelationRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 
@@ -146,11 +146,11 @@ public class ManagerCorrelationRuleTest {
         testResult.put(UUID.randomUUID().toString(), UUID.randomUUID().toString());
 
         testRuleContext.getArguments().remove(ManagerCorrelationRule.ARG_INSTANCE);
-        when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
+        when(testRule.internalExecute(eq(testRuleContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -170,11 +170,11 @@ public class ManagerCorrelationRuleTest {
         testResult.put(UUID.randomUUID().toString(), UUID.randomUUID().toString());
 
         testRuleContext.getArguments().remove(ManagerCorrelationRule.ARG_MANAGER_ATTRIBUTE_VALUE);
-        when(testRule.internalExecute(eq(sailPointContext), any())).thenReturn(testResult);
+        when(testRule.internalExecute(eq(testRuleContext), any())).thenReturn(testResult);
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**

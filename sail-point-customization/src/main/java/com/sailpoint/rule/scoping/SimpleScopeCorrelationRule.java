@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.scoping.ScopeCorrelationRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Scope;
 
 import java.util.Collections;
@@ -23,7 +23,7 @@ public class SimpleScopeCorrelationRule extends ScopeCorrelationRule {
      */
     @Override
     @Argument(name = "scopes", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected List<Scope> internalExecute(SailPointContext sailPointContext,
+    protected List<Scope> internalExecute(JavaRuleContext context,
                                           ScopeCorrelationRule.ScopeCorrelationRuleArguments arguments) {
         log.info("Current identity:[{}]", arguments.getIdentity());
         return Collections.singletonList(new Scope("All"));

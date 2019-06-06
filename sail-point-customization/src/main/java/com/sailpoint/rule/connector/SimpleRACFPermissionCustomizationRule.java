@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.connector.RACFPermissionCustomizationRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Permission;
 
 /**
@@ -20,7 +20,7 @@ public class SimpleRACFPermissionCustomizationRule extends RACFPermissionCustomi
      */
     @Override
     @Argument(name = "permission", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Permission internalExecute(SailPointContext context,
+    protected Permission internalExecute(JavaRuleContext context,
                                          RACFPermissionCustomizationRuleArguments arguments) {
         log.info("Current permission:[{}]", arguments.getPermission());
         return arguments.getPermission();

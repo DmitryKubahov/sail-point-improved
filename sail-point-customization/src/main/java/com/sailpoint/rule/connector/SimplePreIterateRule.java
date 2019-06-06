@@ -5,7 +5,7 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.connector.PreIterateRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 import java.io.InputStream;
 
@@ -21,7 +21,7 @@ public class SimplePreIterateRule extends PreIterateRule {
      */
     @Override
     @Argument(name = "result", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected InputStream internalExecute(SailPointContext context,
+    protected InputStream internalExecute(JavaRuleContext context,
                                           PreIterateRuleArguments arguments) {
         log.debug("Try to get default map");
         log.info("Stats:[{}]", arguments.getStats());

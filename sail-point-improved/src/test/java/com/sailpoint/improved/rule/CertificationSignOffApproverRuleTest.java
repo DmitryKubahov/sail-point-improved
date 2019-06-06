@@ -71,7 +71,7 @@ public class CertificationSignOffApproverRuleTest {
         Map<String, Object> testResult = Collections.singletonMap(UUID.randomUUID().toString(), UUID.randomUUID());
 
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             CertificationSignOffApproverRule.CertificationSignOffApproverRuleArguments arguments = (CertificationSignOffApproverRule.CertificationSignOffApproverRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Certification is not match",
@@ -87,12 +87,12 @@ public class CertificationSignOffApproverRuleTest {
                             .get(CertificationSignOffApproverRule.ARG_STATE),
                     arguments.getState());
             return testResult;
-        }).when(testRule).internalExecute(eq(sailPointContext), any());
+        }).when(testRule).internalExecute(eq(testRuleContext), any());
 
         assertEquals(testResult, testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
     }
 
     /**
@@ -114,7 +114,7 @@ public class CertificationSignOffApproverRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
         }
     }
 

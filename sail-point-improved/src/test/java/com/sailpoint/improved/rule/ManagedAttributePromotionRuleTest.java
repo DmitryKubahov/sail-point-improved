@@ -69,7 +69,7 @@ public class ManagedAttributePromotionRuleTest {
     public void normalTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             ManagedAttributePromotionRule.ManagedAttributePromotionRuleArguments arguments = (ManagedAttributePromotionRule.ManagedAttributePromotionRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Attribute is not match",
@@ -82,13 +82,13 @@ public class ManagedAttributePromotionRuleTest {
                     testRuleContext.getArguments().get(ManagedAttributePromotionRule.ARG_STATE),
                     arguments.getState());
             return null;
-        }).when(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
+        }).when(testRule).internalExecuteNoneOutput(eq(testRuleContext), any());
 
         assertNull(testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
-        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(testRuleContext), any());
     }
 
     /**
@@ -110,8 +110,8 @@ public class ManagedAttributePromotionRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
-            verify(testRule, never()).internalExecuteNoneOutput(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
+            verify(testRule, never()).internalExecuteNoneOutput(eq(testRuleContext), any());
         }
     }
 

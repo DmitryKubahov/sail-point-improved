@@ -3,7 +3,7 @@ package com.sailpoint.rule.certification;
 import com.sailpoint.annotation.Rule;
 import com.sailpoint.improved.rule.certification.CertificationPhaseChangeRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
+import sailpoint.object.JavaRuleContext;
 
 /**
  * Simple implementation of {@link CertificationPhaseChangeRule} rule
@@ -16,7 +16,7 @@ public class SimpleCertificationPhaseChangeRule extends CertificationPhaseChange
      * Log current prev and next phase by INFO and return next phase
      */
     @Override
-    protected void internalExecuteNoneOutput(SailPointContext context,
+    protected void internalExecuteNoneOutput(JavaRuleContext context,
                                              CertificationPhaseChangeRuleArguments arguments) {
         log.info("Previous phase:[{}]", arguments.getPreviousPhase());
         log.info("Next phase:[{}]", arguments.getNextPhase());

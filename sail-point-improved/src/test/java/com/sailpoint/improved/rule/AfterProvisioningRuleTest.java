@@ -68,7 +68,7 @@ public class AfterProvisioningRuleTest {
     public void normalExecutionTest() throws GeneralException {
         JavaRuleContext testRuleContext = buildTestJavaRuleContext();
         doAnswer(invocation -> {
-            assertEquals("SailPoint context is not match", testRuleContext.getContext(), invocation.getArguments()[0]);
+            assertEquals("JavaRuleContext is not match", testRuleContext, invocation.getArguments()[0]);
             AfterProvisioningRule.AfterProvisioningRuleArguments arguments = (AfterProvisioningRule.AfterProvisioningRuleArguments) invocation
                     .getArguments()[1];
             assertEquals("Plan is not match", testRuleContext.getArguments().get(AfterProvisioningRule.ARG_PLAN),
@@ -77,13 +77,13 @@ public class AfterProvisioningRuleTest {
                     testRuleContext.getArguments().get(AfterProvisioningRule.ARG_APPLICATION),
                     arguments.getApplication());
             return null;
-        }).when(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
+        }).when(testRule).internalExecuteNoneOutput(eq(testRuleContext), any());
 
         assertNull(testRule.execute(testRuleContext));
         verify(testRule).internalValidation(eq(testRuleContext));
         verify(testRule).execute(eq(testRuleContext));
-        verify(testRule).internalExecute(eq(sailPointContext), any());
-        verify(testRule).internalExecuteNoneOutput(eq(sailPointContext), any());
+        verify(testRule).internalExecute(eq(testRuleContext), any());
+        verify(testRule).internalExecuteNoneOutput(eq(testRuleContext), any());
     }
 
     /**
@@ -105,8 +105,8 @@ public class AfterProvisioningRuleTest {
 
             assertThrows(GeneralException.class, () -> testRule.execute(testRuleContext));
             verify(testRule).internalValidation(eq(testRuleContext));
-            verify(testRule, never()).internalExecute(eq(sailPointContext), any());
-            verify(testRule, never()).internalExecuteNoneOutput(eq(sailPointContext), any());
+            verify(testRule, never()).internalExecute(eq(testRuleContext), any());
+            verify(testRule, never()).internalExecuteNoneOutput(eq(testRuleContext), any());
         }
     }
 

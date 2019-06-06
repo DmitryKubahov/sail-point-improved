@@ -5,8 +5,8 @@ import com.sailpoint.annotation.common.Argument;
 import com.sailpoint.annotation.common.ArgumentType;
 import com.sailpoint.improved.rule.connector.BuildMapRule;
 import lombok.extern.slf4j.Slf4j;
-import sailpoint.api.SailPointContext;
 import sailpoint.connector.DelimitedFileConnector;
+import sailpoint.object.JavaRuleContext;
 
 import java.util.Map;
 
@@ -22,7 +22,7 @@ public class SimpleBuildMapRule extends BuildMapRule {
      */
     @Override
     @Argument(name = "map", type = ArgumentType.RETURNS, isReturnsType = true)
-    protected Map<String, Object> internalExecute(SailPointContext context,
+    protected Map<String, Object> internalExecute(JavaRuleContext context,
                                                   BuildMapRuleArguments arguments) {
         log.debug("Try to get default map");
         Map<String, Object> map = DelimitedFileConnector.defaultBuildMap(arguments.getColumns(), arguments.getRecord());
