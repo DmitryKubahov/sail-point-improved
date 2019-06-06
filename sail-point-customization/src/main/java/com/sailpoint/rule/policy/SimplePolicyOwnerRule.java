@@ -1,4 +1,4 @@
-package com.sailpoint.rule.PolicyOwner;
+package com.sailpoint.rule.policy;
 
 import com.sailpoint.annotation.Rule;
 import com.sailpoint.annotation.common.Argument;
