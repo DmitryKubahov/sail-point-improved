@@ -12,6 +12,7 @@ import sailpoint.object.Certification;
 import sailpoint.object.Identity;
 import sailpoint.object.JavaRuleContext;
 import sailpoint.object.Rule;
+import sailpoint.workflow.IdentityLibrary;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,8 +33,8 @@ import java.util.Map;
  * <p>
  * Output:
  * Map containing either an Identity or Identity name with
- * the key “identity” or “identityName”, respectively.
- * e.g.: “identity”, identityObject or “identityName”, “Adam.Kennedy”
+ * the key {@link IdentityLibrary#ARG_IDENTITY} or {@link IdentityLibrary#ARG_IDENTITY_NAME}, respectively.
+ * e.g.: {@link IdentityLibrary#ARG_IDENTITY}, identityObject or {@link IdentityLibrary#ARG_IDENTITY_NAME}, “Adam.Kennedy”
  */
 @Slf4j
 public abstract class CertificationSignOffApproverRule
