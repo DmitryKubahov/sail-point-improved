@@ -67,12 +67,6 @@ Contains java implementation for rule types:
 ** [*] PeopleSoftHRMSOperationProvisioning
 ** [*] Integration
 
-* [*] *Report rules*:
-** [*] ReportCustomizer
-** [*] ReportValidation
-** [*] ReportParameterQuery
-** [*] ReportParameterValue
-
 * [*] *Notification/Assignment rules*:
 ** [*] EmailRecipient
 ** [*] Escalation
@@ -87,8 +81,63 @@ Contains java implementation for rule types:
 ** [*] ScopeCorrelation
 ** [*] ScopeSelection
 
-* [*] *Identity and Account Mapping rules*:
+* [*] *Identity and account mapping rules*:
 ** [*] IdentityAttribute
 ** [*] IdentityAttributeTarget
 ** [*] Listener
 ** [*] LinkAttribute
+
+* [*] *Form/Provisioning policy-related rules*:
+** [*] FieldValue
+** [*] AllowedValues
+** [*] Validation
+** [*] Owner
+
+* [*] *Workflow rules*:
+** [*] Workflow
+
+* [*] *Policy/Violation rules*:
+** [*] Policy
+** [*] Violation
+** [*] PolicyOwner
+** [*] PolicyNotification
+
+* [*] *Login configuration rules*:
+** [*] SSOAuthentication
+** [*] SSOValidation
+** [*] SAMLCorrelation
+** [*] IdentityCreation
+
+* [*] *Logical application rules*:
+** [*] CompositeAccount
+** [*] CompositeRemediation
+** [*] CompositeTierCorrelation
+
+* [*] *Unstructured targets rules*:
+** [*] TargetCreation
+** [*] TargetCorrelation
+** [*] TargetRefresh
+** [*] TargetTransformer
+
+* [*] *Alert processing rules*:
+** [*] AlertCreation
+** [*] AlertCorrelation
+** [*] AlertMatch
+
+* [*] *Activity data source rules*:
+** [*] ActivityTransformer
+** [*] ActivityCorrelation
+** [*] ActivityPositionBuilder
+** [*] ActivityConditionBuilder
+
+* [*] *Report rules*:
+** [*] ReportCustomizer
+** [*] ReportValidation
+** [*] ReportParameterQuery
+** [*] ReportParameterValue
+
+* [*] *Miscellaneous rules*:
+** [*] RiskScore
+** [*] RequestObjectSelector
+** [*] TaskEventRule
+** [*] TaskCompletion
