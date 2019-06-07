@@ -99,6 +99,7 @@ public abstract class JDBCBuildMapRule
      * - application
      * - schema
      * - state
+     * - result
      * - connection
      */
     @Data
