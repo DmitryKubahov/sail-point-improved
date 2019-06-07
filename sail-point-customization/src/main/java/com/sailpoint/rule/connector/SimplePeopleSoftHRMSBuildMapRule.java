@@ -14,7 +14,7 @@ import java.util.Map;
  * Simple implementation of {@link PeopleSoftHRMSBuildMapRule} rule
  */
 @Slf4j
-@Rule(value = "Simple JDBC build map rule", type = sailpoint.object.Rule.Type.PeopleSoftHRMSBuildMap)
+@Rule(value = "Simple people soft HRM build map rule", type = sailpoint.object.Rule.Type.PeopleSoftHRMSBuildMap)
 public class SimplePeopleSoftHRMSBuildMapRule extends PeopleSoftHRMSBuildMapRule {
 
     /**
