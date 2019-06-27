@@ -13,6 +13,7 @@ Modules:
 .. *sail-point-annotation* - all external annotations, as for generating xml and as for other modules
 .. *sail-point-annotation-processor* - annotation processors for generating xml from java classes. Current implementation supported generating:
 * [*] Rules
+* [*] Custom objects
 
 .. *sail-point-improved* - extends standard IdentityIQ classes for improvements (e.g. JavaRuleRunner)
 .. *sail-point-customization* - shows how to use all this stuff.
