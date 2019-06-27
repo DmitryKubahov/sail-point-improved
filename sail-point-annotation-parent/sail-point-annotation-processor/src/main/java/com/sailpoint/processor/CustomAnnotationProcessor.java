@@ -67,6 +67,9 @@ public class CustomAnnotationProcessor extends AbstractSailPointAnnotationProces
             customObject.setName(Util.isEmpty(customAnnotation.value())
                     ? customElement.getSimpleName().toString() : customAnnotation.value());
 
+            log.debug("Setting description from java doc of custom object class");
+            customObject.setDescription(javaDocsStorageProvider.readJavaDoc(customElement));
+
             log.debug("Try to get all attributes fields");
             Attributes<String, Object> attributes = attributesBuilder.buildSignature(customElement);
             log.trace("Attributes:[{}]", attributes);
