@@ -44,7 +44,7 @@ public class AllAttributesRuleGenerationTest extends AbstractRuleAnnotationProce
      * @return rule path
      */
     @Override
-    protected String getRuleFilePathName() {
+    protected String getJavaClassFilePathName() {
         return PATH_TO_ALL_ATTRIBUTES_RULE;
     }
 

@@ -34,7 +34,7 @@ public class WithoutAttributesRuleGenerationTest extends AbstractRuleAnnotationP
      * @return rule path
      */
     @Override
-    protected String getRuleFilePathName() {
+    protected String getJavaClassFilePathName() {
         return PATH_TO_WITHOUT_ARGUMENTS_RULE;
     }
 

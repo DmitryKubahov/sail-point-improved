@@ -34,7 +34,7 @@ public class EmptyPromptRuleGenerationTest extends AbstractRuleAnnotationProcess
      * @return rule path
      */
     @Override
-    protected String getRuleFilePathName() {
+    protected String getJavaClassFilePathName() {
         return PATH_TO_EMPTY_PROMPT_RULE;
     }
 
