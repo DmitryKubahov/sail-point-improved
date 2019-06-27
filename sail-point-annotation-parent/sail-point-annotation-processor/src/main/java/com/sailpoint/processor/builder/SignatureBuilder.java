@@ -124,6 +124,7 @@ public class SignatureBuilder {
         } else {
             argumentType = processingEnvironment.getTypeUtils().erasure(elementType).toString();
         }
+        argument.setType(argumentType);
         log.debug("Type of argument is:[{}]", argumentType);
     }
 
