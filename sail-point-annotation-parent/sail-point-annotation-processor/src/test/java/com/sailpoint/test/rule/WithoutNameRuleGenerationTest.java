@@ -39,7 +39,7 @@ public class WithoutNameRuleGenerationTest extends AbstractRuleAnnotationProcess
      * @return rule path
      */
     @Override
-    protected String getRuleFilePathName() {
+    protected String getJavaClassFilePathName() {
         return PATH_TO_WITHOUT_NAME_RULE;
     }
 
