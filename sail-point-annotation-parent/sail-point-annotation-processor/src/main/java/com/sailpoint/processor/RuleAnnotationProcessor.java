@@ -3,10 +3,12 @@ package com.sailpoint.processor;
 import com.google.auto.service.AutoService;
 import com.sailpoint.annotation.Rule;
 import com.sailpoint.exception.RuleXmlObjectWriteError;
+import com.sailpoint.processor.builder.SignatureBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import sailpoint.tools.Util;
 
+import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
@@ -38,6 +40,10 @@ public class RuleAnnotationProcessor extends AbstractSailPointAnnotationProcesso
      * 2 - rule file name
      */
     public static final String RULE_PATH_XML_GENERATION_PATTERN = "{0}/Rule/{1}";
+    /**
+     * Signature builder
+     */
+    protected SignatureBuilder signatureBuilder;
 
     /**
      * Processing elements with rule annotations for generating rule xml
@@ -99,5 +105,16 @@ public class RuleAnnotationProcessor extends AbstractSailPointAnnotationProcesso
             }
         }
         return true;
+    }
+
+    /**
+     * Init signature builder
+     *
+     * @param processingEnv - current environment
+     */
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+        this.signatureBuilder = new SignatureBuilder(javaDocsStorageProvider, processingEnv);
     }
 }
