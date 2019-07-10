@@ -18,7 +18,7 @@ Modules:
 .. *sail-point-improved* - extends standard IdentityIQ classes for improvements (e.g. JavaRuleRunner)
 .. *sail-point-customization* - shows how to use all this stuff.
 
-= Build
+== Build
 For start using it:
 
 . Add 2 IdentityIQ dependencies to local maven repository. Script for adding jars is located in _/bin_ directory. List of custom jars:
