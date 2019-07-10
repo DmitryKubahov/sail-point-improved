@@ -1,0 +1,30 @@
+version: "3"
+services:
+  tomcat:
+    build: ./tomcat
+    working_dir: /usr/local/tomcat
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    links:
+      - "db:${MYSQL_LINK_NAME}"
+    ports:
+      - "${TOMCAT_APPLICATION_PORT}:8080"
+      - "${TOMCAT_APPLICATION_DEBUG_PORT}:8000"
+    depends_on:
+      - db
+    command: ["/home/sp-mysql-ping.sh"]
+    volumes:
+      - "./tomcat/webapps/${SP_VERSION}/identityiq.war:/usr/local/tomcat/webapps/identityiq.war"
+  db:
+    image: mysql:${MYSQL_VERSION}
+    volumes:
+      - "./db/${SP_VERSION}/:/docker-entrypoint-initdb.d/"
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "${MYSQL_PORT}:3306"

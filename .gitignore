@@ -2,3 +2,8 @@ target
 .idea
 *.iml
 pom.xml.versionsBackup
+
+#Docker skip stuff
+bin/docker/tomcat/webapps/**/*.war
+bin/docker/db/**/*.sql
+bin/docker/sp/**/*.properties

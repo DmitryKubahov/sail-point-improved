@@ -1,0 +1,39 @@
+= Dockerization
+
+== Description
+This document contains information about dockerization IdentityIQ
+
+== Folder structure
+*docker* - main folder contains docker-compose.yml and .env files
+*db* - contains sql files for database initialization
+*sp* - contains common staff for IdentityIQ (e.g.: iiq.properties, log4j.properties)
+*tomcat* - all stuff for tomcat container
+*tomcat/webapps* - contains wars to deploy
+
+== Main properties
+=== DB
+dataSource.username=identityiq
+dataSource.password=identityiq
+dataSource.url=jdbc:mysql://mysql:3306/identityiq?useServerPrepStmts=true&tinyInt1isBit=true&useUnicode=true&characterEncoding=utf8
+dataSource.driverClassName=com.mysql.jdbc.Driver
+sessionFactory.hibernateProperties.hibernate.dialect=sailpoint.persistence.MySQL5InnoDBDialec
+
+=== Logs
+log4j.appender.file.File=/usr/local/tomcat/logs/sailpoint.log
+
+== Commands
+
+Build docker images:
+----
+docker-compose build
+----
+
+Start docker images:
+----
+docker-compose up -d
+----
+
+Get dump from MySQL
+----
+mysqldump -u identityiq --databases identityiq > sp_73_dump.sql -pidentityiq
+----
