@@ -31,3 +31,6 @@ Build command:
 ----
 mnv clean install
 ----
+
+= Dockerization
+link:bin/docker/README.adoc[Please, follow this link for more information]
