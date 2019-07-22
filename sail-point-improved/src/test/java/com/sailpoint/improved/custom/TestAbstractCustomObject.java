@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import sailpoint.api.SailPointContext;
+import sailpoint.api.SailPointFactory;
 import sailpoint.object.Attributes;
 import sailpoint.object.Custom;
 import sailpoint.tools.GeneralException;
@@ -143,6 +144,23 @@ public class TestAbstractCustomObject {
     }
 
     /**
+     * Testing saving custom object via current sailpoint context.
+     * Input:
+     * - test instance of java custom object
+     * Expected:
+     * - calling getObjectByName for custom object
+     * - calling saveObject in sailpoint context
+     */
+    @Test
+    public void saveNewCustomObjectViaCurrentSailpointContext() throws GeneralException {
+        SailPointFactory.popContext(this.context);
+        TestSimpleCustomObject loadTestSimpleCustomObject = new TestSimpleCustomObject();
+        loadTestSimpleCustomObject.save();
+        verify(this.context).getObjectByName(eq(Custom.class), any());
+        verify(this.context).saveObject(any());
+    }
+
+    /**
      * Testing filling java custom object from sailpoint source data
      * Input:
      * - test sailpoint custom object
@@ -241,6 +259,51 @@ public class TestAbstractCustomObject {
 
         TestSimpleCustomObject loadTestSimpleCustomObject = new TestSimpleCustomObject();
         loadTestSimpleCustomObject.load(this.context);
+    }
+
+    /**
+     * Testing creating custom object with loading data
+     * Input:
+     * - new test custom sailpoint object with sailpoint context instance as parameter
+     * Expected:
+     * - filled test java custom object with the same data as sailpoint custom object
+     * - transient value must be null
+     */
+    @Test
+    public void loadingCustomCustomObjectWithCustomObjectFactory() throws GeneralException {
+        doAnswer(invocation -> {
+            String actualName = invocation.getArgument(1, String.class);
+            String name = TestSimpleCustomObject.class.getAnnotation(com.sailpoint.annotation.Custom.class).value();
+            assertEquals("Name is not match", name, actualName);
+
+            this.custom = new Custom();
+            this.custom.setName(name);
+            this.custom.setAttributes(new Attributes<>(getAttributes(buildTestSimpleCustomObject())));
+
+            return this.custom;
+        }).when(this.context).getObjectByName(eq(Custom.class), any());
+
+        TestSimpleCustomObject loadTestSimpleCustomObject = CustomObjectFactory
+                .load(TestSimpleCustomObject.class, this.context);
+
+        verify(this.context).getObjectByName(eq(Custom.class), any());
+        compareAttributes(this.custom.getAttributes(), getAttributes(loadTestSimpleCustomObject));
+        assertNull("Transient value must be null", loadTestSimpleCustomObject.getTransientField());
+    }
+
+    /**
+     * Testing loaind custom object via current sailpoint context.
+     * Input:
+     * - test instance of java custom object
+     * Expected:
+     * - calling getObjectByName for custom object
+     */
+    @Test
+    public void loadCustomObjectViaCurrentSailpointContext() throws GeneralException {
+        SailPointFactory.popContext(this.context);
+        TestSimpleCustomObject loadTestSimpleCustomObject = new TestSimpleCustomObject();
+        loadTestSimpleCustomObject.load();
+        verify(this.context).getObjectByName(eq(Custom.class), any());
     }
 
     /**
