@@ -12,6 +12,7 @@ import sailpoint.tools.GeneralException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,13 +65,20 @@ public class TestAbstractCustomObject {
      * @return instance of test custom object with random data
      */
     private TestSimpleCustomObject buildTestSimpleCustomObject() {
+        Random random = new Random();
         TestSimpleCustomObject customObjectInstance = new TestSimpleCustomObject();
         customObjectInstance.setStringValue(UUID.randomUUID().toString());
         customObjectInstance.setFieldName(UUID.randomUUID().toString());
         customObjectInstance.setStringCollection(buildRandomStringList());
-        customObjectInstance.setStringsCollection(buildRandomStringList());
         customObjectInstance.setStringsCollectionNatural(buildRandomStringList());
         customObjectInstance.setTransientField(UUID.randomUUID().toString());
+        customObjectInstance.setBooleanValue(random.nextBoolean());
+        customObjectInstance
+                .setBooleanMap(Collections.singletonMap(UUID.randomUUID().toString(), random.nextBoolean()));
+        customObjectInstance.setDateValue(new Date());
+        customObjectInstance.setDateMap(Collections.singletonMap(UUID.randomUUID().toString(), new Date()));
+        customObjectInstance.setLongValue(random.nextLong());
+        customObjectInstance.setSetValue(Collections.singleton(UUID.randomUUID().toString()));
         return customObjectInstance;
     }
 
@@ -331,8 +339,13 @@ public class TestAbstractCustomObject {
         result.put("stringValue", customObjectInstance.getStringValue());
         result.put("stringCollection", customObjectInstance.getStringCollection());
         result.put("stringsCollectionNatural", customObjectInstance.getStringsCollectionNatural());
-        result.put("stringsCollection", customObjectInstance.getStringsCollection());
         result.put("attributeName", customObjectInstance.getFieldName());
+        result.put("booleanValue", customObjectInstance.getBooleanValue());
+        result.put("booleanMap", customObjectInstance.getBooleanMap());
+        result.put("longValue", customObjectInstance.getLongValue());
+        result.put("dateValue", customObjectInstance.getDateValue());
+        result.put("dateMap", customObjectInstance.getDateMap());
+        result.put("setValue", customObjectInstance.getSetValue());
         return result;
     }
 }

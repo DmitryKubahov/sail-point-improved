@@ -7,6 +7,7 @@ import com.sailpoint.processor.builder.AttributesBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import sailpoint.object.Attributes;
+import sailpoint.tools.GeneralException;
 import sailpoint.tools.Util;
 
 import javax.annotation.processing.ProcessingEnvironment;
@@ -29,7 +30,7 @@ import java.util.Set;
 @SupportedOptions({SailPointAnnotationProcessorDictionary.GENERATION_PATH})
 @SupportedAnnotationTypes("com.sailpoint.annotation.Custom")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class CustomAnnotationProcessor extends AbstractSailPointAnnotationProcessor {
+public class CustomObjectAnnotationProcessor extends AbstractSailPointAnnotationProcessor {
 
     /**
      * Path pattern for generating xml of custom objects. Parameters:
@@ -70,16 +71,16 @@ public class CustomAnnotationProcessor extends AbstractSailPointAnnotationProces
             log.debug("Setting description from java doc of custom object class");
             customObject.setDescription(javaDocsStorageProvider.readJavaDoc(customElement));
 
-            log.debug("Try to get all attributes fields");
-            Attributes<String, Object> attributes = attributesBuilder.buildSignature(customElement);
-            log.trace("Attributes:[{}]", attributes);
-
-            log.debug("Set attributes to custom object:[{}]", customObject.getName());
-            customObject.setAttributes(attributes);
-
             try {
+                log.debug("Try to get all attributes fields");
+                Attributes<String, Object> attributes = attributesBuilder.buildAttributes(customElement);
+                log.trace("Attributes:[{}]", attributes);
+
+                log.debug("Set attributes to custom object:[{}]", customObject.getName());
+                customObject.setAttributes(attributes);
+
                 log.debug("Parse custom object to xml");
-                String customXml = xmlObjectFactory.toXml(customObject);
+                String customXml = xmlObjectFactoryHelper.getXmlObjectFactory().toXml(customObject);
                 log.trace("XML:[{}]", customXml);
 
                 String xmlName = MessageFormat
@@ -88,6 +89,9 @@ public class CustomAnnotationProcessor extends AbstractSailPointAnnotationProces
 
                 log.debug("Write custom object to file:[{}]", fileName);
                 FileUtils.writeStringToFile(new File(fileName), customXml, StandardCharsets.UTF_8.name());
+            } catch (GeneralException ex) {
+                log.debug("Error getting attributes of custom object:[{}]", ex.getMessage());
+                throw new CustomObjectXmlObjectWriteError(customObject.getName(), ex);
             } catch (IOException ex) {
                 log.debug("Error while saving xml of custom object:[{}]", ex.getMessage());
                 throw new CustomObjectXmlObjectWriteError(customObject.getName(), ex);
@@ -104,6 +108,6 @@ public class CustomAnnotationProcessor extends AbstractSailPointAnnotationProces
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
-        this.attributesBuilder = new AttributesBuilder(javaDocsStorageProvider, processingEnv);
+        this.attributesBuilder = new AttributesBuilder(processingEnv, xmlObjectFactoryHelper);
     }
 }
