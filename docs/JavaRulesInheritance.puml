@@ -1,0 +1,12 @@
+@startuml
+
+interface JavaRuleExecutor
+JavaRuleExecutor : +Object execute(JavaRuleContext)
+
+class AbstractJavaRuleExecutor
+class AbstractNoneOutputJavaRuleExecutor
+
+JavaRuleExecutor <|-- AbstractJavaRuleExecutor
+AbstractJavaRuleExecutor <|-- AbstractNoneOutputJavaRuleExecutor
+
+@enduml
