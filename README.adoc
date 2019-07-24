@@ -2,10 +2,10 @@
 :toc:
 :toclevels: 5
 
-= Description
+== Description
 Current project contains modules to improve SailPoint IdentityIQ projects. The main aims of the projects: simplify some areas in IdentityIQ, increasing performance, doing IdentityIQ developers life easier.
 
-= Structure
+== Structure
 
 Modules:
 
@@ -32,6 +32,81 @@ Build command:
 mnv clean install
 ----
 
-= Dockerization
+== Improvements
+All current improvements for IdentityIQ are in this block.
+
+=== Rule
+
+All rules can be separated into 2 groups: with output and none.
+
+[plantuml]
+....
+interface JavaRuleExecutor
+JavaRuleExecutor : +Object execute(JavaRuleContext)
+
+class AbstractJavaRuleExecutor
+class AbstractNoneOutputJavaRuleExecutor
+
+JavaRuleExecutor <|-- AbstractJavaRuleExecutor
+AbstractJavaRuleExecutor <|-- AbstractNoneOutputJavaRuleExecutor
+....
+
+==== Example
+Simple JDBCBuildMap rule type implementation. According to documentation JDBCBuildMap has input attributes and output: map of names/values.
+
+Name of new rule: SimpleJDBCBuildMapRule. Functionality: check value from column: active_status and if value is 'T', than put true, else false (very simple rule). Code:
+[source,java]
+----
+include::sail-point-customization/src/main/java/com/sailpoint/rule/connector/SimpleJDBCBuildMapRule.java[]
+----
+Result generated XML:
+[source,xml]
+----
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+
+<Rule language="java" name="Simple JDBC build map rule" type="JDBCBuildMap">
+  <Description>Simple implementation of {@link JDBCBuildMapRule} rule</Description>
+    <Signature returnType="java.util.Map">
+      <Inputs>
+        <Argument name="application" type="sailpoint.object.Application">
+          <Description>A reference to the Application object</Description>
+        </Argument>
+        <Argument name="schema" type="sailpoint.object.Schema">
+          <Description>A reference to the Schema object for the JDBC source being read</Description>
+        </Argument>
+        <Argument name="state" type="java.util.Map">
+          <Description>A Map that can be used to store and share data between executions of this rule during a single aggregation run</Description>
+        </Argument>
+        <Argument name="result" type="java.sql.ResultSet">
+          <Description>The current ResultSet from the JDBC connector</Description>
+        </Argument>
+        <Argument name="connection" type="java.sql.Connection">
+          <Description>A reference to the current SQL connection</Description>
+        </Argument>
+      </Inputs>
+      <Returns>
+        <Argument name="map" type="java.util.Map">
+          <Description>Check default string attribute {@link SimpleJDBCBuildMapRule#ATTR_ACTIVE_STATUS_NAME} and replace it with boolean value:
+            Y - true
+            all other values - false</Description>
+        </Argument>
+      </Returns>
+    </Signature>
+  <Source>com.sailpoint.rule.connector.SimpleJDBCBuildMapRule</Source>
+</Rule>
+----
+Advantages of using java classes as source of rules:
+
+    No need to write code in xml
+    Debugging rules (no beanshell)
+    Performance improvements (~10 times faster than beanshell)
+    Tests (mockito, jmockit...)
+    No need to copy-paste from java class code to xml and vice versa
+
+=== Custom object
+
+== Dockerization
 Sources: */bin/docker* +
 Documentation: link:bin/docker/README.adoc[README.adoc]
