@@ -39,7 +39,7 @@ All current improvements for IdentityIQ are in this block.
 
 All rules can be separated into 2 groups: with output and none.
 
-image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/DmitryKubahov/sail-point-improved/feature/puml/docs/JavaRulesInheritance.puml[align="center"]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/DmitryKubahov/sail-point-improved/master/docs/JavaRulesInheritance.puml[align="center"]
 
 ==== Example
 Simple JDBCBuildMap rule type implementation. According to documentation JDBCBuildMap has input attributes and output: map of names/values.
