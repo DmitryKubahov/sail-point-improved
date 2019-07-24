@@ -57,7 +57,49 @@ Simple JDBCBuildMap rule type implementation. According to documentation JDBCBui
 Name of new rule: SimpleJDBCBuildMapRule. Functionality: check value from column: active_status and if value is 'T', than put true, else false (very simple rule). Code:
 [source,java]
 ----
-include::sail-point-customization/src/main/java/com/sailpoint/rule/connector/SimpleJDBCBuildMapRule.java[]
+/**
+ * Simple implementation of {@link JDBCBuildMapRule} rule
+ */
+@Slf4j
+@Rule(value = "Simple JDBC build map rule", type = sailpoint.object.Rule.Type.JDBCBuildMap)
+public class SimpleJDBCBuildMapRule extends JDBCBuildMapRule {
+
+    /**
+     * Active status attribute name
+     */
+    static final String ATTR_ACTIVE_STATUS_NAME = "active_status";
+
+    /**
+     * Active status true value
+     */
+    static final String TRUE_ACTIVE_STATUS_VALUE = "T";
+
+    /**
+     * Check default string attribute {@link SimpleJDBCBuildMapRule#ATTR_ACTIVE_STATUS_NAME} and replace it with boolean value:
+     * Y - true
+     * all other values - false
+     */
+    @Override
+    @Argument(name = "map", type = ArgumentType.RETURNS, isReturnsType = true)
+    protected Map<String, Object> internalExecute(JavaRuleContext context,
+                                                  JDBCBuildMapRuleArguments arguments) throws GeneralException {
+        try {
+            log.debug("Try to get default map");
+            Map<String, Object> map = JDBCConnector.buildMapFromResultSet(arguments.getResult());
+
+            log.debug("Check:[{}] attribute in default map", ATTR_ACTIVE_STATUS_NAME);
+            log.trace("Default map:[{}]", map);
+            String activeStatus = (String) map.get(ATTR_ACTIVE_STATUS_NAME);
+            log.trace("[{}] attribute value in default map:[{}]", ATTR_ACTIVE_STATUS_NAME, activeStatus);
+            map.put(ATTR_ACTIVE_STATUS_NAME, TRUE_ACTIVE_STATUS_VALUE.equalsIgnoreCase(activeStatus));
+            return map;
+        } catch (Exception ex) {
+            log.error("Got error:[{}] while executing rule", ex.getMessage(), ex);
+            throw new GeneralException(ex);
+        }
+    }
+}
+
 ----
 Result generated XML:
 [source,xml]
@@ -99,11 +141,11 @@ Result generated XML:
 ----
 Advantages of using java classes as source of rules:
 
-    No need to write code in xml
-    Debugging rules (no beanshell)
-    Performance improvements (~10 times faster than beanshell)
-    Tests (mockito, jmockit...)
-    No need to copy-paste from java class code to xml and vice versa
+. No need to write code in xml
+. Debugging rules (no beanshell)
+. Performance improvements (~10 times faster than beanshell)
+. Tests (mockito, jmockit...)
+. No need to copy-paste from java class code to xml and vice versa
 
 === Custom object
 
