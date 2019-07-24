@@ -1,7 +1,7 @@
 package com.sailpoint.processor;
 
 import com.sailpoint.processor.javadoc.JavaDocsStorageProvider;
-import sailpoint.tools.xml.XMLObjectFactory;
+import sailpoint.tools.xml.XMLObjectFactoryHelper;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -15,7 +15,7 @@ public abstract class AbstractSailPointAnnotationProcessor extends AbstractProce
     /**
      * Sail point object factory
      */
-    protected XMLObjectFactory xmlObjectFactory;
+    protected XMLObjectFactoryHelper xmlObjectFactoryHelper;
 
     /**
      * Xml generation result path
@@ -36,7 +36,7 @@ public abstract class AbstractSailPointAnnotationProcessor extends AbstractProce
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
-        this.xmlObjectFactory = XMLObjectFactory.getInstance();
+        this.xmlObjectFactoryHelper = new XMLObjectFactoryHelper();
         this.xmlPath = Optional
                 .ofNullable(processingEnv.getOptions().get(SailPointAnnotationProcessorDictionary.GENERATION_PATH))
                 .orElse(SailPointAnnotationProcessorDictionary.DEFAULT_PATH_XML_GENERATION);

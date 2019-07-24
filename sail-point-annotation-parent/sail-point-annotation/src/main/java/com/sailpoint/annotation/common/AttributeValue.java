@@ -6,23 +6,23 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Attribute annotation
+ * Attribute value. Type of value takes from field type.
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Attribute {
+public @interface AttributeValue {
 
     /**
-     * Name of attribute. If default value - name will be get from field name
+     * Key of attribute, uses for map type
      *
      * @return name of current attribute
      */
-    String name() default "";
+    String key() default "";
 
     /**
-     * Default value of current attribute
+     * Value of current attribute
      *
      * @return value of attribute
      */
-    AttributeValue[] value() default {};
+    String[] value();
 }

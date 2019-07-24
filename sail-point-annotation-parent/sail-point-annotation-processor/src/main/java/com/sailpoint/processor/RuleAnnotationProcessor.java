@@ -91,7 +91,7 @@ public class RuleAnnotationProcessor extends AbstractSailPointAnnotationProcesso
             rule.setSignature(signatureBuilder.buildSignature(ruleElement));
 
             log.debug("Parse rule to xml");
-            String ruleXml = xmlObjectFactory.toXml(rule);
+            String ruleXml = xmlObjectFactoryHelper.getXmlObjectFactory().toXml(rule);
 
             try {
                 String xmlName = MessageFormat

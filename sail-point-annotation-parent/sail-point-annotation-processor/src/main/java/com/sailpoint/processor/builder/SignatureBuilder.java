@@ -112,15 +112,13 @@ public class SignatureBuilder {
      */
     private void setArgumentType(sailpoint.object.Argument argument, TypeMirror elementType) {
         String argumentType = elementType.toString();
-        if (isCollectionType(elementType)) {
+        if (BuilderHelper.isAssignable(processingEnvironment, Collection.class, elementType)) {
             log.debug("Type of element:[{}] is collection", elementType);
             argument.setMulti(true);
-            if (elementType instanceof DeclaredType) {
-                log.debug("Try to determinate collection element type of:[{}]", elementType);
-                argumentType = ((DeclaredType) elementType).getTypeArguments().stream().findFirst()
-                        .map(TypeMirror::toString).orElse(argumentType);
-                log.debug("Type of collection is:[{}]", argumentType);
-            }
+            log.debug("Try to determinate collection element type of:[{}]", elementType);
+            argumentType = ((DeclaredType) elementType).getTypeArguments().stream().findFirst()
+                    .map(TypeMirror::toString).orElse(argumentType);
+            log.debug("Type of collection is:[{}]", argumentType);
         } else {
             argumentType = processingEnvironment.getTypeUtils().erasure(elementType).toString();
         }
@@ -153,19 +151,6 @@ public class SignatureBuilder {
         argument.setName(Util.isEmpty(argumentAnnotation.name())
                 ? argumentElement.getSimpleName().toString()
                 : argumentAnnotation.name());
-    }
-
-    /**
-     * Check is element is collection
-     *
-     * @param elementType - type to check
-     * @return is collection type
-     */
-    private boolean isCollectionType(TypeMirror elementType) {
-        log.trace("Init collection type from collection class:[{}]", Collection.class);
-        TypeMirror collectionType = processingEnvironment.getTypeUtils()
-                .erasure(processingEnvironment.getElementUtils().getTypeElement(Collection.class.getName()).asType());
-        return processingEnvironment.getTypeUtils().isAssignable(elementType, collectionType);
     }
 
     /**
