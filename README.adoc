@@ -328,6 +328,15 @@ Generated XML:
 
 ----
 
+Advantages of using java classes as source of custom objects:
+
+. Auto-generation xmls
+. Working with a custom object as a simple java class
+. Customization of loading/saving properties to custom object
+. Creating/modifying custom object in run-time using a certain java class
+. Testing
+
+
 == Dockerization
 Sources: */bin/docker* +
 Documentation: link:bin/docker/README.adoc[README.adoc]
