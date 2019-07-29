@@ -1,0 +1,13 @@
+@startuml
+
+class AbstractCustomObject {
+  -String name
+
+  +Attributes<String, Object> getAttributes()
+  +void load()
+  +void load(SailPointContext sailPointContext)
+  +void save()
+  +void save(SailPointContext sailPointContext)
+}
+
+@enduml

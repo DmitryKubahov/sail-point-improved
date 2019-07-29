@@ -139,6 +139,195 @@ Advantages of using java classes as source of rules:
 
 === Custom object
 
+There are 2 main parts of custom object:
+
+. *Name* - the unique value
+. *Attributes* - properties for object. To get properties value developers usually use one of it function: get(), getInt(), getList(), etc.
+
+==== Implementation
+
+There is AbstractCustomObject class which contains all necessary methods to work with custom object:
+
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/DmitryKubahov/sail-point-improved/master/docs/AbstractCustomObject.puml[align="center"]
+
+==== Factory
+
+To simplify working with instance life-cycle of custom object work with CustomObjectFactory class:
+
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/DmitryKubahov/sail-point-improved/master/docs/CustomObjectFactory.puml[align="center"]
+
+==== Example
+
+Simple custom object class source:
+[source,java]
+----
+/**
+ * Simple test custom object example class
+ */
+@Data
+@Custom("Simple custom object")
+public class SimpleCustomObject extends AbstractCustomObject {
+
+    /**
+     * Test string value
+     */
+    @Attribute(@AttributeValue("single"))
+    private String stringValue;
+    /**
+     * Test string value as collection
+     */
+    @Attribute(@AttributeValue("stringCollection"))
+    private List<String> stringCollection;
+    /**
+     * Test strings values
+     */
+    @Attribute({
+            @AttributeValue("string1"),
+            @AttributeValue("string2")
+    })
+    private List<String> stringsCollectionNatural;
+    /**
+     * Test boolean value
+     */
+    @Attribute(@AttributeValue("true"))
+    private Boolean booleanValue;
+    /**
+     * Test long value
+     */
+    @Attribute(@AttributeValue("5"))
+    private Long longValue;
+    /**
+     * Test date value
+     */
+    @Attribute(@AttributeValue("02/15/2019 10:35:45"))
+    private Date dateValue;
+    /**
+     * Test date map
+     */
+    @Attribute({
+            @AttributeValue(key = "now", value = "now"),
+            @AttributeValue(key = "02/15/2019 10:35:45", value = "02/15/2019 10:35:45")
+    })
+    private Map<String, Date> dateMap;
+    /**
+     * Test boolean map
+     */
+    @Attribute({
+            @AttributeValue(key = "false", value = "false"),
+            @AttributeValue(key = "true", value = "true")
+    })
+    private Map<String, Boolean> booleanMap;
+    /**
+     * Test set of string
+     */
+    @Attribute({
+            @AttributeValue(value = "1"),
+            @AttributeValue(value = "2"),
+            @AttributeValue(value = "1")
+    })
+    private Set<String> setValue;
+
+    /**
+     * Test attribute name
+     */
+    @Attribute(name = "attributeName", value = @AttributeValue("nameTest"))
+    private String fieldName;
+
+    /**
+     * Test transient attribute name
+     */
+    private String transientField;
+}
+
+----
+
+Generated XML:
+[source,xml]
+----
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Custom PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Custom name="Simple custom object">
+  <Attributes>
+    <Map>
+      <entry key="attributeName" value="nameTest"/>
+      <entry key="booleanMap">
+        <value>
+          <Map>
+            <entry key="false">
+              <value>
+                <Boolean></Boolean>
+              </value>
+            </entry>
+            <entry key="true">
+              <value>
+                <Boolean>true</Boolean>
+              </value>
+            </entry>
+          </Map>
+        </value>
+      </entry>
+      <entry key="booleanValue">
+        <value>
+          <Boolean>true</Boolean>
+        </value>
+      </entry>
+      <entry key="dateMap">
+        <value>
+          <Map>
+            <entry key="02/15/2019 10:35:45">
+              <value>
+                <Date>1550223345000</Date>
+              </value>
+            </entry>
+            <entry key="now">
+              <value>
+                <Date>1564403046656</Date>
+              </value>
+            </entry>
+          </Map>
+        </value>
+      </entry>
+      <entry key="dateValue">
+        <value>
+          <Date>1550223345000</Date>
+        </value>
+      </entry>
+      <entry key="longValue">
+        <value>
+          <Long>5</Long>
+        </value>
+      </entry>
+      <entry key="setValue">
+        <value>
+          <Set>
+            <String>1</String>
+            <String>2</String>
+          </Set>
+        </value>
+      </entry>
+      <entry key="stringCollection">
+        <value>
+          <List>
+            <String>stringCollection</String>
+          </List>
+        </value>
+      </entry>
+      <entry key="stringValue" value="single"/>
+      <entry key="stringsCollectionNatural">
+        <value>
+          <List>
+            <String>string1</String>
+            <String>string2</String>
+          </List>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Description>Simple test custom object example class</Description>
+</Custom>
+
+----
+
 == Dockerization
 Sources: */bin/docker* +
 Documentation: link:bin/docker/README.adoc[README.adoc]

@@ -1,0 +1,9 @@
+@startuml
+
+class CustomObjectFactory {
+  + {static} <T extends AbstractCustomObject> T create(Class<T> type)
+  + {static} <T extends AbstractCustomObject> T load(Class<T> type)
+  + {static} <T extends AbstractCustomObject> T load(Class<T> type, SailPointContext sailPointContext)
+}
+
+@enduml
