@@ -9,6 +9,7 @@ import lombok.Data;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Test class for simple custom object
@@ -25,32 +26,57 @@ public class SimpleCustomObject extends AbstractCustomObject {
     /**
      * Test string value as collection
      */
-    @Attribute(@AttributeValue("asd"))
+    @Attribute(@AttributeValue("stringCollection"))
     private List<String> stringCollection;
     /**
-     * Test strings value with is collection flag = false
+     * Test strings values
      */
     @Attribute({
-            @AttributeValue("a"),
-            @AttributeValue("b")
+            @AttributeValue("string1"),
+            @AttributeValue("string2")
     })
     private List<String> stringsCollectionNatural;
     /**
-     * Test strings value with is collection flag = false
+     * Test boolean value
      */
-    @Attribute({
-            @AttributeValue("true"),
-            @AttributeValue("false")
-    })
-    private Map<String, Boolean> booleanMap;
+    @Attribute(@AttributeValue("true"))
+    private Boolean booleanValue;
+    /**
+     * Test long value
+     */
+    @Attribute(@AttributeValue("5"))
+    private Long longValue;
+    /**
+     * Test date value
+     */
+    @Attribute(@AttributeValue("02/15/2019 10:35:45"))
+    private Date dateValue;
     /**
      * Test date map
      */
     @Attribute({
-            @AttributeValue("01/01/2019"),
-            @AttributeValue("01/01/2019 01:01:01")
+            @AttributeValue(key = "now", value = "now"),
+            @AttributeValue(key = "02/15/2019 10:35:45", value = "02/15/2019 10:35:45")
     })
     private Map<String, Date> dateMap;
+    /**
+     * Test boolean map
+     */
+    @Attribute({
+            @AttributeValue(key = "false", value = "false"),
+            @AttributeValue(key = "true", value = "true")
+    })
+    private Map<String, Boolean> booleanMap;
+    /**
+     * Test set of string
+     */
+    @Attribute({
+            @AttributeValue(value = "1"),
+            @AttributeValue(value = "2"),
+            @AttributeValue(value = "1")
+    })
+    private Set<String> setValue;
+
     /**
      * Test attribute name
      */

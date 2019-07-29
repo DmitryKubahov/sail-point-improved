@@ -25,7 +25,7 @@ public class TestSimpleCustomObject extends AbstractCustomObject {
     /**
      * Test string value as collection
      */
-    @Attribute(@AttributeValue("asd"))
+    @Attribute(@AttributeValue("singleElementInCollection"))
     private List<String> stringCollection;
     /**
      * Test strings values
