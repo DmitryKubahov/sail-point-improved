@@ -1,4 +1,4 @@
-FROM tomcat:${TOMCAT_VERSION}
+FROM tomcat:8.5.42-jdk8-openjdk-slim
 
 #Add waiting script
 COPY ./sp-mysql-ping.sh /home/sp-mysql-ping.sh
