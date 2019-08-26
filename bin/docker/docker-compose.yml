@@ -8,6 +8,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       JPDA_ADDRESS: 8000
+      #JAVA_OPTS: "-Dsailpoint.spring=classpath:iiqBeansExtended.xml"
     links:
       - "db:${MYSQL_LINK_NAME}"
     ports:
