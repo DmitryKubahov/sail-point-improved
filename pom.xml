@@ -27,7 +27,7 @@
         <!-- IdentityIQ dependencies -->
         <identityiq.version>7.3.p2</identityiq.version>
         <aspectjrt.version>1.8.9</aspectjrt.version>
-        <commons.io.version>1.4</commons.io.version>
+        <commons.io.version>2.7</commons.io.version>
         <commons.pool.version>1.6</commons.pool.version>
         <commons.logging.version>1.1.3</commons.logging.version>
         <juniversalchardet.version>1.0.3</juniversalchardet.version>
